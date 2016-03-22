@@ -15,18 +15,19 @@
         </h2>
       </div>
       <div class="p-l-20 p-r-20 p-b-20">
-        <form action="#">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="text" id="sample3" />
-            <label class="mdl-textfield__label" for="sample3">Username</label>
+            <input class="mdl-textfield__input" name="email" type="text" id="email" />
+            <label class="mdl-textfield__label" for="email">email</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" type="password" id="sample3" />
-            <label class="mdl-textfield__label" for="sample3">Password</label>
+            <input class="mdl-textfield__input" name="password" type="password" id="password" />
+            <label class="mdl-textfield__label" for="password">Password</label>
           </div>
 
           <div class="m-t-20">
-          <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
             Login
           </button>
           <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -34,7 +35,7 @@
           </button>
           </div>
 
-        </form>
+        {!! Form::close() !!}
       </div>
 
 
