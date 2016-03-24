@@ -526,33 +526,40 @@ function() {
     }(),
     function() {
         "use strict";
-        
-        function a(a, b, c, d) {             
-            for (var e = [], f = 200, g = 1; f >= g; g++) e.push({
-                icon: b.createIcon(),
-                firstname: b.createFirstname(),
-                lastname: b.createLastname(),
-                paragraph: b.createSentence()
+
+        function a(a, b, c, d, x) {
+
+            x.get("http://localhost/reedemer/admin/public/admin/dashboard/show").success(function(response){
+              
+                for (var e = [], f = response.length-1, g = 0; f >= g; g++)
+                
+                    e.push({
+                        name: response[g].name,
+                        email: response[g].email
+                    });
+               
+                a.data = e, a.tableParams = new c({
+                    page: 1,
+                    count: 1,
+                    sorting: {
+                        name: "asc"
+                    }
+                }, {
+                    filterDelay: 50,
+                    total: e.length,
+                    getData: function(a, b) {
+                        var c = b.filter().search,
+                            f = [];
+                        c ? (c = c.toLowerCase(), f = e.filter(function(a) {
+                            return a.name.toLowerCase().indexOf(c) > -1 || a.email.toLowerCase().indexOf(c) > -1
+                        })) : f = e, f = b.sorting() ? d("orderBy")(f, b.orderBy()) : f, a.resolve(f.slice((b.page() - 1) * b.count(), b.page() * b.count()))
+                    }
+                })
             });
-            a.data = e, a.tableParams = new c({
-                page: 1,
-                count: 10,
-                sorting: {
-                    firstname: "asc"
-                }
-            }, {
-                filterDelay: 50,
-                total: e.length,
-                getData: function(a, b) {
-                    var c = b.filter().search,
-                        f = [];
-                    c ? (c = c.toLowerCase(), f = e.filter(function(a) {
-                        return a.firstname.toLowerCase().indexOf(c) > -1 || a.lastname.toLowerCase().indexOf(c) > -1
-                    })) : f = e, f = b.sorting() ? d("orderBy")(f, b.orderBy()) : f, a.resolve(f.slice((b.page() - 1) * b.count(), b.page() * b.count()))
-                }
-            })
+
+            
         }
-        angular.module("material-lite").controller("ReedemerDataController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", a])
+        angular.module("material-lite").controller("TablesDataController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter","$http", a])
     }(),
     function() {
         "use strict";

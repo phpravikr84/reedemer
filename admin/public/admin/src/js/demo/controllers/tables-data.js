@@ -3,9 +3,9 @@
 
   angular
     .module('material-lite')
-    .controller('ReedemerDataController', ['$scope', 'PlaceholderTextService', 'ngTableParams', '$filter', ReedemerDataController]);
+    .controller('TablesDataController', ['$scope', 'PlaceholderTextService', 'ngTableParams', '$filter', TablesDataController]);
 
-  function ReedemerDataController($scope, PlaceholderTextService, ngTableParams, $filter) {
+  function TablesDataController($scope, PlaceholderTextService, ngTableParams, $filter) {
 
     // adding demo data
     var data = [];

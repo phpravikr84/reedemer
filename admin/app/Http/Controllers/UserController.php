@@ -46,7 +46,7 @@ class UserController extends Controller {
 
 	public function postStore(Request $request)
 	{
-		dd("V");
+		//dd("V");
 		//return view('user.add');
 	}
 }

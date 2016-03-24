@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -52,9 +52,13 @@ class DashboardController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function getShow()
 	{
 		//
+		//dd("a");
+		$user=User::where('status',1)->get();
+		//dd($user);
+		return $user;
 	}
 
 	/**
@@ -91,13 +95,6 @@ class DashboardController extends Controller {
 	}
 
 	
-	public function getApi($val)
-	{
-		if($val == 'pageviews' )  			$count = Visitor::clicks();
-		if($val == 'unique-visitors' )  	$count = Visitor::count();
-		return response(['msg' => 'success' , 'data' => $count  ]);
-		
-	}
 	
 	
 	
