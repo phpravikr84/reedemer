@@ -31,5 +31,7 @@ Route::get('home', 'HomeController@index');
 Route::controller('user', 'UserController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
-	Route::controller('/admin/dashboard'	, 'DashboardController' 	); 
+
+	Route::controller('/admin/dashboard','DashboardController'); 
+	
 });

@@ -41,6 +41,7 @@ class AuthController extends Controller {
 	/* Login function overwrite */
 	public function postLogin(Request $request)
 	{
+
 		$this->validate($request, [
 			'email' => 'required|email', 'password' => 'required',
 		]);
@@ -50,7 +51,7 @@ class AuthController extends Controller {
 		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'status' => 1]))
 		{			
 			if($this->auth->user()->type == '1')			{
-				
+				//dd("a1");
 				return redirect()->intended( '/admin/dashboard' );
 			}
 			else
