@@ -27,3 +27,9 @@ Route::controllers([
 Route::get('home', 'HomeController@index');
 
 //Route::post('auth', 'AuthController@autheticate');
+
+Route::controller('user', 'UserController');
+
+Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
+	Route::controller('/admin/dashboard'	, 'DashboardController' 	); 
+});

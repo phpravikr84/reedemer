@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"  ng-app="myapp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/material.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/helpers.css') }}">
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/login.css') }}">
-
+ 
 </head>
 <body>
 <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
@@ -38,7 +38,9 @@
   @yield('content')
 </div>
 
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="{{ asset('/frontend/admin/js/material.min.js') }}"></script>
 
+@yield('scripts')
 </body>
 </html>

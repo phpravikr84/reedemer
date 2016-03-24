@@ -4,7 +4,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use App\Http\Requests\Request;
+//use App\Http\Requests\Request;
+use Illuminate\Http\Request;
+//use Illuminate\Http\Request; 
+
 
 class AuthController extends Controller {
 
@@ -34,6 +37,35 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;		
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
+
+	/* Login function overwrite */
+	public function postLogin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required|email', 'password' => 'required',
+		]);
+
+		$credentials = $request->only('email', 'password');
+
+		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'status' => 1]))
+		{			
+			if($this->auth->user()->type == '1')			{
+				
+				return redirect()->intended( '/admin/dashboard' );
+			}
+			else
+			{	
+				// Done later
+			}			
+			
+		}
+
+		/*return redirect($this->loginPath())
+					->withInput($request->only('email', 'remember'))
+					->withErrors([
+						'email' => $this->getFailedLoginMessage(),
+					]);*/
+	}	
 
 	
 	

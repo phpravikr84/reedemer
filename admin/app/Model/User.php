@@ -1,11 +1,11 @@
-<?php namespace App\Models;
+<?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Presenters\DatePresenter;
+//use App\Presenters\DatePresenter;
 
 class User extends Model  {
 
-	use DatePresenter;
+	//use DatePresenter;
 
 	/**
 	 * The database table used by the model.
