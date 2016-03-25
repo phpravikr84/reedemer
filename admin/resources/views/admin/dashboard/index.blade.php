@@ -11,8 +11,8 @@
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('/admin/css/vendors.min.cc72de2f21cf6e67f523.css') }}">
-  <link rel="stylesheet" href="{{ asset('/admin/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/vendors.min.cc72de2f21cf6e67f523.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
 
 
   <!-- IE Compatibility shims -->
@@ -30,11 +30,11 @@
 </head>
 
 <body ng-controller="MainController">
-  <div id="app" class="app" ng-include="'tpl/demo/app.html'"></div>
+  <div id="app" class="app" ng-include="'{{ asset('/tpl/demo/app.html') }}'"></div>
   <!-- <div ui-view></div> -->
 
-  <script src="{{ asset('/admin/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
-  <script src="{{ asset('/admin/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
+  <script src="{{ asset('/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
+  <script src="{{ asset('/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
 
 </body>
 </html>

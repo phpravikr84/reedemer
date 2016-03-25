@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response; 
 use App\Model\User;
 use Hash;
+use Validator; 
 
 
 class UserController extends Controller {
@@ -44,9 +45,47 @@ class UserController extends Controller {
 		return view('user.add');
 	}
 
+	// Register user as reedemer
 	public function postStore(Request $request)
+	{		
+		$rules = array(
+				'company_name'             => 'required',  
+				'email'            => 'required|email|unique:users',   
+				'password'         => 'required'
+
+			);	
+		$validator = Validator::make($request->all(), $rules);
+		if ($validator->fails()) {				
+			$messages = $validator->messages();
+			// redirect our user back to the form with the errors from the validator
+			
+			return redirect()->back()
+							 ->withInput($request->only('email', 'company_name'))
+							 ->withErrors($validator);
+		} else {
+			// create the data for our user
+			$user = new User();
+			$user->name 		= $request->input('company_name');			
+			$user->type 		= 2;			
+			$user->email 		= $request->input('email');
+			$user->password = bcrypt($request->input('password'));
+			$user->save();
+				
+			
+			$request->session()->flash('alert-success', 'User has been created successfully');
+			//return redirect()->back()->withSuccess();		
+			return redirect('user/add');		
+			exit;	
+		}
+	}
+
+
+	public function getShow()
 	{
-		//dd("V");
-		//return view('user.add');
+		//
+		//dd("a");
+		$user=User::where('status',1)->get();
+		//dd($user);
+		return $user;
 	}
 }
