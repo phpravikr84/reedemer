@@ -529,7 +529,7 @@ function() {
 
         function a(a, b, c, d, x) {
         	
-        	x.get("../../admin/dashboard/show").success(function(response){
+        	x.get("../admin/dashboard/show").success(function(response){
         	
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({
                 firstname: response[g].name,
