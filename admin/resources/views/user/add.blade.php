@@ -49,10 +49,10 @@
             <input class="mdl-textfield__input" name="password" type="password" id="password" />
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
             <input class="mdl-textfield__input" name="cpassword" type="password" id="cpassword" />
             <label class="mdl-textfield__label" for="cpassword">Confirm Password</label>
-          </div>
+          </div> -->
 
           <div class="m-t-20">
           <button ng-disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">

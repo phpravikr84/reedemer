@@ -47,33 +47,32 @@ class UserController extends Controller {
 
 	// Register user as reedemer
 	public function postStore(Request $request)
-	{		
+	{	
+	
 		$rules = array(
-				'company_name'             => 'required',  
+				'company_name'     => 'required',  
 				'email'            => 'required|email|unique:users',   
-				'password'         => 'required|confirmed'
+				'password'         => 'required|min:6'
 
 			);	
 		$validator = Validator::make($request->all(), $rules);
 		if ($validator->fails()) {				
 			$messages = $validator->messages();
-			// redirect our user back to the form with the errors from the validator
-			
+			// redirect our user back to the form with the errors from the validator			
 			return redirect()->back()
 							 ->withInput($request->only('company_name'))
 							 ->withErrors($validator);
 		} else {
 			// create the data for our user
 			$user = new User();
-			$user->name 		= $request->input('company_name');			
+			$user->company_name 		= $request->input('company_name');			
 			$user->type 		= 2;			
 			$user->email 		= $request->input('email');
 			$user->password = bcrypt($request->input('password'));
 			$user->save();
 				
 			
-			$request->session()->flash('alert-success', 'User has been created successfully');
-			//return redirect()->back()->withSuccess();		
+			$request->session()->flash('alert-success', 'User has been created successfully');			
 			return redirect('user/add');		
 			exit;	
 		}
@@ -82,10 +81,7 @@ class UserController extends Controller {
 
 	public function getShow()
 	{
-		//
-		//dd("a");
-		$user=User::where('status',1)->get();
-		//dd($user);
+		$user=User::where('status',1)->get();		
 		return $user;
 	}
 }
