@@ -531,14 +531,14 @@ function() {
         	
         	x.get("../admin/dashboard/show").success(function(response){
         	
-            for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({
-                firstname: response[g].name,
+            for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
+                firstname: response[g].company_name,
                 email: response[g].email,
                 status: response[g].status
             });
             a.data = e, a.tableParams = new c({
                 page: 1,
-                count: 10,
+                count: 100,
                 sorting: {
                     firstname: "asc"
                 }
