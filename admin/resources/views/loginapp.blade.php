@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/material.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/helpers.css') }}">
   <link rel="stylesheet" href="{{ asset('/frontend/admin/css/login.css') }}">
-  <link rel="stylesheet" href="{{ asset('/admin/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 </head>
 <body>
 <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">

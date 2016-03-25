@@ -644,7 +644,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "tpl/partials/chat-widget.html"
+                templateUrl: "../tpl/partials/chat-widget.html"
             }
         }
 

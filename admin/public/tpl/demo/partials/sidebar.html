@@ -26,10 +26,10 @@
       <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
         <i class="material-icons f14">menu</i>
       </button>
-      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-        <li class="mdl-menu__item">Elan@space.com</li>
-        <li class="mdl-menu__item">Cloud@strife.com</li>
-        <li class="mdl-menu__item">Add another account</li>
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">        
+        <!-- <li class="mdl-menu__item">Add another account</li> -->
+        <li class="mdl-menu__item" onclick="window.location.href='../auth/logout'">
+         Logout</li>
       </ul>
     </div>
   </header>
@@ -42,7 +42,8 @@
       <ml-menu-group-heading>
         <i class="mdl-color-text--blue-grey-400 material-icons">group</i>Reedemer
       </ml-menu-group-heading>
-      <ml-menu-item><a class="mdl-navigation__link" href="#/tables/list">List</a></ml-menu-item>     
+        <ml-menu-item><a class="mdl-navigation__link" href="#/tables/list">List</a></ml-menu-item>     
+        <ml-menu-item><a class="mdl-navigation__link" href="#/tables/add">Add</a></ml-menu-item>     
     </ml-menu-group>
 
    
