@@ -38,7 +38,7 @@
   @yield('content')
 </div>
 
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="{{ asset('/frontend/admin/js/material.min.js') }}"></script>
 <script src="{{ asset('/frontend/admin/js/material.min.js') }}"></script>
 
 @yield('scripts')

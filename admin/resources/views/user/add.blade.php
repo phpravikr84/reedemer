@@ -55,7 +55,7 @@
           </div>
 
           <div class="m-t-20">
-          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
+          <button ng-disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
             Register
           </button>
           <button type="button" onclick='redirect_url()' class="mdl-button mdl-js-button mdl-js-ripple-effect">

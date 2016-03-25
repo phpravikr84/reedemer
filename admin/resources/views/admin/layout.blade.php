@@ -7,7 +7,7 @@
   <meta name="description" content="Material Lite Angular Admin Theme">
   <meta name="author" content="Theme Guys - The Netherlands">
 
-  <title>Material Lite</title>
+  <title>Reedmer</title>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

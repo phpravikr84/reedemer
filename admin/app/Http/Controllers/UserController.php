@@ -51,7 +51,7 @@ class UserController extends Controller {
 		$rules = array(
 				'company_name'             => 'required',  
 				'email'            => 'required|email|unique:users',   
-				'password'         => 'required'
+				'password'         => 'required|confirmed'
 
 			);	
 		$validator = Validator::make($request->all(), $rules);
@@ -60,7 +60,7 @@ class UserController extends Controller {
 			// redirect our user back to the form with the errors from the validator
 			
 			return redirect()->back()
-							 ->withInput($request->only('email', 'company_name'))
+							 ->withInput($request->only('company_name'))
 							 ->withErrors($validator);
 		} else {
 			// create the data for our user

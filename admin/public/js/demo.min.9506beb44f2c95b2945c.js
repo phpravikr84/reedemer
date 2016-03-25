@@ -7,14 +7,14 @@ function() {
 
     function a(a) {
         a.when("/", {
-            templateUrl: "../../tpl/demo/dashboard.html"
+            templateUrl: "../tpl/demo/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
+                return "../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.tpl + ".html"
+                return "../tpl/demo/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -580,7 +580,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/header.html",
+                templateUrl: "../tpl/demo/partials/header.html",
                 replace: !0
             }
         }
@@ -592,7 +592,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/sidebar.html",
+                templateUrl: "../tpl/demo/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -644,7 +644,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../../tpl/partials/chat-widget.html"
+                templateUrl: "../tpl/partials/chat-widget.html"
             }
         }
 
@@ -725,7 +725,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-item.html",
+                templateUrl: "../tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -746,7 +746,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-group.html",
+                templateUrl: "../tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -950,7 +950,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../../tpl/partials/todo-widget.html",
+                templateUrl: "../tpl/partials/todo-widget.html",
                 replace: !0,
                 link: b
             }
