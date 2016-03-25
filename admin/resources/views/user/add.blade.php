@@ -14,12 +14,32 @@
           Register
         </h2>
       </div>
+      @if ($errors->has())
+        <div class="p-l-20 p-r-20 p-b-20">
+          <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+              {{ $error }}<br>        
+            @endforeach
+          </div>
+        </div>
+      @endif   
+
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has('alert-' . $msg))
+          <div class="p-l-20 p-r-20 p-b-20">
+            <div class="alert alert-{{ $msg }}">
+              {{ Session::get('alert-' . $msg) }} 
+            </div>
+          </div>
+       @endif
+      @endforeach
+        
       <div class="p-l-20 p-r-20 p-b-20">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/store') }}">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-            <input class="mdl-textfield__input" name="name" type="text" id="name" />
-            <label class="mdl-textfield__label" for="name">Name</label>
+            <input class="mdl-textfield__input" name="company_name" type="text" id="company_name" />
+            <label class="mdl-textfield__label" for="company_name">Company Name</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
             <input class="mdl-textfield__input" name="email" type="text" id="email" />

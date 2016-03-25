@@ -14,6 +14,15 @@
           Login
         </h2>
       </div>
+      @if ($errors->has())
+        <div class="p-l-20 p-r-20 p-b-20">
+          <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+              {{ $error }}<br>        
+            @endforeach
+          </div>
+        </div>
+      @endif   
       <div class="p-l-20 p-r-20 p-b-20">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
