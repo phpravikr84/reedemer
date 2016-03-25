@@ -56,7 +56,7 @@ class DashboardController extends Controller {
 	{
 		//
 		//dd("a");
-		$user=User::where('status',1)->get();
+		$user=User::where('type',2)->get();
 		//dd($user);
 		return $user;
 	}

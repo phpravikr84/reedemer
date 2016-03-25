@@ -50,22 +50,24 @@ class AuthController extends Controller {
 
 		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'status' => 1]))
 		{			
-			if($this->auth->user()->type == '1')			{
-				//dd("a1");
+			if($this->auth->user()->type == '1')			
+			{
+				
 				return redirect()->intended( '/admin/dashboard' );
 			}
 			else
 			{	
+				dd("User logged in");
 				// Done later
 			}			
 			
 		}
 
-		/*return redirect($this->loginPath())
+		return redirect($this->loginPath())
 					->withInput($request->only('email', 'remember'))
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),
-					]);*/
+					]);
 	}	
 
 	
