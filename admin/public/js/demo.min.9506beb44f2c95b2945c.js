@@ -528,6 +528,7 @@ function() {
         "use strict";
 
         function a(a, b, c, d, x) {
+            a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
             x.get("../admin/dashboard/logo").success(function(data_response){              
