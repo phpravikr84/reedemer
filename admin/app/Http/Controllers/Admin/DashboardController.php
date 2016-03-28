@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Hash;
+use Validator; 
 
 class DashboardController extends Controller {
 
@@ -43,10 +45,10 @@ class DashboardController extends Controller {
 	 */
 	public function store()
 	{
-		dd("a");
+		//dd("a");
 		//
 		//dd($request->all());
-		return 'c';
+		//return 'c';
 	}
 
 	/**
@@ -119,13 +121,49 @@ class DashboardController extends Controller {
 		$user->approve 		= 1;	
 		$user->email 		= $request->input('email');
 		$user->password = bcrypt($request->input('password'));
-		$user->save();*/
+		if($user->save())
+		{
+			return 'success';
+		}*/
 
-		//$user = User
+		$rules = array(
+				'company_name'     => 'required',  
+				'email'            => 'required|email|unique:users',   
+				'password'         => 'required|min:6'
 
-		$company_name = $request->input('company_name');
-		echo  $company_name."VVV";
+			);	
+		$validator = Validator::make($request->all(), $rules);
+		if ($validator->fails()) {				
+			$messages = $validator->messages();
+			// redirect our user back to the form with the errors from the validator			
+			/*return redirect()->back()
+							 ->withInput($request->only('company_name'))
+							 ->withErrors('Please insert all field');*/
+			return 'error';		
+			exit;	
+		} else {
+			// create the data for our user
+			$user = new User();
+			$user->company_name 		= $request->input('company_name');			
+			$user->type 		= 2;			
+			$user->approve 		= 0;
+			$user->email 		= $request->input('email');
+			$user->password = bcrypt($request->input('password'));
+			$user->save();
+				
+			
+			return 'success';		
+			exit;	
+		}
+		
 	}
+
+	/*public function getCreatereedemer()
+	{
+		return view('admin.reedemer.add');
+	}*/
 	
+
+
 	
 }

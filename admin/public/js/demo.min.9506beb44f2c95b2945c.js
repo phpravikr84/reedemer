@@ -529,17 +529,29 @@ function() {
 
         function a(a, b, c, d, x) {
             a.add_reedemer=function(){ 
-               x.post("../admin/dashboard/storereedemer").success(function(response){
-                 // a.status=response; 
-                 // alert(itemId+'_'+response)  
-                 alert(response);                
+           //     alert(JSON.stringify(a.Redeemer, null, 4));
+               a.show_success_msg=false; 
+               a.show_error_msg=false; 
+               x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
+                  
+                  if(response=="success")
+                  {
+                    a.show_success_msg=true;
+                    a.Redeemer.company_name = null; 
+                    a.Redeemer.email = null;               
+                    a.Redeemer.password = null;   
+                  }
+                  else
+                  {
+                    a.show_error_msg=true;
+                  }
                })
             }
 
             a.update_status=function(itemId,itemStatus){               
                x.get("../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
-                  a.status=response; 
-                 // alert(itemId+'_'+response)                  
+                  a.status=response;                 
+                  window.location.reload();             
                })
             }
         	
