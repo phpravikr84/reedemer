@@ -1,0 +1,76 @@
+
+<section ng-controller="ReedemerController" class="tables-data">
+
+  <div class="mdl-color--blue-grey ml-header relative clear">
+    <div class="p-20">
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Reedemer List</h3>
+      <h4 class="mdl-color-text--blue-grey-100 m-b-20 no-m-t w100">&nbsp</h4>
+    </div>
+  </div>
+
+  <div class="mdl-grid mdl-grid--no-spacing">
+
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-color--grey-100">
+      <div class="p-40 p-20--small">
+        <div class=" mdl-color-text--blue-grey-400">
+          <h3><i class=" material-icons f-left m-r-5">search</i> Search</h3>
+          <p>&nbsp;</p>
+        </div>
+
+        <div class="table-search">
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+          <input type="text" ng-model="tableParams.filter()['search']" class="mdl-textfield__input" placeholder="Search data" autofocus />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--9-col  mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+      <div class="p-20 ml-card-holder ml-card-holder-first">
+
+        <div class="mdl-card mdl-shadow--1dp m-b-30">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">{{logo_details.length}} rows</h2>
+          </div>
+
+
+          <table ng-table="tableParams" template-pagination="custom/pager" class="table mdl-data-table fullwidth ">
+            <tr ng-repeat="logo in logo_details">             
+              
+              <td data-title="'Company Name'" sortable="'company_id'">{{logo.logo_name}}</td>
+              <td data-title="'Logo Text'" sortable="'logo_text'">{{logo.logo_text}}</td>
+             
+            </tr>
+          </table>
+
+          <script type="text/ng-template" id="custom/pager">
+            <div ng-if="params.data.length" class="ml-data-table-pager p-10" style="display:none">
+              <div ng-if="params.settings().counts.length" class="f-right">
+                <button ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="mdl-button">10</button>
+                <button ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="mdl-button">25</button>
+                <button ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="mdl-button">50</button>
+                <button ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="mdl-button">100</button>
+              </div>
+              <span ng-repeat="page in pages"
+                  ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+                  ng-switch="page.type">
+                <button ng-switch-when="prev" ng-click="params.page(page.number)" class="mdl-button">&laquo;</button>
+                <button ng-switch-when="first" ng-click="params.page(page.number)" class="mdl-button"><span ng-bind="page.number"></span></button>
+                <button ng-switch-when="page" ng-click="params.page(page.number)" class="mdl-button"><span ng-bind="page.number"></span></button>
+                <button ng-switch-when="more" ng-click="params.page(page.number)" class="mdl-button">&#8230;</button>
+                <button ng-switch-when="last" ng-click="params.page(page.number)" class="mdl-button"><span ng-bind="page.number"></span></button>
+                <button ng-switch-when="next" ng-click="params.page(page.number)" class="mdl-button">&raquo;</button>
+              </span>
+            </div>
+          </script>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
