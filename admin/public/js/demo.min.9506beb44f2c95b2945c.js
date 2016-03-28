@@ -528,12 +528,20 @@ function() {
         "use strict";
 
         function a(a, b, c, d, x) {
+            a.cnames = [];
+            a.logo_details = [];
+            x.get("../../admin/dashboard/logo").success(function(data_response){              
+                a.logo_details = data_response;
+            });
+           
+            
+            
             a.add_logo=function(){ 
               //  alert(JSON.stringify(a.Redeemer, null, 4));
               //  return false;
                a.show_success_msg=false; 
                a.show_error_msg=false; 
-               x.post("../admin/dashboard/storelogo", a.Redeemer).success(function(response){
+               x.post("../../admin/dashboard/storelogo", a.Redeemer).success(function(response){
                  // alert(response);
                   if(response=="success")
                   {
@@ -553,7 +561,7 @@ function() {
            //     alert(JSON.stringify(a.Redeemer, null, 4));
                a.show_success_msg=false; 
                a.show_error_msg=false; 
-               x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
+               x.post("../../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
                   
                   if(response=="success")
                   {
@@ -570,13 +578,13 @@ function() {
             }
 
             a.update_status=function(itemId,itemStatus){               
-               x.get("../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
+               x.get("../../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
                   a.status=response;                 
                   window.location.reload();             
                })
             }
         	
-        	x.get("../admin/dashboard/show").success(function(response){
+        	x.get("../../admin/dashboard/show").success(function(response){
         	
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                     firstname: response[g].company_name,
@@ -593,6 +601,7 @@ function() {
                 } else {
                     a.statusForItem = 0;
                 }*/
+            a.cnames = response;
             a.data = e, a.tableParams = new c({
                 page: 1,
                 count: 100,

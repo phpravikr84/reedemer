@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Model\Logo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Hash;
@@ -146,7 +147,7 @@ class DashboardController extends Controller {
 			$user = new User();
 			$user->company_name 		= $request->input('company_name');			
 			$user->type 		= 2;			
-			$user->approve 		= 0;
+			$user->approve 		= 1;
 			$user->email 		= $request->input('email');
 			$user->password = bcrypt($request->input('password'));
 			$user->save();
@@ -162,7 +163,30 @@ class DashboardController extends Controller {
 	{
 		return view('admin.reedemer.add');
 	}*/
-	
+
+	public function postStorelogo(Request $request)
+	{
+		$user = new Logo();
+		$user->logo_name 		= $request->input('company_id');	
+		$user->logo_text 		= $request->input('logo_text');		
+		$user->status 		= 1;			
+		$user->uploaded_by 		= 1;
+		$user->save();
+
+		return 'success';		
+		exit;	
+		//echo "aaaaa:".$request->input('company_id');
+	}
+
+	public function getLogo()
+	{
+		$logo = Logo::get();
+		
+		//echo $logo->reedemer;
+		return $logo;		
+		//exit;	
+	}
+
 
 
 	
