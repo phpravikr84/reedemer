@@ -32,9 +32,9 @@
 <body ng-controller="MainController">
   <div id="app" class="app" ng-include="'{{ asset('/tpl/demo/app.html') }}'"></div>
   <!-- <div ui-view></div> -->
-
   <script src="{{ asset('/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
   <script src="{{ asset('/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
+
 
 </body>
 </html>

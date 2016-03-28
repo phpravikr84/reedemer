@@ -7,14 +7,14 @@ function() {
 
     function a(a) {
         a.when("/", {
-            templateUrl: "../../tpl/demo/dashboard.html"
+            templateUrl: "../tpl/demo/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
+                return "../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.tpl + ".html"
+                return "../tpl/demo/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -528,14 +528,38 @@ function() {
         "use strict";
 
         function a(a, b, c, d, x) {
+            a.add_reedemer=function(){ 
+               x.post("../admin/dashboard/storereedemer").success(function(response){
+                 // a.status=response; 
+                 // alert(itemId+'_'+response)  
+                 alert(response);                
+               })
+            }
+
+            a.update_status=function(itemId,itemStatus){               
+               x.get("../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
+                  a.status=response; 
+                 // alert(itemId+'_'+response)                  
+               })
+            }
         	
         	x.get("../admin/dashboard/show").success(function(response){
         	
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
-                firstname: response[g].company_name,
-                email: response[g].email,
-                status: response[g].status
-            });
+                    firstname: response[g].company_name,
+                    email: response[g].email,
+                    approve: response[g].approve,
+                    id: response[g].id
+                });
+
+
+                /*var statusForItem = 'status'+response[g].id;
+                console.log(statusForItem);
+                if(response[g].status){
+                    a.statusForItem = response[g].status;
+                } else {
+                    a.statusForItem = 0;
+                }*/
             a.data = e, a.tableParams = new c({
                 page: 1,
                 count: 100,
@@ -580,7 +604,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/header.html",
+                templateUrl: "../tpl/demo/partials/header.html",
                 replace: !0
             }
         }
@@ -592,7 +616,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/sidebar.html",
+                templateUrl: "../tpl/demo/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -644,7 +668,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../../tpl/partials/chat-widget.html"
+                templateUrl: "../tpl/partials/chat-widget.html"
             }
         }
 
@@ -725,7 +749,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-item.html",
+                templateUrl: "../tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -746,7 +770,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-group.html",
+                templateUrl: "../tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -950,7 +974,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../../tpl/partials/todo-widget.html",
+                templateUrl: "../tpl/partials/todo-widget.html",
                 replace: !0,
                 link: b
             }

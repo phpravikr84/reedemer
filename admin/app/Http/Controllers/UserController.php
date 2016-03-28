@@ -67,6 +67,7 @@ class UserController extends Controller {
 			$user = new User();
 			$user->company_name 		= $request->input('company_name');			
 			$user->type 		= 2;			
+			$user->approve 		= 0;
 			$user->email 		= $request->input('email');
 			$user->password = bcrypt($request->input('password'));
 			$user->save();
@@ -81,7 +82,16 @@ class UserController extends Controller {
 
 	public function getShow()
 	{
-		$user=User::where('status',1)->get();		
-		return $user;
+		//$user=User::where('status',1)->get();		
+		//return $user;
+	}
+
+	public function getStatusupdate($id)
+	{
+		dd($id);
+		//$user = new User();
+		//$user->status=1;
+		//$user->save();
+		//return $id;
 	}
 }
