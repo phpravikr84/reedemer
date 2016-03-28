@@ -7,14 +7,14 @@ function() {
 
     function a(a) {
         a.when("/", {
-            templateUrl: "../tpl/demo/dashboard.html"
+            templateUrl: "../../tpl/demo/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
+                return "../../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../tpl/demo/" + a.tpl + ".html"
+                return "../../tpl/demo/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -528,6 +528,27 @@ function() {
         "use strict";
 
         function a(a, b, c, d, x) {
+            a.add_logo=function(){ 
+              //  alert(JSON.stringify(a.Redeemer, null, 4));
+              //  return false;
+               a.show_success_msg=false; 
+               a.show_error_msg=false; 
+               x.post("../admin/dashboard/storelogo", a.Redeemer).success(function(response){
+                 // alert(response);
+                  if(response=="success")
+                  {
+                    a.show_success_msg=true;
+                    a.Redeemer.logo_text = null; 
+                    a.Redeemer.company_id = null;               
+                   // a.Redeemer.password = null;   
+                  }
+                  else
+                  {
+                    a.show_error_msg=true;
+                  }
+               })
+            }
+
             a.add_reedemer=function(){ 
            //     alert(JSON.stringify(a.Redeemer, null, 4));
                a.show_success_msg=false; 
@@ -587,6 +608,7 @@ function() {
                     c ? (c = c.toLowerCase(), f = e.filter(function(a) {
                         return a.firstname.toLowerCase().indexOf(c) > -1
                     })) : f = e, f = b.sorting() ? d("orderBy")(f, b.orderBy()) : f, a.resolve(f.slice((b.page() - 1) * b.count(), b.page() * b.count()))
+                     // alert(f.length);
                 }
             })
           })
@@ -616,7 +638,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../tpl/demo/partials/header.html",
+                templateUrl: "../../tpl/demo/partials/header.html",
                 replace: !0
             }
         }
@@ -628,7 +650,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../tpl/demo/partials/sidebar.html",
+                templateUrl: "../../tpl/demo/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -680,7 +702,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../tpl/partials/chat-widget.html"
+                templateUrl: "../../tpl/partials/chat-widget.html"
             }
         }
 
@@ -761,7 +783,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../tpl/partials/menu-item.html",
+                templateUrl: "../../tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -782,7 +804,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../tpl/partials/menu-group.html",
+                templateUrl: "../../tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -986,7 +1008,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../tpl/partials/todo-widget.html",
+                templateUrl: "../../tpl/partials/todo-widget.html",
                 replace: !0,
                 link: b
             }
