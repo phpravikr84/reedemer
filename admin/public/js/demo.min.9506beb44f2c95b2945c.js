@@ -1,11 +1,13 @@
 ! function() {
     "use strict";
+    
     angular.module("material-lite", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule"])
 }(),
 function() {
     "use strict";
+   
 
-    function a(a) {
+    function a(a,file_path) {
         a.when("/", {
             templateUrl: "../../tpl/demo/dashboard.html"
         }).when("/:folder/:tpl", {
@@ -543,7 +545,7 @@ function() {
             //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
               // console.dir(file);
               
-               var uploadUrl = "http://localhost/reedemer/admin/public/admin/dashboard/uploadlogo";
+               var uploadUrl = "../admin/dashboard/uploadlogo";
 
                // alert(company_id);
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
