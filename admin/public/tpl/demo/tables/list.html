@@ -42,6 +42,9 @@
               <td  data-title="'Approve'" sortable="'status'">
                 <img id="row_{{ item.id }}" style="cursor:pointer" ng-src="{{item.approve == '1' && '../../images/active.png' || '../../images/block.png'}}" width="20" data-ng-click="update_status(item.id,item.approve);" />
               </td>
+              <td  data-title="'Action'" >
+                <img src="../../images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_reedemer(item.id);" />
+              </td>
             </tr>
           </table>
 

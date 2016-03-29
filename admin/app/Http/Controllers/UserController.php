@@ -94,4 +94,13 @@ class UserController extends Controller {
 		//$user->save();
 		//return $id;
 	}
+
+	public function getDash()
+	{
+		dd("a");
+		//$user = new User();
+		//$user->status=1;
+		//$user->save();
+		//return $id;
+	}
 }

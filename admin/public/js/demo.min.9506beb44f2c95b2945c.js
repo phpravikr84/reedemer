@@ -571,11 +571,32 @@ function() {
                })
             }
 
-            a.update_status=function(itemId,itemStatus){               
+            a.update_status=function(itemId,itemStatus){ 
+
                x.get("../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
                   a.status=response;                 
                   window.location.reload();             
                })
+            }
+
+            a.delete_reedemer=function(itemId){ 
+             if(confirm("Are you sure?"))
+             {               
+               x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
+                  //a.status=response;                 
+                  window.location.reload();             
+               })
+             }
+            }
+
+            a.delete_logo=function(itemId){ 
+             if(confirm("Are you sure?"))
+             {               
+               x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
+                  //a.status=response;                 
+                  window.location.reload();             
+               })
+             }
             }
         	
         	x.get("../admin/dashboard/show").success(function(response){

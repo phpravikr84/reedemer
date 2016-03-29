@@ -249,6 +249,27 @@ class DashboardController extends Controller {
 		}
 	}
 
+	public function getDeletereedemer($id)
+	{
+		$user = User::find($id);  
+		//$logo = Logo::where($id);    
+		if($user->delete())
+		{
+			return 'success';
+		}
+	}
+
+	public function getDeletelogo($id)
+	{
+		//dd($id);
+		$logo = Logo::find($id);  
+		//$logo = Logo::where($id);    
+		if($logo->delete())
+		{
+			return 'success';
+		}
+	}
+
 	
 
 

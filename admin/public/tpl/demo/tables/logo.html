@@ -42,7 +42,9 @@
               <td data-title="'Company'" sortable="'company_id'">{{logo.reedemer_id}}</td>
               <td data-title="'Logo'" sortable="'company_id'"><img src="../../../uploads/thumb/{{logo.logo_name}}" width="50" /></td>
               <td data-title="'Logo Text'" sortable="'logo_text'">{{logo.logo_text}}</td>
-             
+              <td  data-title="'Action'" >
+                <img src="../../images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
+              </td>
             </tr>
           </table>
 
