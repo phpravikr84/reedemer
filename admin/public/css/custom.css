@@ -42,3 +42,7 @@
 .align-left{
     text-align: left;
 }
+
+.ng-table th{
+    text-align: left !important
+}
