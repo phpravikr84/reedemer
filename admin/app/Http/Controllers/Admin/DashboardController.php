@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Hash;
 use Validator; 
+use Input; /* For input */
+use App\Helper\helpers;
 
 class DashboardController extends Controller {
 
@@ -164,29 +166,89 @@ class DashboardController extends Controller {
 		return view('admin.reedemer.add');
 	}*/
 
-	public function postStorelogo(Request $request)
+	public function postUploadlogo(Request $request)
 	{
-		$user = new Logo();
-		$user->logo_name 		= $request->input('company_id');	
-		$user->logo_text 		= $request->input('logo_text');		
-		$user->status 		= 1;			
-		$user->uploaded_by 		= 1;
-		$user->save();
+		$obj = new helpers();
+		$folder_name=env('UPLOADS');
+		$file_name=$_FILES[ 'file' ][ 'name' ];
+		$temp_path = $_FILES[ 'file' ][ 'tmp_name' ];
 
-		return 'success';		
-		exit;	
-		//echo "aaaaa:".$request->input('company_id');
+		
+
+		if (!file_exists($folder_name)) {
+			$create_folder= mkdir($folder_name, 0777);
+			$thumb_path= mkdir($folder_name."/thumb", 0777);
+			$medium_path= mkdir($folder_name."/medium", 0777);
+			$original_path= mkdir($folder_name."/original", 0777);
+		}
+		else
+		{
+			$thumb_path= env('UPLOADS')."/thumb"."/";
+			$medium_path= env('UPLOADS')."/medium"."/";
+			$original_path= env('UPLOADS')."/original"."/";
+		}
+
+
+		$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+		$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
+
+		$file_ori = $_FILES[ 'file' ][ 'tmp_name' ];
+		
+		move_uploaded_file($file_ori, "$original_path$new_file_name");
+		
+		$obj->createThumbnail($original_path,$thumb_path,env('THUMB_SIZE'));
+		$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));
+
+		
+		//$user = new Logo();
+		//$user->logo_name 		= $new_file_name;	
+		//$user->logo_text 		= $request->input('logo_text');		
+		//$user->status 			= 1;			
+		//$user->uploaded_by 		= 1;
+		//$user->save();
+
+		//return 'success';		
+	//	exit;	
+		//echo "aaaaa:".$request->input('logo_name');
+		//dd($request->all());
+		//echo $_FILES[ 'file' ][ 'tmp_name' ]."A<br>";
+		//echo $_FILES[ 'file' ][ 'name' ];
+		//exit;
+		   // $tempPath = $_FILES[ 'file' ][ 'tmp_name' ];
+		   // $uploadPath = '../uploads' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+		  //  move_uploaded_file( $tempPath, $uploadPath );
+		  //  $answer = array( 'answer' => 'File transfer completed' );
+		  //  $json = json_encode( $answer );
+		  //  echo $json;
+		return $new_file_name;
+
 	}
 
 	public function getLogo()
 	{
-		$logo = Logo::get();
+
+		$logo = Logo::get();		
 		
-		//echo $logo->reedemer;
 		return $logo;		
-		//exit;	
+			
 	}
 
+	public function getAddlogo($company_id,$logo_text,$image_name)
+	{
+		//dd($request->all());
+		$user = new Logo();
+		$user->reedemer_id 		= $company_id;	
+		$user->logo_name 		= $image_name;	
+		$user->logo_text 		= $logo_text;		
+		$user->status 			= 1;			
+		$user->uploaded_by 		= 1;
+		if($user->save())
+		{
+			return 'success';
+		}
+	}
+
+	
 
 
 	

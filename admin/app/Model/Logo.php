@@ -19,4 +19,9 @@ class Logo extends Model  {
 		return $this->belongsTo('App\User');
 	}*/
 
+	public function reedemer()
+	{
+		return $this->hasOne('App\User');
+	}
+
 }

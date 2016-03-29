@@ -36,7 +36,7 @@
           </div>
 
           <div class="p-30">
-            <form name="f1" method="POST" ng-submit="add_logo()">
+            <form name="f1" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield">
                 <p>Select Company</p>
@@ -52,12 +52,15 @@
               </div>
               <div class="mdl-textfield">
                 <p>Upload Logo</p>
-                <input class="mdl-textfield__input" id="upload-with-form" type="file" file-model="Redeemer.logo_name"  accept="image/*" />
+               <!-- <input class="mdl-textfield__input" id="upload-with-form" type="file" file-model="Redeemer.logo_name"  accept="image/*" /> -->
+
+               <input type = "file" ng-model="Redeemer.logo_name" file-model = "myFile" name="vvv" />
+   
               </div>
               
              
               <div class="m-t-20">
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                <button type="submit" ng-click = "uploadFile()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                   Save user
                 </button>               
               </div>

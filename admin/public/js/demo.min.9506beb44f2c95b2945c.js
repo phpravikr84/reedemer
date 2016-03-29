@@ -527,36 +527,27 @@ function() {
     function() {
         "use strict";
 
-        function a(a, b, c, d, x) {
+        function a(a, b, c, d, x, fu) {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
             x.get("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
-            });
-           
-            
-            
-            a.add_logo=function(){ 
-              //  alert(JSON.stringify(a.Redeemer, null, 4));
-              //  return false;
-               a.show_success_msg=false; 
-               a.show_error_msg=false; 
-               x.post("../admin/dashboard/storelogo", a.Redeemer).success(function(response){
-                 // alert(response);
-                  if(response=="success")
-                  {
-                    a.show_success_msg=true;
-                    a.Redeemer.logo_text = null; 
-                    a.Redeemer.company_id = null;               
-                   // a.Redeemer.password = null;   
-                  }
-                  else
-                  {
-                    a.show_error_msg=true;
-                  }
-               })
-            }
+                // alert(data_response);
+            });           
+          
+            a.uploadFile = function(){
+               var file = a.myFile;
+               
+             // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
+            //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
+              // console.dir(file);
+              
+               var uploadUrl = "http://localhost/reedemer/admin/public/admin/dashboard/uploadlogo";
+
+               // alert(company_id);
+               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
+            };
 
             a.add_reedemer=function(){ 
            //     alert(JSON.stringify(a.Redeemer, null, 4));
@@ -623,7 +614,82 @@ function() {
             })
           })
         }
-        angular.module("material-lite").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", a])
+        angular.module("material-lite").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
+    }(),    
+    function() {
+        "use strict";
+
+        function a(p) {
+            return {
+                restrict: 'A',
+                link: function(a, b, c) {
+                  var model = p(c.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  b.bind('change', function(){
+                     a.$apply(function(){
+                        modelSetter(a, b[0].files[0]);
+                     });
+                  });
+                }
+            }
+        }
+        angular.module("material-lite").directive("fileModel",["$parse",a])
+    }(),
+    function() {
+        "use strict";
+
+        function a(h) {
+
+            this.uploadFileToUrl = function(file, uploadUrl, data){
+               // alert(data);
+               var fd = new FormData();
+               fd.append('file', file);
+              //  console.log("data :: "+JSON.stringify(data, null, 4));
+              //  return false;
+                // var totalData = {
+                //     image: fd,
+                //     allText: data
+                // };
+                 //console.log("data :: "+JSON.stringify(fd, null, 4));
+               //return false;
+               h.post(uploadUrl, fd, {
+                  transformRequest: angular.identity,
+                  headers: {'Content-Type': undefined},
+                  data:data
+               })
+            
+               .success(function(response){
+                    //alert(response);
+                   // a.show_success_msg=false; 
+                   // a.show_error_msg=false; 
+                   var company_id =$("#company_id").val();
+                   var logo_text =$("#logo_text").val();
+                   //alert(company_id);
+                   //return false;
+                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
+                    // alert(response_back);
+                      if(response_back=="success")
+                      {
+                        //a.show_success_msg=true;
+                        //a.Redeemer.logo_text = null; 
+                       // a.Redeemer.company_id = null; 
+                      // window.location.href='/tables/logo'              
+                       
+                      }
+                      else
+                      {
+                        //a.show_error_msg=true;
+                      }
+                    })
+               })
+            
+               .error(function(){
+                //alert("B");
+               });
+            }
+        }
+        angular.module("material-lite").service("fileUpload", ["$http", a])
     }(),
     function() {
         "use strict";
