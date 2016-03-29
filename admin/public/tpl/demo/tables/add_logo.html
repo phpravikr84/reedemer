@@ -23,6 +23,16 @@
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Add Logo</h2>
           </div>
+          <div class="p-l-20 p-r-20 p-b-20" id="show_success_msg" style="display:none">
+            <div class="alert alert-success">
+                Data inserted successfully
+            </div>
+          </div>
+          <div class="p-l-20 p-r-20 p-b-20" id="show_error_msg" style="display:none">
+            <div class="alert alert-danger">
+                Please insert all field
+            </div>
+          </div>
           
           <div class="p-l-20 p-r-20 p-b-20" ng-if="show_success_msg">
             <div class="alert alert-success">
@@ -42,7 +52,7 @@
                 <p>Select Company</p>
                  <select id="company_id" ng-model="Redeemer.company_id">
                     <option value="">----</option>
-                    <option value="{{ cname.id }}" ng-repeat="cname in cnames">{{cname.company_name}}</option>
+                    <option value="{{ cname.company_name }}" ng-repeat="cname in cnames">{{cname.company_name}}</option>
                    
                   </select>  
               </div>
@@ -54,7 +64,7 @@
                 <p>Upload Logo</p>
                <!-- <input class="mdl-textfield__input" id="upload-with-form" type="file" file-model="Redeemer.logo_name"  accept="image/*" /> -->
 
-               <input type = "file" ng-model="Redeemer.logo_name" file-model = "myFile" name="vvv" />
+               <input type = "file" ng-model="Redeemer.logo_name" file-model = "myFile" id="logo_name" />
    
               </div>
               

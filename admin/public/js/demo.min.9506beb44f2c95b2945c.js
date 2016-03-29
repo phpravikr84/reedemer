@@ -587,6 +587,7 @@ function() {
                     id: response[g].id
                 });
 
+                //console.log("data :: "+JSON.stringify(response, null, 4));
 
                 /*var statusForItem = 'status'+response[g].id;
                 console.log(statusForItem);
@@ -663,31 +664,29 @@ function() {
             
                .success(function(response){
                     //alert(response);
-                   // a.show_success_msg=false; 
+                   // var show_success_msg=false; 
                    // a.show_error_msg=false; 
                    var company_id =$("#company_id").val();
                    var logo_text =$("#logo_text").val();
                    //alert(company_id);
                    //return false;
-                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
-                    // alert(response_back);
-                      if(response_back=="success")
-                      {
-                        //a.show_success_msg=true;
-                        //a.Redeemer.logo_text = null; 
-                       // a.Redeemer.company_id = null; 
-                      // window.location.href='/tables/logo'              
-                       
-                      }
-                      else
-                      {
-                        //a.show_error_msg=true;
-                      }
-                    })
+                   h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
+                        // alert(response_back);
+                        if(response_back=="success")
+                        {
+                           
+                            $("#show_success_msg").show();
+                            $("#logo_text").val("");
+                            $("#company_id").val("");
+                            $("#logo_name").val("");                                          
+
+                        }
+                        
+                   })
                })
             
                .error(function(){
-                //alert("B");
+                $("#show_error_msg").show();
                });
             }
         }

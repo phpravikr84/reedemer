@@ -227,7 +227,7 @@ class DashboardController extends Controller {
 	public function getLogo()
 	{
 
-		$logo = Logo::get();		
+		$logo = Logo::orderBy('id','DESC')->get();	
 		
 		return $logo;		
 			
@@ -235,6 +235,7 @@ class DashboardController extends Controller {
 
 	public function getAddlogo($company_id,$logo_text,$image_name)
 	{
+
 		//dd($request->all());
 		$user = new Logo();
 		$user->reedemer_id 		= $company_id;	
