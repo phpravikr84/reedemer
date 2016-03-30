@@ -2,7 +2,7 @@
 
 @section('content')
 <main class="demo-main mdl-layout__content">
-  <h2 class="t-center mdl-color-text--white text-shadow">Reedemer</h2>
+  <h2 class="t-center mdl-color-text--white text-shadow">Redeemar</h2>
   <a id="top"></a>
   <div class="demo-container mdl-grid">
     <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>

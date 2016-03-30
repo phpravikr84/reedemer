@@ -9,14 +9,14 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "../../tpl/demo/dashboard.html"
+            templateUrl: "../view/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.folder + "/" + a.tpl + ".html"
+                return "../view/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../../tpl/demo/" + a.tpl + ".html"
+                return "../view/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -54,14 +54,20 @@ function() {
     }),
     function() {
         "use strict";
-
-        function a(a) {
-            a.onPikadaySelect = function(a, b) {
+        function a(a,h) {
+            a.onPikadaySelect = function(a, b, h) {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-        }
-        angular.module("material-lite").controller("MainController", ["$scope", a])
+            h.get("../admin/dashboard/userdetails")
+            .success(function (data) {                
+                a.ReedemerDetails=data;
+            });           
+        } 
+
+
+       
+        angular.module("material-lite").controller("MainController", ["$scope","$http", a])
     }(),
     function() {
         "use strict";
@@ -598,44 +604,18 @@ function() {
                })
              }
             }
-        	
-        	x.get("../admin/dashboard/show").success(function(response){
-        	
+            
+            x.get("../admin/dashboard/show").success(function(response){
+            
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
-                    firstname: response[g].company_name,
+                    company_name: response[g].company_name,
                     email: response[g].email,
                     approve: response[g].approve,
                     id: response[g].id
-                });
-
-                //console.log("data :: "+JSON.stringify(response, null, 4));
-
-                /*var statusForItem = 'status'+response[g].id;
-                console.log(statusForItem);
-                if(response[g].status){
-                    a.statusForItem = response[g].status;
-                } else {
-                    a.statusForItem = 0;
-                }*/
-            a.cnames = response;
-            a.data = e, a.tableParams = new c({
-                page: 1,
-                count: 100,
-                sorting: {
-                    firstname: "asc"
-                }
-            }, {
-                filterDelay: 50,
-                total: e.length,
-                getData: function(a, b) {
-                    var c = b.filter().search,
-                        f = [];
-                    c ? (c = c.toLowerCase(), f = e.filter(function(a) {
-                        return a.firstname.toLowerCase().indexOf(c) > -1
-                    })) : f = e, f = b.sorting() ? d("orderBy")(f, b.orderBy()) : f, a.resolve(f.slice((b.page() - 1) * b.count(), b.page() * b.count()))
-                     // alert(f.length);
-                }
-            })
+                });    
+                //alert(JSON.stringify(response, null, 4))    ;        
+                a.cnames = response;
+            
           })
         }
         angular.module("material-lite").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
@@ -736,7 +716,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/header.html",
+                templateUrl: "../view/partials/header.html",
                 replace: !0
             }
         }
@@ -748,7 +728,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../tpl/demo/partials/sidebar.html",
+                templateUrl: "../view/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -800,7 +780,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../../tpl/partials/chat-widget.html"
+                templateUrl: "../view/tpl/partials/chat-widget.html"
             }
         }
 
@@ -881,7 +861,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-item.html",
+                templateUrl: "../view/tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -902,7 +882,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../tpl/partials/menu-group.html",
+                templateUrl: "../view/tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -1106,7 +1086,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../../tpl/partials/todo-widget.html",
+                templateUrl: "../view/tpl/partials/todo-widget.html",
                 replace: !0,
                 link: b
             }

@@ -26,10 +26,10 @@ class UserController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	/*public function __construct()
 	{
 		$this->middleware('guest');
-	}
+	}*/
 
 	
 	/**
@@ -37,6 +37,7 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	*/
+	
 	
 
 	public function getAdd($id = Null)
@@ -102,5 +103,10 @@ class UserController extends Controller {
 		//$user->status=1;
 		//$user->save();
 		//return $id;
+	}
+
+	public function getDashboard()
+	{
+		return view('user.dashboard.index');
 	}
 }

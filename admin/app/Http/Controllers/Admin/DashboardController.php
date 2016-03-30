@@ -10,6 +10,7 @@ use Hash;
 use Validator; 
 use Input; /* For input */
 use App\Helper\helpers;
+use Auth;
 
 class DashboardController extends Controller {
 
@@ -270,7 +271,20 @@ class DashboardController extends Controller {
 		}
 	}
 
-	
+	public function getUserdetails()
+	{
+		$user_id=Auth::user()->id;
+		$user_details=User::findOrFail($user_id);
+		//dd($user_details->toArray());
+		//dd($user_details->company_name);
+		$user_arr=array();
+		$user_arr['company_name']=$user_details->company_name;
+		$user_arr['email']=$user_details->email;
+		$user_arr['type']=$user_details->type;
+
+		//dd($user_arr);
+		return $user_arr;
+	}
 
 
 	

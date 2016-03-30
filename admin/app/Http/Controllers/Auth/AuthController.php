@@ -49,16 +49,15 @@ class AuthController extends Controller {
 		$credentials = $request->only('email', 'password');
 
 		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'status' => 1]))
-		{			
-			if($this->auth->user()->type == '1')			
-			{
-				
+		{	
+			//dd($this->auth->user()->type);		
+			if($this->auth->user()->type == '1')		
+			{	
 				return redirect()->intended( '/admin/dashboard' );
 			}
 			else
-			{	
-				dd("User logged in");
-				// Done later
+			{
+				return redirect()->intended( '/user/dashboard' );
 			}			
 			
 		}
