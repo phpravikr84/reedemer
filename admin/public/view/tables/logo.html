@@ -39,13 +39,13 @@
               <tr ng-repeat="logo in logo_details">
                 <td>{{logo.reedemer_id}}</td>
                 <td>
-                  <img src="../../../uploads/thumb/{{logo.logo_name}}" width="80" />
+                  <img src="{{d_path}}../uploads/thumb/{{logo.logo_name}}" width="80" />
                 </td>
                 <td>
                   {{logo.logo_text}}
                 </td>
                 <td>
-                  <img src="../../images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
+                  <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
               </tr>            
             </tbody>
@@ -61,3 +61,6 @@
   </div>
 
 </section>
+<script>
+alert(d_path);
+</script>

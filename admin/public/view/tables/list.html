@@ -40,10 +40,10 @@
                 <td>{{item.company_name}}</td>
                 <td>{{item.email}}</td>
                 <td>
-                  <img id="row_{{ item.id }}" style="cursor:pointer" ng-src="{{item.approve == '1' && '../../images/active.png' || '../../images/block.png'}}" width="20" data-ng-click="update_status(item.id,item.approve);" />
+                  <img id="row_{{ item.id }}" style="cursor:pointer" ng-src="{{item.approve == '1' && '../images/active.png' || '../images/block.png'}}" width="20" data-ng-click="update_status(item.id,item.approve);" />
                 </td>
                 <td>
-                  <img src="../../images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_reedemer(item.id);" />
+                  <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_reedemer(item.id);" />
                 </td>
               </tr> 
             </tbody>
