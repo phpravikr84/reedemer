@@ -861,7 +861,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../view/tpl/partials/menu-item.html",
+                templateUrl: "../../view/tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -882,7 +882,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../view/tpl/partials/menu-group.html",
+                templateUrl: "../../view/tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -1086,7 +1086,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../view/tpl/partials/todo-widget.html",
+                templateUrl: "../../view/tpl/partials/todo-widget.html",
                 replace: !0,
                 link: b
             }
