@@ -12,11 +12,11 @@ function() {
             templateUrl: "../../view/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../view/" + a.folder + "/" + a.tpl + ".html"
+                return "../../view/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../view/" + a.tpl + ".html"
+                return "../../view/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -716,7 +716,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../view/partials/header.html",
+                templateUrl: "../../view/partials/header.html",
                 replace: !0
             }
         }
@@ -728,7 +728,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../view/partials/sidebar.html",
+                templateUrl: "../../view/partials/sidebar.html",
                 replace: !0
             }
         }
