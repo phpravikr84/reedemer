@@ -1,7 +1,7 @@
 ! function() {
     "use strict";
     
-    angular.module("material-lite", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule"])
+    angular.module("redeemar-app", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule"])
 }(),
 function() {
     "use strict";
@@ -23,7 +23,7 @@ function() {
     }
 
     function b(a) {}
-    angular.module("material-lite").config(["$routeProvider", a]).run(["$route", b])
+    angular.module("redeemar-app").config(["$routeProvider", a]).run(["$route", b])
 }(),
 function() {
     "use strict";
@@ -47,7 +47,7 @@ function() {
             libraries: "weather,geometry,visualization"
         })
     }
-    angular.module("material-lite").run(["$rootScope", "APP", a]).run(["$rootScope", "$timeout", b]).config(["uiGmapGoogleMapApiProvider", c])
+    angular.module("redeemar-app").run(["$rootScope", "APP", a]).run(["$rootScope", "$timeout", b]).config(["uiGmapGoogleMapApiProvider", c])
 }(), angular.module("app.constants", []).constant("APP", {
         version: "1.0.0"
     }),
@@ -69,7 +69,7 @@ function() {
 
         
        
-        angular.module("material-lite").controller("MainController", ["$scope","$http", a])
+        angular.module("redeemar-app").controller("MainController", ["$scope","$http", a])
     }(),
     function() {
         "use strict";
@@ -102,7 +102,7 @@ function() {
                 }, 2e3))
             })
         }
-        angular.module("material-lite").controller("DashboardController", ["$timeout", "$scope", a])
+        angular.module("redeemar-app").controller("DashboardController", ["$timeout", "$scope", a])
     }(),
     function() {
         "use strict";
@@ -110,7 +110,7 @@ function() {
         function a(a, b) {
             a.todoService = new b(a)
         }
-        angular.module("material-lite").controller("TodoController", ["$scope", "TodoService", a])
+        angular.module("redeemar-app").controller("TodoController", ["$scope", "TodoService", a])
     }(),
     function() {
         "use strict";
@@ -124,7 +124,7 @@ function() {
                 this.MaterialProgress.setProgress(33), this.MaterialProgress.setBuffer(87)
             }), componentHandler.downgradeElements([a, b]), componentHandler.upgradeElement(a, "MaterialProgress"), componentHandler.upgradeElement(b, "MaterialProgress")
         }
-        angular.module("material-lite").controller("LoadingController", a)
+        angular.module("redeemar-app").controller("LoadingController", a)
     }(),
     function() {
         "use strict";
@@ -167,7 +167,7 @@ function() {
                 }
             })
         }
-        angular.module("material-lite").directive("disableAnimate", ["$animate", b]).service("imageService", ["$q", "$http", a]).controller("GalleryController", ["$scope", "imageService", "angularGridInstance", c])
+        angular.module("redeemar-app").directive("disableAnimate", ["$animate", b]).service("imageService", ["$q", "$http", a]).controller("GalleryController", ["$scope", "imageService", "angularGridInstance", c])
     }(),
     function() {
         "use strict";
@@ -225,7 +225,7 @@ function() {
                 country: "Colombia"
             }], a.availableColors = ["Red", "Green", "Blue", "Yellow", "Magenta", "Maroon", "Umbra", "Turquoise"], a.selectedState = "", a.states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
         }
-        angular.module("material-lite").controller("SelectController", ["$scope", a])
+        angular.module("redeemar-app").controller("SelectController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -268,7 +268,7 @@ function() {
                     for (var c = 0; c < b.length; c++) a.errorMsg = void 0, f(b[c])
             })
         }
-        angular.module("material-lite").controller("UploadController", ["$scope", "Upload", "$timeout", a])
+        angular.module("redeemar-app").controller("UploadController", ["$scope", "Upload", "$timeout", a])
     }(),
     function() {
         "use strict";
@@ -276,7 +276,7 @@ function() {
         function a(a) {
             a.text1 = "<h1>Lorem ipsum</h1><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe maxime similique, ab voluptate dolorem incidunt, totam dolores illum eum ad quas odit. Magnam rerum doloribus vitae magni quasi molestias repellat.</p><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus tempora explicabo fugit unde maxime alias.</li><li>Numquam, nihil. Fugiat aspernatur suscipit voluptatum dolorum nisi numquam, fugit at, saepe alias assumenda autem.</li><li>Iste dolore sed placeat aperiam alias modi repellat dolorem, temporibus odio adipisci obcaecati, est facere!</li><li>Quas totam itaque voluptatibus dolore ea reprehenderit ut quibusdam, odit beatae aliquam, deleniti unde tempora!</li><li>Rerum quis soluta, necessitatibus. Maxime repudiandae minus at eum, dicta deserunt dignissimos laborum doloribus. Vel.</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis enim illum, iure cumque amet. Eos quisquam, nemo voluptates. Minima facilis, recusandae atque ullam illum quae iure impedit nihil dolorum hic?</p>"
         }
-        angular.module("material-lite").controller("TextEditorController", ["$scope", a])
+        angular.module("redeemar-app").controller("TextEditorController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -317,7 +317,7 @@ function() {
                 title: "San Francisco"
             }), a.markers = b
         }
-        angular.module("material-lite").controller("ClickableMapController", ["$scope", a])
+        angular.module("redeemar-app").controller("ClickableMapController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -347,7 +347,7 @@ function() {
                 }
             })
         }
-        angular.module("material-lite").controller("SearchableMapController", ["$scope", "uiGmapGoogleMapApi", a])
+        angular.module("redeemar-app").controller("SearchableMapController", ["$scope", "uiGmapGoogleMapApi", a])
     }(),
     function() {
         "use strict";
@@ -375,7 +375,7 @@ function() {
                 return a.map.control.getGMap()
             }
         }
-        angular.module("material-lite").controller("ZoomableMapController", ["$scope", a])
+        angular.module("redeemar-app").controller("ZoomableMapController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -482,7 +482,7 @@ function() {
                 }]
             }
         }
-        angular.module("material-lite").controller("StyledMapController", ["$scope", a])
+        angular.module("redeemar-app").controller("StyledMapController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -523,7 +523,7 @@ function() {
                 title: "San Francisco"
             }), a.markers = b
         }
-        angular.module("material-lite").controller("FullMapController", ["$scope", a])
+        angular.module("redeemar-app").controller("FullMapController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -532,7 +532,7 @@ function() {
             var b = [];
             b.push("#4CAF50"), b.push("#2196F3"), b.push("#9c27b0"), b.push("#ff9800"), b.push("#F44336"), a.color_pattern = b.join()
         }
-        angular.module("material-lite").controller("ChartsController", ["$scope", a])
+        angular.module("redeemar-app").controller("ChartsController", ["$scope", a])
     }(),
     function() {
         "use strict";
@@ -623,7 +623,7 @@ function() {
 
         }
 
-        angular.module("material-lite").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
+        angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
     }(),    
     function() {
         "use strict";
@@ -643,7 +643,7 @@ function() {
                 }
             }
         }
-        angular.module("material-lite").directive("fileModel",["$parse",a])
+        angular.module("redeemar-app").directive("fileModel",["$parse",a])
     }(),
     function() {
         "use strict";
@@ -700,7 +700,7 @@ function() {
                });
             }
         }
-        angular.module("material-lite").service("fileUpload", ["$http", a])
+        angular.module("redeemar-app").service("fileUpload", ["$http", a])
     }(),
     function() {
         "use strict";
@@ -717,7 +717,7 @@ function() {
                 }
             }
         }
-        angular.module("material-lite").directive("dynamicColor", a)
+        angular.module("redeemar-app").directive("dynamicColor", a)
     }(),
     function() {
         "use strict";
@@ -729,7 +729,7 @@ function() {
                 replace: !0
             }
         }
-        angular.module("material-lite").directive("mlHeader", a)
+        angular.module("redeemar-app").directive("mlHeader", a)
     }(),
     function() {
         "use strict";
@@ -741,7 +741,7 @@ function() {
                 replace: !0
             }
         }
-        angular.module("material-lite").directive("mlSidebar", a)
+        angular.module("redeemar-app").directive("mlSidebar", a)
     }(),
     function() {
         "use strict";
@@ -1132,5 +1132,5 @@ function() {
                 link: a
             }
         }
-        angular.module("material-lite").directive("mlSticky", a)
+        angular.module("redeemar-app").directive("mlSticky", a)
     }();

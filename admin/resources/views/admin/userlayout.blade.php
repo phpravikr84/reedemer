@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="material-lite">
+<html lang="en" ng-app="redeemar-app">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
