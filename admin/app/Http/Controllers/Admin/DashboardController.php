@@ -227,14 +227,38 @@ class DashboardController extends Controller {
 
 	public function getLogo()
 	{
-
-		$logo = Logo::orderBy('id','DESC')->get();	
-		
-		return $logo;		
+		//dd(Auth::user()->id);
+		$logo_details = Logo::orderBy('id','DESC')->get();
+		$logo_arr=array();	
+		$company_name="N/A";
+		foreach($logo_details as $logo_details)
+		{
+			if($logo_details['reedemer_id'] >0)
+			{
+				$company_details=User::find($logo_details['reedemer_id']);
+				$company_name=$company_details['company_name'];
+			}
+			//echo ."<br>";
+			$logo_arr[]=array(
+						'id'=>$logo_details['id'],
+						'reedemer_id'=>$logo_details['reedemer_id'],
+						'reedemer_company'=>$company_name,
+						'logo_name'=>$logo_details['logo_name'],
+						'logo_text'=>$logo_details['logo_text'],
+						'status'=>$logo_details['status'],
+						'uploaded_by'=>Auth::user()->id,
+						'created_at'=>$logo_details['created_at'],
+						'updated_at'=>$logo_details['updated_at'],
+					  );
+		}
+		$logo_json=json_encode($logo_arr);
+		//dd($logo_arr);
+		//exit;
+		return $logo_json;		
 			
 	}
 
-	public function getAddlogo($company_id,$logo_text,$image_name)
+	public function getAddlogo($company_id='',$logo_text,$image_name)
 	{
 
 		//dd($request->all());

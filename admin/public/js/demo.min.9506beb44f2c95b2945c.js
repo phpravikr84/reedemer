@@ -673,6 +673,10 @@ function() {
                    // var show_success_msg=false; 
                    // a.show_error_msg=false; 
                    var company_id =$("#company_id").val();
+                   if(!company_id)
+                   {
+                       company_id=0;
+                   }
                    var logo_text =$("#logo_text").val();
                    //alert(company_id);
                    //return false;
