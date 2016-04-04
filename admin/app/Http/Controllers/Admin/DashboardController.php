@@ -11,6 +11,9 @@ use Validator;
 use Input; /* For input */
 use App\Helper\helpers;
 use Auth;
+use App\Helper\vuforiaclient;
+//use App\Helper\gettarget;
+//use App\Helper\signaturebuilder;
 
 class DashboardController extends Controller {
 
@@ -226,8 +229,12 @@ class DashboardController extends Controller {
 	}
 
 	public function getLogo()
-	{
-		//dd(Auth::user()->id);
+	{	
+		//$client2 = new gettarget();
+			
+		//$target_id=$client2->GetTarget();
+
+		//dd("B");
 		$logo_details = Logo::orderBy('id','DESC')->get();
 		$logo_arr=array();	
 		$company_name="N/A";
@@ -260,17 +267,33 @@ class DashboardController extends Controller {
 
 	public function getAddlogo($company_id='',$logo_text,$image_name)
 	{
+		
+		$client = new vuforiaclient();
+		$send[0] = "Logo_".time()."_".$company_id;
+		$send[1] = '../uploads/original/'.$image_name;
+		$send[2] = '../uploads/original/'.$image_name;
+		$send[3] = 'Redeemar';
+		$send[4] = 'Redeemar';		
+		$target_id=$client->addTarget($send);
 
-		//dd($request->all());
-		$user = new Logo();
-		$user->reedemer_id 		= $company_id;	
-		$user->logo_name 		= $image_name;	
-		$user->logo_text 		= $logo_text;		
-		$user->status 			= 1;			
-		$user->uploaded_by 		= 1;
-		if($user->save())
+		
+		if($target_id!="")
+		{			
+			$user = new Logo();
+			$user->reedemer_id 		= $company_id;	
+			$user->target_id 		= $target_id;
+			$user->logo_name 		= $image_name;	
+			$user->logo_text 		= $logo_text;		
+			$user->status 			= 1;			
+			$user->uploaded_by 		= 1;
+			if($user->save())
+			{
+				return 'success';
+			}
+		}
+		else
 		{
-			return 'success';
+			return 'error';
 		}
 	}
 
