@@ -234,21 +234,50 @@ class DashboardController extends Controller {
 			
 		//$target_id=$client2->GetTarget();
 
+		//$credentials = createSignature("/targets/".$targetId, "PUT", "application/json",$content);
+		//$result = updateData($credentials, "https://vws.vuforia.com/targets",$targetId, $content);
+		//echo $result;
+		//exit;
 		//dd("B");
+
+		 
+
+		
 		$logo_details = Logo::orderBy('id','DESC')->get();
+
+		//dd($logo_details[0]['target_id']);
+		//$client = new vuforiaclient();
+			
+		
+		
+		//$target_details_arr=json_decode($target_details);
+		//dd($target_details_arr);
+		//echo $logo_details[0]['target_id']."_A<br><br>";
 		$logo_arr=array();	
 		$company_name="N/A";
+		$target_id=NULL;
 		foreach($logo_details as $logo_details)
 		{
+			//$target_id=$logo_details['target_id'];
+			//echo $logo_details['target_id']."A<br><br>";
+			//$target_details=$client->getTarget($target_id); 
+			//$target_details=json_decode($target_details);
+			//echo "<pre>";
+			//print_r($target_details);
+			//echo "</pre>";
+			//echo $logo_details['target_id']."<br>";
 			if($logo_details['reedemer_id'] >0)
 			{
 				$company_details=User::find($logo_details['reedemer_id']);
 				$company_name=$company_details['company_name'];
 			}
+			//dd($target_details->target_record->tracking_rating);
+			//echo 
 			//echo ."<br>";
 			$logo_arr[]=array(
 						'id'=>$logo_details['id'],
 						'reedemer_id'=>$logo_details['reedemer_id'],
+						'tracking_rating'=>'3',
 						'reedemer_company'=>$company_name,
 						'logo_name'=>$logo_details['logo_name'],
 						'logo_text'=>$logo_details['logo_text'],
@@ -275,8 +304,17 @@ class DashboardController extends Controller {
 		$send[3] = 'Redeemar';
 		$send[4] = 'Redeemar';		
 		$target_id=$client->addTarget($send);
-
-		
+		$tracking_rating=null;
+		//$target_id=$logo_details['target_id'];
+		//echo $logo_details['target_id']."A<br><br>";
+		$target_details=$client->getTarget($target_id); 
+		$target_details=json_decode($target_details);
+		$tracking_rating=$target_details->target_record->tracking_rating;
+		//echo $tracking_rating."-----".$target_id;
+		//exit;
+		echo "<pre>";
+		print_r($target_details);
+		echo "</pre>";
 		if($target_id!="")
 		{			
 			$user = new Logo();
@@ -284,6 +322,7 @@ class DashboardController extends Controller {
 			$user->target_id 		= $target_id;
 			$user->logo_name 		= $image_name;	
 			$user->logo_text 		= $logo_text;		
+			$user->tracking_rating 	= $tracking_rating;	
 			$user->status 			= 1;			
 			$user->uploaded_by 		= 1;
 			if($user->save())
@@ -308,13 +347,18 @@ class DashboardController extends Controller {
 	}
 
 	public function getDeletelogo($id)
-	{
-		//dd($id);
-		$logo = Logo::find($id);  
-		//$logo = Logo::where($id);    
-		if($logo->delete())
-		{
-			return 'success';
+	{		
+		$logo = Logo::find($id); 
+		
+		$client = new vuforiaclient();
+			
+		$target_id=$client->deleteAllTargets($logo->target_id);  
+		if($target_id=="deleted")
+		{ 
+			if($logo->delete())
+			{
+				return 'success';
+			}
 		}
 	}
 

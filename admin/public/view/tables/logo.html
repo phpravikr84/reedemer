@@ -31,6 +31,7 @@
               <tr>
                 <th class="mdl-data-table__cell--non-numeric">Comapny Name</th>
                 <th class="mdl-data-table__cell--non-numeric">Logo</th>
+                <th class="mdl-data-table__cell--non-numeric">Rating</th>
                 <th class="mdl-data-table__cell--non-numeric">Text</th>
                 <th class="mdl-data-table__cell--non-numeric">Action</th>
               </tr>
@@ -40,6 +41,9 @@
                 <td>{{logo.reedemer_company}}</td>
                 <td>
                   <img src="{{d_path}}../uploads/original/{{logo.logo_name}}" width="80" />
+                </td>
+                <td>
+                  {{logo.tracking_rating}}
                 </td>
                 <td>
                   {{logo.logo_text}}

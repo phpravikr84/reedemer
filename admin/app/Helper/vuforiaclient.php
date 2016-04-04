@@ -51,28 +51,9 @@ class vuforiaclient {
     }
 
 
-    public function GetTarget() {
-       $curl = curl_init();
-        // Set some options - we are passing in a useragent too here
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => 'https://vws.vuforia.com',
-         
-            CURLOPT_POST => 1,
-            CURLOPT_POSTFIELDS => array(
-                'access_key' => '75fbf9bf5b6aa7529fbef7e7f38910797e5a2723',
-                'secret_key' => 'ed6e6e81cdd198a44c709cd0f9d890c459835a78',
-                'targetId' => 'cc31e294c0bb4fe0984490144891db4e'
-            )
-        ));
-        // Send the request & save response to $resp
-        $resp = curl_exec($curl);
-        dd($resp);
-        // Close request to clear up some resources
-        curl_close($curl);
-    }
     
-    public function deleteAllTargets() {
+    
+    public function deleteAllTargets($id) {
         $ch = curl_init(self::BASE_URL . self::TARGETS_PATH);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders('GET'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -93,7 +74,37 @@ class vuforiaclient {
             if ($info['http_code'] !== 200) {
                 die('Failed to delete target: ' . $response . "\n");
             }
-            print "Deleted target $index of " . count($targets->results);
+            //print "Deleted target $index of " . count($targets->results);
+            return 'deleted';
+        }
+    }
+
+
+    public function getTarget($id) {
+        $ch = curl_init(self::BASE_URL . self::TARGETS_PATH);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders('GET'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        if ($info['http_code'] !== 200) {
+            die('Failed to list targets: ' . $response . "\n");
+        }
+        $targets = json_decode($response);
+        foreach ($targets->results as $index => $id) {
+            $path = self::TARGETS_PATH . "/" . $id;
+            $ch = curl_init(self::BASE_URL . $path);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders('GET', $path));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            if ($info['http_code'] !== 200) {
+                die('Failed to delete target: ' . $response . "\n");
+            }
+           // print "Deleted target $index of " . count($targets->results);
+            //return 'deleted';
+         //   dd($response);
+            return $response;
         }
     }
 
