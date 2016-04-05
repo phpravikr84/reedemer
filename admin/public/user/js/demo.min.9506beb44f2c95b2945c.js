@@ -11,17 +11,14 @@ function() {
         a.when("/", {
             templateUrl: "../../user/dashboard.html"
         }).when("/:folder/:tpl", {
-            templateUrl: function(a) {   
-            alert("A");            
+            templateUrl: function(a) {          
                 return "../../user/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
-            templateUrl: function(a) {
-                 alert("B");    
+            templateUrl: function(a) {    
                 return "../../user/" + a.tpl + ".html"
             }
         }).otherwise({
-            alert("c");
             redirectTo: "/"
         })
     }
