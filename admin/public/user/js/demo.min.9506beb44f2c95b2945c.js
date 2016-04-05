@@ -65,7 +65,7 @@ function() {
             }); 
 
             // set path ../ for local and ../../ for server
-            a.d_path="../";           
+            a.d_path="../../../";           
         } 
 
 
