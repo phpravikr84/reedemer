@@ -340,7 +340,7 @@ class DashboardController extends Controller {
 		//echo $target_id."<br>";
 		//echo "=============";
 		echo "<pre>";
-		print_r($target_details->target_record);
+		print_r($target_details_arr->target_record);
 		echo "</pre>";
 		exit;
 		if($target_id!="")
