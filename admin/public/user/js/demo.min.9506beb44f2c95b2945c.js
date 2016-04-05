@@ -739,7 +739,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../partials/header.html",
+                templateUrl: "../../partials/header.html",
                 replace: !0
             }
         }
