@@ -329,7 +329,7 @@ class DashboardController extends Controller {
 		$send[3] = 'Redeemar';
 		$send[4] = 'Redeemar';		
 		$target_id=$client->addTarget($send);
-		$tracking_rating=null;
+		$tracking_rating=0;
 		//$target_id=$logo_details['target_id'];
 		//echo $logo_details['target_id']."A<br><br>";
 		$target_details=$client->getTarget($target_id); 
