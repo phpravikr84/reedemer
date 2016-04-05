@@ -9,14 +9,14 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "../dashboard.html"
+            templateUrl: "user/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {               
-                return "../" + a.folder + "/" + a.tpl + ".html"
+                return "user/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../" + a.tpl + ".html"
+                return "user/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
