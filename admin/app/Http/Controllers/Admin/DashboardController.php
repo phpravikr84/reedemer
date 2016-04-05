@@ -66,7 +66,19 @@ class DashboardController extends Controller {
 	 */
 	public function getShow()
 	{
-		$user=User::where('type',2)->get();		
+		$id=Auth::user()->id;
+		$type=Auth::user()->type;
+
+		//dd($id);
+		if($type!=1)
+		{
+			$user=User::where('id',$id)->get();	
+		}
+		else
+		{
+			$user=User::where('type',2)->get();		
+					
+		}
 		return $user;
 	}
 
@@ -242,10 +254,23 @@ class DashboardController extends Controller {
 
 		 
 
-		
-		$logo_details = Logo::orderBy('id','DESC')->get();
+		//dd("a");
+		$id=Auth::user()->id;
+		$type=Auth::user()->type;
+		//dd($type);
+		if($type!=1)
+		{
+			$logo_details = Logo::where('reedemer_id',$id)
+							->orderBy('id','DESC')
+							->get();	
+		}
+		else
+		{
+			$logo_details = Logo::orderBy('id','DESC')->get();
+				
+		}
 
-		//dd($logo_details[0]['target_id']);
+		//dd($logo_details);
 		//$client = new vuforiaclient();
 			
 		
@@ -277,7 +302,7 @@ class DashboardController extends Controller {
 			$logo_arr[]=array(
 						'id'=>$logo_details['id'],
 						'reedemer_id'=>$logo_details['reedemer_id'],
-						'tracking_rating'=>'3',
+						'tracking_rating'=>$logo_details['tracking_rating'],
 						'reedemer_company'=>$company_name,
 						'logo_name'=>$logo_details['logo_name'],
 						'logo_text'=>$logo_details['logo_text'],
@@ -308,13 +333,15 @@ class DashboardController extends Controller {
 		//$target_id=$logo_details['target_id'];
 		//echo $logo_details['target_id']."A<br><br>";
 		$target_details=$client->getTarget($target_id); 
-		$target_details=json_decode($target_details);
-		$tracking_rating=$target_details->target_record->tracking_rating;
+		$target_details_arr=json_decode($target_details);
+		$tracking_rating=$target_details_arr->target_record->tracking_rating;
 		//echo $tracking_rating."-----".$target_id;
-		//exit;
-		echo "<pre>";
-		print_r($target_details);
-		echo "</pre>";
+		////exit;
+		//echo $target_id."<br>";
+		//echo "=============";
+		//echo "<pre>";
+		//print_r($target_details);
+		//echo "</pre>";
 		if($target_id!="")
 		{			
 			$user = new Logo();
@@ -352,7 +379,7 @@ class DashboardController extends Controller {
 		
 		$client = new vuforiaclient();
 			
-		$target_id=$client->deleteAllTargets($logo->target_id);  
+		$target_id=$client->deleteTargets($logo->target_id);  
 		if($target_id=="deleted")
 		{ 
 			if($logo->delete())

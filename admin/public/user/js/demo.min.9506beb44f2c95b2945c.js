@@ -9,14 +9,14 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "../../user/dashboard.html"
+            templateUrl: "dashboard.html"
         }).when("/:folder/:tpl", {
-            templateUrl: function(a) {
-                return "../../user/" + a.folder + "/" + a.tpl + ".html"
+            templateUrl: function(a) {               
+                return "" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../../user/" + a.tpl + ".html"
+                return "" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -62,7 +62,10 @@ function() {
             h.get("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
-            });           
+            }); 
+
+            // set path ../ for local and ../../ for server
+            a.d_path="../";           
         } 
 
 
@@ -535,18 +538,29 @@ function() {
     function() {
         "use strict";
 
-        function a(a, b, c, d, x, fu) {
+        function a(a, b, c, d, x, fu) {          
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
+          //  a.saveButtonText = "Save user";
+           // a.isDisabled = false;
+           $('#upload_button').prop('disabled', false);
+           $("#upload_button").text('Save user');
             x.get("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
                 // alert(data_response);
+              //  console.log('data :: '+JSON.stringify(data_response, null, 4));
             });           
           
             a.uploadFile = function(){
                var file = a.myFile;
-               
+              // $("#upload_button").hide();
+               //a.saveButtonText = "Saving..";
+              // a.isDisabled = true;
+               $('#upload_button').prop('disabled', true);
+               $("#upload_button").text('Saving..');
+             //  return false;
+               //alert("a");
              // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
             //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
               // console.dir(file);
@@ -554,50 +568,17 @@ function() {
                var uploadUrl = "../admin/dashboard/uploadlogo";
 
                // alert(company_id);
-               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
+               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );                            ;
             };
-
-            a.add_reedemer=function(){ 
-           //     alert(JSON.stringify(a.Redeemer, null, 4));
-               a.show_success_msg=false; 
-               a.show_error_msg=false; 
-               x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
-                  
-                  if(response=="success")
-                  {
-                    a.show_success_msg=true;
-                    a.Redeemer.company_name = null; 
-                    a.Redeemer.email = null;               
-                    a.Redeemer.password = null;   
-                  }
-                  else
-                  {
-                    a.show_error_msg=true;
-                  }
-               })
-            }
-
-            a.update_status=function(itemId,itemStatus){ 
-
-               x.get("../admin/dashboard/statusupdate/"+itemId+"/"+itemStatus).success(function(response){
-                  a.status=response;                 
-                  window.location.reload();             
-               })
-            }
-
-            a.delete_reedemer=function(itemId){ 
-             if(confirm("Are you sure?"))
-             {               
-               x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
-                  //a.status=response;                 
-                  window.location.reload();             
-               })
-             }
-            }
-
             a.delete_logo=function(itemId){ 
              if(confirm("Are you sure?"))
-             {               
+             {  
+                //var loder_name='loading_'+itemId;
+                //var icon_name='del_icon_'+itemId;
+               // a.'loading_'+itemId = false;   
+               // a.icon_name = true;  
+               // alert(itemId);
+                       
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;                 
                   window.location.reload();             
@@ -611,7 +592,9 @@ function() {
                     firstname: response[g].company_name,
                     email: response[g].email,
                     approve: response[g].approve,
-                    id: response[g].id
+                    id: response[g].id,
+                    reedemer_company: response[g].reedemer_company
+
                 });
 
                 //console.log("data :: "+JSON.stringify(response, null, 4));
@@ -623,7 +606,9 @@ function() {
                 } else {
                     a.statusForItem = 0;
                 }*/
-            a.cnames = response;
+              //  alert(response[0].company_name);
+            a.cnames = response[0];
+           // console.log("data :: "+JSON.stringify(response[0], null, 4));
             a.data = e, a.tableParams = new c({
                 page: 1,
                 count: 100,
@@ -644,6 +629,7 @@ function() {
             })
           })
         }
+
         angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
     }(),    
     function() {
@@ -683,6 +669,7 @@ function() {
                 // };
                  //console.log("data :: "+JSON.stringify(fd, null, 4));
                //return false;
+
                h.post(uploadUrl, fd, {
                   transformRequest: angular.identity,
                   headers: {'Content-Type': undefined},
@@ -695,8 +682,8 @@ function() {
                    // a.show_error_msg=false; 
                    var company_id =$("#company_id").val();
                    var logo_text =$("#logo_text").val();
-                   //alert(company_id);
-                   //return false;
+                  // alert(company_id+'---'+logo_text);
+                  // return false;
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
                         // alert(response_back);
                         if(response_back=="success")
@@ -705,7 +692,17 @@ function() {
                             $("#show_success_msg").show();
                             $("#logo_text").val("");
                             $("#company_id").val("");
-                            $("#logo_name").val("");                                          
+                            $("#logo_name").val("");   
+                          //  $("#upload_button").show();
+                            //a.isDisabled = true;
+                            //a.saveButtonText = "Save user";
+
+                            //a.saveButtonText = "Save user";
+                            //a.isDisabled = false;
+                            //alert("a");
+                             $('#upload_button').prop('disabled', false);
+                             $("#upload_button").text('Save user');
+                          //  window.location.href = '#/tables/logo/success';
 
                         }
                         
@@ -742,7 +739,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../user/partials/header.html",
+                templateUrl: "partials/header.html",
                 replace: !0
             }
         }
@@ -754,7 +751,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../user/partials/sidebar.html",
+                templateUrl: "partials/sidebar.html",
                 replace: !0
             }
         }
@@ -806,7 +803,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../../view/tpl/partials/chat-widget.html"
+                templateUrl: "../view/tpl/partials/chat-widget.html"
             }
         }
 
@@ -887,7 +884,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../user/_partials/menu-item.html",
+                templateUrl: "../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -908,7 +905,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../user/_partials/menu-group.html",
+                templateUrl: "../user/_partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -1112,7 +1109,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../../user/_partials/todo-widget.html",
+                templateUrl: "../user/_partials/todo-widget.html",
                 replace: !0,
                 link: b
             }

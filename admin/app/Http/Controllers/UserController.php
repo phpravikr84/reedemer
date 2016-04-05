@@ -1,10 +1,17 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
 use Illuminate\Http\Response; 
 use App\Model\User;
 use Hash;
-use Validator; 
+use Validator;
+use App\Model\Logo;
+use App\Helper\vuforiaclient;
+use App\Helper\helpers;
+use Auth; 
+use Session ;
 
 
 class UserController extends Controller {
@@ -80,12 +87,7 @@ class UserController extends Controller {
 		}
 	}
 
-
-	public function getShow()
-	{
-		//$user=User::where('status',1)->get();		
-		//return $user;
-	}
+	
 
 	public function getStatusupdate($id)
 	{
@@ -108,5 +110,49 @@ class UserController extends Controller {
 	public function getDashboard()
 	{
 		return view('user.dashboard.index');
+	}
+
+	public function getLogo()
+	{	
+		$id=Auth::user()->id;
+		dd($id);	
+		$logo_details = Logo::where('reedemer_id',41)
+						->orderBy('id','DESC')
+						->get();
+		//dd("d");
+		$logo_arr=array();	
+		$company_name="N/A";
+		$target_id=NULL;
+		foreach($logo_details as $logo_details)
+		{			
+			if($logo_details['reedemer_id'] >0)
+			{
+				$company_details=User::find($logo_details['reedemer_id']);
+				$company_name=$company_details['company_name'];
+			}			
+			$logo_arr[]=array(
+						'id'=>$logo_details['id'],
+						'reedemer_id'=>$logo_details['reedemer_id'],
+						'tracking_rating'=>$logo_details['tracking_rating'],
+						'reedemer_company'=>$company_name,
+						'logo_name'=>$logo_details['logo_name'],
+						'logo_text'=>$logo_details['logo_text'],
+						'status'=>$logo_details['status'],
+						'uploaded_by'=>41,
+						'created_at'=>$logo_details['created_at'],
+						'updated_at'=>$logo_details['updated_at'],
+					  );
+		}
+		$logo_json=json_encode($logo_arr);
+		
+		return $logo_json;	
+	}
+
+	public function getShow()
+	{
+		$id=Auth::User()->id;
+		//dd($id);
+		$user=User::where('id',$id)->get();		
+		return $user;
 	}
 }

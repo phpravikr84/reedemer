@@ -53,7 +53,7 @@ class vuforiaclient {
 
     
     
-    public function deleteAllTargets($id) {
+    public function deleteTargets($id) {
         $ch = curl_init(self::BASE_URL . self::TARGETS_PATH);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders('GET'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -63,7 +63,7 @@ class vuforiaclient {
             die('Failed to list targets: ' . $response . "\n");
         }
         $targets = json_decode($response);
-        foreach ($targets->results as $index => $id) {
+       // foreach ($targets->results as $index => $id) {
             $path = self::TARGETS_PATH . "/" . $id;
             $ch = curl_init(self::BASE_URL . $path);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
@@ -76,7 +76,7 @@ class vuforiaclient {
             }
             //print "Deleted target $index of " . count($targets->results);
             return 'deleted';
-        }
+       // }
     }
 
 
@@ -90,7 +90,8 @@ class vuforiaclient {
             die('Failed to list targets: ' . $response . "\n");
         }
         $targets = json_decode($response);
-        foreach ($targets->results as $index => $id) {
+      //  dd($id);
+       // foreach ($targets->results as $index => $id) {
             $path = self::TARGETS_PATH . "/" . $id;
             $ch = curl_init(self::BASE_URL . $path);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -105,7 +106,7 @@ class vuforiaclient {
             //return 'deleted';
          //   dd($response);
             return $response;
-        }
+       // }
     }
 
     private function getHeaders($method, $path = self::TARGETS_PATH, $content_type = '', $body = '') {

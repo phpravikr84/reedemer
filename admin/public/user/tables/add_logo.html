@@ -1,7 +1,7 @@
 <section class="text-fields" ng-controller="ReedemerController" >
   <div class="mdl-color--amber ml-header relative clear">
     <div class="p-20">
-      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Reedemer</h3>
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Logo</h3>
       <h4 class="mdl-color-text--amber-100 m-b-20 no-m-t w100">&nbsp;</h4>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Add Logo</h2>
+            <h2 class="mdl-card__title-text">User Add Logo</h2>
           </div>
           <div class="p-l-20 p-r-20 p-b-20" id="show_success_msg" style="display:none">
             <div class="alert alert-success">
@@ -50,11 +50,10 @@
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield">
                 <p>Select Company</p>
-                 <select id="company_id" ng-model="Redeemer.company_id">
-                    <option value="">----</option>
-                    <option value="{{ cname.company_name }}" ng-repeat="cname in cnames">{{cname.company_name}}</option>
-                   
-                  </select>  
+                <span>
+                  {{cnames.company_name}}                 
+                 <input id="company_id" type="hidden" name="company_id" ng-value="cnames.id" />
+                </span>               
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <input ng-model="Redeemer.logo_text" class="mdl-textfield__input" type="text" id="logo_text" />
@@ -70,7 +69,7 @@
               
              
               <div class="m-t-20">
-                <button type="submit" ng-click = "uploadFile()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                <button disabled="disabled" id="upload_button" type="submit" ng-click = "uploadFile()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                   Save user
                 </button>               
               </div>
