@@ -335,8 +335,8 @@ class DashboardController extends Controller {
 		$target_details=$client->getTarget($target_id); 
 		$target_details_arr=json_decode($target_details);
 		$tracking_rating=$target_details_arr->target_record->tracking_rating;
-		echo $tracking_rating."-----".$target_id;
-		exit;
+		//echo $tracking_rating."-----".$target_id;
+		//exit;
 		//echo $target_id."<br>";
 		//echo "=============";
 		//echo "<pre>";
