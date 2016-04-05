@@ -9,7 +9,7 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "../user/dashboard.html"
+            templateUrl: "../../user/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {               
                 return "user/" + a.folder + "/" + a.tpl + ".html"
