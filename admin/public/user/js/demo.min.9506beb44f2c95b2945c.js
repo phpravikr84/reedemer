@@ -11,11 +11,13 @@ function() {
         a.when("/", {
             templateUrl: "../../user/dashboard.html"
         }).when("/:folder/:tpl", {
-            templateUrl: function(a) {               
+            templateUrl: function(a) {   
+            alert("A");            
                 return "../../user/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
+                 alert("B");    
                 return "../../user/" + a.tpl + ".html"
             }
         }).otherwise({
