@@ -884,7 +884,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-item.html",
+                templateUrl: "../../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -905,7 +905,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-group.html",
+                templateUrl: "../../user/_partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
