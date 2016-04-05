@@ -9,14 +9,14 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "dashboard.html"
+            templateUrl: "../dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {               
-                return "" + a.folder + "/" + a.tpl + ".html"
+                return "../" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "" + a.tpl + ".html"
+                return "../" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -739,7 +739,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "partials/header.html",
+                templateUrl: "../partials/header.html",
                 replace: !0
             }
         }
@@ -751,7 +751,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "partials/sidebar.html",
+                templateUrl: "../partials/sidebar.html",
                 replace: !0
             }
         }
