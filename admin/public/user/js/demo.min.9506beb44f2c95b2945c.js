@@ -9,16 +9,16 @@ function() {
 
     function a(a,file_path) {
         a.when("/", {
-            templateUrl: "../user/dashboard.html"
+            templateUrl: "../../user/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {   
             alert("A");            
-                return "../user/" + a.folder + "/" + a.tpl + ".html"
+                return "../../user/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
                  alert("B");    
-                return "../user/" + a.tpl + ".html"
+                return "../../user/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -741,7 +741,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../user/partials/header.html",
+                templateUrl: "../../user/partials/header.html",
                 replace: !0
             }
         }
@@ -753,7 +753,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../user/partials/sidebar.html",
+                templateUrl: "../../user/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -886,7 +886,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-item.html",
+                templateUrl: "../../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -907,7 +907,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-group.html",
+                templateUrl: "../../user/_partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
