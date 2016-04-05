@@ -140,4 +140,4 @@ class vuforiaclient {
         );
         return base64_encode(json_encode($metadata));
     }
-} 
+}  
