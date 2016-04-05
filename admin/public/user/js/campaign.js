@@ -11,7 +11,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
    // a.isDisabled = false;
    $('#upload_button').prop('disabled', false);
    $("#upload_button").text('Save user');
-    x.get("campaign/list").success(function(data_response){              
+    x.get("../../campaign/list").success(function(data_response){              
         a.campaign_details = data_response;
         // alert(data_response);
         console.log('data :: '+JSON.stringify(data_response, null, 4));
