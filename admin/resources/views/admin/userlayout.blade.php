@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{ asset('/css/vendors.min.cc72de2f21cf6e67f523.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/jquery.rateyo.css') }}">
 
   <!-- IE Compatibility shims -->
   <!--[if lt IE 9]>
@@ -42,7 +43,26 @@
  
   <script src="{{ asset('/user/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
   <script src="{{ asset('/user/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
+  <script src="{{ asset('/user/js/campaign.js') }}"></script>
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
+  <script>
+  //  $(function () {
+   // alert("a");
+     // $("#rateYo").rateYo({
+     ////   rating: 3.6
+     // });
+
+  //  });
+  </script>
+  <script type="text/javascript">
+    // $(document).ready(function(){  
+     //alert("a")     ;
+       // $("#rateYo").rateYo({
+       //      rating: 3
+       // });      
+    // });
+  </script>
   @yield('scripts')
 </body>
 </html>
