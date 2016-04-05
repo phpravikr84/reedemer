@@ -21,6 +21,7 @@ function() {
                 return "../../user/" + a.tpl + ".html"
             }
         }).otherwise({
+            alert("c");
             redirectTo: "/"
         })
     }
