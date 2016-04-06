@@ -70,12 +70,22 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
             {
               a.show_success_msg =true;
               a.show_error_msg =false;
+              a.show_error_msg_img =false;
+              a.Inventory={};
+            }
+            else if(response=='image_not')
+            {
+              a.show_success_msg =false;
+              a.show_error_msg =false;
+              a.show_error_msg_img =true;
               a.Inventory={};
             }
             else
             {
               a.show_success_msg =false;
               a.show_error_msg =true;
+              a.show_error_msg_img =false;
+              a.Inventory={};
             }
             $('#add_inventory').prop('disabled', false);
             $("#add_inventory").text('Save');

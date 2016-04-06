@@ -99,20 +99,28 @@ class InventoryController extends Controller {
 		}
 		else
 		{
-			$campaign = new Inventory();
-			$campaign->inventory_name 		= $inventory_name;	
-			$campaign->sell_price 		= $sell_price;
-			$campaign->cost 		= $cost;	
-			$campaign->inventory_image 		= $inventory_image;		
-			$campaign->status 			= 1;			
-			$campaign->uploaded_by 		= 1;
-			if($campaign->save())
+			$original_path= env('UPLOADS')."/inventory/original"."/".$inventory_name;
+			if(file_exists($original_path))
 			{
-				return 'success';
+				$campaign = new Inventory();
+				$campaign->inventory_name 		= $inventory_name;	
+				$campaign->sell_price 		= $sell_price;
+				$campaign->cost 		= $cost;	
+				$campaign->inventory_image 		= $inventory_image;		
+				$campaign->status 			= 1;			
+				$campaign->uploaded_by 		= 1;
+				if($campaign->save())
+				{
+					return 'success';
+				}
+				else
+				{
+					return 'error';
+				}
 			}
 			else
 			{
-				return 'error';
+				return 'image_not';
 			}
 		}
 		

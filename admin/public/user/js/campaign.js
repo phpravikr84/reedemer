@@ -97,6 +97,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
               a.show_success_msg =false;
               a.show_error_msg =true;
               a.show_error_msg_img =false;
+              a.Campaign={};
             }
             $('#add_campaign').prop('disabled', false);
             $("#add_campaign").text('Save');
