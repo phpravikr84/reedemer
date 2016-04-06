@@ -64,7 +64,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
       var uploadUrl = "../inventory/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Inventory).then(function(fdata){
           var logo_name = fdata.data;
-        
+       // alert(logo_name);
+       // return false;
           x.get("../inventory/addlogo/"+inventory_name+"/"+sell_price+"/"+cost+"/"+logo_name).success(function(response){
             if(response=='success')
             {

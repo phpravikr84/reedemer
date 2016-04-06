@@ -54,7 +54,8 @@ class InventoryController extends Controller {
 	}
 
 	public function postUploadlogo(Request $request)
-	{		
+	{	
+	
 		$obj = new helpers();
 		$folder_name=env('UPLOADS');
 		$file_name=$_FILES[ 'file' ][ 'name' ];
@@ -99,7 +100,7 @@ class InventoryController extends Controller {
 		}
 		else
 		{
-			$original_path= env('UPLOADS')."/inventory/original"."/".$inventory_name;
+			$original_path= env('UPLOADS')."/inventory/original"."/".$inventory_image;
 			if(file_exists($original_path))
 			{
 				$campaign = new Inventory();
