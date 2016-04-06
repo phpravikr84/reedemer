@@ -82,12 +82,21 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
             {
               a.show_success_msg =true;
               a.show_error_msg =false;
+              a.show_error_msg_img =false;
+              a.Campaign={};
+            }
+            else if(response=='image_not')
+            {
+              a.show_success_msg =false;
+              a.show_error_msg =false;
+              a.show_error_msg_img =true;
               a.Campaign={};
             }
             else
             {
               a.show_success_msg =false;
               a.show_error_msg =true;
+              a.show_error_msg_img =false;
             }
             $('#add_campaign').prop('disabled', false);
             $("#add_campaign").text('Save');

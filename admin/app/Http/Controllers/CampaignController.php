@@ -98,20 +98,28 @@ class CampaignController extends Controller {
 		}
 		else
 		{
-			$campaign = new Campaign();
-			$campaign->campaign_name 		= $campaign_name;	
-			$campaign->campaign_image 		= $campaign_image;
-			$campaign->start_date 		= $start_date;	
-			$campaign->end_date 		= $end_date;		
-			$campaign->status 			= 1;			
-			$campaign->uploaded_by 		= 1;
-			if($campaign->save())
+			$original_path= env('UPLOADS')."/campaign/original"."/".$campaign_image;
+			if(file_exists($original_path))
 			{
-				return 'success';
+				$campaign = new Campaign();
+				$campaign->campaign_name 	= $campaign_name;	
+				$campaign->campaign_image 	= $campaign_image;
+				$campaign->start_date 		= $start_date;	
+				$campaign->end_date 		= $end_date;		
+				$campaign->status 			= 1;			
+				$campaign->uploaded_by 		= 1;
+				if($campaign->save())
+				{
+					return 'success';
+				}
+				else
+				{
+					return 'error';
+				}
 			}
 			else
 			{
-				return 'error';
+				return 'image_not';
 			}
 		}
 		
