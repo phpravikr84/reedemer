@@ -30,6 +30,7 @@ Route::get('home', 'HomeController@index');
 
 Route::controller('/user', 'UserController');
 Route::controller('/campaign', 'CampaignController');
+Route::controller('/inventory', 'InventoryController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 

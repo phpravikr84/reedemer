@@ -1,7 +1,7 @@
 
 "use strict";
 
-var MyApp = angular.module("campaign-app", ["ngFileUpload"]);
+var MyApp = angular.module("inventory-app", ["ngFileUpload"]);
 
 
 
@@ -33,60 +33,61 @@ MyApp.factory("fileToUpload", ["$http", function(h){
 }]);
 
 
-MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileToUpload",function (a, b, c, d, x, fu) {          
+MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileToUpload",function (a, b, c, d, x, fu) {          
     a.dataLength={filtered:[]};
     a.cnames = [];
-    a.campaign_details = [];
+    a.inventory_details = [];
 
-   x.get("../campaign/list").success(function(data_response){              
-        a.campaign_details = data_response;  
+   x.get("../inventory/list").success(function(data_response){              
+        a.inventory_details = data_response;  
     });           
   
-    a.addCampaign = function(){             
+    a.addInventory = function(){             
       var file = a.myFile;
 
-      $('#add_campaign').prop('disabled', true);
-      $("#add_campaign").text('Saving..');      
+      $('#add_inventory').prop('disabled', true);
+      $("#add_inventory").text('Saving..');      
 
-      var c_name = $('#c_name').val();
-      var c_s_date = $('#c_s_date').val();
-      var c_e_date = $('#c_e_date').val();
-      var logo_name = $('#logo_name').val();
+      var inventory_name = $('#inventory_name').val();
+      var sell_price = $('#sell_price').val();
+      var cost = $('#cost').val();
+      var inventory_image = $('#inventory_image').val();
       
-      if(c_name=='' || c_s_date=='' || c_e_date=='' || file=='')
+      if(inventory_name=='' || sell_price=='' || cost=='' || inventory_image=='')
       {
-        $('#add_campaign').prop('disabled', false);
-        $("#add_campaign").text('Save');
+        $('#add_inventory').prop('disabled', false);
+        $("#add_inventory").text('Save');
 
         a.show_error_msg =true;
         return false;
       }
-      var uploadUrl = "../campaign/uploadlogo";  
-      fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
+      var uploadUrl = "../inventory/uploadlogo";  
+      fu.uploadNewFileToUrl(file, uploadUrl, a.Inventory).then(function(fdata){
           var logo_name = fdata.data;
-          x.get("../campaign/addlogo/"+c_name+"/"+c_s_date+"/"+c_e_date+"/"+logo_name).success(function(response){
+        
+          x.get("../inventory/addlogo/"+inventory_name+"/"+sell_price+"/"+cost+"/"+logo_name).success(function(response){
             if(response=='success')
             {
               a.show_success_msg =true;
               a.show_error_msg =false;
-              a.Campaign={};
+              a.Inventory={};
             }
             else
             {
               a.show_success_msg =false;
               a.show_error_msg =true;
             }
-            $('#add_campaign').prop('disabled', false);
-            $("#add_campaign").text('Save');
+            $('#add_inventory').prop('disabled', false);
+            $("#add_inventory").text('Save');
           })
       });
     };
 
-    // Function for deleting a campaign
-    a.delete_campaign=function(itemId){     
+    // Function for deleting a Inventory
+    a.delete_inventory=function(itemId){     
      if(confirm("Are you sure?"))
      {       
-       x.get("../campaign/delete/"+itemId).success(function(response){
+       x.get("../inventory/delete/"+itemId).success(function(response){
           window.location.reload();             
        })
      }

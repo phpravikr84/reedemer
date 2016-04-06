@@ -1,7 +1,7 @@
-<section class="text-fields" ng-controller="CampaignController" >
+<section class="text-fields" ng-controller="InventoryController" >
   <div class="mdl-color--amber ml-header relative clear">
     <div class="p-20">
-      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Campaign</h3>
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Inventory</h3>
       <h4 class="mdl-color-text--amber-100 m-b-20 no-m-t w100">&nbsp;</h4>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">User Add Campaign</h2>
+            <h2 class="mdl-card__title-text">User Add Inventory</h2>
           </div>
           <div class="p-l-20 p-r-20 p-b-20" id="show_success_msg" style="display:none">
             <div class="alert alert-success">
@@ -34,7 +34,7 @@
             </div>
           </div>
           
-          <div class="p-l-20 p-r-20 p-b-20" ng-show="show_success_msg">
+          <div class="p-l-20 p-r-20 p-b-20" ng-if="show_success_msg">
             <div class="alert alert-success">
                 Data inserted successfully
             </div>
@@ -49,28 +49,28 @@
             <form name="f2" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" id="c_name" />
-                <label class="mdl-textfield__label" for="c_name">Name</label>
-              </div>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input id="c_s_date" ng-model="Campaign.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" />
-                <label class="mdl-textfield__label" for="c_s_date">Start Date</label>
-              </div>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input id="c_e_date" ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" />
-                <label class="mdl-textfield__label" for="c_e_date">End Date</label>
+                <input ng-model="Inventory.inventory_name" class="mdl-textfield__input" type="text" id="inventory_name" />
+                <label class="mdl-textfield__label" for="inventory_name">Name</label>
               </div>
               <div class="mdl-textfield">
-                <p>Upload Image</p> 
-               <input type = "file" ng-model="Campaign.logo_name" file-model = "myFile" id="logo_name" />
-   
+                <p>Image</p> 
+               <input type = "file" ng-model="Inventory.inventory_image" file-model = "myFile" id="inventory_image" />   
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <input ng-model="Inventory.sell_price" class="mdl-textfield__input" type="text" id="sell_price" />
+                <label class="mdl-textfield__label" for="sell_price">Sell Price</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <input ng-model="Inventory.cost" class="mdl-textfield__input" type="text" id="cost" />
+                <label class="mdl-textfield__label" for="cost">Cost</label>
               </div>
               
+              
              
-              <div class="m-t-20">           
-
-                <button id="add_campaign" type="submit" ng-click = "addCampaign()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-                  Save             
+              <div class="m-t-20">
+                <button type="submit" ng-click = "addInventory()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" id="add_inventory">
+                  Save
+                </button>               
               </div>
             </form>
           </div>
