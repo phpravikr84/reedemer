@@ -37,6 +37,16 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     a.dataLength={filtered:[]};
     a.cnames = [];
     a.campaign_details = [];
+    
+    //Load Calender when page load
+   // $("#c_s_date").datepicker();
+    $( "#c_s_date" ).datepicker({ 
+      dateFormat:"yy-mm-dd"    
+    });
+
+    $( "#c_e_date" ).datepicker({     
+      dateFormat:"yy-mm-dd"   
+    });
 
    x.get("../campaign/list").success(function(data_response){              
         a.campaign_details = data_response;  
@@ -50,7 +60,10 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
 
       var c_name = $('#c_name').val();
       var c_s_date = $('#c_s_date').val();
+      //var c_s_date = c_s_date_raw[2]+'-'+c_s_date_raw[0]+'-'+c_s_date_raw[1];
+      
       var c_e_date = $('#c_e_date').val();
+      //var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
       var logo_name = $('#logo_name').val();
       
       if(c_name=='' || c_s_date=='' || c_e_date=='' || file=='')
