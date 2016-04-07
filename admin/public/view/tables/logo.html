@@ -23,6 +23,11 @@
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Logo List</h2>
           </div>
+          <div class="p-l-20 p-r-20 p-b-20" id="msg_div" style="display:none">
+            <div class="alert alert-success">
+                Data deleted successfully
+            </div>
+          </div>
           <table class="mdl-data-table ml-table-bordered mdl-js-data-table ">
             <colgroup>
               <col class="auto-cell-size p-r-20">
@@ -37,7 +42,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
+              <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
                 <td>{{logo.reedemer_company}}</td>
                 <td>
                   <img src="{{d_path}}../uploads/original/{{logo.logo_name}}" width="80" />

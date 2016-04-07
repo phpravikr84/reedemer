@@ -71,11 +71,12 @@ class vuforiaclient {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($ch);
             $info = curl_getinfo($ch);
-            if ($info['http_code'] !== 200) {
-                die('Failed to delete target: ' . $response . "\n");
-            }
+            //if ($info['http_code'] !== 200) {
+            //    die('Failed to delete target: ' . $response . "\n");
+            //}
             //print "Deleted target $index of " . count($targets->results);
-            return 'deleted';
+            //return 'deleted';
+            return $response;
        // }
     }
 

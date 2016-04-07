@@ -381,14 +381,26 @@ class DashboardController extends Controller {
 		
 		$client = new vuforiaclient();
 			
-		$target_id=$client->deleteTargets($logo->target_id);  
-		if($target_id=="deleted")
-		{ 
-			if($logo->delete())
-			{
-				return 'success';
-			}
+		$response=$client->deleteTargets($logo->target_id);  
+		//if($target_id=="deleted")
+		//{ 
+		$response_arr=json_decode($response);
+
+		$logo->delete();
+		//dd($response_arr->result_code);
+		if($response_arr->result_code=="UnknownTarget")
+		{
+			return "UnknownTarget";
 		}
+		else
+		{
+			return 'success';
+		}
+		//if($logo->delete())
+		//{
+		//	return 'success';
+		//}
+		//}
 	}
 
 	public function getUserdetails()

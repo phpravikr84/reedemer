@@ -544,25 +544,37 @@ function() {
             x.get("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
                 // alert(data_response);
-            });           
+            });
+
+             //x.get("../admin/dashboard/logo");              
+              //  a.logo_details = data_response;
+                // alert(data_response);
+            //});           
           
             a.uploadFile = function(){
                var file = a.myFile;
                
+            $('#upload_file').prop('disabled', true);
+            $("#upload_file").text('Saving..');
+           // alert("p");
+            //return false;
              // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
             //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
               // console.dir(file);
               
                var uploadUrl = "../admin/dashboard/uploadlogo";
 
-               // alert(company_id);
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
             };
 
-            a.add_reedemer=function(){ 
+            a.add_reedemer=function(){                
            //     alert(JSON.stringify(a.Redeemer, null, 4));
                a.show_success_msg=false; 
                a.show_error_msg=false; 
+
+               $('#add_reedemer').prop('disabled', true);
+               $("#add_reedemer").text('Saving..'); 
+
                x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
                   
                   if(response=="success")
@@ -570,11 +582,16 @@ function() {
                     a.show_success_msg=true;
                     a.Redeemer.company_name = null; 
                     a.Redeemer.email = null;               
-                    a.Redeemer.password = null;   
+                    a.Redeemer.password = null;  
+
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save User');  
                   }
                   else
-                  {
+                  {                    
                     a.show_error_msg=true;
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save User'); 
                   }
                })
             }
@@ -598,11 +615,20 @@ function() {
             }
 
             a.delete_logo=function(itemId){ 
+             
              if(confirm("Are you sure?"))
-             {               
+             {      
+               $("#logo_"+itemId)
+             .replaceWith('<tr class="msg_remove"><td colspan="5" class="center">Removing ...</td></tr>');
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
-                  //a.status=response;                 
-                  window.location.reload();             
+                  //a.status=response;   
+                //  alert(itemId);
+                  $("#logo_"+itemId).hide('500');  
+                  $("#msg_div").show('500');
+                  $(".msg_remove").hide('500');
+                    
+                              
+                 // window.location.reload();             
                })
              }
             }
@@ -681,7 +707,7 @@ function() {
                    //alert(company_id);
                    //return false;
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
-                        // alert(response_back);
+                        
                         if(response_back=="success")
                         {
                            
@@ -691,6 +717,9 @@ function() {
                             $("#logo_name").val("");                                          
 
                         }
+
+                        $('#upload_file').prop('disabled', false);
+                        $("#upload_file").text('Save'); 
                         
                    })
                })
