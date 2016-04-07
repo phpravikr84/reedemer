@@ -323,7 +323,10 @@ class DashboardController extends Controller {
 			//echo "<pre>";
 			//print_r($target_res_details);
 			//echo "</pre>";
-			$target_details_arr=json_decode($target_res_details);		
+			$target_details_arr=json_decode($target_res_details);	
+			echo "<pre>";
+			print_r($target_details_arr);
+			echo "</pre>";	
 
 			$tracking_rating=$target_details_arr->target_record->tracking_rating;
 			//dd($target_details_arr);
