@@ -314,6 +314,7 @@ class DashboardController extends Controller {
 		print_r($response_arr);
 		echo "</pre>";
 		$tracking_rating='0';
+		$target_id='';
 
 		if($response_arr->result_code=="TargetCreated")
 		{
