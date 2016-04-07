@@ -310,7 +310,9 @@ class DashboardController extends Controller {
 		$send[4] = 'Redeemar';		
 		$response=$client->addTarget($send);
 		$response_arr=json_decode($response);
-		
+		echo "<pre>";
+		print_r($response_arr);
+		echo "</pre>";
 		$tracking_rating='0';
 
 		if($response_arr->result_code=="TargetCreated")
