@@ -726,6 +726,11 @@ function() {
                                      //   alert(target_id+'---'+logo_id);
                                       h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
                                     }
+                                    $("#show_success_msg").show();
+                                    $("#image_error").hide('500');
+                                    $("#logo_text").val("");
+                                    $("#company_id").val("");
+                                    $("#logo_name").val("");   
                                 }
                             })
                            //alert(response_back.target_id);
