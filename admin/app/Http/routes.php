@@ -31,6 +31,7 @@ Route::get('home', 'HomeController@index');
 Route::controller('/user', 'UserController');
 Route::controller('/campaign', 'CampaignController');
 Route::controller('/inventory', 'InventoryController');
+Route::controller('/cron', 'CronController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 
