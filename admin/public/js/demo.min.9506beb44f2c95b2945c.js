@@ -63,8 +63,8 @@ function() {
                 a.ReedemerDetails=data;
             });   
           
-          // set path ../ for local and ../ for server
-          a.d_path="../";  
+          // set path ../ for local and ../../ for server
+          a.d_path="../../";  
         } 
         angular.module("redeemar-app").controller("MainController", ["$scope","$http", a])
     }(),
