@@ -23,9 +23,13 @@ class CronController extends Controller {
 		//dd("A");
 		$logo=Logo::where('tracking_rating','<','0')->get();
 		$logo_details=json_decode($logo);
+
+		$client = new vuforiaclient();
 		foreach($logo_details as $logo)
 		{
-			echo $logo->id."<br>";
+			$target_res_details=$client->getTarget($logo->target_id); 
+			//echo $logo->target_id."<br>";
+			dd($target_res_details);
 		}
 		//return $logo;
 
