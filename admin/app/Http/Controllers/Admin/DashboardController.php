@@ -183,7 +183,7 @@ class DashboardController extends Controller {
 	}*/
 
 	public function postUploadlogo(Request $request)
-	{
+	{		
 		$obj = new helpers();
 		$folder_name=env('UPLOADS');
 		$file_name=$_FILES[ 'file' ][ 'name' ];
@@ -252,6 +252,26 @@ class DashboardController extends Controller {
 		//exit;
 		//dd("B");
 
+		$client = new vuforiaclient();
+		//$send[0] = "Logo_".time()."_".$company_id;
+		//$send[1] = '../uploads/original/'.$image_name;
+		//$send[2] = '../uploads/original/'.$image_name;
+		//$send[3] = 'Redeemar';
+		//$send[4] = 'Redeemar';		
+		//$response=$client->addTarget($send);
+		//$response_arr=json_decode($response);
+		//echo "<pre>";
+		//print_r($response_arr);
+		//echo "</pre>";
+		//$tracking_rating='0';
+		//$target_id='';
+
+		//if($response_arr->result_code=="TargetCreated")
+		//{
+			
+		
+
+
 		 
 
 		//dd("a");
@@ -270,21 +290,37 @@ class DashboardController extends Controller {
 							->get();
 				
 		}
+
+
+		//$target_id=$response_arr->target_id;
+		//$target_res_details=$client->getTarget($target_id); 
+
 		
 		$logo_arr=array();	
 		$company_name="N/A";
 		$target_id=NULL;
 		foreach($logo_details as $logo_details)
-		{			
+		{	
+
 			if($logo_details['reedemer_id'] >0)
 			{
 				$company_details=User::find($logo_details['reedemer_id']);
 				$company_name=$company_details['company_name'];
-			}			
+			}
+
+			$target_id=$logo_details->target_id;
+
+			$target_res_details=$client->getTarget($target_id); 
+			$response_arr=json_decode($target_res_details);
+
+			
+			//echo $target_id."<br>";
+			//dd($response_arr->target_record->tracking_rating);
+
 			$logo_arr[]=array(
 						'id'=>$logo_details['id'],
 						'reedemer_id'=>$logo_details['reedemer_id'],
-						'tracking_rating'=>$logo_details['tracking_rating'],
+						'tracking_rating'=>$response_arr->target_record->tracking_rating,
 						'reedemer_company'=>$company_name,
 						'logo_name'=>$logo_details['logo_name'],
 						'logo_text'=>$logo_details['logo_text'],
@@ -310,9 +346,9 @@ class DashboardController extends Controller {
 		$send[4] = 'Redeemar';		
 		$response=$client->addTarget($send);
 		$response_arr=json_decode($response);
-		echo "<pre>";
-		print_r($response_arr);
-		echo "</pre>";
+		//echo "<pre>";
+		//print_r($response_arr);
+		//echo "</pre>";
 		$tracking_rating='0';
 		$target_id='';
 
@@ -325,9 +361,9 @@ class DashboardController extends Controller {
 			//print_r($target_res_details);
 			//echo "</pre>";
 			$target_details_arr=json_decode($target_res_details);	
-			echo "<pre>";
-			print_r($target_details_arr);
-			echo "</pre>";	
+			//echo "<pre>";
+			//print_r($target_details_arr);
+			//echo "</pre>";	
 
 			$tracking_rating=$target_details_arr->target_record->tracking_rating;
 			//dd($target_details_arr);
