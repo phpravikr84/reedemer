@@ -40,14 +40,16 @@ class vuforiaclient {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeaders('POST', self::TARGETS_PATH, self::JSON_CONTENT_TYPE, $body));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-        if ($info['http_code'] !== 201) {
-            print_r($row);
-            print 'Failed to add target: ' . $response;
-        } else {
-            $id = json_decode($response)->target_id;
-            return $id;
-        }
+        //$info = curl_getinfo($ch);
+        //if ($info['http_code'] !== 201) {
+        //    print_r($row);
+        //    print 'Failed to add target: ' . $response;
+        //} else {
+        //    $id = json_decode($response)->target_id;
+        //    return $id;
+        //}
+       // dd($response);
+        return $response;
     }
 
 
@@ -100,12 +102,12 @@ class vuforiaclient {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($ch);
             $info = curl_getinfo($ch);
-            if ($info['http_code'] !== 200) {
-                die('Failed to delete target: ' . $response . "\n");
-            }
+           // if ($info['http_code'] !== 200) {
+            //    die('Failed to delete target: ' . $response . "\n");
+           // }
            // print "Deleted target $index of " . count($targets->results);
             //return 'deleted';
-         //   dd($response);
+            //dd($response);
             return $response;
        // }
     }
