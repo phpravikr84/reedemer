@@ -28,8 +28,9 @@ class CronController extends Controller {
 		foreach($logo_details as $logo)
 		{
 			$target_res_details=$client->getTarget($logo->target_id); 
+			$response_arr=json_decode($target_res_details);
 			//echo $logo->target_id."<br>";
-			dd($target_res_details->target_record);
+			dd($response_arr->target_record->target_id);
 		}
 		//return $logo;
 
