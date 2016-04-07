@@ -315,12 +315,12 @@ class DashboardController extends Controller {
 		{
 			$tracking_rating='0';
 			$target_id=$response_arr->target_id;
-			$target_details=$client->getTarget('a03fd8d30a474b45a341b0061ac0ef92'); 			
+			$target_details=$client->getTarget($target_id); 			
 
 			$target_details_arr=json_decode($target_details);		
-			dd($target_details_arr);	
+
 			$tracking_rating=$target_details_arr->target_record->tracking_rating;
-			
+			dd($tracking_rating);
 			if($target_id!="")
 			{			
 				$user = new Logo();
