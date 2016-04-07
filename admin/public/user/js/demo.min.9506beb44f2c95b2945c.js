@@ -59,7 +59,7 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-            h.get("../admin/dashboard/userdetails")
+            h.get("../../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
             }); 
@@ -564,7 +564,7 @@ function() {
              // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
             //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
               // console.dir(file);
-              
+              //alert("A");
                var uploadUrl = "../admin/dashboard/uploadlogo";
 
                // alert(company_id);
@@ -657,54 +657,63 @@ function() {
 
         function a(h) {
 
-            this.uploadFileToUrl = function(file, uploadUrl, data){
-               // alert(data);
+            this.uploadFileToUrl = function(file, uploadUrl, data){               
                var fd = new FormData();
-               fd.append('file', file);
-              //  console.log("data :: "+JSON.stringify(data, null, 4));
-              //  return false;
-                // var totalData = {
-                //     image: fd,
-                //     allText: data
-                // };
-                 //console.log("data :: "+JSON.stringify(fd, null, 4));
-               //return false;
-
+               fd.append('file', file);              
                h.post(uploadUrl, fd, {
                   transformRequest: angular.identity,
                   headers: {'Content-Type': undefined},
                   data:data
                })
             
-               .success(function(response){
-                    //alert(response);
-                   // var show_success_msg=false; 
-                   // a.show_error_msg=false; 
+               .success(function(response){                   
                    var company_id =$("#company_id").val();
-                   var logo_text =$("#logo_text").val();
-                  // alert(company_id+'---'+logo_text);
-                  // return false;
+                   if(!company_id)
+                   {
+                       company_id=0;
+                   }
+                   var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
-                        // alert(response_back);
-                        if(response_back=="success")
+                        if(response_back.response=="success")
                         {
-                           
-                            $("#show_success_msg").show();
+                            var target_id=response_back.target_id;
+                            var logo_id=response_back.logo_id;
+                            
+                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                                if(target.response=="success")
+                                {
+                                    if(target.rating >0)
+                                    {
+                                        $("#show_success_msg").show();
+                                        $("#image_error").hide('500');
+                                        $("#logo_text").val("");
+                                        $("#company_id").val("");
+                                        $("#logo_name").val("");   
+                                    }
+                                    else
+                                    {                                     
+                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
+                                    }
+                                    $("#show_success_msg").show();
+                                    $("#image_error").hide('500');
+                                    $("#logo_text").val("");
+                                    $("#company_id").val("");
+                                    $("#logo_name").val("");   
+                                }
+                            })   
+                        }
+                        if(response_back.response=="image_problem")
+                        {
+                            $("#show_success_msg").hide();
+                            $("#image_error").show('500');
                             $("#logo_text").val("");
                             $("#company_id").val("");
-                            $("#logo_name").val("");   
-                          //  $("#upload_button").show();
-                            //a.isDisabled = true;
-                            //a.saveButtonText = "Save user";
-
-                            //a.saveButtonText = "Save user";
-                            //a.isDisabled = false;
-                            //alert("a");
-                             $('#upload_button').prop('disabled', false);
-                             $("#upload_button").text('Save user');
-                          //  window.location.href = '#/tables/logo/success';
+                            $("#logo_name").val("");                                          
 
                         }
+
+                        $('#upload_file').prop('disabled', false);
+                        $("#upload_file").text('Save'); 
                         
                    })
                })
@@ -803,7 +812,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../view/tpl/partials/chat-widget.html"
+                templateUrl: "../../view/tpl/partials/chat-widget.html"
             }
         }
 
@@ -1109,7 +1118,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../user/_partials/todo-widget.html",
+                templateUrl: "../../user/_partials/todo-widget.html",
                 replace: !0,
                 link: b
             }

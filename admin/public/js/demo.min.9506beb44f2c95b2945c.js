@@ -673,38 +673,23 @@ function() {
 
         function a(h) {
 
-            this.uploadFileToUrl = function(file, uploadUrl, data){
-               // alert(data);
+            this.uploadFileToUrl = function(file, uploadUrl, data){               
                var fd = new FormData();
-               fd.append('file', file);
-              //  console.log("data :: "+JSON.stringify(data, null, 4));
-              //  return false;
-                // var totalData = {
-                //     image: fd,
-                //     allText: data
-                // };
-                //console.log("data :: "+JSON.stringify(fd, null, 4));
-               //return false;
+               fd.append('file', file);              
                h.post(uploadUrl, fd, {
                   transformRequest: angular.identity,
                   headers: {'Content-Type': undefined},
                   data:data
                })
             
-               .success(function(response){
-                    //alert(response);
-                   // var show_success_msg=false; 
-                   // a.show_error_msg=false; 
+               .success(function(response){                   
                    var company_id =$("#company_id").val();
                    if(!company_id)
                    {
                        company_id=0;
                    }
-                   var logo_text =$("#logo_text").val();
-                   //alert(company_id);
-                   //return false;
+                   var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
-                        //alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
@@ -722,8 +707,7 @@ function() {
                                         $("#logo_name").val("");   
                                     }
                                     else
-                                    {
-                                     //   alert(target_id+'---'+logo_id);
+                                    {                                     
                                       h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
                                     }
                                     $("#show_success_msg").show();
@@ -732,14 +716,10 @@ function() {
                                     $("#company_id").val("");
                                     $("#logo_name").val("");   
                                 }
-                            })
-                           //alert(response_back.target_id);
-                                                                  
-
+                            })   
                         }
                         if(response_back.response=="image_problem")
                         {
-                           
                             $("#show_success_msg").hide();
                             $("#image_error").show('500');
                             $("#logo_text").val("");
