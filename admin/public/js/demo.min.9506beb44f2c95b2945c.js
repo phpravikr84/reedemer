@@ -709,7 +709,7 @@ function() {
                         {
                            
                             $("#show_success_msg").show();
-                            $("#image_error").show('500');
+                            $("#image_error").hide('500');
                             $("#logo_text").val("");
                             $("#company_id").val("");
                             $("#logo_name").val("");                                          
