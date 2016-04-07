@@ -20,7 +20,9 @@ class CronController extends Controller {
 
 	public function getUpdaterating($id = Null)
 	{		
-		dd("A");
+		//dd("A");
+		$logo=Logo::where('tracking_rating','<','0')->get();
+		return $logo;
 	}
 
 	
