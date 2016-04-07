@@ -29,7 +29,7 @@ class CronController extends Controller {
 		{
 			$target_res_details=$client->getTarget($logo->target_id); 
 			//echo $logo->target_id."<br>";
-			dd($target_res_details);
+			dd($target_res_details->target_record);
 		}
 		//return $logo;
 
