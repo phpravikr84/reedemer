@@ -331,7 +331,7 @@ class DashboardController extends Controller {
 				$user->reedemer_id 		= $company_id;	
 				$user->target_id 		= $target_id;
 				$user->logo_name 		= $image_name;	
-				$user->logo_text 		= $logo_text;		
+				$user->logo_text 		= $logo_text;	 	
 				$user->tracking_rating 	= $tracking_rating;	
 				$user->status 			= 1;			
 				$user->uploaded_by 		= 1;
