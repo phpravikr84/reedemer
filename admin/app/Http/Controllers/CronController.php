@@ -25,7 +25,7 @@ class CronController extends Controller {
 		$logo_details=json_decode($logo);
 		foreach($logo_details as $logo)
 		{
-			echo $logo['id']."<br>";
+			echo $logo->id."<br>";
 		}
 		//return $logo;
 
