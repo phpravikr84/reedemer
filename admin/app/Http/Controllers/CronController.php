@@ -23,7 +23,10 @@ class CronController extends Controller {
 		//dd("A");
 		$logo=Logo::where('tracking_rating','<','0')->get();
 		$logo_details=json_decode($logo);
-		dd($logo_details);
+		foreach($logo_details as $logo)
+		{
+			echo $logo['id']."<br>";
+		}
 		//return $logo;
 
 		//getVuforiarate
