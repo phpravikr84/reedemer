@@ -63,8 +63,8 @@ function() {
                 a.ReedemerDetails=data;
             });   
           
-          // set path ../ for local and ../../ for server
-          a.d_path="../../";  
+          // set path ../ for local and ../ for server
+          a.d_path="../";  
         } 
         angular.module("redeemar-app").controller("MainController", ["$scope","$http", a])
     }(),
@@ -683,7 +683,7 @@ function() {
                 //     image: fd,
                 //     allText: data
                 // };
-                 //console.log("data :: "+JSON.stringify(fd, null, 4));
+                //console.log("data :: "+JSON.stringify(fd, null, 4));
                //return false;
                h.post(uploadUrl, fd, {
                   transformRequest: angular.identity,
@@ -704,18 +704,35 @@ function() {
                    //alert(company_id);
                    //return false;
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
-                       // alert(response_back);
-                        if(response_back=="success")
+                        //alert(response_back.response);
+                        if(response_back.response=="success")
                         {
-                           
-                            $("#show_success_msg").show();
-                            $("#image_error").hide('500');
-                            $("#logo_text").val("");
-                            $("#company_id").val("");
-                            $("#logo_name").val("");                                          
+                            var target_id=response_back.target_id;
+                            var logo_id=response_back.logo_id;
+                            
+                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                                if(target.response=="success")
+                                {
+                                    if(target.rating >0)
+                                    {
+                                        $("#show_success_msg").show();
+                                        $("#image_error").hide('500');
+                                        $("#logo_text").val("");
+                                        $("#company_id").val("");
+                                        $("#logo_name").val("");   
+                                    }
+                                    else
+                                    {
+                                     //   alert(target_id+'---'+logo_id);
+                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
+                                    }
+                                }
+                            })
+                           //alert(response_back.target_id);
+                                                                  
 
                         }
-                        if(response_back=="image_problem")
+                        if(response_back.response=="image_problem")
                         {
                            
                             $("#show_success_msg").hide();

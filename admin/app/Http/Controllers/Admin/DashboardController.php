@@ -240,6 +240,27 @@ class DashboardController extends Controller {
 
 	}
 
+	public function getVuforiarate($target_id,$logo_id)
+	{
+		//dd($logo_id);
+		$client = new vuforiaclient();
+		//$target_id=$target_id->target_id;
+
+		$target_res_details=$client->getTarget($target_id); 
+		//$response_arr=json_decode($target_res_details);
+		$response_arr=json_decode($target_res_details);
+		$tracking_rating=$response_arr->target_record->tracking_rating;
+		
+		$logo = Logo::find($logo_id);
+
+		$logo->tracking_rating = $tracking_rating;
+
+		if($logo->save())
+		{
+			//$logo_id = $logo->id;
+			return array('response'=>'success','rating'=>$tracking_rating);
+		}
+	}
 	public function getLogo()
 	{	
 		//$client2 = new gettarget();
@@ -252,7 +273,7 @@ class DashboardController extends Controller {
 		//exit;
 		//dd("B");
 
-		$client = new vuforiaclient();
+		//$client = new vuforiaclient();
 		//$send[0] = "Logo_".time()."_".$company_id;
 		//$send[1] = '../uploads/original/'.$image_name;
 		//$send[2] = '../uploads/original/'.$image_name;
@@ -308,10 +329,10 @@ class DashboardController extends Controller {
 				$company_name=$company_details['company_name'];
 			}
 
-			$target_id=$logo_details->target_id;
+			//$target_id=$logo_details->target_id;
 
-			$target_res_details=$client->getTarget($target_id); 
-			$response_arr=json_decode($target_res_details);
+			//$target_res_details=$client->getTarget($target_id); 
+			//$response_arr=json_decode($target_res_details);
 
 			
 			//echo $target_id."<br>";
@@ -320,7 +341,7 @@ class DashboardController extends Controller {
 			$logo_arr[]=array(
 						'id'=>$logo_details['id'],
 						'reedemer_id'=>$logo_details['reedemer_id'],
-						'tracking_rating'=>$response_arr->target_record->tracking_rating,
+						'tracking_rating'=>$logo_details['tracking_rating'],
 						'reedemer_company'=>$company_name,
 						'logo_name'=>$logo_details['logo_name'],
 						'logo_text'=>$logo_details['logo_text'],
@@ -349,47 +370,47 @@ class DashboardController extends Controller {
 		//echo "<pre>";
 		//print_r($response_arr);
 		//echo "</pre>";
-		$tracking_rating='0';
-		$target_id='';
+		//$tracking_rating='0';
+		//$target_id='';
 
 		if($response_arr->result_code=="TargetCreated")
 		{
 			
 			$target_id=$response_arr->target_id;
-			$target_res_details=$client->getTarget($target_id); 			
+			//$target_res_details=$client->getTarget($target_id); 			
 			//echo "<pre>";
 			//print_r($target_res_details);
 			//echo "</pre>";
-			$target_details_arr=json_decode($target_res_details);	
+			//$target_details_arr=json_decode($target_res_details);	
 			//echo "<pre>";
 			//print_r($target_details_arr);
 			//echo "</pre>";	
 
-			$tracking_rating=$target_details_arr->target_record->tracking_rating;
+			//$tracking_rating=$target_details_arr->target_record->tracking_rating;
 			//dd($target_details_arr);
-			if($target_id!="")
-			{			
-				$user = new Logo();
-				$user->reedemer_id 		= $company_id;	
-				$user->target_id 		= $target_id;
-				$user->logo_name 		= $image_name;	
-				$user->logo_text 		= $logo_text;	 	
-				$user->tracking_rating 	= $tracking_rating;	
-				$user->status 			= 1;			
-				$user->uploaded_by 		= 1;
-				if($user->save())
+			//if($target_id!="")
+			//{			
+				$logo = new Logo();
+				$logo->reedemer_id 		= $company_id;	
+				$logo->target_id 		= $target_id;
+				$logo->logo_name 		= $image_name;	
+				$logo->logo_text 		= $logo_text;
+				$logo->status 			= 1;			
+				$logo->uploaded_by 		= 1;
+				if($logo->save())
 				{
-					return 'success';
+					$logo_id = $logo->id;
+					return array('response'=>'success','target_id'=>$target_id,'logo_id'=>$logo_id);
 				}
-			}
-			else
-			{
-				return 'error';
-			}
+			//}
+			//else
+			//{
+			//	return array('response'=>'error','target_id'=>'');
+			//}
 		}
 		else
 		{
-			return 'image_problem';	
+			return array('response'=>'image_problem','target_id'=>'');			
 		}
 	}
 
