@@ -48,7 +48,7 @@ class AuthController extends Controller {
 
 		$credentials = $request->only('email', 'password');
 
-		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'status' => 1]))
+		if ($this->auth->attempt(['email' => $request->get('email'), 'password' => $request->get('password'), 'approve' => 1]))
 		{	
 			//dd($this->auth->user()->type);		
 			if($this->auth->user()->type == '1')		

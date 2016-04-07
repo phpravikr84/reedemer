@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="logo in logo_details">
+              <tr ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
                 <td>{{logo.reedemer_company}}</td>
                 <td>
                   <img src="{{d_path}}../uploads/original/{{logo.logo_name}}" width="80" />
@@ -51,7 +51,10 @@
                 <td>
                   <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
-              </tr>            
+              </tr> 
+              <tr ng-if="logo_details.length == 0">
+                <td class="center" colspan="5">No data present</td>                
+              </tr>           
             </tbody>
                       
           </table>

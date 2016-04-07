@@ -260,13 +260,14 @@ class DashboardController extends Controller {
 		//dd($type);
 		if($type!=1)
 		{
-			$logo_details = Logo::where('reedemer_id',$id)
+			$logo_details = Logo::where('reedemer_id',$id)							
 							->orderBy('id','DESC')
 							->get();	
 		}
 		else
 		{
-			$logo_details = Logo::orderBy('id','DESC')->get();
+			$logo_details = Logo::orderBy('id','DESC')
+							->get();
 				
 		}
 

@@ -50,7 +50,11 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
 
    x.get("../campaign/list").success(function(data_response){              
         a.campaign_details = data_response;  
-    });           
+        //a.campaign_length = data_response.length;  
+        //console.log('data :: '+JSON.stringify(campaign_length, null, 4));
+    }); 
+    //total: a.data_response,
+    //console.log('data :: '+JSON.stringify(total, null, 4));     
   
     a.addCampaign = function(){             
       var file = a.myFile;

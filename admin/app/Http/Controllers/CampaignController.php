@@ -21,7 +21,25 @@ class CampaignController extends Controller {
 
 	public function getList($id = Null)
 	{		
-		$campaign=Campaign::where('status',1)->get();		
+		// Get current logged in user ID
+		$created_by=Auth::user()->id;
+
+		// Get current logged in user TYPE
+		$type=Auth::user()->type;
+		
+		if($type==1)
+		{
+			$campaign=Campaign::where('status',1)
+					  ->orderBy('id','DESC')
+					  ->get();		
+		}
+		else
+		{
+			$campaign=Campaign::where('status',1)
+					  ->where('created_by',$created_by)
+					  ->orderBy('id','DESC')
+					  ->get();		
+		}
 		return $campaign;	
 	}
 
@@ -92,12 +110,16 @@ class CampaignController extends Controller {
 	
 	public function getAddlogo($campaign_name,$start_date,$end_date,$campaign_image)
 	{
+		// Get current logged in user ID
+		$created_by=Auth::user()->id;
+
 		if($campaign_name=="" || $start_date=="" || $end_date=="" || $campaign_image=="")
 		{
 			return 'error';
 		}
 		else
 		{
+
 			$original_path= env('UPLOADS')."/campaign/original"."/".$campaign_image;
 			if(file_exists($original_path))
 			{
@@ -107,7 +129,7 @@ class CampaignController extends Controller {
 				$campaign->start_date 		= $start_date;	
 				$campaign->end_date 		= $end_date;		
 				$campaign->status 			= 1;			
-				$campaign->uploaded_by 		= 1;
+				$campaign->created_by 		= $created_by;
 				if($campaign->save())
 				{
 					return 'success';

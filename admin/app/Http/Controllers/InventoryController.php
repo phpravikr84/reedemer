@@ -21,8 +21,25 @@ class InventoryController extends Controller {
 	
 
 	public function getList($id = Null)
-	{		
-		$inventory=Inventory::where('status',1)->get();		
+	{	
+		// Get current logged in user ID
+		$created_by=Auth::user()->id;
+
+		// Get current logged in user TYPE
+		$type=Auth::user()->type;
+		if($type==1)
+		{	
+			$inventory=Inventory::where('status',1)
+					   ->orderBy('id','DESC')
+					   ->get();		
+		}
+		else
+		{
+			$inventory=Inventory::where('status',1)
+					  ->where('created_by',$created_by)
+					  ->orderBy('id','DESC')
+					  ->get();
+		}
 		return $inventory;	
 	}
 
@@ -94,6 +111,9 @@ class InventoryController extends Controller {
 	
 	public function getAddlogo($inventory_name,$sell_price,$cost,$inventory_image)
 	{
+		// Get current logged in user ID
+		$created_by=Auth::user()->id;
+
 		if($inventory_name=="" || $sell_price=="" || $cost=="" || $inventory_image=="")
 		{
 			return 'error';
@@ -109,7 +129,7 @@ class InventoryController extends Controller {
 				$campaign->cost 		= $cost;	
 				$campaign->inventory_image 		= $inventory_image;		
 				$campaign->status 			= 1;			
-				$campaign->uploaded_by 		= 1;
+				$campaign->created_by 		= $created_by;
 				if($campaign->save())
 				{
 					return 'success';

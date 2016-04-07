@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp m-b-30">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">User Campaign List</h2>
+            <h2 class="mdl-card__title-text">User Campaign List </h2>
           </div>
           <table class="mdl-data-table ml-table-bordered mdl-js-data-table ">
             <colgroup>
@@ -36,8 +36,8 @@
                 <th class="mdl-data-table__cell--non-numeric">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr ng-repeat="campaign in campaign_details">
+            <tbody>              
+              <tr ng-if="campaign_details.length > 0" ng-repeat="campaign in campaign_details">
                 <td>{{campaign.campaign_name}}</td>
                 <td>                 
                   <img src="{{d_path}}../uploads/campaign/original/{{campaign.campaign_image}}" width="80" />
@@ -51,8 +51,12 @@
                 <td>                  
                   <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
                 </td>
-              </tr>            
+              </tr> 
+              <tr ng-if="campaign_details.length == 0">
+                <td class="center" colspan="5">No data present</td>                
+              </tr> 
             </tbody>
+           
                       
           </table>
         </div>

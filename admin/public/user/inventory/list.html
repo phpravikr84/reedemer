@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="inventory in inventory_details">
+              <tr ng-if="inventory_details.length > 0" ng-repeat="inventory in inventory_details">
                 <td>{{inventory.inventory_name}}</td>
                 <td>                 
                   <img src="{{d_path}}../uploads/inventory/original/{{inventory.inventory_image}}" width="80" />
@@ -51,6 +51,9 @@
                 <td>                  
                   <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_inventory(inventory.id);" />
                 </td>
+              </tr> 
+              <tr ng-if="inventory_details.length == 0">
+                <td class="center" colspan="5">No data present</td>                
               </tr>            
             </tbody>                      
           </table>
