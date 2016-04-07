@@ -320,7 +320,7 @@ class DashboardController extends Controller {
 			$target_details_arr=json_decode($target_details);		
 
 			$tracking_rating=$target_details_arr->target_record->tracking_rating;
-			dd($tracking_rating);
+			dd($target_details_arr);
 			if($target_id!="")
 			{			
 				$user = new Logo();
