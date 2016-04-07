@@ -30,7 +30,10 @@ class CronController extends Controller {
 			$target_res_details=$client->getTarget($logo->target_id); 
 			$response_arr=json_decode($target_res_details);
 			//echo $logo->target_id."<br>";
-			dd($response_arr->target_record->target_id);
+			//dd($response_arr->target_record->tracking_rating);
+			$target_id=$response_arr->target_record->target_id;
+			$tracking_rating=$response_arr->target_record->tracking_rating;
+			$affectedRows = Logo::where('target_id', $target_id)->update(['tracking_rating' => $tracking_rating]);
 		}
 		//return $logo;
 
