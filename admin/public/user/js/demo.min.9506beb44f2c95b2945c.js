@@ -869,7 +869,7 @@ function() {
         function c() {
 
             function a(a, b, c, d) { 
-            
+
                 d.addItem(a), a.$watch("isActive", function(b) {
                     b && d.inactivateOthers(a)
                 });
