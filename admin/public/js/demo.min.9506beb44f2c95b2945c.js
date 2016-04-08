@@ -7,16 +7,16 @@ function() {
     "use strict";
    
     function a(a,file_path) {
-        
+        var site_path=$("#site_path").val();
         a.when("/", {
-            templateUrl: "../view/dashboard.html"
+            templateUrl: site_path+"view/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {
-                return "../view/" + a.folder + "/" + a.tpl + ".html"
+                return site_path+"view/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {
-                return "../view/" + a.tpl + ".html"
+                return site_path+"view/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -763,9 +763,10 @@ function() {
         "use strict";
 
         function a() {
+            var site_path=$("#site_path").val();
             return {
                 restrict: "E",
-                templateUrl: "../view/partials/header.html",
+                templateUrl: site_path+"view/partials/header.html",
                 replace: !0
             }
         }
@@ -775,9 +776,10 @@ function() {
         "use strict";
 
         function a() {
+            var site_path=$("#site_path").val();
             return {
                 restrict: "E",
-                templateUrl: "../view/partials/sidebar.html",
+                templateUrl: site_path+"view/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -892,6 +894,8 @@ function() {
         }
 
         function c() {
+            var site_path=$("#site_path").val();
+
             function a(a, b, c, d) {
                 d.addItem(a), a.$watch("isActive", function(b) {
                     b && d.inactivateOthers(a)
@@ -910,7 +914,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../view/tpl/partials/menu-item.html",
+                templateUrl: site_path+"view/tpl/partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -919,6 +923,7 @@ function() {
         }
 
         function d() {
+            var site_path=$("#site_path").val();
             function a(a, b, c, d) {
                 d.addGroup(a), a.$watch("isOpen", function(b) {
                     b && d.closeOthers(a)
@@ -931,7 +936,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../view/tpl/partials/menu-group.html",
+                templateUrl: site_path+"view/tpl/partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",

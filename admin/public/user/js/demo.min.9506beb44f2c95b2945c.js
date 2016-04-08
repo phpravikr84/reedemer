@@ -867,7 +867,7 @@ function() {
         }
 
         function c() {
-
+            var site_path=$("#site_path").val();
             function a(a, b, c, d) { 
 
                 d.addItem(a), a.$watch("isActive", function(b) {
@@ -889,7 +889,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../user/_partials/menu-item.html",
+                templateUrl: site_path+"user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
