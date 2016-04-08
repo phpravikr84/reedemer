@@ -71,10 +71,14 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
           x.get("../inventory/addlogo/"+inventory_name+"/"+sell_price+"/"+cost+"/"+logo_name).success(function(response){
             if(response=='success')
             {
-              a.show_success_msg =true;
-              a.show_error_msg =false;
-              a.show_error_msg_img =false;
-              a.Inventory={};
+              var main_site_url=$("#main_site_url").val();
+                                    
+              var redirect_url=main_site_url+'/user/dashboard#/inventory/list';                                   
+              window.location.href = redirect_url; 
+              //a.show_success_msg =true;
+              //a.show_error_msg =false;
+              //a.show_error_msg_img =false;
+              //a.Inventory={};
             }
             else if(response=='image_not')
             {
