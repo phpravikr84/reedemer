@@ -9,7 +9,7 @@ function() {
 
     function a(a,file_path) {
         var site_path=$("#site_path").val();
-        alert(site_path);
+        //alert(site_path);
         a.when("/", {
             templateUrl: site_path+"user/dashboard.html"
         }).when("/:folder/:tpl", {
