@@ -8,8 +8,7 @@ function() {
    
 
     function a(a,file_path) {
-        var site_path=$("#site_path").val();
-        //alert(site_path);
+        var site_path=$("#site_path").val();        
         a.when("/", {
             templateUrl: site_path+"user/dashboard.html"
         }).when("/:folder/:tpl", {
@@ -834,8 +833,7 @@ function() {
     }(),
     function() {
         "use strict";
-        var site_path=$("#site_path").val();
-
+       
         function a(a, b, c, d, e) {
             var f = this;
             f.groups = [], f.items = [], f.closeOthers = function(c) {
@@ -869,12 +867,14 @@ function() {
         }
 
         function c() {
-            function a(a, b, c, d) {
+
+            function a(a, b, c, d) {                
                 d.addItem(a), a.$watch("isActive", function(b) {
                     b && d.inactivateOthers(a)
                 });
                 var e = angular.element(b.children()[0]).attr("href");
                 a.isActive = d.isActive(e), a.toggleActive = function() {
+
                     a.isActive || (a.isActive = !a.isActive);
                     var c = b.find("a").clone();
                     c.find("i").remove();
@@ -883,11 +883,12 @@ function() {
                 }
             }
             return {
+
                 require: "^mlMenu",
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: site_path+"user/_partials/menu-item.html",
+                templateUrl: "../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -896,6 +897,7 @@ function() {
         }
 
         function d() {
+            var site_path=$("#site_path").val();
             function a(a, b, c, d) {
                 d.addGroup(a), a.$watch("isOpen", function(b) {
                     b && d.closeOthers(a)
