@@ -736,7 +736,7 @@ function() {
 
         function a() {
             var site_path=$("#site_path").val();
-            
+
             return {
                 restrict: "E",
                 templateUrl: site_path+"user/partials/header.html",
@@ -834,6 +834,7 @@ function() {
     }(),
     function() {
         "use strict";
+        var site_path=$("#site_path").val();
 
         function a(a, b, c, d, e) {
             var f = this;
@@ -886,7 +887,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-item.html",
+                templateUrl: site_path+"user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -907,7 +908,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-group.html",
+                templateUrl: site_path+"user/_partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
