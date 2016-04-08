@@ -747,6 +747,8 @@ function() {
         "use strict";
 
         function a() {
+            var site_path=$("#site_path").val();
+            //alert(site_path);
             return {
                 restrict: "E",
                 templateUrl: site_path+"user/partials/sidebar.html",
