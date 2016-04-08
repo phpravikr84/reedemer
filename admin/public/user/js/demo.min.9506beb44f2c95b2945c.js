@@ -868,7 +868,8 @@ function() {
 
         function c() {
 
-            function a(a, b, c, d) {                
+            function a(a, b, c, d) { 
+            
                 d.addItem(a), a.$watch("isActive", function(b) {
                     b && d.inactivateOthers(a)
                 });
@@ -888,7 +889,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../user/_partials/menu-item.html",
+                templateUrl: "../../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
