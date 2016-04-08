@@ -66,7 +66,7 @@ function() {
             }); 
 
             // set path ../ for local and ../../ for server
-            a.d_path=site_path;           
+            //a.d_path=site_path;           
         } 
 
 
@@ -543,14 +543,17 @@ function() {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
+            var site_path=$("#site_path").val();
           //  a.saveButtonText = "Save user";
            // a.isDisabled = false;
+          // alert(d_path);
            $('#upload_button').prop('disabled', false);
            $("#upload_button").text('Save user');
             x.get("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
-                // alert(data_response);
-              //  console.log('data :: '+JSON.stringify(data_response, null, 4));
+                a.file_path=site_path;
+                 //alert(data_response);
+                //console.log('data :: '+JSON.stringify(data_response, null, 4));
             });           
           
             a.uploadFile = function(){

@@ -65,7 +65,7 @@ function() {
             });   
           
           // set path ../ for local and ../ for server
-          a.d_path="../";  
+          //a.d_path=site_path;  
         } 
         angular.module("redeemar-app").controller("MainController", ["$scope","$http", a])
     }(),
@@ -539,9 +539,12 @@ function() {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
+            var site_path=$("#site_path").val();
+
             x.get("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
-                // alert(data_response);
+                a.file_path=site_path;
+                
             });
 
              //x.get("../admin/dashboard/logo");              

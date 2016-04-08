@@ -8,6 +8,7 @@ var MyApp = angular.module("campaign-app", ["ngFileUpload"]);
 MyApp.factory("fileToUpload", ["$http", function(h){
 
   var promise;
+  
   var fileUpload = {
     uploadNewFileToUrl: function(file, uploadUrl, data) {
       var fd = new FormData();
@@ -37,6 +38,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     a.dataLength={filtered:[]};
     a.cnames = [];
     a.campaign_details = [];
+    var site_path=$("#site_path").val();
     
     //Load Calender when page load
    // $("#c_s_date").datepicker();
@@ -49,7 +51,9 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     });
 
    x.get("../campaign/list").success(function(data_response){              
-        a.campaign_details = data_response;  
+        a.campaign_details = data_response; 
+        a.file_path=site_path; 
+       // alert(site_path);
         //a.campaign_length = data_response.length;  
         //console.log('data :: '+JSON.stringify(campaign_length, null, 4));
     }); 

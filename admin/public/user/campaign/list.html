@@ -40,7 +40,7 @@
               <tr ng-if="campaign_details.length > 0" ng-repeat="campaign in campaign_details">
                 <td>{{campaign.campaign_name}}</td>
                 <td>                 
-                  <img src="{{d_path}}../uploads/campaign/original/{{campaign.campaign_image}}" width="80" />
+                  <img src="{{file_path}}../uploads/campaign/original/{{campaign.campaign_image}}" width="80" />
                 </td>
                 <td>
                   {{campaign.start_date}}
@@ -49,7 +49,7 @@
                   {{campaign.end_date}}
                 </td>
                 <td>                  
-                  <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
+                  <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
                 </td>
               </tr> 
               <tr ng-if="campaign_details.length == 0">
@@ -69,6 +69,3 @@
   </div>
 
 </section>
-<script>
-alert(d_path);
-</script>

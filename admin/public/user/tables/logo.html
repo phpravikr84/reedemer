@@ -40,19 +40,19 @@
               <tr ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
                 <td>{{logo.reedemer_company}}</td>
                 <td>
-                  <img src="{{d_path}}../uploads/original/{{logo.logo_name}}" width="80" />
+                  <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
                 </td>
                 <td ng-if="logo.tracking_rating >= 0">
                   {{logo.tracking_rating}}
                 </td>
                 <td ng-if="logo.tracking_rating < 0">
-                  <img src="{{d_path}}images/spinner.gif" />
+                  <img src="{{file_path}}images/spinner.gif" />
                 </td>
                 <td>
                   {{logo.logo_text}}
                 </td>
                 <td>                  
-                  <img src="{{d_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
+                  <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
               </tr> 
               <tr ng-if="logo_details.length == 0">

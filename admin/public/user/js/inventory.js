@@ -37,9 +37,11 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
     a.dataLength={filtered:[]};
     a.cnames = [];
     a.inventory_details = [];
+    var site_path=$("#site_path").val();
 
    x.get("../inventory/list").success(function(data_response){              
-        a.inventory_details = data_response;  
+        a.inventory_details = data_response; 
+        a.file_path=site_path;  
     });           
   
     a.addInventory = function(){             
