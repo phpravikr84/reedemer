@@ -54,7 +54,7 @@
             <form name="f1" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield">
-                <p>Select Company</p>
+                <p>Company Name</p>
                  <select id="company_id" ng-model="Redeemer.company_id">
                     <option value="">----</option>
                     <option value="{{ cname.id }}" ng-repeat="cname in cnames">{{cname.company_name}}</option>

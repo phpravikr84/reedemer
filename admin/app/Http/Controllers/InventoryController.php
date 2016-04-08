@@ -19,6 +19,13 @@ use App\Model\Inventory;
 class InventoryController extends Controller {
 	
 	
+	//public function __construct( )
+	//{
+		//$this->middleware('auth');
+		//Auth::logout();
+    	//return redirect('auth/login');	
+		
+	//}
 
 	public function postList()
 	{		

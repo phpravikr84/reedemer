@@ -85,12 +85,16 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
       var uploadUrl = "../campaign/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
+          var c_s_date=$('#c_s_date').val();
+          var c_e_date=$('#c_e_date').val();
           a.Campaign.campaign_image = logo_name; 
+          a.Campaign.c_s_date = c_s_date; 
+          a.Campaign.c_e_date = c_e_date; 
          // alert(logo_name);
           var main_site_url=$('#main_site_url').val();
            //  alert(main_site_url);
             // return false;
-           // console.log('data send :: '+JSON.stringify(a.Campaign, null, 4));  
+          //  console.log('data send :: '+JSON.stringify(a.Campaign, null, 4));  
            // return false;
 
           x.post(main_site_url+"/campaign/addlogo",a.Campaign).success(function(response){

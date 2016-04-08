@@ -66,6 +66,14 @@ class DashboardController extends Controller {
 	 */
 	public function getShow()
 	{
+		//dd("dashboard->show");
+		Auth::logout();
+
+    	return redirect()->back();
+	}
+
+	public function postShow()
+	{
 		$id=Auth::user()->id;
 		$type=Auth::user()->type;
 
@@ -452,7 +460,7 @@ class DashboardController extends Controller {
 		//}
 	}
 
-	public function getUserdetails()
+	public function postUserdetails()
 	{
 		$user_id=Auth::user()->id;
 		$user_details=User::findOrFail($user_id);

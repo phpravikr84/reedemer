@@ -60,7 +60,7 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-            h.get("../admin/dashboard/userdetails")
+            h.post("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
             }); 
@@ -575,13 +575,17 @@ function() {
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );                            ;
             };
             a.delete_logo=function(itemId){ 
+
+             var main_site_url=$('#main_site_url').val();
+
              if(confirm("Are you sure?"))
              {  
-                //var loder_name='loading_'+itemId;
-                //var icon_name='del_icon_'+itemId;
+               // var loder_name='loading_'+itemId;
+               // var icon_name='del_icon_'+itemId;
                // a.'loading_'+itemId = false;   
                // a.icon_name = true;  
                // alert(itemId);
+               return false;
                        
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;                 
