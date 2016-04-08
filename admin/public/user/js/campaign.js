@@ -50,7 +50,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
       dateFormat:"yy-mm-dd"   
     });
 
-   x.get("../campaign/list").success(function(data_response){              
+   x.post("../campaign/list").success(function(data_response){              
         a.campaign_details = data_response; 
         a.file_path=site_path; 
        // alert(site_path);
@@ -85,8 +85,15 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
       var uploadUrl = "../campaign/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
+          a.Campaign.campaign_image = logo_name; 
          // alert(logo_name);
-          x.get("../campaign/addlogo/"+c_name+"/"+c_s_date+"/"+c_e_date+"/"+logo_name).success(function(response){
+          var main_site_url=$('#main_site_url').val();
+           //  alert(main_site_url);
+            // return false;
+           // console.log('data send :: '+JSON.stringify(a.Campaign, null, 4));  
+           // return false;
+
+          x.post(main_site_url+"/campaign/addlogo",a.Campaign).success(function(response){
             if(response=='success')
             {
               var main_site_url=$("#main_site_url").val();

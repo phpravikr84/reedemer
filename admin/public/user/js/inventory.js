@@ -39,7 +39,7 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
     a.inventory_details = [];
     var site_path=$("#site_path").val();
 
-   x.get("../inventory/list").success(function(data_response){              
+   x.post("../inventory/list").success(function(data_response){              
         a.inventory_details = data_response; 
         a.file_path=site_path;  
     });           
@@ -66,9 +66,10 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
       var uploadUrl = "../inventory/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Inventory).then(function(fdata){
           var logo_name = fdata.data;
-       // alert(logo_name);
-       // return false;
-          x.get("../inventory/addlogo/"+inventory_name+"/"+sell_price+"/"+cost+"/"+logo_name).success(function(response){
+          a.Inventory.inventory_image = logo_name; 
+          var main_site_url=$('#main_site_url').val();
+
+          x.post(main_site_url+"/inventory/addlogo",a.Inventory).success(function(response){
             if(response=='success')
             {
               var main_site_url=$("#main_site_url").val();

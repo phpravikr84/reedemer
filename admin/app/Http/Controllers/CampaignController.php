@@ -19,7 +19,7 @@ class CampaignController extends Controller {
 	
 	
 
-	public function getList($id = Null)
+	public function postList()
 	{		
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
@@ -108,8 +108,14 @@ class CampaignController extends Controller {
 	}
 
 	
-	public function getAddlogo($campaign_name,$start_date,$end_date,$campaign_image)
+	public function postAddlogo(Request $request)
 	{
+
+		$campaign_name=$request->input('c_name');
+		$start_date=$request->input('c_s_date');
+		$end_date=$request->input('c_e_date');
+		$campaign_image=$request->input('campaign_image');
+
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 

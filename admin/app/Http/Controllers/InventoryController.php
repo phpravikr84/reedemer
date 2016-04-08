@@ -20,8 +20,8 @@ class InventoryController extends Controller {
 	
 	
 
-	public function getList($id = Null)
-	{	
+	public function postList()
+	{		
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 
@@ -109,12 +109,18 @@ class InventoryController extends Controller {
 	}
 
 	
-	public function getAddlogo($inventory_name,$sell_price,$cost,$inventory_image)
+	public function postAddlogo(Request $request)
 	{
+		$inventory_name=$request->input('inventory_name');
+		$sell_price=$request->input('sell_price');
+		$cost=$request->input('cost');
+		$inventory_image=$request->input('inventory_image');
+		//dd("a");
+		//dd($request->all());
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 
-		if($inventory_name=="" || $sell_price=="" || $cost=="" || $inventory_image=="")
+		if($inventory_name=="" || $sell_price=="" || $cost=="")
 		{
 			return 'error';
 		}
