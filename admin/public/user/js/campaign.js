@@ -85,16 +85,18 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
       var uploadUrl = "../campaign/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
+         // alert(logo_name);
           x.get("../campaign/addlogo/"+c_name+"/"+c_s_date+"/"+c_e_date+"/"+logo_name).success(function(response){
             if(response=='success')
             {
-              a.show_success_msg =true;
-              a.show_error_msg =false;
-              a.show_error_msg_img =false;
-              a.Campaign={};
+              var main_site_url=$("#main_site_url").val();
+                                    
+              var redirect_url=main_site_url+'/user/dashboard#/campaign/list';                                   
+              window.location.href = redirect_url;                        
             }
             else if(response=='image_not')
             {
+             // window.location.href = redirect_url;  
               a.show_success_msg =false;
               a.show_error_msg =false;
               a.show_error_msg_img =true;
@@ -102,6 +104,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
             }
             else
             {
+              //window.location.href = redirect_url;  
               a.show_success_msg =false;
               a.show_error_msg =true;
               a.show_error_msg_img =false;
