@@ -8,15 +8,17 @@ function() {
    
 
     function a(a,file_path) {
+        var site_path=$("#site_path").val();
+        alert(site_path);
         a.when("/", {
-            templateUrl: "../../user/dashboard.html"
+            templateUrl: site_path+"user/dashboard.html"
         }).when("/:folder/:tpl", {
             templateUrl: function(a) {          
-                return "../../user/" + a.folder + "/" + a.tpl + ".html"
+                return site_path+"user/" + a.folder + "/" + a.tpl + ".html"
             }
         }).when("/:tpl", {
             templateUrl: function(a) {    
-                return "../../user/" + a.tpl + ".html"
+                return site_path+"user/" + a.tpl + ".html"
             }
         }).otherwise({
             redirectTo: "/"
@@ -59,13 +61,13 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-            h.get("../../admin/dashboard/userdetails")
+            h.get("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
             }); 
 
             // set path ../ for local and ../../ for server
-            a.d_path="../../";           
+            a.d_path=site_path;           
         } 
 
 
@@ -682,23 +684,10 @@ function() {
                             h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
                                 if(target.response=="success")
                                 {
-                                    if(target.rating >0)
-                                    {
-                                        $("#show_success_msg").show();
-                                        $("#image_error").hide('500');
-                                        $("#logo_text").val("");
-                                        $("#company_id").val("");
-                                        $("#logo_name").val("");   
-                                    }
-                                    else
-                                    {                                     
-                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
-                                    }
-                                    $("#show_success_msg").show();
-                                    $("#image_error").hide('500');
-                                    $("#logo_text").val("");
-                                    $("#company_id").val("");
-                                    $("#logo_name").val("");   
+                                    var main_site_url=$("#main_site_url").val();
+                                    
+                                    var redirect_url=main_site_url+'/user/dashboard#/tables/logo';                                   
+                                    window.location.href = redirect_url;                                      
                                 }
                             })   
                         }
@@ -748,7 +737,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../user/partials/header.html",
+                templateUrl: site_path+"user/partials/header.html",
                 replace: !0
             }
         }
@@ -760,7 +749,7 @@ function() {
         function a() {
             return {
                 restrict: "E",
-                templateUrl: "../../user/partials/sidebar.html",
+                templateUrl: site_path+"user/partials/sidebar.html",
                 replace: !0
             }
         }
@@ -812,7 +801,7 @@ function() {
             return {
                 restrict: "EA",
                 controller: "mlChatController",
-                templateUrl: "../../view/tpl/partials/chat-widget.html"
+                templateUrl: "../view/tpl/partials/chat-widget.html"
             }
         }
 
@@ -893,7 +882,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../user/_partials/menu-item.html",
+                templateUrl: "../user/_partials/menu-item.html",
                 scope: {
                     isActive: "=?"
                 },
@@ -914,7 +903,7 @@ function() {
                 restrict: "EA",
                 transclude: !0,
                 replace: !0,
-                templateUrl: "../../user/_partials/menu-group.html",
+                templateUrl: "../user/_partials/menu-group.html",
                 scope: {
                     heading: "@",
                     path: "@",
@@ -1118,7 +1107,7 @@ function() {
             }
             return {
                 restrict: "EA",
-                templateUrl: "../../user/_partials/todo-widget.html",
+                templateUrl: "../user/_partials/todo-widget.html",
                 replace: !0,
                 link: b
             }
