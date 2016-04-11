@@ -549,7 +549,7 @@ function() {
           // alert(d_path);
            $('#upload_button').prop('disabled', false);
            $("#upload_button").text('Save user');
-            x.get("../admin/dashboard/logo").success(function(data_response){              
+            x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
                 a.file_path=site_path;
                  //alert(data_response);
@@ -557,18 +557,35 @@ function() {
             });           
           
             a.uploadFile = function(){
-               var file = a.myFile;
-              // $("#upload_button").hide();
-               //a.saveButtonText = "Saving..";
-              // a.isDisabled = true;
+               var file = a.myFile;              
                $('#upload_button').prop('disabled', true);
-               $("#upload_button").text('Saving..');
-             //  return false;
-               //alert("a");
-             // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
-            //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
-              // console.dir(file);
-              //alert("A");
+               $("#upload_button").text('Saving..');   
+
+                var ext = $('#logo_name').val().split('.').pop().toLowerCase();
+                if($.inArray(ext, ['jpg','jpeg']) == -1) {
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please upload only .jpg /.jpeg image.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#upload_button').prop('disabled', false);
+                    $("#upload_button").text('Save user');
+                    return false;
+                }
+
+                if($("#logo_text").val()=='')
+                {
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#error_div").html("Please insert all fields.");
+                  $("#error_div").show();
+                  $("#success_div").hide();
+
+                  $('#upload_button').prop('disabled', false);
+                  $("#upload_button").text('Save user');
+                  //return false;
+                }
+
                var uploadUrl = "../admin/dashboard/uploadlogo";
 
                // alert(company_id);
@@ -585,7 +602,7 @@ function() {
                // a.'loading_'+itemId = false;   
                // a.icon_name = true;  
                // alert(itemId);
-               return false;
+             //  return false;
                        
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;                 
@@ -594,7 +611,7 @@ function() {
              }
             }
             
-            x.get("../admin/dashboard/show").success(function(response){
+            x.post("../admin/dashboard/show").success(function(response){
             
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                     firstname: response[g].company_name,
@@ -682,6 +699,7 @@ function() {
                    }
                    var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
+                       //alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
@@ -693,17 +711,34 @@ function() {
                                     var main_site_url=$("#main_site_url").val();
                                     
                                     var redirect_url=main_site_url+'/user/dashboard#/tables/logo';                                   
-                                    window.location.href = redirect_url;                                      
+                                   // window.location.href = redirect_url; 
+
+                                    $("#error_div").hide();
+                                    $("#show_message").slideDown();
+                                    $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+                                    $("#success_div").show();              
+
+                                    setTimeout(function() { 
+                                    window.location.href = redirect_url; 
+                                    }, 5000);                                          
                                 }
                             })   
                         }
                         if(response_back.response=="image_problem")
                         {
-                            $("#show_success_msg").hide();
-                            $("#image_error").show('500');
-                            $("#logo_text").val("");
-                            $("#company_id").val("");
-                            $("#logo_name").val("");                                          
+                            //$("#show_success_msg").hide();
+                            //$("#image_error").show('500');
+                            //$("#logo_text").val("");
+                            //$("#company_id").val("");
+                            //$("#logo_name").val("");     
+
+                            $("#show_message").slideDown();
+                            $("#error_div").html("Please upload only .jpg /.jpeg image.");
+                            $("#error_div").show();
+                            $("#success_div").hide();
+
+                            $('#upload_button').prop('disabled', false);
+                            $("#upload_button").text('Save');                                     
 
                         }
 
