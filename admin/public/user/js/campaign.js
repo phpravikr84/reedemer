@@ -200,7 +200,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
        $(".delete_row").hide();
        $("td#row_"+itemId).parent()
     .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');   
-    return false;
+    //return false;
        x.get("../campaign/delete/"+itemId).success(function(response){
           window.location.reload();             
        })

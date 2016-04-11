@@ -320,7 +320,7 @@ class DashboardController extends Controller {
 			
 	}
 
-	public function getAddlogo($company_id='',$logo_text,$image_name)
+	public function getAddlogo($logo_text,$image_name)
 	{
 		
 		/*$rules = array(
@@ -339,22 +339,22 @@ class DashboardController extends Controller {
 		}*/
 
 
-		$client = new vuforiaclient();
-		$send[0] = "Logo_".time()."_".$company_id;
-		$send[1] = '../uploads/original/'.$image_name;
-		$send[2] = '../uploads/original/'.$image_name;
-		$send[3] = 'Redeemar';
-		$send[4] = 'Redeemar';		
-		$response=$client->addTarget($send);
-		$response_arr=json_decode($response);		
+		// $client = new vuforiaclient();
+		// $send[0] = "Logo_".time()."_".$company_id;
+		// $send[1] = '../uploads/original/'.$image_name;
+		// $send[2] = '../uploads/original/'.$image_name;
+		// $send[3] = 'Redeemar';
+		// $send[4] = 'Redeemar';		
+		// $response=$client->addTarget($send);
+		// $response_arr=json_decode($response);		
 
-		if($response_arr->result_code=="TargetCreated")
-		{
-			
-			$target_id=$response_arr->target_id;					
+		//if($response_arr->result_code=="TargetCreated")
+		//{
+			//dd("A");
+			//$target_id=$response_arr->target_id;					
 			$logo = new Logo();
-			$logo->reedemer_id 		= $company_id;	
-			$logo->target_id 		= $target_id;
+			//$logo->reedemer_id 		= $company_id;	
+			//$logo->target_id 		= $target_id;
 			$logo->logo_name 		= $image_name;	
 			$logo->logo_text 		= $logo_text;
 			$logo->status 			= 1;			
@@ -362,13 +362,13 @@ class DashboardController extends Controller {
 			if($logo->save())
 			{
 				$logo_id = $logo->id;
-				return array('response'=>'success','target_id'=>$target_id,'logo_id'=>$logo_id);
+				return array('response'=>'success','target_id'=>'','logo_id'=>$logo_id);
 			}			
-		}
-		else
-		{
-			return array('response'=>'image_problem','target_id'=>'');			
-		}
+		//}
+		//else
+		//{
+		//	return array('response'=>'image_problem','target_id'=>'');			
+		//}
 	}
 
 	public function getDeletereedemer($id)

@@ -60,7 +60,7 @@ function() {
                 a._o.field.dispatchEvent(c)
             }
 
-            h.get("../admin/dashboard/userdetails")
+            h.post("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
             });   
@@ -541,9 +541,10 @@ function() {
             a.cnames = [];
             a.logo_details = [];
             var site_path=$("#site_path").val();
-           // alert("g");
+           
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
+                 alert(site_path);
                 a.file_path=site_path;
                 
             });
@@ -608,7 +609,13 @@ function() {
 
             a.delete_reedemer=function(itemId){ 
              if(confirm("Are you sure?"))
-             {               
+             {   
+
+                $(".delete_row").hide();
+                $("td#row_"+itemId).parent()
+                .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
+                return false;
+
                x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
                   //a.status=response;                 
                   window.location.reload();             
@@ -625,6 +632,8 @@ function() {
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;   
                 //  alert(itemId);
+                alert("A");
+                return false;
                   $("#logo_"+itemId).hide('500');  
                   $("#msg_div").show('500');
                   $(".msg_remove").hide('500');
@@ -635,7 +644,7 @@ function() {
              }
             }
             
-            x.get("../admin/dashboard/show").success(function(response){
+            x.post("../admin/dashboard/show").success(function(response){
             
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                     company_name: response[g].company_name,
@@ -688,40 +697,40 @@ function() {
                })
             
                .success(function(response){                   
-                   var company_id =$("#company_id").val();
-                   if(!company_id)
-                   {
-                       company_id=0;
-                   }
+                  // var company_id =$("#company_id").val();
+                  // if(!company_id)
+                  // {
+                  //     company_id=0;
+                  // }
                    var logo_text =$("#logo_text").val();                   
-                   h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
+                   h.get("../admin/dashboard/addlogo/"+logo_text+"/"+response).success(function(response_back){
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
                             
-                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
-                                if(target.response=="success")
-                                {
-                                    if(target.rating >0)
-                                    {
-                                        $("#show_success_msg").show();
-                                        $("#image_error").hide('500');
-                                        $("#logo_text").val("");
-                                        $("#company_id").val("");
-                                        $("#logo_name").val("");   
-                                    }
-                                    else
-                                    {                                     
-                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
-                                    }
-                                    $("#show_success_msg").show();
-                                    $("#image_error").hide('500');
-                                    $("#logo_text").val("");
-                                    $("#company_id").val("");
-                                    $("#logo_name").val("");   
-                                }
-                            })   
+                            //h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                                // if(target.response=="success")
+                                // {
+                                //     if(target.rating >0)
+                                //     {
+                                //         $("#show_success_msg").show();
+                                //         $("#image_error").hide('500');
+                                //         $("#logo_text").val("");
+                                //         $("#company_id").val("");
+                                //         $("#logo_name").val("");   
+                                //     }
+                                //     else
+                                //     {                                     
+                                //       h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
+                                //     }
+                                //     $("#show_success_msg").show();
+                                //     $("#image_error").hide('500');
+                                //     $("#logo_text").val("");
+                                //     $("#company_id").val("");
+                                //     $("#logo_name").val("");   
+                                // }
+                           // })   
                         }
                         if(response_back.response=="image_problem")
                         {

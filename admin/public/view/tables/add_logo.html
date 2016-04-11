@@ -53,14 +53,14 @@
           <div class="p-30">
             <form name="f1" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="mdl-textfield">
+              <!-- <div class="mdl-textfield">
                 <p>Company Name</p>
                  <select id="company_id" ng-model="Redeemer.company_id">
                     <option value="">----</option>
                     <option value="{{ cname.id }}" ng-repeat="cname in cnames">{{cname.company_name}}</option>
                    
                   </select>  
-              </div>
+              </div> -->
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <input ng-model="Redeemer.logo_text" class="mdl-textfield__input" type="text" id="logo_text" />
                 <label class="mdl-textfield__label" for="logo_text">Logo Text</label>
