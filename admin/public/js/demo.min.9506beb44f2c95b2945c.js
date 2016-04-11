@@ -544,7 +544,7 @@ function() {
            
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
-                 alert(site_path);
+                // alert(site_path);
                 a.file_path=site_path;
                 
             });
