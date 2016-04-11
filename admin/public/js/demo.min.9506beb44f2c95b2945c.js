@@ -708,29 +708,29 @@ function() {
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
-                            
-                            //h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
-                                // if(target.response=="success")
-                                // {
-                                //     if(target.rating >0)
-                                //     {
-                                //         $("#show_success_msg").show();
-                                //         $("#image_error").hide('500');
-                                //         $("#logo_text").val("");
-                                //         $("#company_id").val("");
-                                //         $("#logo_name").val("");   
-                                //     }
-                                //     else
-                                //     {                                     
-                                //       h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
-                                //     }
-                                //     $("#show_success_msg").show();
-                                //     $("#image_error").hide('500');
-                                //     $("#logo_text").val("");
-                                //     $("#company_id").val("");
-                                //     $("#logo_name").val("");   
-                                // }
-                           // })   
+                           // alert(target_id);
+                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                                if(target.response=="success")
+                                {
+                                    if(target.rating >0)
+                                    {
+                                        $("#show_success_msg").show();
+                                        $("#image_error").hide('500');
+                                        $("#logo_text").val("");
+                                        $("#company_id").val("");
+                                        $("#logo_name").val("");   
+                                    }
+                                    else
+                                    {                                     
+                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
+                                    }
+                                    $("#show_success_msg").show();
+                                    $("#image_error").hide('500');
+                                    $("#logo_text").val("");
+                                    $("#company_id").val("");
+                                    $("#logo_name").val("");   
+                                }
+                           })   
                         }
                         if(response_back.response=="image_problem")
                         {
