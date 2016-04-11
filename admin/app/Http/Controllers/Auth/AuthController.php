@@ -55,10 +55,10 @@ class AuthController extends Controller {
 			{	
 				return redirect()->intended( '/admin/dashboard' );
 			}
-			else
+			else 
 			{
 				return redirect()->intended( '/user/dashboard' );
-			}			
+			}					
 			
 		}
 

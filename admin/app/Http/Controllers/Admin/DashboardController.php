@@ -19,10 +19,13 @@ class DashboardController extends Controller {
 
 	//protected $dashboard;
 	
-	public function __construct(  )
-	{
+	//public function __construct(  )
+	//{
 		//$this->dashboard = $dashboard;
-	}	
+	//	$this->middleware('auth');
+	//	dd("Ag");
+	//}	
+
 
 	/**
 	 * Display a listing of the resource.
@@ -67,9 +70,9 @@ class DashboardController extends Controller {
 	public function getShow()
 	{
 		//dd("dashboard->show");
-		Auth::logout();
+		//Auth::logout();
 
-    	return redirect()->back();
+    	//return redirect()->back();
 	}
 
 	public function postShow()
@@ -269,41 +272,8 @@ class DashboardController extends Controller {
 			return array('response'=>'success','rating'=>$tracking_rating);
 		}
 	}
-	public function getLogo()
-	{	
-		//$client2 = new gettarget();
-			
-		//$target_id=$client2->GetTarget();
-
-		//$credentials = createSignature("/targets/".$targetId, "PUT", "application/json",$content);
-		//$result = updateData($credentials, "https://vws.vuforia.com/targets",$targetId, $content);
-		//echo $result;
-		//exit;
-		//dd("B");
-
-		//$client = new vuforiaclient();
-		//$send[0] = "Logo_".time()."_".$company_id;
-		//$send[1] = '../uploads/original/'.$image_name;
-		//$send[2] = '../uploads/original/'.$image_name;
-		//$send[3] = 'Redeemar';
-		//$send[4] = 'Redeemar';		
-		//$response=$client->addTarget($send);
-		//$response_arr=json_decode($response);
-		//echo "<pre>";
-		//print_r($response_arr);
-		//echo "</pre>";
-		//$tracking_rating='0';
-		//$target_id='';
-
-		//if($response_arr->result_code=="TargetCreated")
-		//{
-			
-		
-
-
-		 
-
-		//dd("a");
+	public function postLogo()
+	{
 		$id=Auth::user()->id;
 		$type=Auth::user()->type;
 		//dd($type);
@@ -320,11 +290,6 @@ class DashboardController extends Controller {
 				
 		}
 
-
-		//$target_id=$response_arr->target_id;
-		//$target_res_details=$client->getTarget($target_id); 
-
-		
 		$logo_arr=array();	
 		$company_name="N/A";
 		$target_id=NULL;
@@ -335,16 +300,7 @@ class DashboardController extends Controller {
 			{
 				$company_details=User::find($logo_details['reedemer_id']);
 				$company_name=$company_details['company_name'];
-			}
-
-			//$target_id=$logo_details->target_id;
-
-			//$target_res_details=$client->getTarget($target_id); 
-			//$response_arr=json_decode($target_res_details);
-
-			
-			//echo $target_id."<br>";
-			//dd($response_arr->target_record->tracking_rating);
+			}			
 
 			$logo_arr[]=array(
 						'id'=>$logo_details['id'],
@@ -367,6 +323,22 @@ class DashboardController extends Controller {
 	public function getAddlogo($company_id='',$logo_text,$image_name)
 	{
 		
+		/*$rules = array(
+				'company_name'     => 'required',  
+				'email'            => 'required|email|unique:users',   
+				'password'         => 'required|min:6'
+
+			);	
+		$validator = Validator::make($request->all(), $rules);
+		if ($validator->fails()) {				
+			$messages = $validator->messages();
+			// redirect our user back to the form with the errors from the validator			
+			return redirect()->back()
+							 ->withInput($request->only('company_name'))
+							 ->withErrors($validator);
+		}*/
+
+
 		$client = new vuforiaclient();
 		$send[0] = "Logo_".time()."_".$company_id;
 		$send[1] = '../uploads/original/'.$image_name;
@@ -374,47 +346,24 @@ class DashboardController extends Controller {
 		$send[3] = 'Redeemar';
 		$send[4] = 'Redeemar';		
 		$response=$client->addTarget($send);
-		$response_arr=json_decode($response);
-		//echo "<pre>";
-		//print_r($response_arr);
-		//echo "</pre>";
-		//$tracking_rating='0';
-		//$target_id='';
+		$response_arr=json_decode($response);		
 
 		if($response_arr->result_code=="TargetCreated")
 		{
 			
-			$target_id=$response_arr->target_id;
-			//$target_res_details=$client->getTarget($target_id); 			
-			//echo "<pre>";
-			//print_r($target_res_details);
-			//echo "</pre>";
-			//$target_details_arr=json_decode($target_res_details);	
-			//echo "<pre>";
-			//print_r($target_details_arr);
-			//echo "</pre>";	
-
-			//$tracking_rating=$target_details_arr->target_record->tracking_rating;
-			//dd($target_details_arr);
-			//if($target_id!="")
-			//{			
-				$logo = new Logo();
-				$logo->reedemer_id 		= $company_id;	
-				$logo->target_id 		= $target_id;
-				$logo->logo_name 		= $image_name;	
-				$logo->logo_text 		= $logo_text;
-				$logo->status 			= 1;			
-				$logo->uploaded_by 		= 1;
-				if($logo->save())
-				{
-					$logo_id = $logo->id;
-					return array('response'=>'success','target_id'=>$target_id,'logo_id'=>$logo_id);
-				}
-			//}
-			//else
-			//{
-			//	return array('response'=>'error','target_id'=>'');
-			//}
+			$target_id=$response_arr->target_id;					
+			$logo = new Logo();
+			$logo->reedemer_id 		= $company_id;	
+			$logo->target_id 		= $target_id;
+			$logo->logo_name 		= $image_name;	
+			$logo->logo_text 		= $logo_text;
+			$logo->status 			= 1;			
+			$logo->uploaded_by 		= 1;
+			if($logo->save())
+			{
+				$logo_id = $logo->id;
+				return array('response'=>'success','target_id'=>$target_id,'logo_id'=>$logo_id);
+			}			
 		}
 		else
 		{
@@ -424,8 +373,7 @@ class DashboardController extends Controller {
 
 	public function getDeletereedemer($id)
 	{
-		$user = User::find($id);  
-		//$logo = Logo::where($id);    
+		$user = User::find($id); 		
 		if($user->delete())
 		{
 			return 'success';
@@ -462,6 +410,7 @@ class DashboardController extends Controller {
 
 	public function postUserdetails()
 	{
+		//dd("a");
 		$user_id=Auth::user()->id;
 		$user_details=User::findOrFail($user_id);
 		//dd($user_details->toArray());

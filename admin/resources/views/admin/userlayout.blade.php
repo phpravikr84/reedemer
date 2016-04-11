@@ -30,7 +30,7 @@
   @yield('style')
 </head>
 
-<body ng-controller="MainController" >
+<body ng-controller="MainController" > 
   <!-- <div id="app" class="app" ng-include="'{{ asset('/tpl/demo/app.html') }}'"></div> -->
   <div class="demo-layout mdl-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
     <ml-header></ml-header><!-- This directive uses the partial: src/tpl/demo/partials/header.html -->

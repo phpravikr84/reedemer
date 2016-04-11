@@ -59,6 +59,7 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
+
             h.get("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
@@ -540,8 +541,8 @@ function() {
             a.cnames = [];
             a.logo_details = [];
             var site_path=$("#site_path").val();
-
-            x.get("../admin/dashboard/logo").success(function(data_response){              
+           // alert("g");
+            x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
                 a.file_path=site_path;
                 

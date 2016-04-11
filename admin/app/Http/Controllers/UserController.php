@@ -38,6 +38,17 @@ class UserController extends Controller {
 		$this->middleware('guest');
 	}*/
 
+	public function __construct( )
+	{
+		if($this->middleware('auth'))
+		//if(!Auth::user()->id)
+		{
+			Auth::logout();
+    		return redirect('auth/login');	
+    	}
+		
+	}
+
 	
 	/**
 	 * add user to the system.
