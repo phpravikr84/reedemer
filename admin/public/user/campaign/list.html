@@ -48,13 +48,13 @@
                   <img src="{{file_path}}../uploads/campaign/original/{{campaign.campaign_image}}" width="80" />
                 </td>
                 <td>
-                  {{campaign.start_date}}
+                  {{campaign.start_date}}                  
                 </td>
                 <td>
                   {{campaign.end_date}}
                 </td>
-                <td>                  
-                  <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
+                <td id="row_{{campaign.id}}">                  
+                  <img class="delete_row" src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
                 </td>
               </tr> 
               <tr ng-if="campaign_details.length == 0">

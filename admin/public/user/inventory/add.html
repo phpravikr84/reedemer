@@ -36,20 +36,23 @@
             <form name="f2" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Inventory.inventory_name" class="mdl-textfield__input" type="text" id="inventory_name" />
-                <label class="mdl-textfield__label" for="inventory_name">Name</label>
+                <!-- <input ng-model="Inventory.inventory_name" class="mdl-textfield__input" type="text" id="inventory_name" />
+                <label class="mdl-textfield__label" for="inventory_name">Name</label> -->
+                <input ng-model="Inventory.inventory_name" class="mdl-textfield__input" type="text" id="inventory_name" placeholder="Name" />
               </div>
               <div class="mdl-textfield">
                 <p>Image</p> 
                <input type = "file" ng-model="Inventory.inventory_image" file-model = "myFile" id="inventory_image" />   
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Inventory.sell_price" class="mdl-textfield__input" type="text" id="sell_price" />
-                <label class="mdl-textfield__label" for="sell_price">Sell Price</label>
+                <!-- <input ng-model="Inventory.sell_price" class="mdl-textfield__input" type="text" id="sell_price" />
+                <label class="mdl-textfield__label" for="sell_price">Sell Price</label> -->
+                <input ng-model="Inventory.sell_price" class="mdl-textfield__input" type="text" id="sell_price" placeholder="Sell Price" />
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Inventory.cost" class="mdl-textfield__input" type="text" id="cost" />
-                <label class="mdl-textfield__label" for="cost">Cost</label>
+                <!-- <input ng-model="Inventory.cost" class="mdl-textfield__input" type="text" id="cost" />
+                <label class="mdl-textfield__label" for="cost">Cost</label> -->
+                <input ng-model="Inventory.cost" class="mdl-textfield__input" type="text" id="cost" placeholder="Cost" />
               </div>
               
               

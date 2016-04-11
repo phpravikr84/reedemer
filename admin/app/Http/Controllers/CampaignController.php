@@ -19,6 +19,17 @@ class CampaignController extends Controller {
 	
 	
 
+	public function __construct( )
+	{
+		if($this->middleware('auth'))
+		//if(!Auth::user()->id)
+		{
+			Auth::logout();
+    		return redirect('auth/login');	
+    	}
+		
+	}
+	
 	public function postList()
 	{		
 		// Get current logged in user ID

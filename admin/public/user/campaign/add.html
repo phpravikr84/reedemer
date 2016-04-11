@@ -36,16 +36,19 @@
             <form name="f2" method="POST"  enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" id="c_name" />
-                <label class="mdl-textfield__label" for="c_name">Name</label>
+                <!-- <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" id="c_name" />
+                <label class="mdl-textfield__label" for="c_name">Name</label> -->
+                <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" placeholder="Name" id="c_name" />
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Campaign.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly />
-                <label class="mdl-textfield__label" for="c_s_date">Start Date</label>
+                <!-- <input ng-model="Campaign.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly />
+                <label class="mdl-textfield__label" for="c_s_date">Start Date</label> -->
+                <input ng-model="Campaign.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly placeholder="Start Date" style="width:50%" />
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly  />
-                <label class="mdl-textfield__label" for="c_e_date">End Date</label>
+                <!-- <input ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly  />
+                <label class="mdl-textfield__label" for="c_e_date">End Date</label> -->
+                <input ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly placeholder="End Date" style="width:50%" />
               </div>
               <div class="mdl-textfield">
                 <p>Upload Image</p> 

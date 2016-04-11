@@ -43,19 +43,44 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     //Load Calender when page load
    // $("#c_s_date").datepicker();
     $( "#c_s_date" ).datepicker({ 
-      dateFormat:"yy-mm-dd"    
+        //dateFormat:"mm-dd-yy"
+        /*showOn: "button",
+        buttonImage: site_path+"/images/calendar.gif",
+        buttonImageOnly: true,
+        buttonText: "Select date"*/
+
+       // numberOfMonths: 2,
+       dateFormat:"mm/dd/yy",
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+            $("#c_e_date").datepicker("option", "minDate", dt);
+        }
+
     });
 
     $( "#c_e_date" ).datepicker({     
-      dateFormat:"yy-mm-dd"   
+        //dateFormat:"mm-dd-yy"
+        /*showOn: "button",
+        buttonImage: site_path+"/images/calendar.gif",
+        buttonImageOnly: true,
+        buttonText: "Select date"*/
+
+       // numberOfMonths: 2,
+       dateFormat:"mm/dd/yy",
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() - 1);
+            $("#c_s_date").datepicker("option", "maxDate", dt);
+        }
     });
 
-   x.post("../campaign/list").success(function(data_response){              
+   x.post("../campaign/list").success(function(data_response){         
         a.campaign_details = data_response; 
-        a.file_path=site_path; 
+        a.file_path=site_path;  
        // alert(site_path);
         //a.campaign_length = data_response.length;  
-        //console.log('data :: '+JSON.stringify(campaign_length, null, 4));
+        //console.log('data :: '+JSON.stringify(data_response.start_date, null, 4));
     }); 
     //total: a.data_response,
     //console.log('data :: '+JSON.stringify(total, null, 4));     
@@ -98,8 +123,12 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
       var uploadUrl = "../campaign/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
-          var c_s_date=$('#c_s_date').val();
-          var c_e_date=$('#c_e_date').val();
+          var c_s_date_arr=$('#c_s_date').val().split('/');
+          var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
+         // alert(c_s_date);
+         // return false;
+          var c_e_date_arr=$('#c_e_date').val().split('/');
+          var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
 
           if(c_s_date=='' || c_e_date=='' || $("#c_name").val()=='')
           {
@@ -168,6 +197,10 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     a.delete_campaign=function(itemId){     
      if(confirm("Are you sure?"))
      {       
+       $(".delete_row").hide();
+       $("td#row_"+itemId).parent()
+    .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');   
+    return false;
        x.get("../campaign/delete/"+itemId).success(function(response){
           window.location.reload();             
        })
