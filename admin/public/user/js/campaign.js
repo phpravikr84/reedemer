@@ -63,30 +63,57 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     a.addCampaign = function(){             
       var file = a.myFile;
 
-      $('#add_campaign').prop('disabled', true);
-      $("#add_campaign").text('Saving..');      
+       $('#add_campaign').prop('disabled', true);
+       $("#add_campaign").text('Saving..');      
 
-      var c_name = $('#c_name').val();
-      var c_s_date = $('#c_s_date').val();
-      //var c_s_date = c_s_date_raw[2]+'-'+c_s_date_raw[0]+'-'+c_s_date_raw[1];
+      // var c_name = $('#c_name').val();
+      // var c_s_date = $('#c_s_date').val();
+      // //var c_s_date = c_s_date_raw[2]+'-'+c_s_date_raw[0]+'-'+c_s_date_raw[1];
       
-      var c_e_date = $('#c_e_date').val();
-      //var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
-      var logo_name = $('#logo_name').val();
+      // var c_e_date = $('#c_e_date').val();
+      // //var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
+      // var logo_name = $('#logo_name').val();
       
-      if(c_name=='' || c_s_date=='' || c_e_date=='' || file=='')
-      {
+      // if(c_name=='' || c_s_date=='' || c_e_date=='' || file=='')
+      // {
+      //   $('#add_campaign').prop('disabled', false);
+      //   $("#add_campaign").text('Save');
+
+      //   a.show_error_msg =true;
+      //   return false;
+      // }
+
+      var ext = $('#logo_name').val().split('.').pop().toLowerCase();
+      if($.inArray(ext, ['jpg','jpeg']) == -1) {
+        $("#show_message").slideDown();
+        $("#error_div").html("Please upload only .jpg /.jpeg image.");
+        $("#error_div").show();
+        $("#success_div").hide();
+
         $('#add_campaign').prop('disabled', false);
         $("#add_campaign").text('Save');
-
-        a.show_error_msg =true;
         return false;
       }
+
       var uploadUrl = "../campaign/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
           var c_s_date=$('#c_s_date').val();
           var c_e_date=$('#c_e_date').val();
+
+          if(c_s_date=='' || c_e_date=='' || $("#c_name").val()=='')
+          {
+              $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#error_div").html("Please insert all field.");
+              $("#error_div").show();
+              $("#success_div").hide();
+
+              $('#add_campaign').prop('disabled', false);
+              $("#add_campaign").text('Save');
+              return false;
+          }
+
           a.Campaign.campaign_image = logo_name; 
           a.Campaign.c_s_date = c_s_date; 
           a.Campaign.c_e_date = c_e_date; 
@@ -103,23 +130,33 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
               var main_site_url=$("#main_site_url").val();
                                     
               var redirect_url=main_site_url+'/user/dashboard#/campaign/list';                                   
-              window.location.href = redirect_url;                        
+             // window.location.href = redirect_url;  
+
+              $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+              $("#success_div").show();              
+
+              setTimeout(function() { 
+                window.location.href = redirect_url; 
+              }, 5000);                       
             }
             else if(response=='image_not')
             {
-             // window.location.href = redirect_url;  
-              a.show_success_msg =false;
-              a.show_error_msg =false;
-              a.show_error_msg_img =true;
-              a.Campaign={};
+              $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#error_div").html("Unable to upload image. Please try again.");
+              $("#error_div").show();
+              $("#success_div").hide();
+              return false; 
             }
             else
             {
-              //window.location.href = redirect_url;  
-              a.show_success_msg =false;
-              a.show_error_msg =true;
-              a.show_error_msg_img =false;
-              a.Campaign={};
+              $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#error_div").html("Please insert all field.");
+              $("#error_div").show();
+              $("#success_div").hide(); 
             }
             $('#add_campaign').prop('disabled', false);
             $("#add_campaign").text('Save');

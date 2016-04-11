@@ -64,7 +64,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
     a.addInventory = function(){             
       var file = a.myFile; 
       //console.log('data :: '+JSON.stringify(a.Inventory, null, 4));   
-     
+      $('#add_inventory').prop('disabled', true);
+      $("#add_inventory").text('Saving..');     
       //var inventory_image = $('#inventory_image').val() ;
       //alert(inventory_image);
      // alert(a.Inventory.inventory_name);
@@ -84,9 +85,12 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
       var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
       if($.inArray(ext, ['jpg','jpeg']) == -1) {
         $("#show_message").slideDown();
-        $("#error_div").html("Please upload only .jpg/.jpeg image.");
+        $("#error_div").html("Please upload only .jpg /.jpeg image.");
         $("#error_div").show();
         $("#success_div").hide();
+
+        $('#add_inventory').prop('disabled', false);
+        $("#add_inventory").text('Save');
         return false;
       }
       
@@ -100,6 +104,9 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
               $("#error_div").html("Please insert all fields.");
               $("#error_div").show();
               $("#success_div").hide();
+
+              $('#add_inventory').prop('disabled', false);
+              $("#add_inventory").text('Save');
               return false;
           }
 
@@ -140,8 +147,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
               $("#error_div").show();
               $("#success_div").hide();              
             }
-          //  $('#add_inventory').prop('disabled', false);
-            //$("#add_inventory").text('Save');
+            $('#add_inventory').prop('disabled', false);
+            $("#add_inventory").text('Save');
           })
       });
     };
