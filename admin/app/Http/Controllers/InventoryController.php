@@ -118,45 +118,63 @@ class InventoryController extends Controller {
 	
 	public function postAddlogo(Request $request)
 	{
-		$inventory_name=$request->input('inventory_name');
-		$sell_price=$request->input('sell_price');
-		$cost=$request->input('cost');
-		$inventory_image=$request->input('inventory_image');
-		//dd("a");
 		//dd($request->all());
-		// Get current logged in user ID
-		$created_by=Auth::user()->id;
+		$rules = array(
+				'inventory_name'     => 'required',  
+				'sell_price'         => 'required',   
+				'cost'         		 => 'required',
+				'inventory_image'    => 'required'
 
-		if($inventory_name=="" || $sell_price=="" || $cost=="")
-		{
-			return 'error';
+			);	
+		$validator = Validator::make($request->all(), $rules);
+		if ($validator->fails()) {				
+			$messages = $validator->messages();
+			// redirect our user back to the form with the errors from the validator			
+			return redirect()->back()
+							 ->withInput()
+							 ->withErrors($validator);
 		}
 		else
 		{
-			$original_path= env('UPLOADS')."/inventory/original"."/".$inventory_image;
-			if(file_exists($original_path))
+			$inventory_name=$request->input('inventory_name');
+			$sell_price=$request->input('sell_price');
+			$cost=$request->input('cost');
+			$inventory_image=$request->input('inventory_image');
+			//dd("a");
+			//dd($request->all());
+			// Get current logged in user ID
+			$created_by=Auth::user()->id;
+
+			if($inventory_name=="" || $sell_price=="" || $cost=="")
 			{
-				$campaign = new Inventory();
-				$campaign->inventory_name 		= $inventory_name;	
-				$campaign->sell_price 		= $sell_price;
-				$campaign->cost 		= $cost;	
-				$campaign->inventory_image 		= $inventory_image;		
-				$campaign->status 			= 1;			
-				$campaign->created_by 		= $created_by;
-				if($campaign->save())
-				{
-					return 'success';
-				}
-				else
-				{
-					return 'error';
-				}
+				return 'error';
 			}
 			else
 			{
-				return 'image_not';
-			}
+				$original_path= env('UPLOADS')."/inventory/original"."/".$inventory_image;
+				if(file_exists($original_path))
+				{
+					$campaign = new Inventory();
+					$campaign->inventory_name 		= $inventory_name;	
+					$campaign->sell_price 		= $sell_price;
+					$campaign->cost 		= $cost;	
+					$campaign->inventory_image 		= $inventory_image;		
+					$campaign->status 			= 1;			
+					$campaign->created_by 		= $created_by;
+					if($campaign->save())
+					{
+						return 'success';
+					}
+					else
+					{
+						return 'error';
+					}
+				}
+				else
+				{
+					return 'image_not';
+				}
+			} //
 		}
-		
 	}
 }

@@ -42,46 +42,67 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
     //$("#error_msg").hide('500');
     //alert(a.addInventory);
    // $('#add_inventory').prop('disabled', true);
-
+   //alert("b");
+   //$('input[type="submit"]').prop('disabled', true);
+  //$('#add_inventory').prop('disabled', true);
+  //$('#sell_price').keyup(function() {
+  //    if($(this).val() != '') {
+  //       $('#add_inventory').prop('disabled', false);
+  //    }
+  // });
+  
+  //var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
+  //if($.inArray(ext, ['jpg','jpeg']) == -1) {
+  //    alert('invalid extension!');
+  //}
+  
    x.post("../inventory/list").success(function(data_response){              
         a.inventory_details = data_response; 
         a.file_path=site_path;  
     });           
   
     a.addInventory = function(){             
-      var file = a.myFile;
-     // alert("p");
-     // a.Inventory = [];
-     // if(a.Inventory=='undefined')
+      var file = a.myFile; 
+      //console.log('data :: '+JSON.stringify(a.Inventory, null, 4));   
+     
+      //var inventory_image = $('#inventory_image').val() ;
+      //alert(inventory_image);
+     // alert(a.Inventory.inventory_name);
+     // alert(a.Inventory.sell_price);
+     // alert(a.Inventory.cost);
+      //if(a.Inventory.inventory_name=='undefined' || a.Inventory.sell_price=='undefined' || a.Inventory.cost =='undefined')
       //{
-      //  alert("a");
-      //  return false;
-     // }
-      //
-    //  $('#add_inventory').prop('disabled', true);
-    //  $("#add_inventory").text('Saving..');      
-
-      // var inventory_name = $('#inventory_name').val();
-      // var sell_price = $('#sell_price').val();
-      // var cost = $('#cost').val();
-     //  var inventory_image = $('#inventory_image').val();
-     //  a.Inventory.inventory_image = inventory_image; 
-      console.log('data :: '+JSON.stringify(a.Inventory, null, 4));
+        //$("#success_div").html("Data inserted successfully.");
+        //$("#msg_section").slideDown();
+        //$("#error_div").hide();
+      //  alert("ap");
+      //  $("#show_message").slideDown();
+      //  $("#success_div").html("Please insert all field.");
+      //  $("#success_div").show();
+      //}
+      //alert(a.Inventory.);
+      var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
+      if($.inArray(ext, ['jpg','jpeg']) == -1) {
+        $("#show_message").slideDown();
+        $("#error_div").html("Please upload only .jpg/.jpeg image.");
+        $("#error_div").show();
+        $("#success_div").hide();
+        return false;
+      }
       
-      // if(a.Inventory.inventory_name=='' || a.Inventory.sell_price=='' || a.Inventory.cost=='' || a.Inventory.inventory_image=='')
-      // {
-        //  $("#error_div").html("Please insert all field.");
-        //      $("#msg_section").slideDown();
-        //      $("#success_div").hide();
-         // alert("a");
-      //   $('#add_inventory').prop('disabled', false);
-      //   $("#add_inventory").text('Save');
 
-      //   a.show_error_msg =true;
-      //   return false;
-      // }
       var uploadUrl = "../inventory/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, a.Inventory).then(function(fdata){
+          if($("#inventory_name").val()=='' || $("#sell_price").val()=='' || $("#cost").val()=='')
+          {
+              $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#error_div").html("Please insert all fields.");
+              $("#error_div").show();
+              $("#success_div").hide();
+              return false;
+          }
+
           var logo_name = fdata.data;
           a.Inventory.inventory_image = logo_name; 
           var main_site_url=$('#main_site_url').val();
@@ -93,49 +114,31 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
                                     
               var redirect_url=main_site_url+'/user/dashboard#/inventory/list';  
 
-              
-              $("#success_div").html("Data inserted successfully.");
-              $("#msg_section").slideDown();
               $("#error_div").hide();
+              $("#show_message").slideDown();
+              $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+              $("#success_div").show();              
 
               setTimeout(function() { 
                 window.location.href = redirect_url; 
               }, 5000); 
-
-             // setTimeout("window.location.href = "+, 2000);
-
-             // window.location.href = redirect_url; 
-              //a.show_success_msg =true;
-              //a.show_error_msg =false;
-              //a.show_error_msg_img =false;
-              //a.Inventory={};
             }
             else if(response=='image_not')
             {
-              
+              $("#error_div").hide();
+              $("#show_message").slideDown();
               $("#error_div").html("Unable to upload image. Please try again.");
-              $("#msg_section").slideDown();
+              $("#error_div").show();
               $("#success_div").hide();
-
-              
-              
-             // alert("A");
-             // a.show_success_msg =false;
-             // a.show_error_msg =false;
-             // a.show_error_msg_img =true;
-             // a.Inventory={};
+              return false;              
             }
             else
             {
-              alert("a");
-             // a.show_success_msg =false;
-              //a.show_error_msg =true;
-              //a.show_error_msg_img =false;
-              //a.Inventory={};
-             
+              $("#error_div").hide();
+              $("#show_message").slideDown();
               $("#error_div").html("Please insert all field.");
-              $("#msg_section").slideDown();
-              $("#success_div").hide();
+              $("#error_div").show();
+              $("#success_div").hide();              
             }
           //  $('#add_inventory').prop('disabled', false);
             //$("#add_inventory").text('Save');
