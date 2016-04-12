@@ -591,8 +591,9 @@ function() {
 
                var uploadUrl = "../admin/dashboard/uploadlogo";
 
-               // alert(company_id);
-               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );                            ;
+                
+               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer ); 
+                                          ;
             };
             a.delete_logo=function(itemId){ 
 
@@ -705,8 +706,10 @@ function() {
                  var file = a.myFile;  
                  var uploadUrl = "../admin/dashboard/uploadlogo";
 
-               // alert(company_id);
-               fu.uploadFileToUrl(file, uploadUrl, a.Logo );     
+               // alert(a.Logo);
+                var logo_name=$("#logo_name").val();
+               fu.uploadFileToUrl(file, uploadUrl, logo_name ); 
+
 
 
 
@@ -749,7 +752,8 @@ function() {
 
         function a(h) {
 
-            this.uploadFileToUrl = function(file, uploadUrl, data){               
+            this.uploadFileToUrl = function(file, uploadUrl, data){  
+           // alert(file+'---'+uploadUrl+'---'+data);             
                var fd = new FormData();
                fd.append('file', file);              
                h.post(uploadUrl, fd, {
@@ -758,12 +762,14 @@ function() {
                   data:data
                })
             
-               .success(function(response){                   
+               .success(function(response){   
+              // alert("a");                   
                    var company_id =$("#company_id").val();
                    if(!company_id)
                    {
                        company_id=0;
                    }
+
                    var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
                        //alert(response_back.response);
@@ -816,7 +822,8 @@ function() {
                })
             
                .error(function(){
-                $("#show_error_msg").show();
+                alert("as");   
+               // $("#show_error_msg").show();
                });
             }
         }

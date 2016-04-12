@@ -228,29 +228,8 @@ class DashboardController extends Controller {
 		move_uploaded_file($file_ori, "$original_path$new_file_name");
 		
 		$obj->createThumbnail($original_path,$thumb_path,env('THUMB_SIZE'));
-		$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));
-
+		$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));		
 		
-		//$user = new Logo();
-		//$user->logo_name 		= $new_file_name;	
-		//$user->logo_text 		= $request->input('logo_text');		
-		//$user->status 			= 1;			
-		//$user->uploaded_by 		= 1;
-		//$user->save();
-
-		//return 'success';		
-	//	exit;	
-		//echo "aaaaa:".$request->input('logo_name');
-		//dd($request->all());
-		//echo $_FILES[ 'file' ][ 'tmp_name' ]."A<br>";
-		//echo $_FILES[ 'file' ][ 'name' ];
-		//exit;
-		   // $tempPath = $_FILES[ 'file' ][ 'tmp_name' ];
-		   // $uploadPath = '../uploads' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
-		  //  move_uploaded_file( $tempPath, $uploadPath );
-		  //  $answer = array( 'answer' => 'File transfer completed' );
-		  //  $json = json_encode( $answer );
-		  //  echo $json;
 		return $new_file_name;
 
 	}
