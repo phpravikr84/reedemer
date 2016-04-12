@@ -36,24 +36,22 @@
             <div class="demo-grid-ruler mdl-grid">
               <div class="mdl-cell border-box mdl-cell--12-col">
                 Search for my logo
-                <input ng-model="Redeemer.logo_text"  type="text" id="filter" placeholder="Company Name" class="input-field" />
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    Search
-                  </button>   
-                  <span id="filter-count"></span>            
+                <input ng-model="searchText"  type="text" placeholder="Company Name" class="input-field" />
+                     
+                  <div id="filter-count"></div>            
               </div>            
             </div>
             <div class="demo-grid-2 mdl-grid">              
               <div class="mdl-cell border-box mdl-cell--12-col">
                 <div class="demo-grid-ruler mdl-grid">
-                  <div class="mdl-cell border-box mdl-cell--3-col searchlist" ng-repeat="logo in logo_details"  >                    
-                    <span>
+                  <div class="mdl-cell border-box mdl-cell--3-col searchlist" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }"  >                    
+                    <div style="height:80px;overflow:hidden;">
                       <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
-                    </span><br/>
-                    <span>
+                    </div><br/>
+                    <div>
                       <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
                       <strong>{{logo.logo_text}}</strong>
-                    </span>
+                    </div>
                   </div>
                 </div>              
               </div>

@@ -674,6 +674,7 @@ function() {
             //a.cnames = [];
            // a.logo_details = [];
             var site_path=$("#site_path").val();
+            a.searchText   = '';     // set the default search/filter term
           //  a.saveButtonText = "Save user";
            // a.isDisabled = false;
           // alert(d_path);
@@ -683,29 +684,7 @@ function() {
            $("#logo_details_div").hide();
            $("#loading_div").hide();
            //Live Search
-            $("#filter").keyup(function(){
- 
-        // Retrieve the input field text and reset the count to zero
-        var filter = $(this).val(), count = 0;
- 
-        // Loop through the comment list
-        $(".searchlist").each(function(){
- 
-            // If the list item does not contain the text phrase fade it out
-            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-                $(this).fadeOut();
- 
-            // Show the list item if the phrase matches and increase the count by 1
-            } else {
-                $(this).show();
-                count++;
-            }
-        });
- 
-        // Update the count
-        var numberItems = count;
-        $("#filter-count").text("Total = "+count);
-    });
+           
            //Live search
             x.get("../admin/dashboard/alllogo").success(function(data_response){              
                // alert(data_response);
