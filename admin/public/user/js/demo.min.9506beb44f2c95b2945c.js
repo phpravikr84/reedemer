@@ -670,86 +670,46 @@ function() {
         "use strict";
 
         function a(a, b, c, d, x, fu) {          
-           // a.dataLength={filtered:[]};
-            //a.cnames = [];
-           // a.logo_details = [];
             var site_path=$("#site_path").val();
-            a.searchText   = '';     // set the default search/filter term
-          //  a.saveButtonText = "Save user";
-           // a.isDisabled = false;
-          // alert(d_path);
-         // alert("a");
-           //$('#upload_button').prop('disabled', false);
-           //$("#upload_button").text('Save user');
-           $("#logo_details_div").hide();
-           $("#loading_div").hide();
-           //Live Search
-           
-           //Live search
+            a.searchText   = '';     // set the default search/filter term          
+            $("#logo_details_div").hide();
+            $("#loading_div").hide();           
             x.get("../admin/dashboard/alllogo").success(function(data_response){              
-               // alert(data_response);
                 a.logo_details = data_response;
-                a.file_path=site_path;
-                 //alert(data_response);
-                //console.log('data :: '+JSON.stringify(data_response, null, 4));
+                a.file_path=site_path;                
             }); 
 
-             a.show_rating=function(itemId){ 
-               // alert(itemId); 
-               // $('#rate').hide(); 
+             a.show_rating=function(itemId){                
                var main_site_url=$('#main_site_url').val();
                $("#loading_div").show();  
                $("#rating_div").hide(); 
                $("#logo_details_div").hide(); 
-               //$("#loading_div").hide(); 
-               //return false;
-               x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){              
-                   // alert(data_response[0].tracking_rating);
-                   // a.logo_details = data_response;
-                   // a.file_path=site_path;
-                     //alert(data_response);
-                   // console.log('data :: '+JSON.stringify(data_response.id, null, 4));
-                   //  console.log('data Id :: '+JSON.stringify(data_response.id, null, 4));
-                  // var tracking_rating = data_response[0].tracking_rating;
-                   $("#logo_details_div").show();
-                   $("#loading_div").hide();  
-                   $("#rating_div").show(); 
-
-                   a.tracking_rating=data_response[0].tracking_rating;
-                   a.logo_name=data_response[0].logo_name;
-
-                   // $("#rateYo").rateYo({
-                   //    rating: tracking_rating
-                   // });
-                   //$('#rate').hide();
-                  // $('#rate').show();
-                   //setInterval(
-                   // function() {
-                   // alert("A");
-                       // $('#rate').reload();
-                         //var p=Math.floor(Math.random() * 5) + 1  ;
-                         //alert(p);
-                            $( "#rateYo" ).hide();
-                            $( "#rating_div" ).after( '<div id="rateYo"></div>' );
-                            $("#rateYo").rateYo({
-                                rating: a.tracking_rating
-                            });
-
-                   // }, 4000); 
-
-                  // setInterval(
-                  //   function() {
-                  //       $('#rate').load().fadeIn("slow");
-                         
-                  //           $("#rateYo").rateYo({
-                  //               rating: tracking_rating
-                  //           });
-                  //   }, 4000); 
-
-
-      
-
+               
+               x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){
+                    $("#logo_details_div").show();
+                    $("#loading_div").hide();  
+                    $("#rating_div").show(); 
+                    a.tracking_rating=data_response[0].tracking_rating;
+                    a.logo_name=data_response[0].logo_name;                   
+                    $( "#rateYo" ).hide();
+                    $( "#rating_div" ).after( '<div id="rateYo"></div>' );
+                    $("#rateYo").rateYo({
+                        rating: a.tracking_rating
+                    });
                });         
+            };
+
+
+
+            a.add_logo = function(){
+                 var file = a.myFile;  
+                 var uploadUrl = "../admin/dashboard/uploadlogo";
+
+               // alert(company_id);
+               fu.uploadFileToUrl(file, uploadUrl, a.Logo );     
+
+
+
             };
            
         }
