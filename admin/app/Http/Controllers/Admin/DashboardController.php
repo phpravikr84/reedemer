@@ -376,6 +376,42 @@ class DashboardController extends Controller {
 		}
 	}
 
+	public function getAlllogo()
+	{		
+		$logo_details = Logo::orderBy('id','DESC')
+						->get();
+		
+
+		$logo_arr=array();	
+		$company_name="N/A";
+		$target_id=NULL;
+		foreach($logo_details as $logo_details)
+		{	
+
+			if($logo_details['reedemer_id'] >0)
+			{
+				$company_details=User::find($logo_details['reedemer_id']);
+				$company_name=$company_details['company_name'];
+			}			
+
+			$logo_arr[]=array(
+						'id'=>$logo_details['id'],
+						'reedemer_id'=>$logo_details['reedemer_id'],
+						'tracking_rating'=>$logo_details['tracking_rating'],
+						'reedemer_company'=>$company_name,
+						'logo_name'=>$logo_details['logo_name'],
+						'logo_text'=>$logo_details['logo_text'],
+						'status'=>$logo_details['status'],
+						'uploaded_by'=>Auth::user()->id,
+						'created_at'=>$logo_details['created_at'],
+						'updated_at'=>$logo_details['updated_at'],
+					  );
+		}
+		$logo_json=json_encode($logo_arr);		
+		return $logo_json;		
+			
+	}
+
 	public function getDeletereedemer($id)
 	{
 		$user = User::find($id); 		

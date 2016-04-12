@@ -49,3 +49,17 @@
 .center{
   text-align: center !important;  
 }
+.border-box{
+    border:1px solid #bdbdbd;
+    background-color: transparent !important;
+    box-sizing: border-box;
+    color: #bdbdbd !important;
+    height: auto!important;
+    padding-left: 8px !important;
+    padding-top: 4px !important;
+}
+.input-field{
+    padding:5px;
+    margin:5px;
+    width: 40%;
+}

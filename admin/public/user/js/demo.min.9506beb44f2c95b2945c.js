@@ -547,6 +547,7 @@ function() {
           //  a.saveButtonText = "Save user";
            // a.isDisabled = false;
           // alert(d_path);
+          //alert("a");
            $('#upload_button').prop('disabled', false);
            $("#upload_button").text('Save user');
             x.post("../admin/dashboard/logo").success(function(data_response){              
@@ -656,7 +657,45 @@ function() {
         }
 
         angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
-    }(),    
+    }(),
+
+
+
+
+    function() {
+        "use strict";
+
+        function a(a, b, c, d, x, fu) {          
+           // a.dataLength={filtered:[]};
+            //a.cnames = [];
+           // a.logo_details = [];
+            var site_path=$("#site_path").val();
+          //  a.saveButtonText = "Save user";
+           // a.isDisabled = false;
+          // alert(d_path);
+         // alert("a");
+           //$('#upload_button').prop('disabled', false);
+           //$("#upload_button").text('Save user');
+            x.get("../admin/dashboard/alllogo").success(function(data_response){              
+               // alert(data_response);
+                a.logo_details = data_response;
+                a.file_path=site_path;
+                 //alert(data_response);
+                //console.log('data :: '+JSON.stringify(data_response, null, 4));
+            }); 
+           
+        }
+
+        angular.module("redeemar-app").controller("LogoController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
+    }(),
+
+
+
+
+
+
+
+
     function() {
         "use strict";
 
