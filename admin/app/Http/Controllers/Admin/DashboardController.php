@@ -83,11 +83,11 @@ class DashboardController extends Controller {
 		//dd($id);
 		if($type!=1)
 		{
-			$user=User::where('id',$id)->get();	
+			$user=User::where('id',$id)->orderBy('id','DESC')->get();	
 		}
 		else
 		{
-			$user=User::where('type',2)->get();		
+			$user=User::where('type',2)->orderBy('id','DESC')->get();		
 					
 		}
 		return $user;
@@ -155,7 +155,11 @@ class DashboardController extends Controller {
 		{
 			return 'success';
 		}*/
-
+		if($request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
+		{
+			return 'error';
+			exit;
+		}
 		$rules = array(
 				'company_name'     => 'required',  
 				'email'            => 'required|email|unique:users',   
@@ -169,7 +173,7 @@ class DashboardController extends Controller {
 			/*return redirect()->back()
 							 ->withInput($request->only('company_name'))
 							 ->withErrors('Please insert all field');*/
-			return 'error';		
+			return 'email_exists';		
 			exit;	
 		} else {
 			// create the data for our user
