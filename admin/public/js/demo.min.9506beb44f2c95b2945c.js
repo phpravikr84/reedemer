@@ -580,22 +580,54 @@ function() {
 
                x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
                   
+                  //alert(response);
                   if(response=="success")
                   {
-                    a.show_success_msg=true;
-                    a.Redeemer.company_name = null; 
-                    a.Redeemer.email = null;               
-                    a.Redeemer.password = null;  
+                    //a.show_success_msg=true;
+                    //a.Redeemer.company_name = null; 
+                    //a.Redeemer.email = null;               
+                    //a.Redeemer.password = null;  
+
+                    //$('#add_reedemer').prop('disabled', false);
+                    //$("#add_reedemer").text('Save User');
+                    var main_site_url=$("#main_site_url").val();
+                                    
+                    var redirect_url=main_site_url+'/admin/dashboard#/tables/list'; 
+
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+                    $("#success_div").show();              
+
+                    setTimeout(function() { 
+                    window.location.href = redirect_url; 
+                    }, 5000);
+                  }
+                  else if(response=="email_exists")
+                  {                    
+                    //a.show_error_msg=true;
+                    //$('#add_reedemer').prop('disabled', false);
+                    //$("#add_reedemer").text('Save User'); 
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Email already exists.Please try with diffrent email.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
 
                     $('#add_reedemer').prop('disabled', false);
-                    $("#add_reedemer").text('Save User');  
+                    $("#add_reedemer").text('Save user');     
                   }
                   else
-                  {                    
-                    a.show_error_msg=true;
+                {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please insert all field.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
                     $('#add_reedemer').prop('disabled', false);
-                    $("#add_reedemer").text('Save User'); 
-                  }
+                    $("#add_reedemer").text('Save user');     
+                }
                })
             }
 
