@@ -56,7 +56,38 @@
                 </div>              
               </div>
               <div class="demo-grid-2 mdl-grid">
-                <div class="mdl-cell border-box border-box mdl-cell--6-col">6</div>
+                <div class="mdl-cell border-box border-box mdl-cell--6-col">
+                  <div><h3>Logo Creator</h3></div>
+                  <div>
+                    <div class="center"><h3>Upload File</h3></div>
+                    <div>
+                      <p class="small"><small>JPG/JPEG formats</small></p>
+                      <p class="small"><small>50MB Max File Size</small></p>                      
+                    </div>
+                    <div>
+                      <p>
+                        <input type = "file" ng-model="Campaign.logo_name" file-model = "myFile" id="logo_name" />
+                      </p>
+                      <p><hr></p>
+                      <p class="small"> 
+                        By uploading the file, you certify that you own the copyright for these photos or are authorized by the 
+                          owner to make a photo-to-canvas reproduction. 
+                      </p>  
+                      <p class="small">                        
+                          <strong>My logo does not receive a minimum star rating.</strong>        
+                      </p>
+                      <p class="small" style="vertical-align:top;">                        
+                          <input type="checkbox" /><strong>Allow redeemar to professionaly enhance my logo for best result</strong>
+                      </p> 
+                      <div class="m-t-30 pull-right" style="margin:0 5px 5px 0;">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                          Next
+                        </button>
+                      </div>            
+                    </div>                    
+                   
+                  </div> 
+                </div>
                 <div class="mdl-cell border-box mdl-cell--6-col" id="logo_details_div">
                   <div class="demo-grid-ruler mdl-grid center">
                     <div>

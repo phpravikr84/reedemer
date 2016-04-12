@@ -58,8 +58,15 @@
     padding-left: 8px !important;
     padding-top: 4px !important;
 }
+
 .input-field{
     padding:5px;
     margin:5px;
     width: 40%;
+}
+
+.small{
+    font-size:10px;
+    font-weight:normal;
+    color:#4C4C4C;
 }
