@@ -76,6 +76,10 @@
        // });      
     // });
 
+  $(document).ready(function(){
+    //alert("A");
+    
+});
   </script>
   @yield('scripts')
 </body>

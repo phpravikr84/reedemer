@@ -680,6 +680,33 @@ function() {
          // alert("a");
            //$('#upload_button').prop('disabled', false);
            //$("#upload_button").text('Save user');
+           $("#logo_details_div").hide();
+           $("#loading_div").hide();
+           //Live Search
+            $("#filter").keyup(function(){
+ 
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0;
+ 
+        // Loop through the comment list
+        $(".searchlist").each(function(){
+ 
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).fadeOut();
+ 
+            // Show the list item if the phrase matches and increase the count by 1
+            } else {
+                $(this).show();
+                count++;
+            }
+        });
+ 
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text("Total = "+count);
+    });
+           //Live search
             x.get("../admin/dashboard/alllogo").success(function(data_response){              
                // alert(data_response);
                 a.logo_details = data_response;
@@ -693,7 +720,9 @@ function() {
                // $('#rate').hide(); 
                var main_site_url=$('#main_site_url').val();
                $("#loading_div").show();  
-               $("#rating_div").hide();   
+               $("#rating_div").hide(); 
+               $("#logo_details_div").hide(); 
+               //$("#loading_div").hide(); 
                //return false;
                x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){              
                    // alert(data_response[0].tracking_rating);
@@ -703,7 +732,7 @@ function() {
                    // console.log('data :: '+JSON.stringify(data_response.id, null, 4));
                    //  console.log('data Id :: '+JSON.stringify(data_response.id, null, 4));
                   // var tracking_rating = data_response[0].tracking_rating;
-
+                   $("#logo_details_div").show();
                    $("#loading_div").hide();  
                    $("#rating_div").show(); 
 
