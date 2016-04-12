@@ -555,7 +555,9 @@ function() {
                 a.file_path=site_path;
                  //alert(data_response);
                 //console.log('data :: '+JSON.stringify(data_response, null, 4));
-            });           
+            });  
+
+            
           
             a.uploadFile = function(){
                var file = a.myFile;              
@@ -611,6 +613,8 @@ function() {
                })
              }
             }
+
+
             
             x.post("../admin/dashboard/show").success(function(response){
             
@@ -683,6 +687,62 @@ function() {
                  //alert(data_response);
                 //console.log('data :: '+JSON.stringify(data_response, null, 4));
             }); 
+
+             a.show_rating=function(itemId){ 
+               // alert(itemId); 
+               // $('#rate').hide(); 
+               var main_site_url=$('#main_site_url').val();
+               $("#loading_div").show();  
+               $("#rating_div").hide();   
+               //return false;
+               x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){              
+                   // alert(data_response[0].tracking_rating);
+                   // a.logo_details = data_response;
+                   // a.file_path=site_path;
+                     //alert(data_response);
+                   // console.log('data :: '+JSON.stringify(data_response.id, null, 4));
+                   //  console.log('data Id :: '+JSON.stringify(data_response.id, null, 4));
+                  // var tracking_rating = data_response[0].tracking_rating;
+
+                   $("#loading_div").hide();  
+                   $("#rating_div").show(); 
+
+                   a.tracking_rating=data_response[0].tracking_rating;
+                   a.logo_name=data_response[0].logo_name;
+
+                   // $("#rateYo").rateYo({
+                   //    rating: tracking_rating
+                   // });
+                   //$('#rate').hide();
+                  // $('#rate').show();
+                   //setInterval(
+                   // function() {
+                   // alert("A");
+                       // $('#rate').reload();
+                         //var p=Math.floor(Math.random() * 5) + 1  ;
+                         //alert(p);
+                            $( "#rateYo" ).hide();
+                            $( "#rating_div" ).after( '<div id="rateYo"></div>' );
+                            $("#rateYo").rateYo({
+                                rating: a.tracking_rating
+                            });
+
+                   // }, 4000); 
+
+                  // setInterval(
+                  //   function() {
+                  //       $('#rate').load().fadeIn("slow");
+                         
+                  //           $("#rateYo").rateYo({
+                  //               rating: tracking_rating
+                  //           });
+                  //   }, 4000); 
+
+
+      
+
+               });         
+            };
            
         }
 

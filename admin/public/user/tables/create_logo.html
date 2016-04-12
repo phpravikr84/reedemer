@@ -37,6 +37,9 @@
               <div class="mdl-cell border-box mdl-cell--12-col">
                 Search for my logo
                 <input ng-model="Redeemer.logo_text"  type="text" id="logo_text" placeholder="Company Name" class="input-field" />
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Search
+                  </button>               
               </div>            
             </div>
             <div class="demo-grid-2 mdl-grid">              
@@ -46,13 +49,30 @@
                     <span>
                       <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
                     </span><br/>
-                    <span>{{logo.logo_text}}</span>
+                    <span>
+                      <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
+                      <strong>{{logo.logo_text}}</strong>
+                    </span>
                   </div>
                 </div>              
               </div>
               <div class="demo-grid-2 mdl-grid">
                 <div class="mdl-cell border-box border-box mdl-cell--6-col">6</div>
-                <div class="mdl-cell border-box mdl-cell--6-col">4</div>           
+                <div class="mdl-cell border-box mdl-cell--6-col">
+                  <div class="demo-grid-ruler mdl-grid center">
+                  <div id="">
+                    <span>Congratulations !</span>
+                    <span>We have found your logo {{tracking_rating}}</span>
+                    <span>
+                      <img src="{{file_path}}../uploads/original/{{logo_name}}" width="150" />
+                    </span>
+                  </div>
+                  <div id="loading_div" class="demo-grid-ruler mdl-grid center">
+                    <img src="{{file_path}}images/loader.gif" />
+                  </div>
+                  <div id="rating_div" class=" center"> </div>
+                  <div>
+                </div>           
               </div>            
           </div>
         </div>
@@ -60,3 +80,6 @@
     </div>
   </div>  
 </section>
+<script>
+
+</script>

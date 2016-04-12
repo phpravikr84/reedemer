@@ -52,14 +52,21 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-  <script>
-  //  $(function () {
-   // alert("a");
-     // $("#rateYo").rateYo({
-     ////   rating: 3.6
-     // });
+    <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
+    <script src="{{ asset('/user/js/rating.js') }}"></script>
 
-  //  });
+
+  <script>
+ //  $(document).ready(function(){  
+ //  $(function () {
+ // alert("m");
+ //    $("#rateYo").rateYo({
+ //      rating: 3.6
+ //    });
+   
+ //  });
+ //  });
+
   </script>
   <script type="text/javascript">
     // $(document).ready(function(){  
