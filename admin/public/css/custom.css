@@ -68,5 +68,17 @@
 .small{
     font-size:10px;
     font-weight:normal;
-    color:#4C4C4C;
+    
+}
+
+#scroll {
+height:190px;
+margin:10px auto;
+overflow:auto;
+
+}
+
+#small_div {
+margin:20px 10px 0 10px;
+white-space:wrap;
 }

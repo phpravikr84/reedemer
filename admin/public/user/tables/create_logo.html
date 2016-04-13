@@ -37,8 +37,8 @@
             </div>
             <div class="demo-grid-2 mdl-grid">              
               <div class="mdl-cell border-box mdl-cell--12-col">
-                <div class="demo-grid-ruler mdl-grid">
-                  <div class="mdl-cell border-box mdl-cell--3-col searchlist" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }"  >                    
+                <div class="demo-grid-ruler mdl-grid" id="scroll">
+                  <div id="small_div" class="mdl-cell border-box mdl-cell--3-col searchlist" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }"  style="height:auto;"  >                    
                     <div style="height:80px;overflow:hidden;">
                       <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
                     </div><br/>
@@ -56,7 +56,7 @@
                     <div class="center"><h3>Upload File</h3></div>
                     <div>
                       <p class="small"><small>JPG/JPEG formats</small></p>
-                      <p class="small"><small>50MB Max File Size</small></p>                      
+                      <p class="small"><small>2 MB Max File Size</small></p>                      
                     </div>
                     <div>
                       <p>
@@ -74,13 +74,17 @@
                       <p class="small">                        
                           <strong>My logo does not receive a minimum star rating.</strong>        
                       </p>
-                      <p class="small" style="vertical-align:top;">                        
-                          <input type="checkbox" /><strong>Allow redeemar to professionaly enhance my logo for best result</strong>
+                      <p class="small" style="vertical-align:top;">     
+                                        
+                          <input type="checkbox" name="enhance_logo" id="enhance_logo" ng-model="Logo.enhance_logo" value="1" /><strong>Allow redeemar to professionaly enhance my logo for best result</strong>
+                        
                       </p> 
-                      <div class="m-t-30 pull-right" style="margin:0 5px 5px 0;">
-                        <button ng-click = "add_logo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                          Next
-                        </button>
+                      <div  class="m-t-30 pull-right" style="margin:0 5px 5px 0;">
+                        <div class="m-t-20">   
+                          <button id="add_logo"  ng-click = "add_logo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Next
+                          </button>
+                        </div>
                       </div>            
                     </div>                    
                    

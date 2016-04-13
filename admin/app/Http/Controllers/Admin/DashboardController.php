@@ -304,17 +304,19 @@ class DashboardController extends Controller {
 			
 	}
 
-	public function getAddlogo($logo_text,$image_name)
+	public function getAddlogo($logo_text,$image_name,$enhance_logo=0)
 	{		
 		$id=Auth::user()->id;
 		$type=Auth::user()->type;		
 		if($type==2)
 		{
 			$reedemer_id=$id;	
+			$status=0;
 		}
 		else
 		{
 			$reedemer_id=null;
+			$status=1;
 				
 		}
 
@@ -337,8 +339,9 @@ class DashboardController extends Controller {
 			$logo->target_id 		= $target_id;
 			$logo->logo_name 		= $image_name;	
 			$logo->logo_text 		= $logo_text;
-			$logo->status 			= 1;			
-			$logo->uploaded_by 		= 1;
+			$logo->status 			= $status;			
+			$logo->enhance_logo 	= $enhance_logo;
+			$logo->uploaded_by 		= $id;
 			if($logo->save())
 			{
 				$logo_id = $logo->id;
@@ -352,10 +355,21 @@ class DashboardController extends Controller {
 	}
 
 	public function getAlllogo()
-	{		
-		$logo_details = Logo::orderBy('id','DESC')
+	{
+		$id=Auth::user()->id;
+		$type=Auth::user()->type;		
+		if($type==2)
+		{
+			$logo_details = Logo::orderBy('id','DESC')
+						->where('status',1)
+						->get();	
+		}
+		else
+		{
+			$logo_details = Logo::orderBy('id','DESC')						
 						->get();
-		
+				
+		}		
 
 		$logo_arr=array();	
 		$company_name="N/A";
