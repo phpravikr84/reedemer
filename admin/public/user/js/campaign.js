@@ -147,7 +147,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
             {
               var main_site_url=$("#main_site_url").val();
                                     
-              var redirect_url=main_site_url+'/user/dashboard#/campaign/list';                                   
+              var redirect_url=main_site_url+'/dashboard#/tables/logo';                                   
              // window.location.href = redirect_url;  
 
               $("#error_div").hide();

@@ -23,30 +23,12 @@
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Add Logo</h2>
           </div>
-          <div class="p-l-20 p-r-20 p-b-20" id="show_success_msg" style="display:none">
-            <div class="alert alert-success">
-                Data inserted successfully
+          <div class="p-l-20 p-r-20 p-b-20" id="show_message" style="display:none">
+            <div id="success_div" class="alert alert-success">
+                
             </div>
-          </div>
-          <div class="p-l-20 p-r-20 p-b-20" id="show_error_msg" style="display:none">
-            <div class="alert alert-danger">
-                Please insert all field
-            </div>
-          </div>
-          
-          <div class="p-l-20 p-r-20 p-b-20" ng-if="show_success_msg">
-            <div class="alert alert-success">
-                Data inserted successfully
-            </div>
-          </div>
-          <div class="p-l-20 p-r-20 p-b-20" ng-if="show_error_msg">
-            <div class="alert alert-danger">
-                Please insert all field
-            </div>
-          </div>
-          <div class="p-l-20 p-r-20 p-b-20" id="image_error" style="display:none">
-            <div class="alert alert-danger">
-                Problem uploding your image. Please try with .jpg or .jpeg image and size should be within 2MB.
+             <div id="error_div" class="alert alert-danger">
+                
             </div>
           </div>
 

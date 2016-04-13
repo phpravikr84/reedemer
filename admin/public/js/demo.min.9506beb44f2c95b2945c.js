@@ -542,31 +542,20 @@ function() {
             a.logo_details = [];
             var site_path=$("#site_path").val();
            
+            // show all uploaded logo in admin panel
             x.post("../admin/dashboard/logo").success(function(data_response){              
-                a.logo_details = data_response;
-                // alert(site_path);
+                a.logo_details = data_response;                
                 a.file_path=site_path;
                 
             });
-
-             //x.get("../admin/dashboard/logo");              
-              //  a.logo_details = data_response;
-                // alert(data_response);
-            //});           
-          
+                  
+            // Upload logo by admin
             a.uploadFile = function(){
                var file = a.myFile;
                
             $('#upload_file').prop('disabled', true);
             $("#upload_file").text('Saving..');
-           // alert("p");
-            //return false;
-             // console.log('data :: '+JSON.stringify(a.Redeemer, null, 4));
-            //  console.log('image name :: '+JSON.stringify(a.myFile, null, 4));
-              // console.dir(file);
-              
                var uploadUrl = "../admin/dashboard/uploadlogo";
-
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
             };
 
@@ -664,8 +653,8 @@ function() {
                x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;   
                 //  alert(itemId);
-                alert("A");
-                return false;
+               // alert("A");
+               // return false;
                   $("#logo_"+itemId).hide('500');  
                   $("#msg_div").show('500');
                   $(".msg_remove").hide('500');
@@ -734,6 +723,7 @@ function() {
                   // {
                   //     company_id=0;
                   // }
+                  // var company_id=0;
                    var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+logo_text+"/"+response).success(function(response_back){
                         if(response_back.response=="success")
@@ -744,23 +734,18 @@ function() {
                             h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
                                 if(target.response=="success")
                                 {
-                                    if(target.rating >0)
-                                    {
-                                        $("#show_success_msg").show();
-                                        $("#image_error").hide('500');
-                                        $("#logo_text").val("");
-                                        $("#company_id").val("");
-                                        $("#logo_name").val("");   
-                                    }
-                                    else
-                                    {                                     
-                                      h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id);  
-                                    }
-                                    $("#show_success_msg").show();
-                                    $("#image_error").hide('500');
-                                    $("#logo_text").val("");
-                                    $("#company_id").val("");
-                                    $("#logo_name").val("");   
+                                    var main_site_url=$("#main_site_url").val();
+                                    var redirect_url=main_site_url+'/admin/dashboard#/tables/logo';                                                                         
+
+                                    $("#error_div").hide();
+                                    $("#show_message").slideDown();
+                                    $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+                                    $("#success_div").show();              
+                                    //alert(redirect_url);
+                                   // return false;
+                                    setTimeout(function() { 
+                                        window.location.href = redirect_url; 
+                                    }, 5000);   
                                 }
                            })   
                         }
