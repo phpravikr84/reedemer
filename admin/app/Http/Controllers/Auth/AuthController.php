@@ -53,7 +53,7 @@ class AuthController extends Controller {
 			//dd($this->auth->user()->type);		
 			if($this->auth->user()->type == '1')		
 			{	
-				return redirect()->intended( '/admin/dashboard' );
+				return redirect()->intended( '/dashboard' );
 			}
 			else 
 			{

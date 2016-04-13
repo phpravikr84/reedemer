@@ -40,7 +40,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
     a.searchText   = '';     // set the default search/filter term          
     $("#logo_details_div").hide();
     $("#loading_div").hide();           
-    x.get("../admin/dashboard/alllogo").success(function(data_response){              
+    x.get("../dashboard/alllogo").success(function(data_response){              
         a.logo_details = data_response;
         a.file_path=site_path;                
     });          
@@ -89,7 +89,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
       }
 
       
-      var uploadUrl = "../admin/dashboard/uploadlogo";  
+      var uploadUrl = "../dashboard/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, logo_name).then(function(fdata){
           var logo_name = fdata.data;
           var logo_text = a.Logo.logo_text;
@@ -104,7 +104,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
           //alert(enhance_logo);
           //return false;
 
-          x.get("../admin/dashboard/addlogo/"+logo_text+"/"+logo_name+"/"+enhance_logo).success(function(response_back){
+          x.get("../dashboard/addlogo/"+logo_text+"/"+logo_name+"/"+enhance_logo).success(function(response_back){
            // alert(response_back);
             console.log('data :: '+JSON.stringify(response_back, null, 4));  
             if(response_back.response=="success")
@@ -136,7 +136,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
        $("#rating_div").hide(); 
        $("#logo_details_div").hide(); 
        
-       x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){
+       x.get("../dashboard/logodetails/"+itemId).success(function(data_response){
             $("#logo_details_div").show();
             $("#loading_div").hide();  
             $("#rating_div").show(); 

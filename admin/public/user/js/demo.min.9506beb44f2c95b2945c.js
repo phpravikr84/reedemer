@@ -60,7 +60,7 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-            h.post("../admin/dashboard/userdetails")
+            h.post("../dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
             }); 
@@ -551,7 +551,7 @@ function() {
           //alert("a");
            $('#upload_button').prop('disabled', false);
            $("#upload_button").text('Save user');
-            x.post("../admin/dashboard/logo").success(function(data_response){              
+            x.post("../dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;
                 a.file_path=site_path;
                  //alert(data_response);
@@ -590,7 +590,7 @@ function() {
                   //return false;
                 }
 
-               var uploadUrl = "../admin/dashboard/uploadlogo";
+               var uploadUrl = "../dashboard/uploadlogo";
 
                 
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer ); 
@@ -609,7 +609,7 @@ function() {
                // alert(itemId);
              //  return false;
                        
-               x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
+               x.get("../dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;                 
                   window.location.reload();             
                })
@@ -618,7 +618,7 @@ function() {
 
 
             
-            x.post("../admin/dashboard/show").success(function(response){
+            x.post("../dashboard/show").success(function(response){
             
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                     firstname: response[g].company_name,
@@ -709,14 +709,14 @@ function() {
                    }
 
                    var logo_text =$("#logo_text").val();                   
-                   h.get("../admin/dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
+                   h.get("../dashboard/addlogo/"+company_id+"/"+logo_text+"/"+response).success(function(response_back){
                        //alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
                             
-                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                            h.get("../dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
                                 if(target.response=="success")
                                 {
                                     var main_site_url=$("#main_site_url").val();
