@@ -27,10 +27,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="{{ asset('/public/frontend/admin/css/material.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/frontend/admin/css/helpers.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/frontend/admin/css/login.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('/frontend/admin/css/material.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/frontend/admin/css/helpers.css') }}">
+  <link rel="stylesheet" href="{{ asset('/frontend/admin/css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 </head>
 <body>
 <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
@@ -38,8 +38,8 @@
   @yield('content')
 </div>
 
-<script src="{{ asset('/public/frontend/admin/js/material.min.js') }}"></script>
-<script src="{{ asset('/public/frontend/admin/js/material.min.js') }}"></script>
+<script src="{{ asset('/frontend/admin/js/material.min.js') }}"></script>
+<script src="{{ asset('/frontend/admin/js/material.min.js') }}"></script>
 
 @yield('scripts')
 </body>

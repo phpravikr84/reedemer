@@ -35,6 +35,6 @@ Route::controller('/cron', 'CronController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 
-	Route::controller('/dashboard','DashboardController'); 
+	Route::controller('/admin/dashboard','DashboardController'); 
 	
 });

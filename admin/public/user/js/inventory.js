@@ -175,7 +175,7 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
      }
     }
 
-    x.post("../dashboard/show").success(function(response){
+    x.post("../admin/dashboard/show").success(function(response){
     
     for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
             firstname: response[g].company_name,

@@ -11,10 +11,10 @@
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('/public/css/vendors.min.cc72de2f21cf6e67f523.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/css/custom.css') }}">
-  <link rel="stylesheet" href="{{ asset('/public/css/jquery.rateyo.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/vendors.min.cc72de2f21cf6e67f523.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/jquery.rateyo.css') }}">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <!-- IE Compatibility shims -->
   <!--[if lt IE 9]>
@@ -40,21 +40,21 @@
     
   </div>
   <input type="hidden" name="main_site_url" id="main_site_url" value="{{ url() }}" />
-  <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH_USER')}}"  />
+  <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />
   @yield('content')
  
-  <script src="{{ asset('/public/user/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
-  <script src="{{ asset('/public/user/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
-  <script src="{{ asset('/public/user/js/campaign.js') }}"></script>
-  <script src="{{ asset('/public/user/js/inventory.js') }}"></script>
-  <script src="{{ asset('/public/user/js/logo.js') }}"></script>
+  <script src="{{ asset('/user/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
+  <script src="{{ asset('/user/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
+  <script src="{{ asset('/user/js/campaign.js') }}"></script>
+  <script src="{{ asset('/user/js/inventory.js') }}"></script>
+  <script src="{{ asset('/user/js/logo.js') }}"></script>
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('/public/css/rating.css') }}">
-    <script src="{{ asset('/public/user/js/rating.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
+    <script src="{{ asset('/user/js/rating.js') }}"></script>
 
 
   <script>
