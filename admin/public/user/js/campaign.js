@@ -20,6 +20,7 @@ MyApp.factory("fileToUpload", ["$http", function(h){
       };
       if ( !promise ) {
         // $http returns a promise, which has a then function, which also returns a promise
+        // console.log('data :: '+JSON.stringify(postData, null, 4)); 
         promise = h.post(uploadUrl, fd, postData).success(function(response){          
            return response;
         }).error(function(){
@@ -91,22 +92,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
        $('#add_campaign').prop('disabled', true);
        $("#add_campaign").text('Saving..');      
 
-      // var c_name = $('#c_name').val();
-      // var c_s_date = $('#c_s_date').val();
-      // //var c_s_date = c_s_date_raw[2]+'-'+c_s_date_raw[0]+'-'+c_s_date_raw[1];
       
-      // var c_e_date = $('#c_e_date').val();
-      // //var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
-      // var logo_name = $('#logo_name').val();
-      
-      // if(c_name=='' || c_s_date=='' || c_e_date=='' || file=='')
-      // {
-      //   $('#add_campaign').prop('disabled', false);
-      //   $("#add_campaign").text('Save');
-
-      //   a.show_error_msg =true;
-      //   return false;
-      // }
 
       var ext = $('#logo_name').val().split('.').pop().toLowerCase();
       if($.inArray(ext, ['jpg','jpeg']) == -1) {
@@ -120,9 +106,12 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
         return false;
       }
 
-      var uploadUrl = "../campaign/uploadlogo";  
+      var uploadUrl = "../campaign/uploadlogo"; 
+
       fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
           var logo_name = fdata.data;
+          //console.log('data :: '+JSON.stringify(logo_name, null, 4)); 
+         // return false;
           var c_s_date_arr=$('#c_s_date').val().split('/');
           var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
          // alert(c_s_date);

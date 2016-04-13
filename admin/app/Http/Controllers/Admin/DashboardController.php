@@ -206,20 +206,21 @@ class DashboardController extends Controller {
 
 		
 
-		if (!file_exists($folder_name)) {
+		if (!file_exists($folder_name)) {			
 			$create_folder= mkdir($folder_name, 0777);
 			$thumb_path= mkdir($folder_name."/thumb", 0777);
 			$medium_path= mkdir($folder_name."/medium", 0777);
 			$original_path= mkdir($folder_name."/original", 0777);
 		}
 		else
-		{
+		{			
 			$thumb_path= env('UPLOADS')."/thumb"."/";
 			$medium_path= env('UPLOADS')."/medium"."/";
 			$original_path= env('UPLOADS')."/original"."/";
 		}
 
-
+		//echo "PP".$file_name;
+		//die();
 		$extension = pathinfo($file_name, PATHINFO_EXTENSION);
 		$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
 
@@ -227,8 +228,8 @@ class DashboardController extends Controller {
 		
 		move_uploaded_file($file_ori, "$original_path$new_file_name");
 		
-		$obj->createThumbnail($original_path,$thumb_path,env('THUMB_SIZE'));
-		$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));		
+		//$obj->createThumbnail($original_path,$thumb_path,env('THUMB_SIZE'));
+		//$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));		
 		
 		return $new_file_name;
 
@@ -321,7 +322,7 @@ class DashboardController extends Controller {
 							 ->withErrors($validator);
 		}*/
 
-
+		//dd($image_name);
 		$client = new vuforiaclient();
 		$rand=rand(111111,999999);
 		$send[0] = "Logo_".time()."_".$rand;

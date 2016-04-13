@@ -47,6 +47,7 @@
   <script src="{{ asset('/user/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
   <script src="{{ asset('/user/js/campaign.js') }}"></script>
   <script src="{{ asset('/user/js/inventory.js') }}"></script>
+  <script src="{{ asset('/user/js/logo.js') }}"></script>
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>

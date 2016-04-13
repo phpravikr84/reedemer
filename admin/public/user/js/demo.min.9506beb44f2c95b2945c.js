@@ -1,7 +1,7 @@
 ! function() {
     "use strict";
     
-    angular.module("redeemar-app", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule", "campaign-app", "inventory-app"])
+    angular.module("redeemar-app", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule", "campaign-app", "inventory-app", "logo-app"])
 }(),
 function() {
     "use strict";
@@ -663,70 +663,7 @@ function() {
 
         angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
     }(),
-
-
-
-
-    function() {
-        "use strict";
-
-        function a(a, b, c, d, x, fu) {          
-            var site_path=$("#site_path").val();
-            a.searchText   = '';     // set the default search/filter term          
-            $("#logo_details_div").hide();
-            $("#loading_div").hide();           
-            x.get("../admin/dashboard/alllogo").success(function(data_response){              
-                a.logo_details = data_response;
-                a.file_path=site_path;                
-            }); 
-
-             a.show_rating=function(itemId){                
-               var main_site_url=$('#main_site_url').val();
-               $("#loading_div").show();  
-               $("#rating_div").hide(); 
-               $("#logo_details_div").hide(); 
-               
-               x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){
-                    $("#logo_details_div").show();
-                    $("#loading_div").hide();  
-                    $("#rating_div").show(); 
-                    a.tracking_rating=data_response[0].tracking_rating;
-                    a.logo_name=data_response[0].logo_name;                   
-                    $( "#rateYo" ).hide();
-                    $( "#rating_div" ).after( '<div id="rateYo"></div>' );
-                    $("#rateYo").rateYo({
-                        rating: a.tracking_rating
-                    });
-               });         
-            };
-
-
-
-            a.add_logo = function(){
-                 var file = a.myFile;  
-                 var uploadUrl = "../admin/dashboard/uploadlogo";
-
-               // alert(a.Logo);
-                var logo_name=$("#logo_name").val();
-               fu.uploadFileToUrl(file, uploadUrl, logo_name ); 
-
-
-
-
-            };
-           
-        }
-
-        angular.module("redeemar-app").controller("LogoController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
-    }(),
-
-
-
-
-
-
-
-
+    
     function() {
         "use strict";
 
