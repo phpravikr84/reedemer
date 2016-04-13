@@ -305,24 +305,19 @@ class DashboardController extends Controller {
 	}
 
 	public function getAddlogo($logo_text,$image_name)
-	{
-		
-		/*$rules = array(
-				'company_name'     => 'required',  
-				'email'            => 'required|email|unique:users',   
-				'password'         => 'required|min:6'
+	{		
+		$id=Auth::user()->id;
+		$type=Auth::user()->type;		
+		if($type==2)
+		{
+			$reedemer_id=$id;	
+		}
+		else
+		{
+			$reedemer_id=null;
+				
+		}
 
-			);	
-		$validator = Validator::make($request->all(), $rules);
-		if ($validator->fails()) {				
-			$messages = $validator->messages();
-			// redirect our user back to the form with the errors from the validator			
-			return redirect()->back()
-							 ->withInput($request->only('company_name'))
-							 ->withErrors($validator);
-		}*/
-
-		//dd($image_name);
 		$client = new vuforiaclient();
 		$rand=rand(111111,999999);
 		$send[0] = "Logo_".time()."_".$rand;
@@ -338,7 +333,7 @@ class DashboardController extends Controller {
 			//dd("A");
 			$target_id=$response_arr->target_id;					
 			$logo = new Logo();
-			//$logo->reedemer_id 		= $company_id;	
+			$logo->reedemer_id 		= $reedemer_id;	
 			$logo->target_id 		= $target_id;
 			$logo->logo_name 		= $image_name;	
 			$logo->logo_text 		= $logo_text;

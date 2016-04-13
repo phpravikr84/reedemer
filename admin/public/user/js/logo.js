@@ -52,26 +52,28 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
       var uploadUrl = "../admin/dashboard/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, logo_name).then(function(fdata){
           var logo_name = fdata.data;
-          var logo_text="mmm";
+          var logo_text=a.Logo.logo_text;
+          //alert(logo_text);
+         // return false;
 
           x.get("../admin/dashboard/addlogo/"+logo_text+"/"+logo_name).success(function(response_back){
            // alert(response_back);
             //console.log('data :: '+JSON.stringify(response_back, null, 4));  
             if(response_back.response=="success")
             {
-                var main_site_url=$("#main_site_url").val();
-                
-                var redirect_url=main_site_url+'/user/dashboard#/tables/logo';                                   
-               // window.location.href = redirect_url; 
+                var main_site_url=$("#main_site_url").val();                
+                var redirect_url=main_site_url+'/user/dashboard#/tables/logo';                                
+               
 
-                $("#error_div").hide();
-                $("#show_message").slideDown();
-                $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
-                $("#success_div").show();              
+                $("#notification_success").hide();
+                $("#notification_error").hide();
+                $("#notification").slideDown();
+                $("#notification_info").html("Data inserted successfully. Please back after 5 minutes while we receiving your image rating.");
+                $("#notification_info").show();              
 
-                setTimeout(function() { 
-                window.location.href = redirect_url; 
-                }, 5000);                                          
+                //setTimeout(function() { 
+                //window.location.href = redirect_url; 
+                //}, 5000);                                          
             }
           })         
           //console.log('data :: '+JSON.stringify(response_back, null, 4));           
