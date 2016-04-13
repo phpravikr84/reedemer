@@ -147,7 +147,7 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
             {
               var main_site_url=$("#main_site_url").val();
                                     
-              var redirect_url=main_site_url+'/dashboard#/tables/logo';                                   
+              var redirect_url=main_site_url+'/user/dashboard#/campaign/list'                                   
              // window.location.href = redirect_url;  
 
               $("#error_div").hide();
@@ -185,11 +185,13 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     // Function for deleting a campaign
     a.delete_campaign=function(itemId){     
      if(confirm("Are you sure?"))
-     {       
+     {  
+       var main_site_url=$("#main_site_url").val();     
+
        $(".delete_row").hide();
        $("td#row_"+itemId).parent()
     .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');   
-    //return false;
+  //  return false;
        x.get("../campaign/delete/"+itemId).success(function(response){
           window.location.reload();             
        })

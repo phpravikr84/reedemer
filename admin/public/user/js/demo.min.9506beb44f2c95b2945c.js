@@ -64,7 +64,8 @@ function() {
             .success(function (data) {                
                 a.ReedemerDetails=data;
             }); 
-
+           // alert("a");
+           //$("#pp").html("uuu");
             // set path ../ for local and ../../ for server
             //a.d_path=site_path;           
         } 

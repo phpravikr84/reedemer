@@ -116,7 +116,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
                 $("#notification_success").hide();
                 $("#notification_error").hide();
                 $("#notification").slideDown();
-                $("#notification_info").html("Data inserted successfully. Please back after 5 minutes while we receiving your image rating.");
+                $("#notification_info").html("Data inserted successfully. It can take maximum 5 minutes to receive your image rating.");
                 $("#notification_info").show();              
 
                 setTimeout(function() { 
