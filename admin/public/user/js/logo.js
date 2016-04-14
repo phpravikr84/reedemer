@@ -39,7 +39,9 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
     var site_path=$("#site_path").val();
     a.searchText   = '';     // set the default search/filter term          
     $("#logo_details_div").hide();
-    $("#loading_div").hide();           
+    $("#loading_div").hide();   
+
+            
     x.get("../admin/dashboard/alllogo").success(function(data_response){              
         a.logo_details = data_response;
         a.file_path=site_path;                
@@ -62,7 +64,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
         $("#notification_error").html("Please upload only .jpg /.jpeg image.");       
 
         $('#add_logo').prop('disabled', false);
-        $("#add_logo").text('next');
+        $("#add_logo").text('Upload');
 
         setTimeout(function() { 
           $("#notification").slideUp();
@@ -80,7 +82,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
         $("#notification_error").html("Please type logo text.");       
 
         $('#add_logo').prop('disabled', false);
-        $("#add_logo").text('next');
+        $("#add_logo").text('Upload');
 
         setTimeout(function() { 
           $("#notification").slideUp();

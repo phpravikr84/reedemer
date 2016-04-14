@@ -27,6 +27,19 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/flexie/1.0.3/flexie.min.js"></script>
   <![endif]-->
   <!-- end shims -->
+  <style type="text/css">
+            /* Some styles for the containers */
+            #slider1 {
+                position:relative;  /* Containers need relative or absolute position. */
+                margin-left:10px;
+                /*width:500px;*/
+                height:120px;
+               /* border-top:1px solid #aaa;
+                border-bottom:1px solid #aaa;*/
+            }  
+
+
+        </style>
   @yield('style')
 </head>
 
@@ -56,6 +69,12 @@
     <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
     <script src="{{ asset('/user/js/rating.js') }}"></script>
 
+    <script src="{{ asset('/user/js/thumbelina.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}">
+
+    <script src="{{ asset('/user/js/jquery.bxslider.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/css/jquery.bxslider.css') }}">
+
 
   <script>
  //  $(document).ready(function(){  
@@ -69,15 +88,36 @@
  //  });
 
   </script>
-  <script type="text/javascript">
-    // $(document).ready(function(){  
-     //alert("a")     ;
-       // $("#rateYo").rateYo({
-       //      rating: 3
-       // });      
-    // });
+  <script type="text/javascript"> 
+ // $(document).ready(function(){
+  
+   // alert("a");
+  // $('#logo_show').hide();  
+  // $('#slider1').hide(); 
+  // }); 
+   
 
+    setTimeout(function() {      
+      run_slider();
+    }, 5000); 
 
+    function run_slider()
+    {      
+      // $("#slider1").show();
+      // $("#slider2").hide();
+      // $('#slider1').Thumbelina({
+      //   $bwdBut:$('#slider1 .left'),    // Selector to left button.
+      //   $fwdBut:$('#slider1 .right')    // Selector to right button.
+      // });  
+      //$('.bxslider').bxSlider({
+      //  minSlides: 3,
+       // maxSlides: 3,
+       // slideWidth: 170,
+       // slideMargin: 10
+    //  });           
+    }
+
+    
   </script>
   @yield('scripts')
 </body>

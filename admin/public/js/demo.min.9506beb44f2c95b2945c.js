@@ -551,13 +551,41 @@ function() {
                   
             // Upload logo by admin
             a.uploadFile = function(){
-               var file = a.myFile;
-               
-            $('#upload_file').prop('disabled', true);
-            $("#upload_file").text('Saving..');
-               var uploadUrl = "../admin/dashboard/uploadlogo";
-               fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
-            };
+                var file = a.myFile;
+
+                $('#upload_file').prop('disabled', false);
+                $("#upload_file").text('Saving..');
+
+                if($("#logo_text").val()=='')
+                {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please insert all fields.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#upload_file').prop('disabled', false);
+                    $("#upload_file").text('Save');
+                    return false;
+                }
+
+                var ext = $('#logo_name').val().split('.').pop().toLowerCase();
+                if($.inArray(ext, ['jpg','jpeg']) == -1) {
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please upload only .jpg /.jpeg image.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#upload_file').prop('disabled', false);
+                    $("#upload_file").text('Save');
+                    return false;
+                }
+
+                $('#upload_file').prop('disabled', true);
+                $("#upload_file").text('Saving..');
+                var uploadUrl = "../admin/dashboard/uploadlogo";
+                    fu.uploadFileToUrl(file, uploadUrl, a.Redeemer );
+                };
 
             a.add_reedemer=function(){                
            //     alert(JSON.stringify(a.Redeemer, null, 4));
@@ -631,11 +659,13 @@ function() {
             a.delete_reedemer=function(itemId){ 
              if(confirm("Are you sure?"))
              {   
+                var main_site_url=$('#main_site_url').val();
 
                 $(".delete_row").hide();
                 $("td#row_"+itemId).parent()
                 .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
-                return false;
+               // alert("a");
+               // return false;
 
                x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
                   //a.status=response;                 
@@ -759,8 +789,8 @@ function() {
 
                         }
 
-                        $('#upload_file').prop('disabled', false);
-                        $("#upload_file").text('Save'); 
+                        //$('#upload_file').prop('disabled', false);
+                        //$("#upload_file").text('Save');
                         
                    })
                })

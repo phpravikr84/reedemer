@@ -37,7 +37,31 @@
             </div>
             <div class="demo-grid-2 mdl-grid">              
               <div class="mdl-cell border-box mdl-cell--12-col">
-                <div class="demo-grid-ruler mdl-grid" id="scroll">
+                <!-- <div id="slider1" style="display:none">
+                  <div class="thumbelina-but horiz left">&#706;</div>
+                    <ul class="logo_show">                        
+                        <li ng-repeat="logo in logo_details | filter:{ logo_text: searchText }">
+                          <!-- <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" /> -->
+                          <!-- <span>
+                            <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
+                          </span><br/>
+                          <span style="color:#000; visibility:show; display:block">
+                            <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
+                            {{logo.logo_text}}
+                          </span>
+                        </li>                        
+                    </ul>
+                    <div class="thumbelina-but horiz right">&#707;</div>
+                </div> -->
+
+                <!-- <div id="slider2" class="center">
+                  <img src="{{file_path}}/images/loader.gif" />
+                </div> -->
+                <!-- <ul class="bxslider">
+                  <li ng-repeat="logo in logo_details | filter:{ logo_text: searchText }"><img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" /></li>
+                </ul> -->
+
+                <!-- <div class="demo-grid-ruler mdl-grid" id="scroll">
                   <div id="small_div" class="mdl-cell border-box mdl-cell--3-col searchlist" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }"  style="height:auto;"  >                    
                     <div style="height:80px;overflow:hidden;">
                       <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
@@ -47,8 +71,39 @@
                       <strong>{{logo.logo_text}}</strong>
                     </div>
                   </div>
-                </div>              
+                </div>  -->  
+                <div id="myWorkContent">
+                   <ul style="margin:0; padding:0">
+                      <li class="image_container" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }">
+                        <div class="image_div">
+                           <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="120" />
+                        </div>
+                        <div class="text_div">
+                          <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
+                          {{logo.logo_text}}
+                        </div>
+
+                      </li>                      
+                   </ul>
+                   <!-- <ul> 
+                      <li ng-repeat="logo in logo_details | filter:{ logo_text: searchText }">
+                         <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="150" /> 
+                         <span>AAAAAAAAA<span>
+                      </li>
+
+                   </ul> -->
+                   <!-- <div ng-repeat="logo in logo_details | filter:{ logo_text: searchText }">
+                   <span style="height:80px;overflow:hidden;">
+                      <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
+                    </span><br/>
+                    <span>
+                      <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
+                      <strong>{{logo.logo_text}}</strong>
+                    </span>
+                </div>-->
+               </div>          
               </div>
+            </div>
               <div class="demo-grid-2 mdl-grid">
                 <div class="mdl-cell border-box border-box mdl-cell--6-col">
                   <div><h3>Logo Creator</h3></div>
@@ -82,7 +137,7 @@
                       <div  class="m-t-30 pull-right" style="margin:0 5px 5px 0;">
                         <div class="m-t-20">   
                           <button id="add_logo"  ng-click = "add_logo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                            Next
+                            Upload
                           </button>
                         </div>
                       </div>            
