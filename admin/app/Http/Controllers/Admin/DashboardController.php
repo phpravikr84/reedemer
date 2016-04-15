@@ -312,7 +312,7 @@ class DashboardController extends Controller {
 		{
 			$user_details=User::find($id);
 			//dd($user_details->company_name);
-			$reedemer_id=$id;
+			$reedemer_id=null;
 			//dd()
 			$status=0;
 			$logo_text=$user_details->company_name;
@@ -427,6 +427,7 @@ class DashboardController extends Controller {
 						'id'=>$logo_details['id'],
 						'reedemer_id'=>$logo_details['reedemer_id'],
 						'tracking_rating'=>$logo_details['tracking_rating'],
+						'target_id'=>$logo_details['target_id'],
 						'reedemer_company'=>$company_name,
 						'logo_name'=>$logo_details['logo_name'],
 						'logo_text'=>$logo_details['logo_text'],
@@ -500,6 +501,32 @@ class DashboardController extends Controller {
 
 		//dd($user_arr);
 		return $user_arr;
+	}
+	//http://localhost/reedemer/admin/public/admin/dashboard/logoupdate/
+	//http://localhost/reedemer/admin/public/admin/dashboard/updatestatus
+	public function postUpdatestatus(Request $request)
+	{	
+	//dd("a");	
+		// if($approve==1)
+		// {
+		// 	$new_status=0;
+		// }
+		// else
+		// {
+		// 	$new_status=1;	
+		// }
+		//dd($request->get('user_logo_target_id'));
+		$id=$request->get('user_logo_id');
+		$target_id=$request->get('user_logo_target_id');
+		$reedemer_id=Auth::user()->id;
+		//dd($target_id);
+		//dd($reedemer_id);
+		$logo = Logo::find($id);
+		$logo->reedemer_id=$reedemer_id;
+		if($logo->save())
+		{
+			return 'success';
+		}
 	}
 
 

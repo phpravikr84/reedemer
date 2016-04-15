@@ -82,13 +82,13 @@
                 <div id="myWorkContent">
                    <ul style="margin:0; padding:0">
                       <li class="image_container" ng-repeat="logo in logo_details | filter:{ logo_text: searchText }">
+                        <div class="text_div">
+                          <input class="checkboxs" ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
+                        </div>
                         <div class="image_div">
                            <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="120" />
                         </div>
-                        <div class="text_div">
-                          <input  ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
-                          {{logo.logo_text}}
-                        </div>
+                        
 
                       </li>                      
                    </ul>
@@ -174,7 +174,9 @@
             </div>
             <form name="userForm"  novalidate>
               <div class="form-group" >
-                  <input type="text" name="user_logo_id" class="form-control" ng-model="userlogo.user_logo_id" value="{{userlogo.user_logo_rating}}" id="user_logo_id" required>                  
+                  <input type="hidden" name="user_logo_id" class="form-control" ng-model="userlogo.user_logo_id" value="{{userlogo.user_logo_id}}" id="user_logo_id" required>
+
+                  <input type="hidden" name="user_logo_target_id" class="form-control" ng-model="userlogo.user_logo_target_id" value="{{userlogo.user_logo_target_id}}" id="user_logo_target_id" required>                  
               </div>
               <div class="m-t-20">   
                 <button id="add_logo" ng-click = "save_logo()"  ng-disabled="userForm.$invalid" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">

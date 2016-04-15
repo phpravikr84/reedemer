@@ -21,17 +21,25 @@
 }
 .image_div{
    padding:5px;
-   height:120px;  
+   height:160px;  
    overflow:hidden; 
 }
 .text_div{
-   height:70px;
-   border-top: 1px solid #ccc;
+   height:30px;
+   border-bottom: 1px solid #ccc;
+   border-right: 1px solid #ccc;
+   width:35px;
    padding:5px;
-   text-align: center;  
+   text-align: left;  
    white-space: normal;
-   vertical-align: top
+   vertical-align: top;
 }
 .checkbox_div{
 
+}
+
+.checkboxs{
+  -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+  -moz-appearance: checkbox;    /* Firefox */
+  -ms-appearance: checkbox;     /* not currently supported */
 }

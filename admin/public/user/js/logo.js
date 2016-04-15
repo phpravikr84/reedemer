@@ -146,9 +146,24 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
     a.save_logo=function(){   
    // alert("a") ;
        var logo_details=a.userlogo;            
+       //var target_id=a.userlogo;  
        //alert("a")   ;enhance_logo
-       console.log('data :: '+JSON.stringify(logo_details, null, 4)); 
-       return false;
+       var main_site_url=$('#main_site_url').val();
+       //alert(main_site_url);
+       //return false;
+       x.post("../admin/dashboard/updatestatus",logo_details).success(function(response){
+          $("#error_div").hide();
+          $("#show_message").slideDown();
+          $("#success_div").html("Thank you for choosing this logo.");
+          $("#success_div").show(); 
+
+          setTimeout(function() {         
+            window.location.reload();  
+          }, 5000);   
+          
+       });
+       //console.log('data :: '+JSON.stringify(logo_details, null, 4)); 
+       //return false;
     };
 
     a.delete_user_logo=function(){
@@ -186,9 +201,14 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
             $("#rating_div").show(); 
             a.tracking_rating=data_response[0].tracking_rating;
             a.logo_name=data_response[0].logo_name;    
+            a.target_id=data_response[0].target_id;  
+            //console.log('data :: '+JSON.stringify(a.target_id, null, 4)); 
+     // return false;
             //$("#user_logo_id").val(a.tracking_rating);               
-            //a.user_logo_id=a.tracking_rating;            
-            a.userlogo = {user_logo_id: itemId};
+            //a.user_logo_id=a.tracking_rating;      user_logo_target_id      
+            a.userlogo = {user_logo_id: itemId,user_logo_target_id:a.target_id};
+           // a.userlogo = {user_logo_target_id:'u'};
+            //$("#user_logo_target_id").val(a.target_id);
             $( "#rateYo" ).hide();
             $( "#rating_div" ).after( '<div id="rateYo"></div>' );
             $("#rateYo").rateYo({
