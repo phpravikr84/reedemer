@@ -304,19 +304,24 @@ class DashboardController extends Controller {
 			
 	}
 
-	public function getAddlogo($logo_text,$image_name,$enhance_logo=0)
+	public function getAddlogo($logo_text='',$image_name,$enhance_logo=0)
 	{		
 		$id=Auth::user()->id;
 		$type=Auth::user()->type;		
 		if($type==2)
 		{
-			$reedemer_id=$id;	
+			$user_details=User::find($id);
+			//dd($user_details->company_name);
+			$reedemer_id=$id;
+			//dd()
 			$status=0;
+			$logo_text=$user_details->company_name;
 		}
 		else
 		{
 			$reedemer_id=null;
 			$status=1;
+			//$logo_text="";
 				
 		}
 

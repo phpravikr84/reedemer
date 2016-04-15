@@ -44,8 +44,10 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
             
     x.get("../admin/dashboard/alllogo").success(function(data_response){              
         a.logo_details = data_response;
-        a.file_path=site_path;                
-    });          
+        a.file_path=site_path;       
+       // console.log('data :: '+JSON.stringify(a.file_path, null, 4));           
+    }); 
+
   
     a.add_logo = function(){
       var file = a.myFile;
@@ -73,7 +75,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
         return false;
       }
 
-      if($("#logo_text").val()=='')
+      /*if($("#logo_text").val()=='')
       {
         // showing error message if logo text is blank 
         $("#notification_success").hide();
@@ -88,14 +90,17 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
           $("#notification").slideUp();
         }, 5000);  
         return false;
-      }
+      } */
 
-      
+      a.logo=[];
       var uploadUrl = "../admin/dashboard/uploadlogo";  
       fu.uploadNewFileToUrl(file, uploadUrl, logo_name).then(function(fdata){
+        //alert("a");
           var logo_name = fdata.data;
-          var logo_text = a.Logo.logo_text;
-          if(a.Logo.enhance_logo==true)
+          a.logo.logo_name=logo_name;
+          //var logo_text = a.Logo.logo_text;
+          var logo_text='demo';
+          if($("#enhance_logo").prop("checked")==true)
           {
             var enhance_logo = 1;
           }
@@ -103,12 +108,19 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
           {
            var enhance_logo = 0; 
           }
-          //alert(enhance_logo);
+          a.logo.logo_name=enhance_logo;
+
+         // alert(logo_name);
+         // return false;
+         // alert(enhance_logo);
+          //console.log('data :: '+JSON.stringify(a.logo, null, 4)); 
           //return false;
 
-          x.get("../admin/dashboard/addlogo/"+logo_text+"/"+logo_name+"/"+enhance_logo).success(function(response_back){
-           // alert(response_back);
-            console.log('data :: '+JSON.stringify(response_back, null, 4));  
+           x.get("../admin/dashboard/addlogo/"+logo_text+"/"+logo_name+"/"+enhance_logo).success(function(response_back){
+            //x.get("../admin/dashboard/addlogo/").success(function(response_back){
+            //alert(response_back);
+            //return false;
+            //console.log('data :: '+JSON.stringify(response_back, null, 4));  
             if(response_back.response=="success")
             {
                 var main_site_url=$("#main_site_url").val();                
