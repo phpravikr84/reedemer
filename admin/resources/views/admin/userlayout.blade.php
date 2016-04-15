@@ -69,10 +69,10 @@
     <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
     <script src="{{ asset('/user/js/rating.js') }}"></script>
 
-    <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> -->
 
-    <script src="{{ asset('/user/js/jquery.bxslider.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('/css/jquery.bxslider.css') }}">
+    <!-- <script src="{{ asset('/user/js/jquery.bxslider.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('/css/jquery.bxslider.css') }}"> -->
 
 
   <script>
