@@ -1,0 +1,37 @@
+#myWorkContent{
+    /*width:530px;*/
+    height:210px;
+   
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+#myWorkContent li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#myWorkContent img {border: 0px solid #CCC;}
+
+.image_container{
+    margin:5px;
+    height:180px; 
+    width:130px;
+    border: 1px solid #ccc;
+}
+.image_div{
+   padding:5px;
+   height:120px;  
+   overflow:hidden; 
+}
+.text_div{
+   height:70px;
+   border-top: 1px solid #ccc;
+   padding:5px;
+   text-align: center;  
+   white-space: normal;
+   vertical-align: top
+}
+.checkbox_div{
+
+}
