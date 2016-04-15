@@ -160,7 +160,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
           setTimeout(function() {         
             window.location.reload();  
           }, 5000);   
-          
+
        });
        //console.log('data :: '+JSON.stringify(logo_details, null, 4)); 
        //return false;
@@ -189,11 +189,13 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
 
     a.show_rating=function(itemId){                
        var main_site_url=$('#main_site_url').val();
+       var site_path=$('#site_path').val();
+
        $("#loading_div").show();  
        $("#rating_div").hide(); 
-       $("#logo_details_div").hide(); 
-       //$("#user_logo_id").val();
-      // user_logo_id
+       $("#logo_details_div").hide();   
+       //a.file_path='../';         
+       //a.file_name='1460722279_502923475.jpg'; 
        
        x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){
             $("#logo_details_div").show();
@@ -203,12 +205,9 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
             a.logo_name=data_response[0].logo_name;    
             a.target_id=data_response[0].target_id;  
             //console.log('data :: '+JSON.stringify(a.target_id, null, 4)); 
-     // return false;
-            //$("#user_logo_id").val(a.tracking_rating);               
-            //a.user_logo_id=a.tracking_rating;      user_logo_target_id      
-            a.userlogo = {user_logo_id: itemId,user_logo_target_id:a.target_id};
-           // a.userlogo = {user_logo_target_id:'u'};
-            //$("#user_logo_target_id").val(a.target_id);
+            // return false;
+            
+            a.userlogo = {user_logo_id: itemId,user_logo_target_id:a.target_id};          
             $( "#rateYo" ).hide();
             $( "#rating_div" ).after( '<div id="rateYo"></div>' );
             $("#rateYo").rateYo({

@@ -55,7 +55,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
   //if($.inArray(ext, ['jpg','jpeg']) == -1) {
   //    alert('invalid extension!');
   //}
-  
+   //var site_path=$("#site_path").val();
+   //alert(site_path);
    x.post("../inventory/list").success(function(data_response){              
         a.inventory_details = data_response; 
         a.file_path=site_path;  
