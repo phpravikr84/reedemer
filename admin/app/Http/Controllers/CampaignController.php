@@ -58,22 +58,22 @@ class CampaignController extends Controller {
 	{		
 		$campaign = Campaign::find($id);		
 		
-		$thubm_path=env('UPLOADS')."/campaign/thumb/";
-		$medium_path=env('UPLOADS')."/campaign/medium/";
-		$original_path=env('UPLOADS')."/campaign/original/";
+		// $thubm_path=env('UPLOADS')."/campaign/thumb/";
+		// $medium_path=env('UPLOADS')."/campaign/medium/";
+		// $original_path=env('UPLOADS')."/campaign/original/";
 
-		if(file_exists($thubm_path.$campaign->campaign_image))
-		{
-			unlink($thubm_path.$campaign->campaign_image);
-		} 
-		if(file_exists($medium_path.$campaign->campaign_image))
-		{
-			unlink($medium_path.$campaign->campaign_image);
-		}
-		if(file_exists($original_path.$campaign->campaign_image))
-		{
-			unlink($original_path.$campaign->campaign_image);
-		}
+		// if(file_exists($thubm_path.$campaign->campaign_image))
+		// {
+		// 	unlink($thubm_path.$campaign->campaign_image);
+		// } 
+		// if(file_exists($medium_path.$campaign->campaign_image))
+		// {
+		// 	unlink($medium_path.$campaign->campaign_image);
+		// }
+		// if(file_exists($original_path.$campaign->campaign_image))
+		// {
+		// 	unlink($original_path.$campaign->campaign_image);
+		// }
 		$campaign->delete();
 		if($campaign->delete())
 		{
@@ -125,41 +125,31 @@ class CampaignController extends Controller {
 		$campaign_name=$request->input('c_name');
 		$start_date=$request->input('c_s_date');
 		$end_date=$request->input('c_e_date');
-		$campaign_image=$request->input('campaign_image');
+		//$campaign_image=$request->input('campaign_image');
 
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 
-		if($campaign_name=="" || $start_date=="" || $end_date=="" || $campaign_image=="")
+		if($campaign_name=="" || $start_date=="" || $end_date=="")
 		{
 			return 'error';
 		}
 		else
-		{
-
-			$original_path= env('UPLOADS')."/campaign/original"."/".$campaign_image;
-			if(file_exists($original_path))
+		{			
+			$campaign = new Campaign();
+			$campaign->campaign_name 	= $campaign_name;			
+			$campaign->start_date 		= $start_date;	
+			$campaign->end_date 		= $end_date;		
+			$campaign->status 			= 1;			
+			$campaign->created_by 		= $created_by;
+			if($campaign->save())
 			{
-				$campaign = new Campaign();
-				$campaign->campaign_name 	= $campaign_name;	
-				$campaign->campaign_image 	= $campaign_image;
-				$campaign->start_date 		= $start_date;	
-				$campaign->end_date 		= $end_date;		
-				$campaign->status 			= 1;			
-				$campaign->created_by 		= $created_by;
-				if($campaign->save())
-				{
-					return 'success';
-				}
-				else
-				{
-					return 'error';
-				}
+				return 'success';
 			}
 			else
 			{
-				return 'image_not';
-			}
+				return 'error';
+			}			
 		}
 		
 	}

@@ -130,20 +130,53 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
       });
     };
 
+    
+    a.save_logo=function(){   
+   // alert("a") ;
+       var logo_details=a.userlogo;            
+       //alert("a")   ;enhance_logo
+       console.log('data :: '+JSON.stringify(logo_details, null, 4)); 
+       return false;
+    };
 
+    a.delete_user_logo=function(){
+      //alert("a") ;
+      var itemId = $("#user_logo_id").val();      
+      //console.log('data :: '+JSON.stringify(logo_details, null, 4)); 
+      //return false;
+      if(confirm("Are you sure?"))
+      { 
+        $("#logo_details_div").hide(500);
+        x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
+          $("#error_div").hide();
+          $("#show_message").slideDown();
+          $("#success_div").html("Data deleted successfully. <br />Please wait,we will reload this page for you.");
+          $("#success_div").show();              
+
+          setTimeout(function() {         
+            window.location.reload();  
+          }, 5000);                  
+        })
+      }
+    };
 
     a.show_rating=function(itemId){                
        var main_site_url=$('#main_site_url').val();
        $("#loading_div").show();  
        $("#rating_div").hide(); 
        $("#logo_details_div").hide(); 
+       //$("#user_logo_id").val();
+      // user_logo_id
        
        x.get("../admin/dashboard/logodetails/"+itemId).success(function(data_response){
             $("#logo_details_div").show();
             $("#loading_div").hide();  
             $("#rating_div").show(); 
             a.tracking_rating=data_response[0].tracking_rating;
-            a.logo_name=data_response[0].logo_name;                   
+            a.logo_name=data_response[0].logo_name;    
+            //$("#user_logo_id").val(a.tracking_rating);               
+            //a.user_logo_id=a.tracking_rating;            
+            a.userlogo = {user_logo_id: itemId};
             $( "#rateYo" ).hide();
             $( "#rating_div" ).after( '<div id="rateYo"></div>' );
             $("#rateYo").rateYo({

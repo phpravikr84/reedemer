@@ -680,7 +680,7 @@ function() {
              {      
                $("#logo_"+itemId)
              .replaceWith('<tr class="msg_remove"><td colspan="5" class="center">Removing ...</td></tr>');
-               x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
+             x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
                   //a.status=response;   
                 //  alert(itemId);
                // alert("A");

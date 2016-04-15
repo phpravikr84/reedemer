@@ -24,7 +24,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.7/es5-shim.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/flexie/1.0.3/flexie.min.js"></script>
+  
   <![endif]-->
   <!-- end shims -->
   <style type="text/css">
@@ -69,7 +69,6 @@
     <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
     <script src="{{ asset('/user/js/rating.js') }}"></script>
 
-    <script src="{{ asset('/user/js/thumbelina.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}">
 
     <script src="{{ asset('/user/js/jquery.bxslider.js') }}"></script>
@@ -97,9 +96,9 @@
   // }); 
    
 
-    setTimeout(function() {      
-      run_slider();
-    }, 5000); 
+    //setTimeout(function() {      
+     // run_slider();
+    //}, 5000); 
 
     function run_slider()
     {      

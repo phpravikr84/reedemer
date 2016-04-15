@@ -37,13 +37,13 @@
                 <th class="mdl-data-table__cell--non-numeric">Comapny Name</th>
                 <th class="mdl-data-table__cell--non-numeric">Logo</th>
                 <th class="mdl-data-table__cell--non-numeric">Rating</th>
-                <th class="mdl-data-table__cell--non-numeric">Text</th>
                 <th class="mdl-data-table__cell--non-numeric">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
-                <td>{{logo.reedemer_company}}</td>
+                <td>{{logo.logo_text}}</td>
+                <!-- <td>{{logo.reedemer_company}}</td> -->
                 <td>
                  
 
@@ -57,9 +57,9 @@
                 <td ng-if="logo.tracking_rating < 0">
                   <img src="{{file_path}}images/spinner.gif" />
                 </td>
-                <td>
+               <!--  <td>
                   {{logo.logo_text}}
-                </td>
+                </td> -->
                 <td>
                   <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>

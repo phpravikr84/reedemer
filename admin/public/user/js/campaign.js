@@ -86,99 +86,56 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
     //total: a.data_response,
     //console.log('data :: '+JSON.stringify(total, null, 4));     
   
-    a.addCampaign = function(){             
-      var file = a.myFile;
+    a.addCampaign = function(){
+      $('#add_campaign').prop('disabled', true);
+      $("#add_campaign").text('Saving..');      
 
-       $('#add_campaign').prop('disabled', true);
-       $("#add_campaign").text('Saving..');      
+      if($('#c_s_date').val()=='' || $('#c_e_date').val()=='' || $("#c_name").val()=='')
+      {
+          $("#error_div").hide();
+          $("#show_message").slideDown();
+          $("#error_div").html("Please insert all field.");
+          $("#error_div").show();
+          $("#success_div").hide();
 
-      
-
-      var ext = $('#logo_name').val().split('.').pop().toLowerCase();
-      if($.inArray(ext, ['jpg','jpeg']) == -1) {
-        $("#show_message").slideDown();
-        $("#error_div").html("Please upload only .jpg /.jpeg image.");
-        $("#error_div").show();
-        $("#success_div").hide();
-
-        $('#add_campaign').prop('disabled', false);
-        $("#add_campaign").text('Save');
-        return false;
+          $('#add_campaign').prop('disabled', false);
+          $("#add_campaign").text('Save');
+          return false;
       }
+      var main_site_url=$('#main_site_url').val();
+      var c_s_date_arr=$('#c_s_date').val().split('/');
+      var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
+         
+      var c_e_date_arr=$('#c_e_date').val().split('/');
+      var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
+      a.Campaign.c_s_date = c_s_date; 
+      a.Campaign.c_e_date = c_e_date; 
+      
+      
+      x.post(main_site_url+"/campaign/addlogo",a.Campaign).success(function(response){
+        var main_site_url=$("#main_site_url").val();                              
+        var redirect_url=main_site_url+'/user/dashboard#/campaign/list'
+        if(response=='success')
+        {
+          $("#error_div").hide();
+          $("#show_message").slideDown();
+          $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+          $("#success_div").show();              
 
-      var uploadUrl = "../campaign/uploadlogo"; 
-
-      fu.uploadNewFileToUrl(file, uploadUrl, a.Campaign).then(function(fdata){
-          var logo_name = fdata.data;
-          //console.log('data :: '+JSON.stringify(logo_name, null, 4)); 
-         // return false;
-          var c_s_date_arr=$('#c_s_date').val().split('/');
-          var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
-         // alert(c_s_date);
-         // return false;
-          var c_e_date_arr=$('#c_e_date').val().split('/');
-          var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
-
-          if(c_s_date=='' || c_e_date=='' || $("#c_name").val()=='')
-          {
-              $("#error_div").hide();
-              $("#show_message").slideDown();
-              $("#error_div").html("Please insert all field.");
-              $("#error_div").show();
-              $("#success_div").hide();
-
-              $('#add_campaign').prop('disabled', false);
-              $("#add_campaign").text('Save');
-              return false;
-          }
-
-          a.Campaign.campaign_image = logo_name; 
-          a.Campaign.c_s_date = c_s_date; 
-          a.Campaign.c_e_date = c_e_date; 
-         // alert(logo_name);
-          var main_site_url=$('#main_site_url').val();
-           //  alert(main_site_url);
-            // return false;
-          //  console.log('data send :: '+JSON.stringify(a.Campaign, null, 4));  
-           // return false;
-
-          x.post(main_site_url+"/campaign/addlogo",a.Campaign).success(function(response){
-            if(response=='success')
-            {
-              var main_site_url=$("#main_site_url").val();
-                                    
-              var redirect_url=main_site_url+'/user/dashboard#/campaign/list'                                   
-             // window.location.href = redirect_url;  
-
-              $("#error_div").hide();
-              $("#show_message").slideDown();
-              $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
-              $("#success_div").show();              
-
-              setTimeout(function() { 
-                window.location.href = redirect_url; 
-              }, 5000);                       
-            }
-            else if(response=='image_not')
-            {
-              $("#error_div").hide();
-              $("#show_message").slideDown();
-              $("#error_div").html("Unable to upload image. Please try again.");
-              $("#error_div").show();
-              $("#success_div").hide();
-              return false; 
-            }
-            else
-            {
-              $("#error_div").hide();
-              $("#show_message").slideDown();
-              $("#error_div").html("Please insert all field.");
-              $("#error_div").show();
-              $("#success_div").hide(); 
-            }
-            $('#add_campaign').prop('disabled', false);
-            $("#add_campaign").text('Save');
-          })
+          setTimeout(function() { 
+            window.location.href = redirect_url; 
+          }, 5000);
+        }
+        else
+        {
+          $("#error_div").hide();
+          $("#show_message").slideDown();
+          $("#error_div").html("Please insert all field.");
+          $("#error_div").show();
+          $("#success_div").hide(); 
+        }
+        $('#add_campaign').prop('disabled', false);
+        $("#add_campaign").text('Save');  
       });
     };
 

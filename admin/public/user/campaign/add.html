@@ -33,7 +33,7 @@
           </div>
 
           <div class="p-30">
-            <form name="f2" method="POST"  enctype="multipart/form-data">
+            <form name="f2" method="POST"   enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <!-- <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" id="c_name" />
@@ -50,16 +50,16 @@
                 <label class="mdl-textfield__label" for="c_e_date">End Date</label> -->
                 <input ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly placeholder="End Date" style="width:50%" />
               </div>
-              <div class="mdl-textfield">
+              <!-- <div class="mdl-textfield">
                 <p>Upload Image</p> 
                <input type = "file" ng-model="Campaign.logo_name" file-model = "myFile" id="logo_name" />
    
-              </div>
+              </div> -->
               
              
               <div class="m-t-20">           
 
-                <button id="add_campaign" type="submit" ng-click = "addCampaign()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                <button id="add_campaign" type="submit" ng-click = "addCampaign()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
                   Save             
               </div>
             </form>

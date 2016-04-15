@@ -35,7 +35,6 @@
             <thead>
               <tr>
                 <th class="mdl-data-table__cell--non-numeric">Campaign Name</th>
-                <th class="mdl-data-table__cell--non-numeric">Image</th>
                 <th class="mdl-data-table__cell--non-numeric">Start date</th>
                 <th class="mdl-data-table__cell--non-numeric">End date</th>
                 <th class="mdl-data-table__cell--non-numeric">Action</th>
@@ -43,10 +42,7 @@
             </thead>
             <tbody>              
               <tr ng-if="campaign_details.length > 0" ng-repeat="campaign in campaign_details">
-                <td>{{campaign.campaign_name}}</td>
-                <td>                 
-                  <img src="{{file_path}}../uploads/campaign/original/{{campaign.campaign_image}}" width="80" />
-                </td>
+                <td>{{campaign.campaign_name}}</td>                
                 <td>
                   {{campaign.start_date}}                  
                 </td>

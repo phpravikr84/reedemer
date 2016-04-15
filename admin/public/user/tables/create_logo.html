@@ -24,8 +24,15 @@
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Logo Creator</h2>
           </div>
+          <div class="p-l-20 p-r-20 p-b-20" id="show_message" style="display:none">
+            <div id="success_div" class="alert alert-success">
+                
+            </div>
+             <div id="error_div" class="alert alert-danger">
+                
+            </div>
+          </div>
           
-
           <div class="p-30">
             <div class="demo-grid-ruler mdl-grid">
               <div class="mdl-cell border-box mdl-cell--12-col">
@@ -119,7 +126,7 @@
 
                       </p>
                       <p>
-                        <input ng-model="Logo.logo_text" class="mdl-textfield__input" type="text" id="logo_text" placeholder="Logo Text" />
+                        <input ng-model="logo.logo_text" class="mdl-textfield__input" type="text" id="logo_text" placeholder="Logo Text" />
                       </p>
                       <p><hr></p>
                       <p class="small"> 
@@ -156,14 +163,28 @@
                       </span>
                     </div>                    
                     <div id="rating_div" class=" center"> </div>  
-                  </div>
-                  <div id="loading_div" class="demo-grid-ruler mdl-grid center">
-                      <img src="{{file_path}}images/loader.gif" />
+                    <div class="m-t-20">   
+                          <button id="add_logo"  ng-click = "delete_user_logo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Delete
+                          </button>
                     </div>
-                  </div>            
-                </div>
+                  </div>
+                </div> 
+              </div>
             </div>
+            <form name="userForm"  novalidate>
+              <div class="form-group" >
+                  <input type="text" name="user_logo_id" class="form-control" ng-model="userlogo.user_logo_id" value="{{userlogo.user_logo_rating}}" id="user_logo_id" required>                  
+              </div>
+              <div class="m-t-20">   
+                <button id="add_logo" ng-click = "save_logo()"  ng-disabled="userForm.$invalid" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Save
+                </button>
+              </div>
+            </form> 
+                   
           </div>
+        </form>
         </div>
   </div>  
 </section>
