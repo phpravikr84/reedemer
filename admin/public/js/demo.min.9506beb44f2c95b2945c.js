@@ -541,11 +541,13 @@ function() {
             a.cnames = [];
             a.logo_details = [];
             var site_path=$("#site_path").val();
+
+            a.img_file_path =site_path;
            
             // show all uploaded logo in admin panel
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;                
-                a.file_path=site_path;
+               // a.file_path=site_path;
                 
             });
                   
@@ -694,20 +696,23 @@ function() {
                })
              }
             }
-            
-            x.post("../admin/dashboard/show").success(function(response){
-            
-            for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
-                    company_name: response[g].company_name,
-                    email: response[g].email,
-                    approve: response[g].approve,
-                    id: response[g].id
-                });    
-                //alert(JSON.stringify(response, null, 4))    ;        
-                a.cnames = response;
-            
-          })
+           
 
+           // setTimeout(function() { 
+                x.post("../admin/dashboard/show").success(function(response){
+                for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
+                        company_name: response[g].company_name,
+                        email: response[g].email,
+                        approve: response[g].approve,
+                        id: response[g].id
+                       // site_path:site_path
+                    });    
+                    //alert(JSON.stringify(response, null, 4))    ;        
+                    a.cnames = response;
+                   
+                
+                })
+          //  }, 5000);  
 
         }
 
