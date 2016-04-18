@@ -39,10 +39,12 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
     //a.dataLength={filtered:[]};
    // a.cnames = [];
    // a.campaign_details = [];
-   // var site_path=$("#site_path").val();
+    var site_path=$("#site_path").val();
     
-    x.get("../directory/show").success(function(response){
+    x.post("../directory/show").success(function(response){
       //alert("V");
+      a.repo_details=response,
+      a.file_path=site_path
     });
     //alert("C");
    // alert("a");
@@ -56,7 +58,7 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
           if(response=="success")
           {
               var main_site_url=$("#main_site_url").val();                
-              var redirect_url=main_site_url+'/user/dashboard#/repository/add';
+              var redirect_url=main_site_url+'/user/dashboard#/repository/list';
 
               $("#error_div").hide();
               $("#show_message").slideDown();

@@ -30,9 +30,12 @@ class DirectoryController extends Controller {
 		
 	}
 	
-	public function getShow()
+	public function postShow()
 	{
-		dd("a");
+		$directory = Directory::where('status',1)
+					 ->orderBy('id','DESC')
+					 ->get();
+		return $directory;
 	}
 	public function postStore(Request $request)
 	{
