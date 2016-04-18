@@ -37,8 +37,7 @@
             <div class="demo-grid-ruler mdl-grid">
               <div class="mdl-cell border-box mdl-cell--12-col">
                 Search for my logo
-                <input ng-model="searchText"  type="text" placeholder="Company Name" class="input-field" />
-                     
+                <input ng-model="searchText"  type="text" placeholder="Company Name" class="input-field" />                     
                   <div id="filter-count"></div>            
               </div>            
             </div>
@@ -51,7 +50,9 @@
                           <input class="checkboxs" ng-click="show_rating(logo.id);" type="radio" name="company_logo_id" value="{{logo.id}}" />
                         </div>
                         <div class="image_div">
-                           <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="120" />
+                          <!-- <img src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="120" /> -->
+
+                           <img ng-if="logo.logo_name" ng-src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="120" />
                         </div>
                         
 
@@ -109,10 +110,12 @@
                       <span>Congratulations !</span>
                       <span>We have found your logo </span>
                       <span>
-                        <img src="{{file_path}}../uploads/original/{{logo_name}}" width="150" />
+                        <!-- <img src="{{file_path}}../uploads/original/{{logo_name}}" width="150" /> -->
+                        <!-- <img src="../../uploads/original/1460723395_698096725.jpg" width="150" />  -->
+                        <img id="logo_image_first" src="../../uploads/blank-img-1.png" width="150" />
                       </span>
                     </div>                    
-                    <div id="rating_div" class=" center"> </div>  
+                    <div class="center"><div id="rating_div" > </div>  </div>
                     <div class="m-t-20">   
                           <button id="add_logo"  ng-click = "delete_user_logo()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                             Delete

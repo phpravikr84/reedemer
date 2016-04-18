@@ -40,12 +40,20 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
     a.searchText   = '';     // set the default search/filter term          
     $("#logo_details_div").hide();
     $("#loading_div").hide();   
-
-            
+    //console.log("a");
+     
+      
+    a.currentImage = 0;
+    //a.logo_details.logo_name='1460722279_502923475.jpg';
     x.get("../admin/dashboard/alllogo").success(function(data_response){              
         a.logo_details = data_response;
         a.file_path=site_path;       
-       // console.log('data :: '+JSON.stringify(a.file_path, null, 4));           
+       // console.log('data :: '+JSON.stringify(a.logo_details.logo_name, null, 4)); 
+       //alert("A");
+        $("#logo_image_first").attr("src",a.logo_details.logo_name);
+
+
+
     }); 
 
   
@@ -206,7 +214,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
             a.target_id=data_response[0].target_id;  
             //console.log('data :: '+JSON.stringify(a.target_id, null, 4)); 
             // return false;
-            
+            //$("#logo_image_first").attr("src",a.logo_name);
             a.userlogo = {user_logo_id: itemId,user_logo_target_id:a.target_id};          
             $( "#rateYo" ).hide();
             $( "#rating_div" ).after( '<div id="rateYo"></div>' );
