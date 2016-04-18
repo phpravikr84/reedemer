@@ -55,13 +55,14 @@
                   {{logo.tracking_rating}}
                 </td>
                 <td ng-if="logo.tracking_rating < 0">
-                  <img src="{{file_path}}images/spinner.gif" />
+                  <!-- <img src="{{file_path}}images/spinner.gif" /> -->
+                  <img id="spinner_icon" src="../../uploads/blank-img-1.png"  />
                 </td>
                <!--  <td>
                   {{logo.logo_text}}
                 </td> -->
                 <td>
-                  <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
+                   <img src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
               </tr> 
               <tr ng-if="logo_details.length == 0">

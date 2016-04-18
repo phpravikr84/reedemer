@@ -699,6 +699,8 @@ function() {
            
 
            // setTimeout(function() { 
+                var site_path=$("#site_path").val();
+               // alert(site_path);
                 x.post("../admin/dashboard/show").success(function(response){
                 for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                         company_name: response[g].company_name,
@@ -707,8 +709,16 @@ function() {
                         id: response[g].id
                        // site_path:site_path
                     });    
+                    //alert("m");{{file_path}}
                     //alert(JSON.stringify(response, null, 4))    ;        
                     a.cnames = response;
+                    a.file_path = site_path;
+                    var site_image_path=$('#site_image_path').val();
+                    //setTimeout(function() { 
+                    $("#spinner_icon").attr("src", site_image_path+'../../../images/spinner.gif')
+                    //}, 5000);  
+                    $("#pp2").show();
+                    $("#pp").hide();
                    
                 
                 })
