@@ -215,7 +215,7 @@ MyApp.controller('LogoController',["$scope", "PlaceholderTextService", "ngTableP
             //console.log('data :: '+JSON.stringify(a.target_id, null, 4)); 
             // return false;
             //$("#logo_image_first").attr("src",a.logo_name);
-            $("#logo_image_first").attr("src", '../../uploads/original/'+a.logo_name)
+            $("#logo_image_first").attr("src", site_path+'../uploads/original/'+a.logo_name)
             //alert(../../uploads/original/+a.logo_name);
 
             a.userlogo = {user_logo_id: itemId,user_logo_target_id:a.target_id};          
