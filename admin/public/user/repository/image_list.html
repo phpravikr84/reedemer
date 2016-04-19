@@ -1,7 +1,7 @@
 <section ng-controller="RepoController">
   <div class="mdl-color--blue-grey ml-header relative clear">
     <div class="p-20">
-      <h3 class="mdl-color-text--white m-t-20 m-b-5">Directory</h3>
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Image List</h3>
       <h4 class="mdl-color-text--amber-100 m-b-20 no-m-t w100">&nbsp;</h4>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp m-b-30">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">User Directory List </h2>
+            <h2 class="mdl-card__title-text">User Image List </h2>
           </div>
           <div class="p-l-20 p-r-20 p-b-20" ng-if="show_error_msg">
             <div class="alert alert-success">
@@ -51,12 +51,9 @@
             <tbody>              
               <tr ng-if="repo_details.length > 0" ng-repeat="repo in repo_details">
                 <td>
-                  <i ng-if="repo.directory == 1" class="material-icons f-left">folder</i>
-                  <i ng-if="repo.directory == 0" class="material-icons f-left">collections</i>
+                  <i class="material-icons f-left">folder</i>
                 </td>
-                <td>
-                  <a href="javascript:void(0);" data-ng-click="set_dir_id(repo.id)">{{repo.file_name}}</a>
-                </td>                
+                <td>{{repo.directory_name}}</td>                
                 <td>
                   <img  ng-if="repo.status == 1" src="../images/active.png" width="20" />          
 
@@ -76,13 +73,11 @@
           </table>
         </div>
         <div class="tags m-t-20 f-right">
-          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#/repository/add" >Add Directory</a>
-
-          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#/repository/add_image" >Upload File</a>
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#/repository/add_image" >Add Image</a>
         </div>
       </div>
     </div>
-    <input type="text" name="dir_id" id="dir_id" value="" />
+
   </div>
 
 </section>

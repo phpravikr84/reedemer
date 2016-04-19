@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Material Lite Angular Admin Theme">
   <meta name="author" content="Theme Guys - The Netherlands">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Redeemar</title>
 

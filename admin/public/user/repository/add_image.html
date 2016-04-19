@@ -1,7 +1,7 @@
 <section class="text-fields" ng-controller="RepoController" >
   <div class="mdl-color--amber ml-header relative clear">
     <div class="p-20">
-      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Directory</h3>
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Add Image</h3>
       <h4 class="mdl-color-text--amber-100 m-b-20 no-m-t w100">&nbsp;</h4>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Add Directory{{new_dir_id}}</h2>
+            <h2 class="mdl-card__title-text">Add Image</h2>
           </div>
           <div class="p-l-20 p-r-20 p-b-20" id="show_message" style="display:none">
             <div id="success_div" class="alert alert-success">
@@ -33,14 +33,26 @@
           </div>
 
           <div class="p-30">
-            <form name="userForm"  novalidate>
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">                
-                <input ng-model="repodetails.dir_name" class="mdl-textfield__input" type="text" id="logo_text" placeholder="Add Directory" required />
+            <form name="userForm" id="userForm" method="post" enctype="multipart/form-data" >
+              <div class="mdl-textfield">
+                <p>Select Directory</p>
+                 <select id="dir_id">
+                    <option value="">----</option>
+                    <option value="{{cname.id}}" ng-repeat="cname in cnames" >{{cname.file_name}}</option>
+                  </select>  
+              </div> 
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                 <!-- <input type = "file" ng-model="repodetails.logo_name" file-model = "myFile" id="logo_name" /> 
+                 <input type="file" id="file" name="file" multiple
+            onchange="angular.element(this).scope().getFileDetails(this)" />-->
+              <!-- <input type="text" id="dir_name" name="dir_name" value="s"  /> -->
+              <input type="file" accept="image/*" id="image_file" name="image_file"  />
+
+              
               </div> 
               <div class="m-t-20">
-                 <button ng-disabled="userForm.$invalid" ng-click="add_folder()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-                  Add Directory
+                 <button id="send-btn"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                  Upload
                 </button>               
                
               </div>
