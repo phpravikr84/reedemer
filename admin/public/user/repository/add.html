@@ -21,7 +21,7 @@
       <div class="p-20 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Add Directory{{new_dir_id}}</h2>
+            <h2 class="mdl-card__title-text">Add Directory</h2>
           </div>
           <div class="p-l-20 p-r-20 p-b-20" id="show_message" style="display:none">
             <div id="success_div" class="alert alert-success">
@@ -35,8 +35,11 @@
           <div class="p-30">
             <form name="userForm"  novalidate>
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">                
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo"> 
+
                 <input ng-model="repodetails.dir_name" class="mdl-textfield__input" type="text" id="logo_text" placeholder="Add Directory" required />
+
+                <input ng-model="repodetails.new_dir_id" class="mdl-textfield__input" type="hidden" id="new_dir_id" placeholder="Adddd Directory" ng-value="new_dir_id" />
               </div> 
               <div class="m-t-20">
                  <button ng-disabled="userForm.$invalid" ng-click="add_folder()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">

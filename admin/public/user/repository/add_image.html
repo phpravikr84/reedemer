@@ -38,7 +38,7 @@
                 <p>Select Directory</p>
                  <select id="dir_id">
                     <option value="">----</option>
-                    <option value="{{cname.id}}" ng-repeat="cname in cnames" >{{cname.file_name}}</option>
+                    <option ng-selected="{{ cname.id == new_dir_id }}" value="{{cname.id}}" ng-repeat="cname in cnames" >{{cname.file_name}}</option>
                   </select>  
               </div> 
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">

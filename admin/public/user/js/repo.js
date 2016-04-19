@@ -73,7 +73,10 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
         });
     }; 
     a.add_folder = function(new_dir_id){
-    // a.logo_details = a.repodetails;
+
+     a.repodetails.new_dir_id = $("#new_dir_id").val();
+     //alert(JSON.stringify(a.repodetails, null, 4)); 
+    // return false;
       //var dir_name=a.repodetails.dir_name;
         //http://localhost/reedemer/admin/public/directory/store
         x.post("../directory/store",a.repodetails).success(function(response){
@@ -166,7 +169,7 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
           {
             var main_site_url=$("#main_site_url").val();
 
-            var redirect_url=main_site_url+'/user/dashboard#/repository/image_list';  
+            var redirect_url=main_site_url+'/user/dashboard#/repository/list';  
 
             $("#error_div").hide();
             $("#show_message").slideDown();

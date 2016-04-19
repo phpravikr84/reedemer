@@ -51,12 +51,23 @@
             <tbody>              
               <tr ng-if="repo_details.length > 0" ng-repeat="repo in repo_details">
                 <td>
-                  <i ng-if="repo.directory == 1" class="material-icons f-left">folder</i>
-                  <i ng-if="repo.directory == 0" class="material-icons f-left">collections</i>
+                  <span ng-if="repo.directory == 1">
+                    <i class="material-icons f-left">folder</i>
+                  </span>
+                  <span ng-if="repo.directory == 0">
+                    <i class="material-icons f-left">collections</i>
+                  </span>
                 </td>
                 <td>
-                  <a href="javascript:void(0);" data-ng-click="set_dir_id(repo.id)">{{repo.file_name}}</a>
-                </td>                
+                  <span ng-if="repo.directory == 1">
+                    <a href="javascript:void(0);" data-ng-click="set_dir_id(repo.id)">{{repo.file_name}}</a>                 
+                  </span>
+                  <span ng-if="repo.directory == 0">
+                    {{repo.file_name}}                
+                  </span>
+                </td>
+                
+                               
                 <td>
                   <img  ng-if="repo.status == 1" src="../images/active.png" width="20" />          
 
@@ -82,7 +93,7 @@
         </div>
       </div>
     </div>
-    <input type="text" name="dir_id" id="dir_id" value="" />
+    <input type="hidden" name="dir_id" id="dir_id" value="" />
   </div>
 
 </section>

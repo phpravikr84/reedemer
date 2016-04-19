@@ -67,7 +67,14 @@ class DirectoryController extends Controller {
 
 		$base_dir=$upload_dir."/".$created_by;
 		$directory_name=$request->get('dir_name');
-		
+		if($request->get('new_dir_id'))
+		{
+			$directory_id=$request->get('new_dir_id');
+		}
+		else
+		{
+			$directory_id=0;
+		}
 		//check if base folder exists
 		if(!file_exists($base_dir))
 		{
@@ -90,7 +97,7 @@ class DirectoryController extends Controller {
 		$directory_url=url()."/".$directory_name;
 
 		$directory = new Directory();
-		$directory->directory_id 		= 0;			
+		$directory->directory_id 		= $directory_id;			
 		$directory->original_name 		= $directory_name;	
 		$directory->file_name 		= $directory_name;				
 		$directory->directory_base_path 		= $base_dir."/".$directory_name;	
