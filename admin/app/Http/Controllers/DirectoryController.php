@@ -32,8 +32,7 @@ class DirectoryController extends Controller {
 	
 	public function postShow()
 	{
-		$directory = Directory::where('status',1)
-					 ->where('directory_id',0)
+		$directory = Directory::where('directory_id',0)
 					 ->orderBy('id','DESC')
 					 ->get();
 		return $directory;
@@ -220,5 +219,23 @@ class DirectoryController extends Controller {
 		//exit;
 		//dd($request->all());
 		//return $request;
+	}
+
+	public function getUpdatestatus($id)
+	{
+		$directory = Directory::find($id);
+		if($directory->status ==0)
+		{
+			$new_status=1;
+		}
+		else
+		{
+			$new_status=0;
+		}
+		$directory->status = $new_status;			
+		if($directory->save())
+		{
+			return 'success';
+		}
 	}
 }

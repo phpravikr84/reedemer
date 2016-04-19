@@ -114,6 +114,13 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
     // alert(JSON.stringify(dir_name, null, 4));
     }; 
 
+    a.update_status = function(itemId){
+      //a.details.id=itemId;
+      x.get("../directory/updatestatus/"+itemId).success(function(response){
+      });
+    }
+
+
     //console.log('data :: '+JSON.stringify(a.repodetails.dir_name, null, 4)); 
     a.delete_folder = function(itemId){
       var main_site_url=$("#main_site_url").val();   
