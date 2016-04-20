@@ -68,59 +68,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="{{ asset('/user/js/rating.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> 
 
-    <link rel="stylesheet" href="{{ asset('/css/rating.css') }}">
-    <script src="{{ asset('/user/js/rating.js') }}"></script>
-
-    <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> 
-
-    <!-- <script src="{{ asset('/user/js/jquery.bxslider.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('/css/jquery.bxslider.css') }}"> -->
-
-
-  <script>
- //  $(document).ready(function(){  
- //  $(function () {
- // alert("m");
- //    $("#rateYo").rateYo({
- //      rating: 3.6
- //    });
-   
- //  });
- //  });
-
-  </script>
-  <script type="text/javascript"> 
- // $(document).ready(function(){
-  
-   // alert("a");
-  // $('#logo_show').hide();  
-  // $('#slider1').hide(); 
-  // }); 
-   
-
-    //setTimeout(function() {      
-     // run_slider();
-    //}, 5000); 
-
-    function run_slider()
-    {      
-      // $("#slider1").show();
-      // $("#slider2").hide();
-      // $('#slider1').Thumbelina({
-      //   $bwdBut:$('#slider1 .left'),    // Selector to left button.
-      //   $fwdBut:$('#slider1 .right')    // Selector to right button.
-      // });  
-      //$('.bxslider').bxSlider({
-      //  minSlides: 3,
-       // maxSlides: 3,
-       // slideWidth: 170,
-       // slideMargin: 10
-    //  });           
-    }
-
-    
-  </script>
   @yield('scripts')
 </body>
 </html>

@@ -11,6 +11,7 @@ use App\Model\Logo;
 use App\Helper\vuforiaclient;
 use App\Helper\helpers;
 use Auth; 
+use File; 
 use Session ;
 use App\Model\Directory;
 
@@ -128,6 +129,7 @@ class DirectoryController extends Controller {
 	{		
 		
 		$directory = Directory::find($id);		
+		//dd($directory->directory_base_path);
 		//dd($directory->directory);
 		// $thubm_path=env('UPLOADS')."/inventory/thumb/";
 		// $medium_path=env('UPLOADS')."/inventory/medium/";
@@ -141,17 +143,32 @@ class DirectoryController extends Controller {
 		// {
 		// 	@unlink($medium_path.$inventory->campaign_image);
 		// }
-		// if(file_exists($original_path.$inventory->campaign_image))
-		// {
-		// 	@unlink($original_path.$inventory->campaign_image);
-		// }
-		if($directory->directory==1)
-		{
-			if (is_dir($directory->directory_base_path)) 
+		 if($directory->directory==1)
+		 {
+			$file=$directory->directory_base_path."/";
+			File::deleteDirectory($file);
+		 }
+		 else
+		 {
+		 	$file=$directory->directory_base_path."/".$directory->file_name;
+		 	if(file_exists($file))
 			{
-				rmdir($directory->directory_base_path);
+			 	//dd("M");
+				unlink($file);
 			}
-		}
+		 }
+		 
+		 //dd($file);
+		
+
+		// if($directory->directory==1)
+		// {
+		// 	if (is_dir($directory->directory_base_path)) 
+		// 	{
+		// 		rmdir($directory->directory_base_path);
+		// 	}
+		// }
+		//unlink();
 		//$directory->delete();
 		if($directory->delete())
 		{
@@ -164,8 +181,11 @@ class DirectoryController extends Controller {
 
 	public function postUpload(Request $request)
 	{
+		//dd($request->all());
+		$image_name=$request->input('image_name');
 		$dir_id=$request->input('dir_id');
 		$created_by=Auth::user()->id;
+		//dd($image_name);
 		if($dir_id)
 		{
 			$directory=Directory::find($dir_id);
@@ -191,15 +211,31 @@ class DirectoryController extends Controller {
 		//echo "PP".$file_name;
 		//die();
 		$extension = pathinfo($file_name, PATHINFO_EXTENSION);
-		$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
-
+		if($image_name)
+		{
+			$new_file_name = $image_name.'.'.$extension;
+		}
+		else
+		{
+			$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
+		}
+		$directory_url=url()."/".$original_path.$new_file_name;
+		$check_url=$original_path.$new_file_name;
+		//$directory_url="../../".$original_path.$new_file_name;
+		if (File::exists($check_url))		
+		{
+			return 'already_exists';
+			echo "has";
+		}
+		
+		//dd($directory_url);
 		$file_ori = $_FILES[ 'image_file' ][ 'tmp_name' ];
 		
 		move_uploaded_file($file_ori, "$original_path$new_file_name");		
 			
-		$directory_url=url()."/".$original_path.$new_file_name;
-		//dd($directory_url);
-
+		
+		
+		
 		$directory_save = new Directory();
 		$directory_save->directory_id 		= $dir_id;			
 		$directory_save->original_name 		= $_FILES[ 'image_file' ][ 'name' ];	

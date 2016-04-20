@@ -159,6 +159,7 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
       var token=$("#token").val(); 
       var data = new FormData($('form')[0]);
       data.append("dir_id",  $("#dir_id").val());  
+      data.append("image_name",  $("#image_name").val());
       $.ajax({
         url: '../directory/upload',
         type: "POST",
@@ -170,7 +171,7 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },        
         success: function(response){
-          //alert(data);
+         // alert(response);
 
           if(response=='success')
           {
@@ -185,6 +186,23 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
 
             setTimeout(function() { 
               window.location.href = redirect_url; 
+            }, 5000); 
+          }
+
+          if(response=='already_exists')
+          {
+            var main_site_url=$("#main_site_url").val();
+
+            var redirect_url=main_site_url+'/user/dashboard#/repository/list';  
+
+           $("#error_div").hide();
+           $("#show_message").slideDown();
+           $("#error_div").html("Image with same name already exists. <br /> Please try with a diffrent name.");
+           $("#error_div").show();
+           $("#success_div").hide();             
+
+            setTimeout(function() { 
+             // window.location.href = redirect_url; 
             }, 5000); 
           }
         }

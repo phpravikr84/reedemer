@@ -41,7 +41,7 @@
               <tr ng-if="inventory_details.length > 0" ng-repeat="inventory in inventory_details">
                 <td>{{inventory.inventory_name}}</td>
                 <td>                 
-                  <img src="{{file_path}}../uploads/inventory/original/{{inventory.inventory_image}}" width="80" /> -->
+                  <img ng-src="{{file_path}}../uploads/inventory/original/{{inventory.inventory_image}}" width="80" /> -->
                 </td>
                 <td>
                   {{inventory.sell_price}}
@@ -50,7 +50,7 @@
                   {{inventory.cost}}
                 </td>
                 <td id="row_{{inventory.id}}">                  
-                  <img class="delete_row" src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_inventory(inventory.id);" />
+                  <img class="delete_row" ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_inventory(inventory.id);" />
                 </td>
               </tr> 
               <tr ng-if="inventory_details.length == 0">
