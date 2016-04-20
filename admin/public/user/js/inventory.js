@@ -83,17 +83,17 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
       //  $("#success_div").show();
       //}
       //alert(a.Inventory.);
-      var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
-      if($.inArray(ext, ['jpg','jpeg']) == -1) {
-        $("#show_message").slideDown();
-        $("#error_div").html("Please upload only .jpg /.jpeg image.");
-        $("#error_div").show();
-        $("#success_div").hide();
+      // var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
+      // if($.inArray(ext, ['jpg','jpeg']) == -1) {
+      //   $("#show_message").slideDown();
+      //   $("#error_div").html("Please upload only .jpg /.jpeg image.");
+      //   $("#error_div").show();
+      //   $("#success_div").hide();
 
-        $('#add_inventory').prop('disabled', false);
-        $("#add_inventory").text('Save');
-        return false;
-      }
+      //   $('#add_inventory').prop('disabled', false);
+      //   $("#add_inventory").text('Save');
+      //   return false;
+      // }
       
 
       var uploadUrl = "../inventory/uploadlogo";  
