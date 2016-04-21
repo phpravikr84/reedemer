@@ -1,0 +1,70 @@
+<section class="text-fields" ng-controller="CampaignController" >
+  <div class="mdl-color--amber ml-header relative clear">
+    <div class="p-20">
+      <h3 class="mdl-color-text--white m-t-20 m-b-5">Update Campaign</h3>
+      <h4 class="mdl-color-text--amber-100 m-b-20 no-m-t w100">&nbsp;</h4>
+    </div>
+  </div>
+
+  <div class="mdl-grid mdl-grid--no-spacing">
+
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-color--grey-100">
+      <div class="p-40 p-r-20 p-20--small">
+        <div class=" mdl-color-text--blue-grey-400">
+          <h3>&nbsp;</h3>
+          <p>&nbsp;</p>          
+        </div>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">
+      <div class="p-20 ml-card-holder ml-card-holder-first">
+        <div class="mdl-card mdl-shadow--1dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">User Update Campaign</h2>
+          </div>
+          <div class="p-l-20 p-r-20 p-b-20" id="show_message" style="display:none">
+            <div id="success_div" class="alert alert-success">
+                
+            </div>
+             <div id="error_div" class="alert alert-danger">
+                
+            </div>
+          </div>
+
+          <div class="p-30">
+            <form name="edit_campaign" method="POST"   enctype="multipart/form-data">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <!-- <input id="c_name" ng-model="Campaign.c_name" class="mdl-textfield__input" type="text" id="c_name" />
+                <label class="mdl-textfield__label" for="c_name">Name</label> -->
+                <input id="c_name" ng-model="campaign_details[0].campaign_name" class="mdl-textfield__input" type="text" placeholder="Name" id="c_name"  />
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <!-- <input ng-model="Campaign.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly />
+                <label class="mdl-textfield__label" for="c_s_date">Start Date</label> -->
+                <input ng-model="c_start_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly placeholder="Start Date" style="width:50%" />
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                <!-- <input ng-model="Campaign.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly  />
+                <label class="mdl-textfield__label" for="c_e_date">End Date</label> -->
+                <input ng-model="c_end_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly placeholder="End Date" style="width:50%" />
+              </div>
+              <!-- <div class="mdl-textfield">
+                <p>Upload Image</p> 
+               <input type = "file" ng-model="Campaign.logo_name" file-model = "myFile" id="logo_name" />
+   
+              </div> -->
+              
+             
+              <div class="m-t-20">              
+                <button id="edit_campaign" type="submit" ng-click = "updateCampaign()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >
+                  Save          
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</section>
