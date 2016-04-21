@@ -38,25 +38,36 @@ class InventoryController extends Controller {
 		
 	}
 
-	public function postList()
+	public function postList(Request $request)
 	{		
+		//dd($request[0]);
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 
 		// Get current logged in user TYPE
 		$type=Auth::user()->type;
-		if($type==1)
-		{	
+		if($request[0]!="")
+		{
+			$id=$request[0];
 			$inventory=Inventory::where('status',1)
-					   ->orderBy('id','DESC')
-					   ->get();		
+						  ->where('id',$id)						 
+						  ->get();	
 		}
 		else
 		{
-			$inventory=Inventory::where('status',1)
-					  ->where('created_by',$created_by)
-					  ->orderBy('id','DESC')
-					  ->get();
+			if($type==1)
+			{	
+				$inventory=Inventory::where('status',1)
+						   ->orderBy('id','DESC')
+						   ->get();		
+			}
+			else
+			{
+				$inventory=Inventory::where('status',1)
+						  ->where('created_by',$created_by)
+						  ->orderBy('id','DESC')
+						  ->get();
+			}
 		}
 		return $inventory;	
 	}
@@ -187,5 +198,46 @@ class InventoryController extends Controller {
 				}
 			} //
 		}
+	}
+
+	public function postEditinventory(Request $request)
+	{
+		//dd($request[0]['campaign_name']);
+		//dd($request->all());
+		$inventory = Inventory::find($request[0]['id']);
+		//dd($request[0]['campaign_name']);
+
+		$inventory_name=$request[0]['inventory_name'];
+		$sell_price=$request[0]['sell_price'];
+		$cost=$request[0]['cost'];
+		//$updated_at=$request[0]['updated_at'];
+		//$campaign_image=$request->input('campaign_image');
+
+		// Get current logged in user ID
+		//$created_by=Auth::user()->id;
+		if($request[0]['id']=="")
+		{
+			return 'invalid_id';
+		}
+		else if($inventory_name=="" || $sell_price=="" || $cost=="")
+		{
+			return 'error';
+		}
+		else
+		{			
+			
+			$inventory->inventory_name 	= $inventory_name;			
+			$inventory->sell_price 		= $sell_price;	
+			$inventory->cost 			= $cost;			
+			if($inventory->save())
+			{
+				return 'success';
+			}
+			else
+			{
+				return 'error';
+			}			
+		}
+		
 	}
 }

@@ -44,13 +44,19 @@
               <tr ng-if="campaign_details.length > 0" ng-repeat="campaign in campaign_details">
                 <td>{{campaign.campaign_name}}</td>                
                 <td>
-                  {{campaign.start_date}}                  
+                  {{campaign.start_date.split('-')[1]+'/'+campaign.start_date.split('-')[2]+'/'+campaign.start_date.split('-')[0] }}   
+
                 </td>
-                <td>
-                  {{campaign.end_date}}
+                <td>                  
+                  {{campaign.end_date.split('-')[1]+'/'+campaign.end_date.split('-')[2]+'/'+campaign.end_date.split('-')[0] }} 
                 </td>
                 <td  id="row_{{campaign.id}}">                  
+                  <img class="delete_row" ng-src="{{file_path}}images/edit.png" width="20" style="cursor:pointer" data-ng-click="redirect_edit(campaign.id);" />
+
+                  
                   <img class="delete_row" ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_campaign(campaign.id);" />
+
+                  <!-- <img class="delete_row" ng-src="{{file_path}}images/edit.png" width="20" style="cursor:pointer" data-ng-click="redirect_edit(campaign.id);" /> -->  
                 </td>
               </tr> 
               <tr ng-if="campaign_details.length == 0">
@@ -66,7 +72,7 @@
         </div>
       </div>
     </div>
-
+    
   </div>
 
 </section>

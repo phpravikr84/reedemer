@@ -30,26 +30,36 @@ class CampaignController extends Controller {
 		
 	}
 	
-	public function postList()
+	public function postList(Request $request)
 	{		
+		//dd($request[0]);
 		// Get current logged in user ID
 		$created_by=Auth::user()->id;
 
 		// Get current logged in user TYPE
 		$type=Auth::user()->type;
-		
-		if($type==1)
+		if($request[0]!="")
 		{
+			$id=$request[0];
 			$campaign=Campaign::where('status',1)
-					  ->orderBy('id','DESC')
-					  ->get();		
+						  ->where('id',$id)						 
+						  ->get();	
 		}
 		else
 		{
-			$campaign=Campaign::where('status',1)
-					  ->where('created_by',$created_by)
-					  ->orderBy('id','DESC')
-					  ->get();		
+			if($type==1)
+			{
+				$campaign=Campaign::where('status',1)
+						  ->orderBy('id','DESC')
+						  ->get();		
+			}
+			else
+			{
+				$campaign=Campaign::where('status',1)
+						  ->where('created_by',$created_by)
+						  ->orderBy('id','DESC')
+						  ->get();		
+			}
 		}
 		return $campaign;	
 	}
@@ -142,6 +152,47 @@ class CampaignController extends Controller {
 			$campaign->end_date 		= $end_date;		
 			$campaign->status 			= 1;			
 			$campaign->created_by 		= $created_by;
+			if($campaign->save())
+			{
+				return 'success';
+			}
+			else
+			{
+				return 'error';
+			}			
+		}
+		
+	}
+
+	public function postEditcampaign(Request $request)
+	{
+		//dd($request[0]['campaign_name']);
+		//dd($request->all());
+		$campaign = Campaign::find($request[0]['id']);
+		//dd($request[0]['campaign_name']);
+
+		$campaign_name=$request[0]['campaign_name'];
+		$start_date=$request[0]['start_date'];
+		$end_date=$request[0]['end_date'];
+		//$updated_at=$request[0]['updated_at'];
+		//$campaign_image=$request->input('campaign_image');
+
+		// Get current logged in user ID
+		//$created_by=Auth::user()->id;
+		if($request[0]['id']=="")
+		{
+			return 'invalid_id';
+		}
+		else if($campaign_name=="" || $start_date=="" || $end_date=="")
+		{
+			return 'error';
+		}
+		else
+		{			
+			
+			$campaign->campaign_name 	= $campaign_name;			
+			$campaign->start_date 		= $start_date;	
+			$campaign->end_date 		= $end_date;			
 			if($campaign->save())
 			{
 				return 'success';

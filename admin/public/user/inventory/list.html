@@ -49,8 +49,11 @@
                 <td>
                   {{inventory.cost}}
                 </td>
-                <td id="row_{{inventory.id}}">                  
+                <td id="row_{{inventory.id}}"> 
+                  <img class="delete_row" ng-src="{{file_path}}images/edit.png" width="20" style="cursor:pointer" data-ng-click="redirect_edit(inventory.id);" />                 
                   <img class="delete_row" ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_inventory(inventory.id);" />
+
+
                 </td>
               </tr> 
               <tr ng-if="inventory_details.length == 0">
