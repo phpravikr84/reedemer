@@ -166,6 +166,8 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
      }
     }
 
+    
+
     a.redirect_edit=function(itemId){  
    // alert("a") ;
     //return false;
@@ -263,6 +265,13 @@ MyApp.controller('CampaignController',["$scope", "PlaceholderTextService", "ngTa
         }
         
       });
+    }
+
+    a.cancel_redirect=function(){ 
+      var main_site_url=$("#main_site_url").val();
+      $("#update_id").val(''); 
+      var redirect_url=main_site_url+'/user/dashboard#/campaign/list';
+      window.location.href = redirect_url; 
     }
 
     x.get("../admin/dashboard/show").success(function(response){

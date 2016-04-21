@@ -282,6 +282,20 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
     //  }
     }
 
+    /*a.cancel_redirect=function(){ 
+      var main_site_url=$("#main_site_url").val();
+      $("#update_id").val(''); 
+      var redirect_url=main_site_url+'/user/dashboard#/inventory/list';
+      window.location.href = redirect_url; 
+    }*/
+
+    a.cancel_redirect=function(folder_name){ 
+        var main_site_url=$("#main_site_url").val();
+        $("#update_id").val(''); 
+        var redirect_url=main_site_url+'/user/dashboard#/'+folder_name+'/list';
+        window.location.href = redirect_url; 
+   } 
+
     x.post("../admin/dashboard/show").success(function(response){
     
     for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                

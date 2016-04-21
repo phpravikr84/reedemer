@@ -24,6 +24,8 @@ function() {
         })
     }
 
+
+
     function b(a) {}
     angular.module("redeemar-app").config(["$routeProvider", a]).run(["$route", b])
 }(),
@@ -60,14 +62,18 @@ function() {
                 var c = new Event("input");
                 a._o.field.dispatchEvent(c)
             }
-            h.post("../admin/dashboard/userdetails")
-            .success(function (data) {                
-                a.ReedemerDetails=data;
-            }); 
+                        
            // alert("a");
            //$("#pp").html("uuu");
             // set path ../ for local and ../../ for server
-            //a.d_path=site_path;           
+            //a.d_path=site_path;      
+
+           
+
+            h.post("../admin/dashboard/userdetails")
+            .success(function (data) {                
+                a.ReedemerDetails=data;
+            });    
         } 
 
 
@@ -549,6 +555,7 @@ function() {
            // a.isDisabled = false;
           // alert(d_path);
           //alert("a");
+           
            $('#upload_button').prop('disabled', false);
            $("#upload_button").text('Save user');
             x.post("../admin/dashboard/logo").success(function(data_response){              
@@ -596,6 +603,9 @@ function() {
                fu.uploadFileToUrl(file, uploadUrl, a.Redeemer ); 
                                           ;
             };
+
+            
+
             a.delete_logo=function(itemId){ 
 
              var main_site_url=$('#main_site_url').val();
