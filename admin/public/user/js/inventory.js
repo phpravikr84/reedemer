@@ -162,8 +162,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
      // alert("V");
      // return false;
       var main_site_url=$('#main_site_url').val();
-     // $('#edit_campaign').prop('disabled', true);
-     // $("#edit_campaign").text('Saving..'); 
+      $('#edit_inventory').prop('disabled', true);
+      $("#edit_inventory").text('Saving..'); 
 
      
       var inventory_name=$('#inventory_name').val();
