@@ -205,9 +205,9 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
      {    
         $(".delete_row").hide();
         $("td#row_"+itemId).parent()
-    .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');   
-        alert(main_site_url+'/images/loader.gif');
-        return false;
+    .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/../images/loader.gif" /></td></tr>');   
+       // alert(main_site_url+'/../images/loader.gif');
+       // return false;
        x.get("../inventory/delete/"+itemId).success(function(response){
           window.location.reload();             
          // var redirect_url=main_site_url+'/user/dashboard#/inventory/list';
