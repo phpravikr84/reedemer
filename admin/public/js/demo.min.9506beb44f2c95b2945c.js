@@ -676,54 +676,135 @@ function() {
              }
             }
 
-            a.delete_logo=function(itemId){ 
+            a.redirect_edit=function(itemId){            
+              $("#update_id").val(itemId);              
+              var main_site_url=$("#main_site_url").val(); 
+              var edit_url=main_site_url+'/admin/dashboard#/tables/edit/';    
+              window.location.href = edit_url;             
+            }
+
+
+            a.edit_redeemar=function(){  
+             // alert("V");
+             // return false;
+              var main_site_url=$('#main_site_url').val();
+             // $('#edit_inventory').prop('disabled', true);
+             // $("#edit_inventory").text('Saving..'); 
+
              
+              // var inventory_name=$('#inventory_name').val();
+              // var sell_price=$('#sell_price').val();
+              // var cost=$('#cost').val();
+
+              //alert(JSON.stringify(a.redeemar_details,null,4));
+              //return false;
+              a.inventory_details= [{
+                                    'inventory_name':inventory_name,
+                                    'sell_price':sell_price,
+                                    'cost':cost,
+                                    'id':update_id
+                                  }]; 
+              //a.campaign_details.push('end_date':c_e_date); 
+
+              // var c_name=$("#c_name").val();
+              // var c_s_date=$("#c_s_date").val();
+              // var c_e_date=$("#c_e_date").val();
+
+              // var c_s_date_arr=$('#c_s_date').val().split('/');
+              // var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
+                 
+              // var c_e_date_arr=$('#c_e_date').val().split('/');
+              // var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
+              //a.c_name.push(c_name); 
+              //a.Campaignedit.push(c_s_date); 
+              //a.Campaignedit.push(c_e_date);
+             // a.Campaign.c_e_date = c_e_date; 
+             //alert()
+            // alert(JSON.stringify(a.inventory_details,null,4));
+            // return false;
+              x.post(main_site_url+"/inventory/editinventory",a.inventory_details).success(function(response){
+                var main_site_url=$("#main_site_url").val();                              
+                var redirect_url=main_site_url+'/user/dashboard#/inventory/list';
+                //alert(response);
+               // return false;
+                if(response=='success')
+                {
+                  $("#update_id").val('');
+                  //return false;
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#success_div").html("Data updated successfully. <br />Please wait,we will redirect you to listing page.");
+                  $("#success_div").show(); 
+
+
+                  setTimeout(function() { 
+                    window.location.href = redirect_url; 
+                  }, 5000);
+                }
+                else if(response=='invalid_id')
+                {
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#error_div").html("Error occoure! Please try again.");
+                  $("#error_div").show();
+                  $("#success_div").hide();
+
+                  setTimeout(function() { 
+                    window.location.href = redirect_url; 
+                  }, 2000);
+                }
+                else
+                {
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#error_div").html("Please insert all field.");
+                  $("#error_div").show();
+                  $("#success_div").hide(); 
+                }
+                
+              });
+            }
+
+
+            a.delete_logo=function(itemId){              
              if(confirm("Are you sure?"))
              {      
                $("#logo_"+itemId)
              .replaceWith('<tr class="msg_remove"><td colspan="5" class="center">Removing ...</td></tr>');
-             x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){
-                  //a.status=response;   
-                //  alert(itemId);
-               // alert("A");
-               // return false;
+             x.get("../admin/dashboard/deletelogo/"+itemId).success(function(response){                  
                   $("#logo_"+itemId).hide('500');  
                   $("#msg_div").show('500');
                   $(".msg_remove").hide('500');
-                    
-                              
-                 // window.location.reload();             
                })
              }
             }
-           
 
-           // setTimeout(function() { 
-                var site_path=$("#site_path").val();
-               // alert(site_path);
-                x.post("../admin/dashboard/show").success(function(response){
-                for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
-                        company_name: response[g].company_name,
-                        email: response[g].email,
-                        approve: response[g].approve,
-                        id: response[g].id
-                       // site_path:site_path
-                    });    
-                    //alert("m");{{file_path}}
-                    //alert(JSON.stringify(response, null, 4))    ;        
-                    a.cnames = response;
-                    a.file_path = site_path;
-                    var site_image_path=$('#site_image_path').val();
-                    //setTimeout(function() { 
-                    $("#spinner_icon").attr("src", site_image_path+'../../../images/spinner.gif')
-                    //}, 5000);  
-                    $("#pp2").show();
-                    $("#pp").hide();
-                   
-                
-                })
-          //  }, 5000);  
-
+            // a.redeemar_details= [{
+            //     'start_date':c_s_date,
+            //     'end_date':c_e_date,
+            //     'campaign_name':c_name,
+            //     'id':update_id
+            // }];
+            // alert(JSON.stringify(a.redeemar_details,null,4));
+            // return false;
+            var site_path=$("#site_path").val();               
+            x.post("../admin/dashboard/show",a.redeemar_details).success(function(response){
+            for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
+                    company_name: response[g].company_name,
+                    email: response[g].email,
+                    approve: response[g].approve,
+                    id: response[g].id 
+                                       
+                });
+                a.redeemar_details = response  ;
+               // alert(JSON.stringify(a.redeemar_details,null,4));
+                a.cnames = response;
+                a.file_path = site_path;
+                var site_image_path=$('#site_image_path').val();
+                $("#spinner_icon").attr("src", site_image_path+'../../../images/spinner.gif')
+                $("#pp2").show();
+                $("#pp").hide();
+            }) 
         }
 
         angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])

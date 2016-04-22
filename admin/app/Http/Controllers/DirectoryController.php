@@ -181,6 +181,38 @@ class DirectoryController extends Controller {
 
 	public function postUpload(Request $request)
 	{
+		$created_by=Auth::user()->id;
+		$upload_dir = env('UPLOADS');
+
+		$base_dir=$upload_dir."/".$created_by;
+		// $directory_name=$request->get('dir_name');
+		// if($request->get('new_dir_id'))
+		// {
+		// 	$directory_id=$request->get('new_dir_id');
+		// }
+		// else
+		// {
+		// 	$directory_id=0;
+		// }
+		//check if base folder exists
+		if(!file_exists($base_dir))
+		{
+			//create base folder
+			mkdir($base_dir, 0777);
+		}
+
+		// // check if folder exists
+		// if(!file_exists($base_dir."/".$directory_name))
+		// {	
+		// 	//create folder		
+		// 	mkdir($base_dir."/".$directory_name, 0777);
+		// }
+		// else
+		// {
+		// 	return 'folder_exists';
+		// }
+
+		//dd($base_dir);
 		//dd($request->all());
 		$image_name=$request->input('image_name');
 		$dir_id=$request->input('dir_id');
