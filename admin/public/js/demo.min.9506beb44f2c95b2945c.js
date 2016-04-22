@@ -733,12 +733,12 @@ function() {
                   //return false;
                   $("#error_div").hide();
                   $("#show_message").slideDown();
-                  $("#success_div").html("Data updated successfully. <br />Please wait,we will redirect you to listing page.");
+                  $("#success_div").html("Data updated successfully. <br />Please wait,we will reload this page.");
                   $("#success_div").show(); 
 
 
                   setTimeout(function() { 
-                    window.location.href = redirect_url; 
+                    window.location.reload();
                   }, 5000);
                 }
                 else if(response=='invalid_id')

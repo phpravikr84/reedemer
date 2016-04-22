@@ -41,24 +41,7 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
    
     var site_path=$("#site_path").val();
     var update_id =$("#update_id").val();
-    //$("#error_msg").hide('500');
-    //alert(a.addInventory);
-   // $('#add_inventory').prop('disabled', true);
-   //alert("b");
-   //$('input[type="submit"]').prop('disabled', true);
-  //$('#add_inventory').prop('disabled', true);
-  //$('#sell_price').keyup(function() {
-  //    if($(this).val() != '') {
-  //       $('#add_inventory').prop('disabled', false);
-  //    }
-  // });
-  
-  //var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
-  //if($.inArray(ext, ['jpg','jpeg']) == -1) {
-  //    alert('invalid extension!');
-  //}
-   //var site_path=$("#site_path").val();
-   //alert(site_path);
+    
    x.post("../inventory/list",update_id).success(function(data_response){              
         a.inventory_details = data_response; 
         a.file_path=site_path;  
@@ -69,33 +52,7 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
       //console.log('data :: '+JSON.stringify(a.Inventory, null, 4));   
       $('#add_inventory').prop('disabled', true);
       $("#add_inventory").text('Saving..');     
-      //var inventory_image = $('#inventory_image').val() ;
-      //alert(inventory_image);
-     // alert(a.Inventory.inventory_name);
-     // alert(a.Inventory.sell_price);
-     // alert(a.Inventory.cost);
-      //if(a.Inventory.inventory_name=='undefined' || a.Inventory.sell_price=='undefined' || a.Inventory.cost =='undefined')
-      //{
-        //$("#success_div").html("Data inserted successfully.");
-        //$("#msg_section").slideDown();
-        //$("#error_div").hide();
-      //  alert("ap");
-      //  $("#show_message").slideDown();
-      //  $("#success_div").html("Please insert all field.");
-      //  $("#success_div").show();
-      //}
-      //alert(a.Inventory.);
-      // var ext = $('#inventory_image').val().split('.').pop().toLowerCase();
-      // if($.inArray(ext, ['jpg','jpeg']) == -1) {
-      //   $("#show_message").slideDown();
-      //   $("#error_div").html("Please upload only .jpg /.jpeg image.");
-      //   $("#error_div").show();
-      //   $("#success_div").hide();
-
-      //   $('#add_inventory').prop('disabled', false);
-      //   $("#add_inventory").text('Save');
-      //   return false;
-      // }
+      
       
 
       var uploadUrl = "../inventory/uploadlogo";  
@@ -114,7 +71,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
           }
          // alert(fdata.data);
           var logo_name = fdata.data;
-          //alert(logo_name);
+         // alert(logo_name);
+         // return false;
           a.Inventory.inventory_image = logo_name; 
           var main_site_url=$('#main_site_url').val();
 
@@ -127,11 +85,12 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
 
               $("#error_div").hide();
               $("#show_message").slideDown();
-              $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+              $("#success_div").html("Data inserted successfully. <br />Please wait,we will reload this page.");
               $("#success_div").show();              
 
               setTimeout(function() { 
-                window.location.href = redirect_url; 
+                window.location.reload();
+                //window.location.href = redirect_url; 
               }, 5000); 
             }
             else if(response=='image_not')
@@ -151,8 +110,8 @@ MyApp.controller('InventoryController',["$scope", "PlaceholderTextService", "ngT
               $("#error_div").show();
               $("#success_div").hide();              
             }
-            $('#add_inventory').prop('disabled', false);
-            $("#add_inventory").text('Save');
+           // $('#add_inventory').prop('disabled', false);
+           // $("#add_inventory").text('Save');
           })
       });
     };
