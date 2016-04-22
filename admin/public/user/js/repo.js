@@ -129,7 +129,7 @@ MyApp.controller('RepoController',["$scope", "PlaceholderTextService", "ngTableP
       {    
         $(".delete_row").hide();
         $("td#row_"+itemId).parent()
-        .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');   
+        .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/../images/loader.gif" /></td></tr>');   
         // return false;
         x.get("../directory/delete/"+itemId).success(function(response){
 
