@@ -14,6 +14,19 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 	public function handle($request, Closure $next)
 	{
+		//return parent::handle($request, $next);
+		//disable CSRF check on following routes
+  		$skip = array(
+					'redeemar/store'					
+					);
+
+		foreach ($skip as $key => $route) {
+			//skip csrf check on route			
+			if($request->is($route)){
+				return parent::addCookieToResponse($request, $next($request));
+			}
+		}
+
 		return parent::handle($request, $next);
 	}
 
