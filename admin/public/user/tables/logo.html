@@ -43,9 +43,10 @@
                   <img ng-src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" />
                 </td>
                 <td ng-if="logo.tracking_rating >= 0">
-                  {{logo.tracking_rating}}
+                  {{logo.tracking_rating}}{{file_path}}
                 </td>
                 <td ng-if="logo.tracking_rating < 0">
+                 
                   <img ng-src="{{file_path}}images/spinner.gif" />
                 </td>
                 <td>
