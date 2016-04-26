@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
 use Illuminate\Http\Response; 
 use App\Model\User;
+use App\Model\Token;
 use Hash;
 use Validator;
 use App\Model\Logo;
@@ -48,20 +49,72 @@ class RedeemarController extends Controller {
 		
 	}
 
-	
+	public function getGeneratetoken($length = 10)
+	{
+		$token = Token::first();
+		$total_token=Token::count();
+		//dd($total_token);
+
+		$characters = '!@#$%^&*()[]{}0123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+		    $randomString .= $characters[rand(0, $charactersLength - 1)];		    
+		}		    
+		if($total_token >0)
+		{
+			$token->token_value	= $randomString;	
+			$token->status 		= 1;	
+			if($token->save())
+			{
+				return $randomString;				
+			}
+		}
+		else
+		{
+		    $token = new Token();
+			$token->token_value	= $randomString;			
+			$token->status 		= 1;	
+			if($token->save())
+			{
+				return 'added';
+			}
+		}
+		//return $response;
+	}
 	/**
 	 * add user to the system.
 	 *
 	 * @return Response
 	*/
+
+	public function getToken($length = 10)
+	{
+		$token = Token::first();
+		return $token->token_value;
+	}
 	
 	
 	// Register user as reedemer
 	public function postStore(Request $request)
 	{
-		//dd("a");
-		//dd($request->all());
-
+		//echo $this->getToken();
+		//exit;
+		$token_value=$request->input('token_value');
+		$token_value_db=$this->getToken();
+		$error=0;
+		if($token_value=="")
+		{
+			$response['success']='false';
+			$response['message']='Token is missing';
+			$error=1;
+		}
+		if($token_value!=$token_value_db)
+		{
+			$response['success']='false';
+			$response['message']='Token not match with our db';
+			$error=1;
+		}
 		$company_name = $request->input('company_name');
 		$address 	  = $request->input('address');
 		$email 		  = $request->input('email');
@@ -71,24 +124,74 @@ class RedeemarController extends Controller {
 		$type         = 2;
 		$approve 	  = 0;
 		
-		$user = new User();
-		$user->company_name	= $company_name;			
-		$user->address 		= $address;	
-		$user->email 		= $email;	
-		$user->web_address 	= $web_address;	
-		$user->owner 		= $owner;	
-		$user->type 		= $type;			
-		$user->approve 		= $approve;		
-		$user->password = bcrypt($password);
-		if($user->save())
+		if($company_name=="")
 		{
-			return true;
+			$response['success']='false';
+			$response['message']='Company name is missing';
+			$error=1;
 		}
+		if($address=="")
+		{
+			$response['success']='false';
+			$response['message']='Address is missing';
+			$error=1;
+		}
+
+		if($web_address=="")
+		{
+			$response['success']='false';
+			$response['message']='Web address is missing';
+			$error=1;
+		}
+		if($password=="")
+		{
+			$response['success']='false';
+			$response['message']='Password is missing';
+			$error=1;
+		}
+		
+		if($error==0)
+		{
+			$check_user = User::where('email',$email)->count();
+			$check_company = User::where('company_name',strtolower($company_name))->count();
+
+			if ($check_user >0) {
+
+				$response['success']='false';
+				$response['message']='Email already registered with us';			   
+			}
+			else if ($check_company >0) {
+
+				$response['success']='false';
+				$response['message']='Company name already registered with us';			   
+			}
+			else
+			{
+				$user = new User();
+				$user->company_name	= $company_name;			
+				$user->address 		= $address;	
+				$user->email 		= $email;	
+				$user->web_address 	= $web_address;	
+				$user->owner 		= $owner;	
+				$user->type 		= $type;			
+				$user->approve 		= $approve;		
+				$user->password = bcrypt($password);
+				if($user->save())
+				{
+					$response['success']='true';
+					$response['message']='User added successfully';
+				}
+				else
+				{
+					$response['success']='false';
+					$response['message']='User added successfully';
+				}
+			}
+		}
+
+		$response['message']=htmlspecialchars(ltrim($response['message'],' & '));	
+		
+		return $response;
 	}
-
-	 
-
-	
-
 	
 }
