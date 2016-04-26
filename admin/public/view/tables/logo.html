@@ -51,16 +51,14 @@
 
                    
                 </td>
-                <td ng-if="logo.tracking_rating >= 0">
-                  {{logo.tracking_rating}}
+                <td ng-if="logo.tracking_rating >= 0" > 
+                   <span class="rating-static rating-{{logo.tracking_rating*10}}"></span>
                 </td>
                 <td ng-if="logo.tracking_rating < 0">
                   <img ng-src="{{file_path}}images/spinner.gif" /> 
                  
                 </td>
-               <!--  <td>
-                  {{logo.logo_text}}
-                </td> -->
+               
                 <td>
                    <img ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
@@ -72,9 +70,9 @@
                       
           </table>
         </div>
-        <div class="tags m-t-20 f-right">
+        <!-- <div class="tags m-t-20 f-right">
           <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#/tables/add_logo">Add</a>
-        </div>
+        </div> -->
       </div>
     </div>
 
