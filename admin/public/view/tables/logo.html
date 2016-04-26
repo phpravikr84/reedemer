@@ -54,9 +54,9 @@
                 <td ng-if="logo.tracking_rating >= 0">
                   {{logo.tracking_rating}}
                 </td>
-                <td ng-if="logo.tracking_rating < 0">
-                  <!-- <img src="{{file_path}}images/spinner.gif" /> -->
-                  <img id="spinner_icon" ng-src="../../uploads/blank-img-1.png"  />
+                <td ng-if="logo.tracking_rating < 0">{{file_path}}
+                  <img src="{{file_path}}images/spinner.gif" /> 
+                 
                 </td>
                <!--  <td>
                   {{logo.logo_text}}

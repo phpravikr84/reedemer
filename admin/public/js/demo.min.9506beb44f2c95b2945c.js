@@ -547,7 +547,7 @@ function() {
             // show all uploaded logo in admin panel
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;                
-               // a.file_path=site_path;
+                file_path=site_path;
                 
             });
                   
