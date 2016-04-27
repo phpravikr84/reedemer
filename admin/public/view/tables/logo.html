@@ -41,7 +41,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" dir-paginate="logo in logo_details|itemsPerPage:5">
+              <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" dir-paginate="logo in logo_details|itemsPerPage:10">
                 <td>{{logo.logo_text}}</td>                
                 <td>
                   <img ng-src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" /> 

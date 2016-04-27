@@ -38,7 +38,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-if="inventory_details.length > 0"   dir-paginate="inventory in inventory_details|itemsPerPage:2">
+              <tr ng-if="inventory_details.length > 0"   dir-paginate="inventory in inventory_details|itemsPerPage:10">
                 <td>{{inventory.inventory_name}}</td>
                 <td>                 
                   <img ng-src="{{file_path}}../uploads/inventory/original/{{inventory.inventory_image}}" width="80" /> 
