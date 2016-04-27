@@ -41,7 +41,7 @@
               </tr>
             </thead>
             <tbody>              
-              <tr ng-if="campaign_details.length > 0" ng-repeat="campaign in campaign_details">
+              <tr ng-if="campaign_details.length > 0"  dir-paginate="campaign in campaign_details|itemsPerPage:2" >
                 <td>{{campaign.campaign_name}}</td>                
                 <td>
                   {{campaign.start_date.split('-')[1]+'/'+campaign.start_date.split('-')[2]+'/'+campaign.start_date.split('-')[0] }}   
@@ -59,6 +59,15 @@
                   <!-- <img class="delete_row" ng-src="{{file_path}}images/edit.png" width="20" style="cursor:pointer" data-ng-click="redirect_edit(campaign.id);" /> -->  
                 </td>
               </tr> 
+              <tr>
+                <td colspan="4" class="text-center">
+                  <dir-pagination-controls
+                    max-size="7"
+                    direction-links="true"
+                    boundary-links="true" >
+                  </dir-pagination-controls>
+                </td>
+              </tr>
               <tr ng-if="campaign_details.length == 0">
                 <td class="center" colspan="5">No data present</td>                
               </tr> 

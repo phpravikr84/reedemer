@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/jquery.rateyo.css') }}">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> 
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}"> 
   <!-- IE Compatibility shims -->
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js""></script>
@@ -66,13 +68,12 @@
   <script src="{{ asset('/user/js/repo.js') }}"></script>
   <script src="{{ asset('/user/js/logo.js') }}"></script>
   <script src="{{ asset('/user/js/promotion.js') }}"></script>
-  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="{{ asset('/user/js/rating.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> 
-
+  <script src="{{ asset('/js/jquery-1.12.0.min.js') }}"></script>
+  <script src="{{ asset('/js/jquery.rateyo.min.js') }}"></script>
+  <script src="{{ asset('/js/jquery-1.10.2.js') }}"></script>
+  <script src="{{ asset('/js/jquery-ui.js') }}"></script>
+  <script src="{{ asset('/user/js/rating.js') }}"></script>  
+  <script src="{{ asset('/js/dirPagination.js') }}"></script>
   @yield('scripts')
 </body>
 </html>

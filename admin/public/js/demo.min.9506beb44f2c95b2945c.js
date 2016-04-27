@@ -1,7 +1,7 @@
 ! function() {
     "use strict";
     
-    angular.module("redeemar-app", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule"])
+    angular.module("redeemar-app", ["app.constants", "ngRoute", "ngAnimate", "ngSanitize", "angular.mdl", "ml.chat", "ml.menu", "ml.svg-map", "ml.todo", "ui.select", "ngFileUpload", "ngWig", "pikaday", "ngPlaceholders", "ngTable", "uiGmapgoogle-maps", "gridshore.c3js.chart", "angularGrid", "LocalStorageModule","angularUtils.directives.dirPagination"])
 }(),
 function() {
     "use strict";
@@ -540,6 +540,9 @@ function() {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
+             a.currentPage = 0;
+            a.pageSize = 5;
+
             var site_path=$("#site_path").val();
 
             a.img_file_path =site_path;
@@ -547,8 +550,7 @@ function() {
             // show all uploaded logo in admin panel
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;                
-                a.file_path=site_path;
-                
+                a.file_path=site_path;  
             });
                   
             // Upload logo by admin

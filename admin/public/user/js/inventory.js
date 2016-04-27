@@ -1,7 +1,7 @@
 
 "use strict";
 
-var MyApp = angular.module("inventory-app", ["ngFileUpload"]);
+var MyApp = angular.module("inventory-app", ["ngFileUpload","angularUtils.directives.dirPagination"]);
 
 
 

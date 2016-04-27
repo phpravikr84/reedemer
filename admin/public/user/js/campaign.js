@@ -1,7 +1,7 @@
 
 "use strict";
 
-var MyApp = angular.module("campaign-app", ["ngFileUpload"]);
+var MyApp = angular.module("campaign-app", ["ngFileUpload","angularUtils.directives.dirPagination"]);
 
 
 

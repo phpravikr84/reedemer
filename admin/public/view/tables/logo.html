@@ -41,35 +41,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" ng-repeat="logo in logo_details">
-                <td>{{logo.logo_text}}</td>
-                <!-- <td>{{logo.reedemer_company}}</td> -->
+              <tr id="logo_{{logo.id}}" ng-if="logo_details.length > 0" dir-paginate="logo in logo_details|itemsPerPage:5">
+                <td>{{logo.logo_text}}</td>                
                 <td>
-                 
-
                   <img ng-src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" /> 
-
-                   
                 </td>
                 <td ng-if="logo.tracking_rating >= 0" > 
                    <span class="rating-static rating-{{logo.tracking_rating*10}}"></span>
                 </td>
                 <td ng-if="logo.tracking_rating < 0">
                   <img ng-src="{{file_path}}images/spinner.gif" /> 
-                 
-                </td>
-               
+                </td>               
                 <td>
                    <img ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>
-              </tr> 
-              <tr ng-if="logo_details.length == 0">
-                <td class="center" colspan="5">No data present</td>                
-              </tr>           
+              </tr>
+              <tr>
+                <td colspan="4" class="text-center">
+                  <dir-pagination-controls
+                    max-size="7"
+                    direction-links="true"
+                    boundary-links="true" >
+                  </dir-pagination-controls>
+                </td>
+              </tr>
             </tbody>
                       
           </table>
         </div>
+        
+      </div>
         <!-- <div class="tags m-t-20 f-right">
           <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#/tables/add_logo">Add</a>
         </div> -->

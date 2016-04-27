@@ -36,7 +36,7 @@
             </tr>
             </thead>
             <tbody>
-              <tr ng-if="cnames.length > 0" ng-repeat="item in cnames">
+              <tr ng-if="cnames.length > 0"  dir-paginate="item in cnames|itemsPerPage:5">
                 <td>{{item.company_name}}</td>
                 <td>{{item.email}}</td>
                 <td> 
@@ -50,6 +50,15 @@
                   <img class="delete_row" ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_reedemer(item.id);" />
                 </td>
               </tr> 
+              <tr>
+                <td colspan="4" class="text-center">
+                  <dir-pagination-controls
+                    max-size="7"
+                    direction-links="true"
+                    boundary-links="true" >
+                  </dir-pagination-controls>
+                </td>
+              </tr>
               <tr ng-if="cnames.length == 0">
                 <td class="center" colspan="5">No data present</td>                
               </tr> 

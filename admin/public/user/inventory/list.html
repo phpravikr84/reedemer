@@ -38,7 +38,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-if="inventory_details.length > 0" ng-repeat="inventory in inventory_details">
+              <tr ng-if="inventory_details.length > 0"   dir-paginate="inventory in inventory_details|itemsPerPage:2">
                 <td>{{inventory.inventory_name}}</td>
                 <td>                 
                   <img ng-src="{{file_path}}../uploads/inventory/original/{{inventory.inventory_image}}" width="80" /> 
@@ -52,10 +52,17 @@
                 <td id="row_{{inventory.id}}"> 
                   <img class="delete_row" ng-src="{{file_path}}images/edit.png" width="20" style="cursor:pointer" data-ng-click="redirect_edit(inventory.id);" />                 
                   <img class="delete_row" ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_inventory(inventory.id);" />
-
-
                 </td>
               </tr> 
+              <tr>
+                <td colspan="4" class="text-center">
+                  <dir-pagination-controls
+                    max-size="7"
+                    direction-links="true"
+                    boundary-links="true" >
+                  </dir-pagination-controls>
+                </td>
+              </tr>
               <tr ng-if="inventory_details.length == 0">
                 <td class="center" colspan="5">No data present</td>                
               </tr>            
