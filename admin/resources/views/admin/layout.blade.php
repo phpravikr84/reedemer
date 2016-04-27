@@ -41,6 +41,7 @@
   </div>
   <input type="hidden" name="main_site_url" id="main_site_url" value="{{ url() }}" />
   <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />
+  <input type="hidden" name="update_id" id="update_id" value="" />
   @yield('content')
  
   <script src="{{ asset('/js/vendors.min.c95e87841078c8095acf.js') }}"></script>

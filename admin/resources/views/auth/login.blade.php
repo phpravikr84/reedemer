@@ -39,9 +39,9 @@
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
             Login
           </button>
-          <button type="button" onclick='redirect_url()' class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          <!-- <button type="button" onclick='redirect_url()' class="mdl-button mdl-js-button mdl-js-ripple-effect">
             Register
-          </button>
+          </button> -->
           </div>
 
         {!! Form::close() !!}
@@ -54,9 +54,9 @@
 @endsection
 @section('scripts')
   <script >
-  function redirect_url()
-  {   
-    window.location.href={!! json_encode(url('/user/add')) !!};
-  }
+  //function redirect_url()
+  //{   
+    //window.location.href={!! json_encode(url('/user/add')) !!};
+  //}
   </script>
 @endsection

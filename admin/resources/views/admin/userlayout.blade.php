@@ -50,10 +50,8 @@
   <!-- <div id="app" class="app" ng-include="'{{ asset('/tpl/demo/app.html') }}'"></div> -->
   <div class="demo-layout mdl-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
     <ml-header></ml-header><!-- This directive uses the partial: src/tpl/demo/partials/header.html -->
-
     <ml-sidebar></ml-sidebar><!-- This directive uses the partial: src/tpl/demo/partials/sidebar.html -->
     <main class="mdl-layout__content mdl-color--grey-100 page" ng-view></main>   
-    
   </div>
   <input type="hidden" name="main_site_url" id="main_site_url" value="{{ url() }}" />
   <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />

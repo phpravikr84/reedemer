@@ -33,9 +33,22 @@ class DirectoryController extends Controller {
 	
 	public function postShow()
 	{
-		$directory = Directory::where('directory_id',0)
-					 ->orderBy('id','DESC')
-					 ->get();
+		$id=Auth::user()->id;
+		// Get current logged in user TYPE
+		$type=Auth::user()->type;
+		if($type==1)
+		{
+			$directory = Directory::where('directory_id',0)
+						 ->orderBy('id','DESC')
+						 ->get();
+		}
+		else
+		{
+			$directory = Directory::where('directory_id',0)
+						 ->where('created_by',$id)
+						 ->orderBy('id','DESC')
+						 ->get();
+		}
 		return $directory;
 	}
 

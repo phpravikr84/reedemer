@@ -540,10 +540,11 @@ function() {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
-             a.currentPage = 0;
+            a.currentPage = 0;
             a.pageSize = 5;
 
             var site_path=$("#site_path").val();
+            var update_id =$("#update_id").val();
 
             a.img_file_path =site_path;
            
@@ -603,16 +604,8 @@ function() {
                   
                   //alert(response);
                   if(response=="success")
-                  {
-                    //a.show_success_msg=true;
-                    //a.Redeemer.company_name = null; 
-                    //a.Redeemer.email = null;               
-                    //a.Redeemer.password = null;  
-
-                    //$('#add_reedemer').prop('disabled', false);
-                    //$("#add_reedemer").text('Save User');
-                    var main_site_url=$("#main_site_url").val();
-                                    
+                  {                    
+                    var main_site_url=$("#main_site_url").val();                                    
                     var redirect_url=main_site_url+'/admin/dashboard#/tables/list'; 
 
                     $("#error_div").hide();
@@ -625,10 +618,7 @@ function() {
                     }, 5000);
                   }
                   else if(response=="email_exists")
-                  {                    
-                    //a.show_error_msg=true;
-                    //$('#add_reedemer').prop('disabled', false);
-                    //$("#add_reedemer").text('Save User'); 
+                  {
                     $("#error_div").hide();
                     $("#show_message").slideDown();
                     $("#error_div").html("Email already exists.Please try with diffrent email.");
@@ -639,18 +629,36 @@ function() {
                     $("#add_reedemer").text('Save user');     
                   }
                   else
-                {
-                    $("#error_div").hide();
-                    $("#show_message").slideDown();
-                    $("#error_div").html("Please insert all field.");
-                    $("#error_div").show();
-                    $("#success_div").hide();
+                  {
+                      $("#error_div").hide();
+                      $("#show_message").slideDown();
+                      $("#error_div").html("Please insert all field.");
+                      $("#error_div").show();
+                      $("#success_div").hide();
 
-                    $('#add_reedemer').prop('disabled', false);
-                    $("#add_reedemer").text('Save user');     
-                }
+                      $('#add_reedemer').prop('disabled', false);
+                      $("#add_reedemer").text('Save user');     
+                  }
                })
             }
+
+            a.view_item=function(itemId){ 
+                var main_site_url=$("#main_site_url").val();
+                var url_link=main_site_url+'/admin/dashboard#/tables/view/';   
+
+                window.location.href = url_link;  
+
+                //x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
+
+                //});
+            } 
+            a.cancel_redirect=function(folder_name){ 
+                var main_site_url=$("#main_site_url").val();
+                $("#update_id").val(''); 
+                var redirect_url=main_site_url+'/admin/dashboard#/'+folder_name+'/list';
+                
+                window.location.href = redirect_url; 
+            } 
 
             a.update_status=function(itemId,itemStatus){ 
 
@@ -668,11 +676,8 @@ function() {
                 $(".delete_row").hide();
                 $("td#row_"+itemId).parent()
                 .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
-               // alert("a");
-               // return false;
-
+               
                x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
-                  //a.status=response;                 
                   window.location.reload();             
                })
              }
@@ -686,49 +691,26 @@ function() {
             }
 
 
-            a.edit_redeemar=function(){  
-             // alert("V");
-             // return false;
-              var main_site_url=$('#main_site_url').val();
-             // $('#edit_inventory').prop('disabled', true);
-             // $("#edit_inventory").text('Saving..'); 
+            a.edit_redeemar=function(){
+              var main_site_url=$('#main_site_url').val();   
+              var company_name=$('#company_name').val();
+              var web_address=$('#web_address').val();
+              var email=$('#email').val();          
+              var address=$('#address').val();              ;
 
-             
-              // var inventory_name=$('#inventory_name').val();
-              // var sell_price=$('#sell_price').val();
-              // var cost=$('#cost').val();
-
-              //alert(JSON.stringify(a.redeemar_details,null,4));
-              //return false;
               a.inventory_details= [{
-                                    'inventory_name':inventory_name,
-                                    'sell_price':sell_price,
-                                    'cost':cost,
+                                    'company_name':company_name,
+                                    'web_address':web_address,
+                                    'email':email,
+                                    'address':address,
                                     'id':update_id
                                   }]; 
-              //a.campaign_details.push('end_date':c_e_date); 
-
-              // var c_name=$("#c_name").val();
-              // var c_s_date=$("#c_s_date").val();
-              // var c_e_date=$("#c_e_date").val();
-
-              // var c_s_date_arr=$('#c_s_date').val().split('/');
-              // var c_s_date = c_s_date_arr[2]+'-'+c_s_date_arr[0]+'-'+c_s_date_arr[1];
-                 
-              // var c_e_date_arr=$('#c_e_date').val().split('/');
-              // var c_e_date = c_e_date_arr[2]+'-'+c_e_date_arr[0]+'-'+c_e_date_arr[1];
-              //a.c_name.push(c_name); 
-              //a.Campaignedit.push(c_s_date); 
-              //a.Campaignedit.push(c_e_date);
-             // a.Campaign.c_e_date = c_e_date; 
-             //alert()
             // alert(JSON.stringify(a.inventory_details,null,4));
             // return false;
-              x.post(main_site_url+"/inventory/editinventory",a.inventory_details).success(function(response){
+              x.post(main_site_url+"/admin/dashboard/editredeemar",a.inventory_details).success(function(response){
                 var main_site_url=$("#main_site_url").val();                              
-                var redirect_url=main_site_url+'/user/dashboard#/inventory/list';
-                //alert(response);
-               // return false;
+                var redirect_url=main_site_url+'/admin/dashboard#/tables/list';
+                
                 if(response=='success')
                 {
                   $("#update_id").val('');
@@ -740,7 +722,8 @@ function() {
 
 
                   setTimeout(function() { 
-                    window.location.reload();
+                   // window.location.reload();
+                    window.location.href = redirect_url; 
                   }, 5000);
                 }
                 else if(response=='invalid_id')
@@ -790,7 +773,7 @@ function() {
             // alert(JSON.stringify(a.redeemar_details,null,4));
             // return false;
             var site_path=$("#site_path").val();               
-            x.post("../admin/dashboard/show",a.redeemar_details).success(function(response){
+            x.post("../admin/dashboard/show",update_id).success(function(response){
             for (var e = [], f = response.length-1, g = 1; f >= g; g++) e.push({                
                     company_name: response[g].company_name,
                     email: response[g].email,

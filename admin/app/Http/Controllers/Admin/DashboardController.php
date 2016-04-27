@@ -75,22 +75,49 @@ class DashboardController extends Controller {
     	//return redirect()->back();
 	}
 
-	public function postShow()
+	public function postShow(Request $request)
 	{
-		$id=Auth::user()->id;
-		$type=Auth::user()->type;
+		//dd($request->all());
 
-		//dd($id);
-		if($type!=1)
+		$id=Auth::user()->id;
+		$created_by=Auth::user()->id;
+
+		// Get current logged in user TYPE
+		$type=Auth::user()->type;
+		if($request[0]!="")
 		{
-			$user=User::where('id',$id)->orderBy('id','DESC')->get();	
+			$id=$request[0];
+			$user=User::where('status',1)
+						  ->where('id',$id)						 
+						  ->get();	
 		}
 		else
 		{
-			$user=User::where('type',2)->orderBy('id','DESC')->get();		
-					
+			if($type==1)
+			{	
+				$user=User::where('type',2)->orderBy('id','DESC')->get();			
+			}
+			else
+			{
+				$user=User::where('id',$id)->orderBy('id','DESC')->get();	
+			}
 		}
-		return $user;
+
+
+		// $id=Auth::user()->id;
+		// $type=Auth::user()->type;
+
+		// dd($id);
+		// if($type!=1)
+		// {
+		// 	$user=User::where('id',$id)->orderBy('id','DESC')->get();	
+		// }
+		// else
+		// {
+		// 	$user=User::where('type',2)->orderBy('id','DESC')->get();		
+					
+		// }
+		 return $user;
 	}
 
 	public function getStatusupdate($id,$approve)
@@ -155,7 +182,7 @@ class DashboardController extends Controller {
 		{
 			return 'success';
 		}*/
-		if($request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
+		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
 		{
 			return 'error';
 			exit;
@@ -179,9 +206,11 @@ class DashboardController extends Controller {
 			// create the data for our user
 			$user = new User();
 			$user->company_name 		= $request->input('company_name');			
+			$user->address 		= $request->input('address');
 			$user->type 		= 2;			
 			$user->approve 		= 1;
 			$user->email 		= $request->input('email');
+			$user->web_address 		= $request->input('web_address');
 			$user->password = bcrypt($request->input('password'));
 			$user->save();
 				
@@ -529,6 +558,49 @@ class DashboardController extends Controller {
 		}
 	}
 
+	public function postEditredeemar(Request $request)
+	{
+		//dd($request[0]['campaign_name']);
+		//dd($request->all());
+		//dd($request[0]['id']);
+
+
+		$user = User::find($request[0]['id']);		
+
+		$company_name=$request[0]['company_name'];
+		$web_address=$request[0]['web_address'];		
+		$address=$request[0]['address'];
+		$id=$request[0]['id'];
+		
+		if($request[0]['id']=="")
+		{
+			return 'invalid_id';
+		}
+		else if($company_name=="" || $web_address=="" || $address=="")
+		{
+			return 'error';
+		}
+		else
+		{			
+			
+			$user->company_name 	= $company_name;			
+			$user->web_address 	= $web_address;							
+			$user->address 		= $address;	
+			if($user->save())
+			{
+				return 'success';
+			}
+			else
+			{
+				return 'error';
+			}			
+		}
+		
+		
+	}
+
+
+	
 
 	
 }
