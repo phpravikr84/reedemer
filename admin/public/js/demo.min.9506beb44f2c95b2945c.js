@@ -549,9 +549,31 @@ function() {
             a.img_file_path =site_path;
            
             // show all uploaded logo in admin panel
+            // var t_val ='';
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;                
-                a.file_path=site_path;  
+                a.file_path=site_path; 
+
+               // if(data_response[0]['tracking_rating']<0)
+               // {
+                //    var t_val = 'rating-static rating-'+data_response[g]['tracking_rating']*10;                  
+                    //$('#div_'+data_value[g]['id']).html(data_value[g]['tracking_rating']);
+                // $('#div_'+data_response[g]['id']).html('<span class="'+t_val+'"></span>');
+
+                //alert(JSON.stringify(data_response[0]['tracking_rating'],null,4)) ;
+                if(data_response[0]['tracking_rating']<0)
+                {
+                    setTimeout(function() { 
+                  
+                        x.get("../cron/updaterating").success(function(data_new){
+                            x.post("../admin/dashboard/logo").success(function(data_value){       
+                            a.logo_details = data_value;                
+                            a.file_path=site_path;
+                        });
+                            });
+                   // http://localhost/reedemer/admin/public/cron/updaterating
+                    }, 10000);
+                }
             });
                   
             // Upload logo by admin
@@ -601,8 +623,10 @@ function() {
                $("#add_reedemer").text('Saving..'); 
 
                x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
-                  
-                  //alert(response);
+                 // $('#add_reedemer').prop('disabled', false);
+                 // $("#add_reedemer").text('Save'); 
+                  //alert(JSON.stringify(response, null, 4));
+                  //return false;
                   if(response=="success")
                   {                    
                     var main_site_url=$("#main_site_url").val();                                    

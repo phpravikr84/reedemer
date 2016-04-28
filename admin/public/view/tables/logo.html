@@ -46,12 +46,13 @@
                 <td>
                   <img ng-src="{{file_path}}../uploads/original/{{logo.logo_name}}" width="80" /> 
                 </td>
-                <td ng-if="logo.tracking_rating >= 0" > 
+                <td  id="div_{{logo.id}}" ng-if="logo.tracking_rating >= 0" > 
                    <span class="rating-static rating-{{logo.tracking_rating*10}}"></span>
                 </td>
-                <td ng-if="logo.tracking_rating < 0">
+                <td  id="div_{{logo.id}}" ng-if="logo.tracking_rating < 0">
                   <img ng-src="{{file_path}}images/spinner.gif" /> 
-                </td>               
+                </td>   
+                            
                 <td>
                    <img ng-src="{{file_path}}images/delete.png" width="20" style="cursor:pointer" data-ng-click="delete_logo(logo.id);" />
                 </td>

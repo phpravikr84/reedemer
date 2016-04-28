@@ -11,8 +11,8 @@ use DateTimeZone;
 
 class vuforiaclient {
     const JSON_CONTENT_TYPE = 'application/json';
-    const ACCESS_KEY = '75fbf9bf5b6aa7529fbef7e7f38910797e5a2723';
-    const SECRET_KEY = 'ed6e6e81cdd198a44c709cd0f9d890c459835a78';
+    //const ACCESS_KEY = '75fbf9bf5b6aa7529fbef7e7f38910797e5a2723';
+    //const SECRET_KEY = 'ed6e6e81cdd198a44c709cd0f9d890c459835a78';
     const BASE_URL = 'https://vws.vuforia.com';
     const TARGETS_PATH = '/targets';
     const ID_INDEX = 0;
@@ -20,6 +20,15 @@ class vuforiaclient {
     const WINE_COM_URL = 2;
     const VINTAGE = 3;
     const WINERY_NAME = 4;
+
+    //public function __construct(  )
+   // {
+       // $access_key="75fbf9bf5b6aa7529fbef7e7f38910797e5a2723";
+       // $secret_key="ed6e6e81cdd198a44c709cd0f9d890c459835a78";
+        //$this->dashboard = $dashboard;
+      //$this->middleware('auth');
+      //dd("Ag");
+   // } 
 
     public function addTarget($row) {
        // dd("v");
@@ -118,8 +127,8 @@ class vuforiaclient {
         $dateString = $date->format("D, d M Y H:i:s") . " GMT";
         $md5 = md5($body, false);
         $string_to_sign = $method . "\n" . $md5 . "\n" . $content_type . "\n" . $dateString . "\n" . $path;
-        $signature = $this->hexToBase64(hash_hmac("sha1", $string_to_sign, self::SECRET_KEY));
-        $headers[] = 'Authorization: VWS ' . self::ACCESS_KEY . ':' . $signature;
+        $signature = $this->hexToBase64(hash_hmac("sha1", $string_to_sign, getenv('SECRET_KEY')));
+        $headers[] = 'Authorization: VWS ' . getenv('ACCESS_KEY') . ':' . $signature;
         $headers[] = 'Content-Type: ' . $content_type;
         $headers[] = 'Date: ' . $dateString;
         return $headers;
