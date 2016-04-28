@@ -31,26 +31,26 @@ img.emoji {
 	padding: 0 !important;
 }
 </style>
-<link rel='stylesheet' id='contact-form-7-css'  href='http://159.203.91.38/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.1' type='text/css' media='all' />
-<link rel='stylesheet' id='acf-fonticonpicker-icons-css'  href='http://159.203.91.38/wp-content/themes/couponhut/inc/includes/acf-fonticonpicker/icons/style.css?ver=4.4.2' type='text/css' media='all' />
-<link rel='stylesheet' id='fw-ext-breadcrumbs-add-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/framework-customizations/extensions/breadcrumbs/static/css/style.css?ver=4.4.2' type='text/css' media='all' />
-<link rel='stylesheet' id='fw-ext-builder-frontend-grid-css'  href='http://159.203.91.38/wp-content/plugins/unyson/framework/extensions/builder/static/css/frontend-grid.css?ver=1.2.0' type='text/css' media='all' />
-<link rel='stylesheet' id='fw-ext-forms-default-styles-css'  href='http://159.203.91.38/wp-content/plugins/unyson/framework/extensions/forms/static/css/frontend.css?ver=2.5.2' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_owl-carousel-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/owl.carousel.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_font-awesome-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/font-awesome.min.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_icomoon-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/icomoon.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_videojs-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/video-js.min.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_bigvideo-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/bigvideo.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='ssd_master-css-css'  href='http://159.203.91.38/wp-content/themes/couponhut/assets/css/master.css?ver=1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='um_minified-css'  href='http://159.203.91.38/wp-content/plugins/ultimate-member/assets/css/um.min.css?ver=1.3.49' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='{{env('SITE_PATH')}}../plugins/contact-form-7/includes/css/styles.css?ver=4.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='acf-fonticonpicker-icons-css'  href='{{env('SITE_PATH')}}../themes/couponhut/inc/includes/acf-fonticonpicker/icons/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='fw-ext-breadcrumbs-add-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/framework-customizations/extensions/breadcrumbs/static/css/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='fw-ext-builder-frontend-grid-css'  href='{{env('SITE_PATH')}}../plugins/unyson/framework/extensions/builder/static/css/frontend-grid.css?ver=1.2.0' type='text/css' media='all' />
+<link rel='stylesheet' id='fw-ext-forms-default-styles-css'  href='{{env('SITE_PATH')}}../plugins/unyson/framework/extensions/forms/static/css/frontend.css?ver=2.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_owl-carousel-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/owl.carousel.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_font-awesome-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/font-awesome.min.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_icomoon-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/icomoon.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_videojs-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/video-js.min.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_bigvideo-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/bigvideo.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ssd_master-css-css'  href='{{env('SITE_PATH')}}../themes/couponhut/assets/css/master.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='um_minified-css'  href='{{env('SITE_PATH')}}../plugins/ultimate-member/assets/css/um.min.css?ver=1.3.49' type='text/css' media='all' />
 <link rel='stylesheet' id='dashicons-css'  href='http://159.203.91.38/wp-includes/css/dashicons.min.css?ver=4.4.2' type='text/css' media='all' />
 <link rel='stylesheet' id='thickbox-css'  href='http://159.203.91.38/wp-includes/js/thickbox/thickbox.css?ver=4.4.2' type='text/css' media='all' />
-<link rel='stylesheet' id='front_end_youtube_style-css'  href='http://159.203.91.38/wp-content/plugins/youtube-video-player/fornt_end/styles/baze_styles_youtube.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='front_end_youtube_style-css'  href='{{env('SITE_PATH')}}../plugins/youtube-video-player/fornt_end/styles/baze_styles_youtube.css?ver=4.4.2' type='text/css' media='all' />
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
 <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.exp&#038;sensor=false&#038;ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/google-map.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/plugins/youtube-video-player/fornt_end/scripts/youtube_embed_front_end.js?ver=4.4.2'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/google-map.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../plugins/youtube-video-player/fornt_end/scripts/youtube_embed_front_end.js?ver=4.4.2'></script>
 <script type='text/javascript' src='https://www.youtube.com/iframe_api?ver=4.4.2'></script>
 <link rel='canonical' href='http://159.203.91.38/index.php/contact/' />
 <link rel='https://api.w.org/' href='http://159.203.91.38/wp-json/' />
@@ -63,8 +63,8 @@ img.emoji {
 
 		<script type="text/javascript">
 
-		var ultimatemember_image_upload_url = 'http://159.203.91.38/wp-content/plugins/ultimate-member/core/lib/upload/um-image-upload.php';
-		var ultimatemember_file_upload_url = 'http://159.203.91.38/wp-content/plugins/ultimate-member/core/lib/upload/um-file-upload.php';
+		var ultimatemember_image_upload_url = '{{env('SITE_PATH')}}../plugins/ultimate-member/core/lib/upload/um-image-upload.php';
+		var ultimatemember_file_upload_url = '{{env('SITE_PATH')}}../plugins/ultimate-member/core/lib/upload/um-file-upload.php';
 		var ultimatemember_ajax_url = 'http://159.203.91.38/wp-admin/admin-ajax.php';
 
 		</script>
@@ -366,35 +366,35 @@ h6,
 	</div>
 	
 </div><script type='text/javascript' src='http://159.203.91.38/wp-includes/js/comment-reply.min.js?ver=4.4.2'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
 var _wpcf7 = {"loaderUrl":"http:\/\/159.203.91.38\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Sending ..."};
 /* ]]> */
 </script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.1'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../plugins/contact-form-7/includes/js/scripts.js?ver=4.4.1'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/ui/mouse.min.js?ver=1.11.4'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/ui/slider.min.js?ver=1.11.4'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/bootstrap.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/SmoothScroll.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/owl.carousel.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/imagesloaded.pkgd.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/video.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/jquery.countdown.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/hoverIntent.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/superfish.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/isotope.pkgd.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/jquery.slicknav.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/clipboard.min.js?ver=1.0'></script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/bigvideo.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/bootstrap.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/SmoothScroll.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/owl.carousel.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/imagesloaded.pkgd.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/video.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/jquery.countdown.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/hoverIntent.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/superfish.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/isotope.pkgd.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/jquery.slicknav.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/clipboard.min.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/bigvideo.js?ver=1.0'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
 var couponhut = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","expired":"Expired!","day":"day","days":"days","hour":"hour","hours":"hours","minute":"minute","minutes":"minutes","loading_deals":"Loading deals...","no_deals":"No deals found.","nonce":"82c50e591d"};
 /* ]]> */
 </script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/themes/couponhut/assets/js/scripts.js?ver=1.0'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../themes/couponhut/assets/js/scripts.js?ver=1.0'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/masonry.min.js?ver=3.1.2'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/jquery/jquery.masonry.min.js?ver=3.1.2'></script>
 <script type='text/javascript'>
@@ -402,7 +402,7 @@ var couponhut = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","e
 var um_scripts = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","fileupload":"http:\/\/159.203.91.38\/wp-content\/plugins\/ultimate-member\/core\/lib\/upload\/um-file-upload.php","imageupload":"http:\/\/159.203.91.38\/wp-content\/plugins\/ultimate-member\/core\/lib\/upload\/um-image-upload.php"};
 /* ]]> */
 </script>
-<script type='text/javascript' src='http://159.203.91.38/wp-content/plugins/ultimate-member/assets/js/um.min.js?ver=1.3.49'></script>
+<script type='text/javascript' src='{{env('SITE_PATH')}}../plugins/ultimate-member/assets/js/um.min.js?ver=1.3.49'></script>
 <script type='text/javascript'>
 /* <![CDATA[ */
 var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"http:\/\/159.203.91.38\/wp-includes\/js\/thickbox\/loadingAnimation.gif"};
