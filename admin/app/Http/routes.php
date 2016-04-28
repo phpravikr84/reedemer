@@ -25,7 +25,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 Route::get('home', 'HomeController@index');
-Route::get('partner', 'PartnerController@index');
+Route::controller('/partner', 'PartnerController');
 
 //Route::post('auth', 'AuthController@autheticate');
 
