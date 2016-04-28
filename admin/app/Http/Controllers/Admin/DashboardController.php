@@ -197,10 +197,10 @@ class DashboardController extends Controller {
 		if ($validator->fails()) {				
 			$messages = $validator->messages();
 			// redirect our user back to the form with the errors from the validator			
-			/*return redirect()->back()
+			return redirect()->back()
 							 ->withInput($request->only('company_name'))
-							 ->withErrors('Please insert all field');*/
-			return 'email_exists';		
+							 ->withErrors('Please insert all field');
+			//return $messages;		
 			exit;	
 		} else {
 			// create the data for our user

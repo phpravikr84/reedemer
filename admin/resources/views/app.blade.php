@@ -70,7 +70,7 @@ img.emoji {
 		</script>
 
 	
-		<style type="text/css">.request_name { display: none !important; }</style>
+<style type="text/css">.request_name { display: none !important; }</style>
 
 	
 <style type="text/css">
@@ -318,7 +318,7 @@ h6,
 
 
 </style>
-
+@yield('styles')
 
 
 </head>
@@ -326,56 +326,7 @@ h6,
 
 
 <div class="navigation-wrapper">
-	<div class="container">
-		<div class="col-sm-3">
-			<div class="site-logo">
-				<a href="http://159.203.91.38/">
-											<img src="//159.203.91.38/wp-content/uploads/2016/04/reedemerlogo.png" alt="">
-											</a>
-				</div>
-		</div><!-- end col-sm-3 -->
-		<div class="col-sm-9">
-						<nav id="main-navigation" class="main-navigation">
-				    	<ul id="menu-menu-1" class="is-slicknav"><li id="menu-item-384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-384"><a href="http://159.203.91.38/">Home</a>
-<ul class="sub-menu">
-	<li id="menu-item-928" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-928"><a href="http://159.203.91.38/index.php/front-page-image/">Front Page &#8211; Image</a></li>
-	<li id="menu-item-927" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-927"><a href="http://159.203.91.38/index.php/front-page-alternative/">Front Page &#8211; Alternative</a></li>
-</ul>
-</li>
-<li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650"><a href="http://159.203.91.38/index.php/deals/">Deals</a></li>
-<li id="menu-item-1348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1348"><a href="http://159.203.91.38/index.php/partners/">Partners</a></li>
-<li id="menu-item-619" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-619"><a href="http://159.203.91.38/index.php/shops/">Shops</a></li>
-<li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="http://159.203.91.38/index.php/categories/">Categories</a></li>
-<li id="menu-item-704" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-409 current_page_item menu-item-704"><a href="http://159.203.91.38/index.php/contact/">Contact</a></li>
-<li id="menu-item-465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-465"><a href="http://159.203.91.38/index.php/blog/">Blog</a></li>
-<li id="menu-item-626" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-626"><a href="#">Pages</a>
-<ul class="sub-menu">
-	<li id="menu-item-1340" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1340"><a href="http://159.203.91.38/index.php/about-ir/">ABOUT IR</a></li>
-	<li id="menu-item-629" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-629"><a href="http://159.203.91.38/index.php/popular-deals/">Popular Deals</a></li>
-	<li id="menu-item-623" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-623"><a href="http://159.203.91.38/index.php/expiring-deals/">Expiring Deals</a></li>
-	<li id="menu-item-638" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-638"><a href="http://159.203.91.38/index.php/full-width/">Full Width</a></li>
-	<li id="menu-item-632" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-632"><a href="//localhost:3000/couponhut/deal/404/">404</a></li>
-</ul>
-</li>
-<li id="menu-item-1306" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1306"><a href="#"><i class="icon-User"></i></a>
-<ul class="sub-menu">
-	<li id="menu-item-1307" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1307"><a href="http://159.203.91.38/admin/public/index.php/auth/login">LOG IN</a></li>
-	<li id="menu-item-1308" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1308"><a href="#">REGISTER</a></li>
-</ul>
-</li>
-
-		<li class="menu-item-has-children">
-							<a href=""><i class='icon-User'></i></a>
-						<ul class="sub-menu">
-								<li><a href="">Log In</a></li>
-				<li><a href="">Register</a></li>
-							</ul>
-		</li>
-    	</ul>				</nav>
-					</div><!-- end col-sm-9 -->
-
-	</div><!-- end container -->
-	
+	@include('layout.nav')
 </div><!-- end navigation-wrapper -->
 <div class="nav-offset"></div>
 
@@ -386,7 +337,7 @@ h6,
 		
 		<div class="split-section-col">
 			<div class="content-contact">
-				sdfsd
+				@yield('content')
 			</div><!-- end content-contact -->
 			
 		</div>
@@ -396,56 +347,7 @@ h6,
 
 
 <footer class="footer">	
-					<div class="bg-image parallax" data-bgimage="//159.203.91.38/wp-content/uploads/2016/04/footer-bg.jpg"></div>
-		<div class="overlay-dark"></div>
-		
-	<div class="container footer-wrapper">
-		<div class="row">
-
-			<div class="col-md-3 col-sm-12"><div id="text-2" class="widget clearfix widget_text">			<div class="textwidget"><p>App Store Google play<br />
-© 2015 redeemar, Inc.<br />
-Apple, iPad, iPhone, iPod touch, and iTunes are<br />
-trademarks of Apple Inc., registered in the U.S. and other countries.<br />
-App Store is a service mark of Apple Inc.<br />
-Terms of use Privacy</p>
-</div>
-		</div></div><div class="col-md-3 col-sm-12"><div id="image-3" class="widget clearfix widget_image"><div class="image-widget-wrapper widget-list">			<img width="164" height="57" src="http://159.203.91.38/wp-content/uploads/2016/04/iphone.png" class="attachment-ssd_widget-bgimage size-ssd_widget-bgimage" alt="iphone" />		</div><!-- end image-widget-wrapper --></div><div id="text-6" class="widget clearfix widget_text">			<div class="textwidget">
-<ul>
-<li><a href="#"> About redeemar </a></li>
-<li><a href="#">  Why Choose Us </a></li>
-<li><a href="#">  Testimonials </a></li>
- <li><a href="#"> Track My Offer </a></li>
-<li><a href="#">  Contact Us </a></li>
-</ul>
-</div>
-		</div></div><div class="col-md-3 col-sm-12"><div id="text-3" class="widget clearfix widget_text">			<div class="textwidget"><img src="http://159.203.91.38/wp-content/uploads/2016/04/google-play.png" alt=""/></div>
-		</div><div id="text-7" class="widget clearfix widget_text">			<div class="textwidget">
-<ul>
-<li><a href="#">   FAQ</a></li>
-<li><a href="#">   Returns </a></li>
-<li><a href="#">   Privacy Policy </a></li>
- <li><a href="#">  Terms of Use</a></li>
-<li><a href="#">  Secure Payments </a></li>
-</ul></div>
-		</div></div><div class="col-md-3 col-sm-12"><div id="text-4" class="widget clearfix widget_text">			<div class="textwidget"><img src="http://159.203.91.38/wp-content/uploads/2016/04/rar.png" alt=""/></div>
-		</div><div id="text-5" class="widget clearfix widget_text">			<div class="textwidget"><h3 class="font_3" style="font-size: 18px; max-width: 99.9000015258789%;">
-    <span class="color_11">
-        <span style="font-weight: bold;">
-            CUSTOMER CARE
-        </span>
-</h3>
-<p style="max-width: 99.9000015258789%style;">phone1-888-979-2656</p></div>
-		</div></div><div class="clear"></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<section class="copyright">
-					&copy; 2016 Redeemer. All rights reserved.				</section>
-			</div>
-		</div>
-		
-
-	</div><!-- end container -->
+	@include('layout.footer')
 </footer>
 
 
@@ -508,9 +410,8 @@ var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","c
 </script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/thickbox/thickbox.js?ver=3.1-20121105'></script>
 <script type='text/javascript' src='http://159.203.91.38/wp-includes/js/wp-embed.min.js?ver=4.4.2'></script>
+<script type="text/javascript">jQuery( '#request' ).val( '' );</script>
 
-		<script type="text/javascript">jQuery( '#request' ).val( '' );</script>
-
-	
+@yield('scripts')	
 </body>
 </html>

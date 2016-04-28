@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Auth;
+use App\Model\Logo;
 class PartnerController extends Controller {
 
 	/*
@@ -38,7 +39,16 @@ class PartnerController extends Controller {
 	 */
 	public function index()
 	{
-		return view('partner.list');
+		$logo_details=Logo::where('status',1)
+					  ->orderBy('id','DESC')
+					  ->get();
+					 // dd($logo_details->toArray());
+		$url=url();
+		
+		return view('partner.list',[
+						'logo_details' =>$logo_details,
+						'url' =>$url
+				   ]);
 	}
 
 }
