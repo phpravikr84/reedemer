@@ -7,7 +7,7 @@
 	<!-- Open Graph -->
 	<meta property="og:site_name" content="Redeemar"/><meta property="og:description" content="THE APP"/><meta property="og:image" content="//159.203.91.38/wp-content/uploads/2016/04/reedemerlogo.png" /><meta property="og:type" content="website" />
     
-<link rel="stylesheet" href="{{env('SITE_PATH')}}wp-content/themes/couponhut/style.css" type="text/css" />
+<link rel="stylesheet" href="{{env('SITE_PATH')}}../wp-content/themes/couponhut/style.css" type="text/css" />
     <title>Contact &#8211; Redeemar</title>
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 <link rel="alternate" type="application/rss+xml" title="Redeemar &raquo; Feed" href="http://159.203.91.38/index.php/feed/" />
