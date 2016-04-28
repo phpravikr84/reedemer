@@ -10,7 +10,7 @@
     	@foreach($logo_details as $logo)
         <div class="item  col-md-4 col-xs-4">
             <div class="thumbnail">
-                <img class="group list-group-image" src="../uploads/original/{{$logo->logo_name}}" alt="" />                
+                <img class="group list-group-image" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}" alt="" />                
             </div>
         </div>
         @endforeach
