@@ -48,6 +48,22 @@ class PartnerController extends Controller {
 	 */
 	public function getIndex()
 	{
+		//echo $search;
+		$logo_details=Logo::where('status',1)
+					  ->orderBy('id','DESC')
+					  ->get();					 
+		$url=url();
+		
+		return view('partner.list',[
+						'logo_details' =>$logo_details,
+						'url' =>$url
+				   ]);
+	}
+
+	public function postSearch(Request $request)
+	{
+		//dd($request->all());
+		//exit;
 		$logo_details=Logo::where('status',1)
 					  ->orderBy('id','DESC')
 					  ->get();					 
@@ -104,13 +120,24 @@ class PartnerController extends Controller {
 		{
 			$reedemer_id = $result_arr->reedemer_id;
 
-			$logo=Logo::find($logo_id);
-			$logo->reedemer_id 	= $reedemer_id;	
-			$logo->save();
-			
-			Session::flash('message', $result_arr->message);
+			if($logo_id==0)
+			{
+				//dd("a");
+				//redirect()->route('login');
+				return Redirect('partner/addlogo/'.$reedemer_id)->with('reedemer_id',$reedemer_id);
+			}
+			else
+			{
+				
 
-			return Redirect::back();
+				$logo=Logo::find($logo_id);
+				$logo->reedemer_id 	= $reedemer_id;	
+				$logo->save();
+				
+				Session::flash('message', $result_arr->message);
+
+				return Redirect::back();
+			}
 		}
 
 		
@@ -143,5 +170,15 @@ class PartnerController extends Controller {
 		//dd($wptoken->toArray());
 		return $wptoken;
 	}
+
+	public function getAddlogo($reedemer_id)
+	{
+		//getAddlogoecho $reedemer_id;
+		 return view('partner.addlogo',[
+		 				'reedemer_id' =>$reedemer_id
+		 		   ]);
+	}
+
+	
 
 }
