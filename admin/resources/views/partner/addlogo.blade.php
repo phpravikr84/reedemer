@@ -40,13 +40,14 @@
 				</div>
 				
 				<div class="um-col-alt">
-					<div class="um-left um-half">
+					<!-- <div class="um-left um-half">
 						<input type="submit" id="register" class="um-button" value="Register">
 					</div>
 					<div class="um-right um-half">
 						
 					</div>
-					<div class="um-clear"></div>
+					<div class="um-clear"></div> -->
+					<p>Yet to add this functionality</p>
 				</div>
 			</form>
 		</div>       
