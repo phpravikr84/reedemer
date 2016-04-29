@@ -30,7 +30,7 @@
 						<p>Yet to implement this functionality</p>	
 					</div>
 				</div>				
-				<div class="um-col-alt">
+				<!-- <div class="um-col-alt">
 					<div class="um-left um-half">
 						<input type="submit" id="upload" class="um-button" value="Upload File">
 					</div>
@@ -38,7 +38,7 @@
 						
 					</div>
 					<div class="um-clear"></div>
-				</div>
+				</div> -->
 			</form>
 		</div>       
     </div> 
