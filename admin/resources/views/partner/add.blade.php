@@ -125,6 +125,10 @@
     	<p>
     		Existing owners sign in
     	</p>
+    	<p>
+    		<button onclick="window.location='{{url()}}/auth/login'" type="button" class="btn btn-primary">Sign In</button>
+    		<!-- <input type="button" id="sign_in" class="um-button" value="Sign In">-->
+    	</p>
     </div>
 </div>
 @endsection

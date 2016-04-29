@@ -333,9 +333,9 @@ class DashboardController extends Controller {
 			
 	}
 
-	public function getAddlogo()
+	public function getAddlogo($logo_text='',$image_name,$enhance_logo=0)
 	{	
-	dd("a")	;
+	
 		$id=Auth::user()->id;
 		$type=Auth::user()->type;		
 		if($type==2)

@@ -21,24 +21,33 @@
 				</div>
 			@endif
 
-			<form name="add_user" id="add_user" action="{{url()}}/partner/store" method="POST" enctype="multipart/form-data">
+			<form name="add_user" id="add_user" action="{{url()}}/admin/dashboard/addlogo" method="get" enctype="multipart/form-data">
 				<input type="hidden" name="logo_id" value="">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="um-row _um_row_1 ">
 					<div class="um-col-1">
 						
-						<p>Yet to implement this functionality</p>	
+						<div class="um-field um-field-user_login um-field-text">
+							<div class="um-field-label">
+								<label for="company_name">Upload Logo</label>
+								<div class="um-clear"></div>
+							</div>
+							<div class="um-field-area">
+								<input type="file" name="logo_image" value="" />
+							</div>
+						</div>	
 					</div>
-				</div>				
-				<!-- <div class="um-col-alt">
+				</div>
+				
+				<div class="um-col-alt">
 					<div class="um-left um-half">
-						<input type="submit" id="upload" class="um-button" value="Upload File">
+						<input type="submit" id="register" class="um-button" value="Register">
 					</div>
 					<div class="um-right um-half">
 						
 					</div>
 					<div class="um-clear"></div>
-				</div> -->
+				</div>
 			</form>
 		</div>       
     </div> 
@@ -52,6 +61,10 @@
     	</p>
     	<p>
     		Existing owners sign in
+    	</p>
+    	<p>
+    		<button onclick="window.location='{{url()}}/auth/login'" type="button" class="btn btn-primary">Sign In</button>
+    		<!-- <input type="button" id="sign_in" class="um-button" value="Sign In">-->
     	</p>
     </div>
 </div>
@@ -69,6 +82,6 @@
 
         
 
-    });
+   // });
 </script>
 @endsection
