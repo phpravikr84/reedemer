@@ -97,9 +97,7 @@ class RedeemarController extends Controller {
 	
 	// Register user as reedemer
 	public function postStore(Request $request)
-	{
-		//echo $this->getToken();
-		//exit;
+	{		
 		$token_value=$request->input('token_value');
 		$token_value_db=$this->getToken();
 		$error=0;
@@ -120,7 +118,9 @@ class RedeemarController extends Controller {
 		$email 		  = $request->input('email');
 		$web_address  = $request->input('web_address');
 		$password     = $request->input('password');
+		$confirm_user_password     = $request->input('confirm_user_password');
 		$owner 		  = $request->input('owner');
+		$create_offer_permission 		  = $request->input('create_offer_permission');
 		$type         = 2;
 		$approve 	  = 0;
 		
@@ -143,10 +143,22 @@ class RedeemarController extends Controller {
 			$response['message']='Web address is missing';
 			$error=1;
 		}
-		if($password=="")
+		if(strlen($password) <6)
 		{
 			$response['success']='false';
-			$response['message']='Password is missing';
+			$response['message']='Password must be atleast 6 character long';
+			$error=1;
+		}
+		if($confirm_user_password=="")
+		{
+			$response['success']='false';
+			$response['message']='Retype password again';
+			$error=1;
+		}
+		if($password!=$confirm_user_password)
+		{
+			$response['success']='false';
+			$response['message']='Password not match with Retype password';
 			$error=1;
 		}
 		
@@ -173,6 +185,7 @@ class RedeemarController extends Controller {
 				$user->email 		= $email;	
 				$user->web_address 	= $web_address;	
 				$user->owner 		= $owner;	
+				$user->create_offer_permission 		= $create_offer_permission;
 				$user->type 		= $type;			
 				$user->approve 		= $approve;		
 				$user->password = bcrypt($password);

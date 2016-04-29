@@ -1,10 +1,14 @@
 <?php namespace App\Http\Controllers;
 use Auth;
 use App\Model\Logo;
+use App\Model\Wptoken;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
 use Illuminate\Http\Response; 
+use Redirect;
+use Session;
+
 
 class PartnerController extends Controller {
 
@@ -46,8 +50,7 @@ class PartnerController extends Controller {
 	{
 		$logo_details=Logo::where('status',1)
 					  ->orderBy('id','DESC')
-					  ->get();
-					 // dd($logo_details->toArray());
+					  ->get();					 
 		$url=url();
 		
 		return view('partner.list',[
@@ -58,8 +61,7 @@ class PartnerController extends Controller {
 
 	public function getAdd($logo_id)
 	{	
-		$logo_details=Logo::where('id',$logo_id)->first();	
-		//dd($logo_details->toArray());
+		$logo_details=Logo::where('id',$logo_id)->first();			
 		return view('partner.add',[
 						'logo_id' =>$logo_id,
 						'logo_details' =>$logo_details
@@ -67,10 +69,9 @@ class PartnerController extends Controller {
 	}
 
 	public function postStore(Request $request)
-	{
-		//dd($request->get('company_name'));
-		//dd($request->all());
-
+	{		
+		$wptoken=$this->getWptoken();
+		
 		// Data Array
 		$data = array(
 			'company_name' => urlencode($request->get('company_name')),
@@ -78,17 +79,33 @@ class PartnerController extends Controller {
 			'email' => urlencode($request->get('user_email')),
 			'web_address' => urlencode($request->get('web_address')),
 			'password' => urlencode($request->get('user_password')),
-			'owner' => urlencode('1'),
-			'token_value' => '76EJVZh$Q$'
+			'confirm_user_password' => urlencode($request->get('confirm_user_password')),
+			'owner' => urlencode($request->get('owner')),
+			'create_offer_permission' => urlencode($request->get('create_offer_permission')),
+			'token_value' => $wptoken->token_value
 		);
 
-
-		$url = 'http://localhost/reedemer/admin/public/redeemar/store';
+		
+		$url = getenv('WEBSERVICE_PATH');
 		$result= $this->post_to_url($url, $data);
 		$result_arr=json_decode($result);
-		//print_r($kk);
-		echo $result_arr->success."<br>";
-		echo $result_arr->message."<br>";
+		
+		if($result_arr->success=='false')
+		{
+			return redirect()->back()	
+					->withInput($request->only('company_name','address','user_email', 'web_address'))								
+					->withErrors([
+						'message' => $result_arr->message,
+					]);
+		}
+		else
+		{
+			Session::flash('message', $result_arr->message);
+
+			return Redirect::back();
+		}
+
+		
 
 
 	}
@@ -111,6 +128,12 @@ class PartnerController extends Controller {
 
 	    curl_close($post);
 	    return $result;
+	}
+
+	public function getWptoken() {
+		$wptoken=Wptoken::first();
+		//dd($wptoken->toArray());
+		return $wptoken;
 	}
 
 }

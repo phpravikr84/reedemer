@@ -495,12 +495,11 @@ class DashboardController extends Controller {
 		$client = new vuforiaclient();
 			
 		$response=$client->deleteTargets($logo->target_id);  
-		//if($target_id=="deleted")
-		//{ 
+		 
 		$response_arr=json_decode($response);
 
 		$logo->delete();
-		//dd($response_arr->result_code);
+		
 		if($response_arr->result_code=="UnknownTarget")
 		{
 			return "UnknownTarget";
@@ -508,43 +507,24 @@ class DashboardController extends Controller {
 		else
 		{
 			return 'success';
-		}
-		//if($logo->delete())
-		//{
-		//	return 'success';
-		//}
-		//}
+		}		
 	}
 
 	public function postUserdetails()
-	{
-		//dd("a");
+	{		
 		$user_id=Auth::user()->id;
 		$user_details=User::findOrFail($user_id);
-		//dd($user_details->toArray());
-		//dd($user_details->company_name);
+		
 		$user_arr=array();
 		$user_arr['company_name']=$user_details->company_name;
 		$user_arr['email']=$user_details->email;
 		$user_arr['type']=$user_details->type;
-
-		//dd($user_arr);
+		
 		return $user_arr;
 	}
-	//http://localhost/reedemer/admin/public/admin/dashboard/logoupdate/
-	//http://localhost/reedemer/admin/public/admin/dashboard/updatestatus
+	
 	public function postUpdatestatus(Request $request)
-	{	
-	//dd("a");	
-		// if($approve==1)
-		// {
-		// 	$new_status=0;
-		// }
-		// else
-		// {
-		// 	$new_status=1;	
-		// }
-		//dd($request->get('user_logo_target_id'));
+	{
 		$id=$request->get('user_logo_id');
 		$target_id=$request->get('user_logo_target_id');
 		$reedemer_id=Auth::user()->id;
@@ -560,11 +540,6 @@ class DashboardController extends Controller {
 
 	public function postEditredeemar(Request $request)
 	{
-		//dd($request[0]['campaign_name']);
-		//dd($request->all());
-		//dd($request[0]['id']);
-
-
 		$user = User::find($request[0]['id']);		
 
 		$company_name=$request[0]['company_name'];
