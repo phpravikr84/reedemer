@@ -27,15 +27,7 @@
 				<div class="um-row _um_row_1 ">
 					<div class="um-col-1">
 						
-						<div class="um-field um-field-user_login um-field-text">
-							<div class="um-field-label">
-								<label for="company_name">Upload Logo</label>
-								<div class="um-clear"></div>
-							</div>
-							<div class="um-field-area">
-								<input type="file" name="logo_image" value="" />
-							</div>
-						</div>	
+						<p>Yet to implement this functionality</p>	
 					</div>
 				</div>				
 				<div class="um-col-alt">
