@@ -71,9 +71,11 @@ class PartnerController extends Controller {
 	public function postStore(Request $request)
 	{		
 		$wptoken=$this->getWptoken();
+		$logo_id=$request->get('logo_id');
 		
 		// Data Array
 		$data = array(
+			//'logo_id' => urlencode($request->get('logo_id')),
 			'company_name' => urlencode($request->get('company_name')),
 			'address' => urlencode($request->get('address')),
 			'email' => urlencode($request->get('user_email')),
@@ -100,6 +102,12 @@ class PartnerController extends Controller {
 		}
 		else
 		{
+			$reedemer_id = $result_arr->reedemer_id;
+
+			$logo=Logo::find($logo_id);
+			$logo->reedemer_id 	= $reedemer_id;	
+			$logo->save();
+			
 			Session::flash('message', $result_arr->message);
 
 			return Redirect::back();

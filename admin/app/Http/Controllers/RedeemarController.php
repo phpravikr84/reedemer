@@ -113,6 +113,7 @@ class RedeemarController extends Controller {
 			$response['message']='Token not match with our db';
 			$error=1;
 		}
+		//$logo_id = $request->input('logo_id');
 		$company_name = $request->input('company_name');
 		$address 	  = $request->input('address');
 		$email 		  = $request->input('email');
@@ -193,6 +194,7 @@ class RedeemarController extends Controller {
 				{
 					$response['success']='true';
 					$response['message']='User added successfully';
+					$response['reedemer_id']=$user->id;
 				}
 				else
 				{
