@@ -134,10 +134,11 @@
 
 function show_big_image(image_id,image_name,rating_val) 
 {   
+   var site_path=$("#site_path").val();
    $("#logo_details_div").show(500);
    $("#msg_section").hide();
    $("#logo_section").show(500);
-   $("#big_image").html('<img  width="200" src="../uploads/original/'+image_name+'" />');  
+   $("#big_image").html('<img  width="200" src="'+site_path+'/uploads/original/'+image_name+'" />');  
    $("#rate_div").html('<div id="rateYo"></div>');
    $("#rateYo").rateYo({
 	    rating: rating_val,
