@@ -331,8 +331,8 @@ h6,
 	</div>
 	
 </div>
-  <input type="hidden" name="main_site_url" id="main_site_url" value="{{ url() }}" />
-  <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />
+<input type="hidden" name="main_site_url" id="main_site_url" value="{{ url() }}" />
+<input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />
 <script type='text/javascript' src='{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/assets/js/bootstrap.min.js?ver=1.0'></script>
 <script type='text/javascript' src='{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/assets/js/SmoothScroll.js?ver=1.0'></script>
 <script type='text/javascript' src='{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/assets/js/owl.carousel.min.js?ver=1.0'></script>
