@@ -7,12 +7,12 @@
 	<!-- Open Graph -->
 	<meta property="og:site_name" content="Redeemar"/><meta property="og:description" content="THE APP"/><meta property="og:image" content="//159.203.91.38/wp-content/uploads/2016/04/reedemerlogo.png" /><meta property="og:type" content="website" />
     
-<link rel="stylesheet" href="{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/style.css" type="text/css" />
+<link rel="stylesheet" href="{{env('SITE_PATH_URL')}}../wp-content/themes/couponhut/style.css" type="text/css" />
     <title>Contact &#8211; Redeemar</title>
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-<link rel='stylesheet' href='{{url()}}/../css/thumbelina.css' type='text/css' media='all' />
-<link rel='stylesheet' href='{{url()}}/../css/custom.css' type='text/css' media='all' />
+<link rel='stylesheet' href='{{url()}}/css/thumbelina.css' type='text/css' media='all' />
+<link rel='stylesheet' href='{{url()}}/css/custom.css' type='text/css' media='all' />
 <link rel='stylesheet' id='acf-fonticonpicker-icons-css'  href='{{env("SITE_PATH_URL_URL")}}../wp-content/themes/couponhut/inc/includes/acf-fonticonpicker/icons/style.css?ver=4.4.2' type='text/css' media='all' />
 <link rel='stylesheet' id='fw-ext-breadcrumbs-add-css-css'  href='{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/framework-customizations/extensions/breadcrumbs/static/css/style.css?ver=4.4.2' type='text/css' media='all' />
 <link rel='stylesheet' id='fw-ext-builder-frontend-grid-css'  href='{{env("SITE_PATH_URL")}}../wp-content/plugins/unyson/framework/extensions/builder/static/css/frontend-grid.css?ver=1.2.0' type='text/css' media='all' />
@@ -283,8 +283,8 @@ h6,
  <link rel="stylesheet" href="{{url()}}/../css/jquery.rateyo.css">
 
 @yield('styles')
- <script src="{{url()}}/../js/jquery-1.12.0.min.js"></script>
- <script src="{{url()}}/../user/js/rating.js"></script>  
+ <script src="{{url()}}/js/jquery-1.12.0.min.js"></script>
+ <script src="{{url()}}/user/js/rating.js"></script>  
 
 </head>
 <body class="page page-id-409 page-template page-template-template-contact page-template-template-contact-php">
@@ -356,7 +356,7 @@ var couponhut = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","e
 
 
 
-<link rel='stylesheet' href='{{url()}}/../js/front.js' type='text/css' media='all' />
+<link rel='stylesheet' href='{{url()}}/js/front.js' type='text/css' media='all' />
 @yield('scripts')	
 </body>
 </html>
