@@ -11,7 +11,7 @@
     <title>Contact &#8211; Redeemar</title>
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-<link rel='stylesheet' href='{{url()}}/css/thumbelina.css' type='text/css' media='all' />
+<link rel='stylesheet' href='{{url()}}/{{env("SITE_PATH")}}css/thumbelina.css' type='text/css' media='all' />
 <link rel='stylesheet' href='{{url()}}/css/custom.css' type='text/css' media='all' />
 <link rel='stylesheet' id='acf-fonticonpicker-icons-css'  href='{{env("SITE_PATH_URL_URL")}}../wp-content/themes/couponhut/inc/includes/acf-fonticonpicker/icons/style.css?ver=4.4.2' type='text/css' media='all' />
 <link rel='stylesheet' id='fw-ext-breadcrumbs-add-css-css'  href='{{env("SITE_PATH_URL")}}../wp-content/themes/couponhut/framework-customizations/extensions/breadcrumbs/static/css/style.css?ver=4.4.2' type='text/css' media='all' />
