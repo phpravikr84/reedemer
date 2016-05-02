@@ -8,7 +8,7 @@
         </div>
 	    <div class="searchform-wrapper">
 			<div class="demo-grid-2 mdl-grid"> 
-				<input type="text" name="search" class="search" value="" placeholder="Search Your Friends" autocomplete="off">	
+				<input type="text" name="search" class="search" value="" placeholder="Search Your Company" autocomplete="off">	
 			</div>	    	
 	    </div>	    
     </div>
