@@ -18,14 +18,14 @@
 	    <div id="myWorkContent"   >
 	       <ul style="margin:0; padding:0">
 	       	  @foreach($logo_details as $logo)
-		          <li class="image_container friend_holder fl" id="{{$logo->logo_text}}">
+		          <li style="cursor:pointer" class="image_container friend_holder fl" id="{{$logo->logo_text}}" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');">
 		            <!-- <div class="text_div">
 		              <input type="radio" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');" value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">
 		            </div> -->
 
 		            <div class="image_div" id="image_div_{{$logo->id}}" onclick="get_select({{$logo->id}})">	
 		            <label>    
-		              <input type="radio" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');" value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">        	
+		              <input type="radio"  value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">        	
 		              <img  width="120" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}">
 		            </label>
 		            </div> 
