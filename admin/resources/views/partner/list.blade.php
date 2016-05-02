@@ -41,7 +41,7 @@
 				<div><h2>Congratulations !</h2></div>
 				<div><h4>We have found your logo</h4> </div>
 				<div id="big_image">                        
-					<img width="150" src="../../uploads/blank-img-1.png" id="logo_image_first" >
+					<img width="150" src="{{env('SITE_PATH')}}uploads/blank-img-1.png" id="logo_image_first" >
 				</div>
 			</div>  			           
 			<div class="col-md-4 col-xs-4" id="rate_div"></div>
