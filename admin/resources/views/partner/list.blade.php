@@ -19,11 +19,15 @@
 	       <ul style="margin:0; padding:0">
 	       	  @foreach($logo_details as $logo)
 		          <li class="image_container friend_holder fl" id="{{$logo->logo_text}}">
-		            <div class="text_div">
+		            <!-- <div class="text_div">
 		              <input type="radio" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');" value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">
-		            </div>
-		            <div class="image_div">	            	
+		            </div> -->
+
+		            <div class="image_div" id="image_div_{{$logo->id}}" onclick="get_select({{$logo->id}})">	
+		            <label>    
+		              <input type="radio" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');" value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">        	
 		              <img  width="120" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}">
+		            </label>
 		            </div> 
 		          </li>
 	          @endforeach	         
@@ -32,9 +36,12 @@
 	  </div>
 	</div>  
 	<div class="demo-grid-2 mdl-grid"> 
-		<input type="button" name="save_logo" id="save_logo" value="Save as my logo" />
+		<input type="button" name="save_logo_old" id="save_logo_old" value="Save as my logo" />
+
+		<input type="button" name="save_logo" id="save_logo" value="Register and upload logo" />
 	</div>
-	<div class="demo-grid-2 mdl-grid margin-top-10"> 
+
+	<div class="demo-grid-2 mdl-grid margin-top-10 details_div"> 
 		<div id="logo_details_div" class="logo_div col-md-6 col-xs-6" >		
 		<div id="logo_section">
 			<div>
@@ -58,7 +65,7 @@
 		@foreach($logo_details as $logo)
 		<div class="col-md-4 col-xs-4">
 		    <div class="thumbnail">
-		        <img class="group list-group-image" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}" alt="" />                
+		        <img class="group list-group-image" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}" alt="{{$logo->logo_text}}" width="150" />                
 		    </div>
 		</div>
 		@endforeach
@@ -68,6 +75,16 @@
 @endsection
 @section('styles')
 <style>
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+  border:2px solid #f00;
+}
 </style>
 @endsection
 @section('scripts')
@@ -114,13 +131,38 @@
     	$("#msg_section").show();
         $("input[name='save_logo']").click(function(){
         //	$("#logo_section").show(500);
-            var logo_id = $("input[name='company_logo_id']:checked").val();
-            if(!logo_id)
-            {
+            //var logo_id = $("input[name='company_logo_id']:checked").val();
+            //if(!logo_id)
+            //{
             	logo_id=0;
-            }
+           // }
             window.location.href='partner/add/'+logo_id;
             // if(logo_id){
+
+            //     alert("Your are a - " + logo_id);
+
+            // }
+
+        });
+
+        
+
+    });
+
+    $(document).ready(function(){
+    	$("#logo_section").hide();
+    	$("#msg_section").show();
+        $("input[name='save_logo_old']").click(function(){
+        //	$("#logo_section").show(500);
+            var logo_id = $("input[name='company_logo_id']:checked").val();
+           
+            if(!logo_id)
+            {
+            	alert("Please select a logo.");
+            	return false;
+            }
+            window.location.href='partner/add/'+logo_id;
+            // if(logo_id){save_logo_old
 
             //     alert("Your are a - " + logo_id);
 
@@ -139,7 +181,7 @@ function show_big_image(image_id,image_name,rating_val)
    $("#logo_details_div").show(500);
    $("#msg_section").hide();
    $("#logo_section").show(500);
-   $("#big_image").html('<img  width="200" src="'+site_path+'/uploads/original/'+image_name+'" />');  
+   $("#big_image").html('<img  width="200" src="'+site_path+'/uploads/original/'+image_name+'" width="150" />');  
    $("#rate_div").html('<div id="rateYo"></div>');
    $("#rateYo").rateYo({
 	    rating: rating_val,
@@ -148,9 +190,26 @@ function show_big_image(image_id,image_name,rating_val)
    });
 }
 
+function get_select(select_id)
+{
+	$(".image_div").css({		
+		'border':'',
+		'box-shadow':'',
+	})
+	var select_id = '#image_div_'+select_id;
+	$(select_id).css({		
+		'border':'2px solid #8ec252',
+		'box-shadow': '6px 6px 3px #888888'
+	})
+}
 // $( "#save_logo" ).click(function() {
 //   alert( "Handler for .click() called." );
+
 // });
+
+
+
+
 
 </script>
 @endsection

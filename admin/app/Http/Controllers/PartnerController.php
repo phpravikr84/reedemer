@@ -219,7 +219,7 @@ class PartnerController extends Controller {
 		 $logo->reedemer_id=$reedemer_id;
 		 $logo->logo_name=$fileName;
 		 $logo->logo_text=$logo_text;
-		 $logo->status=1;
+		 $logo->status=0;
 		 $logo->target_id=$target_id;
 		 $logo->tracking_rating=-1;
 		 if($logo->save())
