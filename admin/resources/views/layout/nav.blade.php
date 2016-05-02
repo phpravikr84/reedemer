@@ -10,8 +10,8 @@
 						<nav id="main-navigation" class="main-navigation">
 				    	<ul id="menu-menu-1" class="is-slicknav"><li id="menu-item-384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-384"><a href="{{env('SITE_PATH')}}../">Home</a>
 <ul class="sub-menu">
-	<li id="menu-item-928" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-928"><a href="index.php/{{env('SITE_PATH')}}front-page-image/">Front Page &#8211; Image</a></li>
-	<li id="menu-item-927" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-927"><a href="index.php/{{env('SITE_PATH')}}front-page-alternative/">Front Page &#8211; Alternative</a></li>
+	<li id="menu-item-928" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-928"><a href="index.php/{{env('SITE_PATH_URL')}}front-page-image/">Front Page &#8211; Image</a></li>
+	<li id="menu-item-927" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-927"><a href="index.php/{{env('SITE_PATH_URL')}}front-page-alternative/">Front Page &#8211; Alternative</a></li>
 </ul>
 </li>
 <li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650"><a href="deals/">Deals</a></li>
