@@ -280,11 +280,11 @@ h6,
 
 
 
- <link rel="stylesheet" href="{{url()}}/../css/jquery.rateyo.css">
+ <link rel="stylesheet" href="index.php/{{env('SITE_PATH')}}/../css/jquery.rateyo.css">
 
 @yield('styles')
- <script src="{{url()}}/js/jquery-1.12.0.min.js"></script>
- <script src="{{url()}}/user/js/rating.js"></script>  
+ <script src="index.php/{{env('SITE_PATH')}}/js/jquery-1.12.0.min.js"></script>
+ <script src="index.php/{{env('SITE_PATH')}}/user/js/rating.js"></script>  
 
 </head>
 <body class="page page-id-409 page-template page-template-template-contact page-template-template-contact-php">
@@ -356,7 +356,7 @@ var couponhut = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","e
 
 
 
-<link rel='stylesheet' href='{{url()}}/js/front.js' type='text/css' media='all' />
+<link rel='stylesheet' href='index.php/{{env("SITE_PATH")}}/js/front.js' type='text/css' media='all' />
 @yield('scripts')	
 </body>
 </html>
