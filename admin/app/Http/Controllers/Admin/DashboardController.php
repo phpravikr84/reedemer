@@ -285,6 +285,7 @@ class DashboardController extends Controller {
 			return array('response'=>'success','rating'=>$tracking_rating);
 		}
 	}
+	
 	public function postLogo()
 	{
 		$id=Auth::user()->id;

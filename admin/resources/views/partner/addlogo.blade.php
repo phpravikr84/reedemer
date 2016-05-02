@@ -21,8 +21,9 @@
 				</div>
 			@endif
 
-			<form name="add_user" id="add_user" action="{{url()}}/admin/dashboard/addlogo" method="get" enctype="multipart/form-data">
-				<input type="hidden" name="logo_id" value="">
+			<form name="add_user" id="add_user" action="{{url()}}/partner/addlogo" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="reedemer_id" value="{{$reedemer_id}}">
+				<input type="hidden" name="logo_text" value="{{$logo_text}}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="um-row _um_row_1 ">
 					<div class="um-col-1">
@@ -40,14 +41,13 @@
 				</div>
 				
 				<div class="um-col-alt">
-					<!-- <div class="um-left um-half">
+					<div class="um-left um-half">
 						<input type="submit" id="register" class="um-button" value="Register">
 					</div>
 					<div class="um-right um-half">
 						
 					</div>
-					<div class="um-clear"></div> -->
-					<p>Yet to add this functionality</p>
+					<div class="um-clear"></div>					
 				</div>
 			</form>
 		</div>       

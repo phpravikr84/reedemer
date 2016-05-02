@@ -1,14 +1,17 @@
 <?php namespace App\Http\Controllers;
 use Auth;
-use App\Model\Logo;
+//use App\Model\Logo;
 use App\Model\Wptoken;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
 use Illuminate\Http\Response; 
 use Redirect;
+use Input;
 use Session;
-
+use App\Helper\vuforiaclient;
+use App\Model\User;
+use App\Model\Logo;
 
 class PartnerController extends Controller {
 
@@ -124,7 +127,15 @@ class PartnerController extends Controller {
 			{
 				//dd("a");
 				//redirect()->route('login');
-				return Redirect('partner/addlogo/'.$reedemer_id)->with('reedemer_id',$reedemer_id);
+				if (Auth::attempt(['email' => $request->get('user_email'), 'password' => $request->get('user_password')]))
+        		{
+         			return view('partner.addlogo',[
+						 'reedemer_id' =>$reedemer_id,
+						 'logo_text' =>$request->get('company_name')
+				     ]);
+
+					//return Redirect('partner/addlogo/'.$reedemer_id)->with('reedemer_id',$reedemer_id);
+				}
 			}
 			else
 			{
@@ -171,14 +182,92 @@ class PartnerController extends Controller {
 		return $wptoken;
 	}
 
-	public function getAddlogo($reedemer_id)
+	public function postAddlogo(Request $request)
 	{
-		//getAddlogoecho $reedemer_id;
-		 return view('partner.addlogo',[
-		 				'reedemer_id' =>$reedemer_id
-		 		   ]);
+		if($_FILES['logo_image']['name']!="")
+		{
+			$destinationPath ='../uploads/original/'; // upload path			
+			$extension = Input::file('logo_image')->getClientOriginalExtension(); // getting image extension
+			$fileName = time()."_".rand(111111111,999999999).'.'.$extension;
+			Input::file('logo_image')->move($destinationPath, $fileName); // uploading file to given path
+		}
+
+
+		$client = new vuforiaclient();
+		//$rand=rand(111111,999999);
+		$send[0] = $fileName;
+		$send[1] = '../uploads/original/'.$fileName;
+		$send[2] = '../uploads/original/'.$fileName;
+		$send[3] = 'Redeemar';
+		$send[4] = 'Redeemar';		
+		$response=$client->addTarget($send);
+		$response_arr=json_decode($response);		
+		//echo $response_arr->target_id;
+		//dd($response_arr);
+		//if($response_arr->result_code=="TargetCreated")
+		//{
+
+		//echo $fileName;
+		//echo $request;
+		//exit;
+		$reedemer_id = $request->get('reedemer_id');
+		$target_id = $response_arr->target_id;
+		$logo_text = $request->get('logo_text');
+
+		//dd($request->get('reedemer_id'));
+		 $logo = new Logo();
+		 $logo->reedemer_id=$reedemer_id;
+		 $logo->logo_name=$fileName;
+		 $logo->logo_text=$logo_text;
+		 $logo->status=1;
+		 $logo->target_id=$target_id;
+		 $logo->tracking_rating=-1;
+		 if($logo->save())
+		 {
+		 	Session::flash('message', "Your account created successfully. We will notify you via email after it activated.");
+
+			return Redirect::to('partner/msg');
+		 }
+		 else
+		 {
+
+			return redirect()->back()	
+					->withInput()								
+					->withErrors([
+						'message' => 'Unable to upload your logo. Please try again',
+					]);
+		 }
 	}
 
+
+	public function getVuforiarate($target_id,$logo_id)
+	{
+		//dd($logo_id);
+		$client = new vuforiaclient();
+		//$target_id=$target_id->target_id;
+
+		$target_res_details=$client->getTarget($target_id); 
+		//$response_arr=json_decode($target_res_details);
+		$response_arr=json_decode($target_res_details);
+		$tracking_rating=$response_arr->target_record->tracking_rating;
+		
+		return $tracking_rating;
+		// $logo = Logo::find($logo_id);
+
+		// $logo->tracking_rating = $tracking_rating;
+
+		// if($logo->save())
+		// {
+		// 	//$logo_id = $logo->id;
+		// 	return array('response'=>'success','rating'=>$tracking_rating);
+		// }
+	}
+
+	public function getMsg()
+	{
+		//$this->getVuforiarate();
+		return view('partner.msg');
+	}
 	
 
 }
