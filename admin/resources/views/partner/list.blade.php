@@ -135,7 +135,7 @@
 function show_big_image(image_id,image_name,rating_val) 
 {   
    var site_path=$("#site_path").val();
-   alert(site_path);
+  // alert(site_path);
    $("#logo_details_div").show(500);
    $("#msg_section").hide();
    $("#logo_section").show(500);
