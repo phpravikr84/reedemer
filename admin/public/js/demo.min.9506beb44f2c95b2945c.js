@@ -548,17 +548,10 @@ function() {
 
             a.img_file_path =site_path;
            
-            // show all uploaded logo in admin panel
-            // var t_val ='';
+            // show all uploaded logo in admin panel           
             x.post("../admin/dashboard/logo").success(function(data_response){              
                 a.logo_details = data_response;                
-                a.file_path=site_path; 
-
-               // if(data_response[0]['tracking_rating']<0)
-               // {
-                //    var t_val = 'rating-static rating-'+data_response[g]['tracking_rating']*10;                  
-                    //$('#div_'+data_value[g]['id']).html(data_value[g]['tracking_rating']);
-                // $('#div_'+data_response[g]['id']).html('<span class="'+t_val+'"></span>');
+                a.file_path=site_path;                
 
                 //alert(JSON.stringify(data_response[0]['tracking_rating'],null,4)) ;
                 if(data_response[0]['tracking_rating']<0)
@@ -570,11 +563,147 @@ function() {
                             a.logo_details = data_value;                
                             a.file_path=site_path;
                         });
-                            });
-                   // http://localhost/reedemer/admin/public/cron/updaterating
+                            });                   
                     }, 10000);
                 }
             });
+
+            //alert(update_id);
+            // show all uploaded logo in admin panel           
+            x.post("../admin/dashboard/category",update_id).success(function(category_data_response){              
+                a.category_details = category_data_response;                
+                a.file_path=site_path; 
+            });
+
+            a.update_category=function(itemId,itemStatus){
+               x.get("../admin/dashboard/categoryupdate/"+itemId+"/"+itemStatus).success(function(response){
+                  a.status=response;                 
+                  window.location.reload();             
+               })
+            }
+
+
+            a.add_category=function(){                
+               a.show_success_msg=false; 
+               a.show_error_msg=false; 
+
+               $('#add_category').prop('disabled', true);
+               $("#add_category").text('Saving..'); 
+             ///  alert(JSON.stringify(a.category, null, 4));
+              // return false;
+               x.post("../admin/dashboard/storecategory", a.category).success(function(response){
+                
+                  if(response=="success")
+                  {                    
+                    var main_site_url=$("#main_site_url").val();                                    
+                    var redirect_url=main_site_url+'/admin/dashboard#/tables/category_list'; 
+
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#success_div").html("Data inserted successfully. <br />Please wait,we will redirect you to listing page.");
+                    $("#success_div").show();              
+
+                    setTimeout(function() { 
+                    window.location.href = redirect_url; 
+                    }, 5000);
+                  }                 
+                  else
+                  {
+                      $("#error_div").hide();
+                      $("#show_message").slideDown();
+                      $("#error_div").html("Please insert all field.");
+                      $("#error_div").show();
+                      $("#success_div").hide();
+
+                      $('#add_reedemer').prop('disabled', false);
+                      $("#add_reedemer").text('Save user');     
+                  }
+               })
+            }
+
+            a.category_edit=function(itemId){            
+              //  alert(itemId)
+              //  return false;
+              $("#update_id").val(itemId);              
+              var main_site_url=$("#main_site_url").val(); 
+              var edit_url=main_site_url+'/admin/dashboard#/tables/category_edit/';    
+              window.location.href = edit_url;             
+            }
+
+            a.edit_category=function(){              
+              var main_site_url=$('#main_site_url').val();   
+              var cat_name=$('#cat_name').val();
+             
+
+              a.cat_details= [{
+                                'cat_name':cat_name,
+                                'id':update_id
+                              }]; 
+            // alert(JSON.stringify(a.inventory_details,null,4));
+            // return false;
+              x.post(main_site_url+"/admin/dashboard/editcategory",a.cat_details).success(function(response){
+                var main_site_url=$("#main_site_url").val();                              
+                var redirect_url=main_site_url+'/admin/dashboard#/tables/category_list';
+                
+                if(response=='success')
+                {
+                  $("#update_id").val('');
+                  //return false;
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#success_div").html("Data updated successfully. <br />Please wait,we will reload this page.");
+                  $("#success_div").show(); 
+
+
+                  setTimeout(function() { 
+                   // window.location.reload();
+                    window.location.href = redirect_url; 
+                  }, 5000);
+                }
+                else if(response=='invalid_id')
+                {
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#error_div").html("Error occoure! Please try again.");
+                  $("#error_div").show();
+                  $("#success_div").hide();
+
+                  setTimeout(function() { 
+                    window.location.href = redirect_url; 
+                  }, 2000);
+                }
+                else
+                {
+                  $("#error_div").hide();
+                  $("#show_message").slideDown();
+                  $("#error_div").html("Please insert all field.");
+                  $("#error_div").show();
+                  $("#success_div").hide(); 
+                }
+                
+              });
+            }
+
+            a.delete_category=function(itemId){ 
+             if(confirm("Are you sure?"))
+             {   
+                //alert(itemId);
+                //return false;edit_category
+                var main_site_url=$('#main_site_url').val();
+
+                $(".delete_row").hide();
+                $("td#row_"+itemId).parent()
+                .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
+               //var site_path=$("#site_path").val();   
+              // alert(site_path);
+               //return false;
+               x.get(site_path+"admin/dashboard/deletecategory/"+itemId).success(function(response){
+                  window.location.reload();             
+               })
+             }
+            }
+
+
                   
             // Upload logo by admin
             a.uploadFile = function(){
@@ -666,6 +795,8 @@ function() {
                })
             }
 
+
+
             a.view_item=function(itemId){ 
                 var main_site_url=$("#main_site_url").val();
                 var url_link=main_site_url+'/admin/dashboard#/tables/view/';   
@@ -680,6 +811,14 @@ function() {
                 var main_site_url=$("#main_site_url").val();
                 $("#update_id").val(''); 
                 var redirect_url=main_site_url+'/admin/dashboard#/'+folder_name+'/list';
+                
+                window.location.href = redirect_url; 
+            } 
+
+            a.cancel_category=function(folder_name){ 
+                var main_site_url=$("#main_site_url").val();
+                $("#update_id").val(''); 
+                var redirect_url=main_site_url+'/admin/dashboard#/'+folder_name+'/category_list';
                 
                 window.location.href = redirect_url; 
             } 

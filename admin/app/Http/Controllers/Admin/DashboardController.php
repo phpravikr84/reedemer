@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Model\Logo;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Hash;
@@ -576,6 +577,101 @@ class DashboardController extends Controller {
 		
 	}
 
+	public function postCategory(Request $request)
+	{
+		//dd($request[0]);
+		$id=null;
+		if($request[0])
+		{
+			$id=$request[0];
+			$category = Category::where('id',$id)->get();
+		}
+		else
+		{
+			$category = Category::orderBy('id','DESC')->get();
+		}
+		//dd($category->toArray());
+		return $category;
+	}
+
+	public function getCategoryupdate($id,$approve)
+	{	
+	
+		if($approve==1)
+		{
+			$new_status=0;
+		}
+		else
+		{
+			$new_status=1;	
+		}
+		$user = Category::find($id);
+		$user->status=$new_status;
+		$user->save();
+		return $new_status;
+	}
+
+	public function postStorecategory(Request $request)
+	{	
+		$cat_name=$request->get('cat_name');
+
+		$category = new Category();
+		$category->cat_name 		= $cat_name;	
+		$category->parent_id 		= 0;
+		$category->status 		= 1;		
+		if($category->save())
+		{
+			return 'success';
+		}
+		else
+		{
+			return 'error';
+		}
+		//dd(4)
+		//dd($request->get('cat_name'));
+	}
+
+	public function postEditcategory(Request $request)
+	{
+		//dd($request[0]['id']);
+		$category = Category::find($request[0]['id']);		
+
+		$cat_name=$request[0]['cat_name'];
+		//$web_address=$request[0]['web_address'];		
+		//$address=$request[0]['address'];
+		$id=$request[0]['id'];
+		
+		if($request[0]['id']=="")
+		{
+			return 'invalid_id';
+		}
+		else if($cat_name=="")
+		{
+			return 'error';
+		}
+		else
+		{			
+			
+			$category->cat_name 	= $cat_name;		
+			if($category->save())
+			{
+				return 'success';
+			}
+			else
+			{
+				return 'error';
+			}			
+		}
+	}
+
+	public function getDeletecategory($id)
+	{
+		$category = Category::find($id); 		
+		if($category->delete())
+		{
+			return 'success';
+		}
+	}
 
 	
 
