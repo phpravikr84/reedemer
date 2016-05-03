@@ -356,7 +356,7 @@ var couponhut = {"ajaxurl":"http:\/\/159.203.91.38\/wp-admin\/admin-ajax.php","e
 
 
 
-<link rel='stylesheet' href='index.php/{{env("SITE_PATH")}}js/front.js' type='text/css' media='all' />
+<link rel='stylesheet' href='{{env("SITE_PATH_URL")}}/js/front.js' type='text/css' media='all' />
 @yield('scripts')	
 </body>
 </html>
