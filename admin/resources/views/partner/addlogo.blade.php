@@ -21,7 +21,7 @@
 				</div>
 			@endif
 
-			<form name="add_user" id="add_user" action="{{url()}}/partner/addlogo" method="post" enctype="multipart/form-data" onsubmit="Upload();">
+			<form name="add_user" id="add_user" action="{{url()}}/partner/addlogo" method="post" enctype="multipart/form-data" onSubmit="return validate();">
 				<input type="hidden" name="reedemer_id" value="{{$reedemer_id}}">
 				<input type="hidden" name="logo_text" value="{{$logo_text}}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -29,13 +29,16 @@
 					<div class="um-col-1">
 						
 						<div class="um-field um-field-user_login um-field-text">
+							<div id="file_error"></div>
 							<div class="um-field-label">
 								<label for="company_name">Upload Logo</label>
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">
-								<input accept="image/jpeg" type="file" name="logo_image" value="" />
+								<input accept="image/jpeg" type="file" id="file" name="logo_image" class="demoInputBox" value="" />
+								
 							</div>
+							
 						</div>	
 					</div>
 				</div>
@@ -72,6 +75,7 @@
 @endsection
 @section('styles')
 <style>
+
 </style>
 @endsection
 @section('scripts')
@@ -94,5 +98,34 @@
 			alert("This browser does not support HTML5.");
 		}
 	}
+
+	function validate() {
+		var file = $('#file').val();
+		var extension = file.substr( (file.lastIndexOf('.') +1) );
+		if(file=='')
+		{
+			$("#file_error").html("<div class='alert alert-danger'>Select a file to upload.</div>");
+			$("#file_error").css("border-color","#FF0000");
+			return false;
+		}
+		if(extension=="jpg" || extension=="jpeg")
+		{
+			$("#file_error").html("");
+			$(".demoInputBox").css("border-color","#F0F0F0");
+			var file_size = $('#file')[0].files[0].size;
+			if(file_size>2097152) {
+				$("#file_error").html("<div class='alert alert-danger'>Upload only .jpg file within 2MB size</div>");
+				$("#file_error").css("border-color","#FF0000");
+				return false;
+			} 
+		}
+		else
+		{
+			$("#file_error").html("<div class='alert alert-danger'>Upload only .jpg file within 2MB size</div>");
+			$("#file_error").css("border-color","#FF0000");
+			return false;
+		}
+		return true;
+	}	
 </script>
 @endsection

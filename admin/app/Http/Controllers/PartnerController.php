@@ -127,15 +127,16 @@ class PartnerController extends Controller {
 			{
 				//dd("a");
 				//redirect()->route('login');
-				if (Auth::attempt(['email' => $request->get('user_email'), 'password' => $request->get('user_password')]))
-        		{
+				//if (Auth::attempt(['email' => $request->get('user_email'), 'password' => $request->get('user_password')]))
+        		//{
          			return view('partner.addlogo',[
 						 'reedemer_id' =>$reedemer_id,
 						 'logo_text' =>$request->get('company_name')
 				     ]);
 
 					//return Redirect('partner/addlogo/'.$reedemer_id)->with('reedemer_id',$reedemer_id);
-				}
+				//}
+         		//	return redirect('/illustrations');
 			}
 			else
 			{
