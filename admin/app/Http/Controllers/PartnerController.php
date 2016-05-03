@@ -184,12 +184,48 @@ class PartnerController extends Controller {
 
 	public function postAddlogo(Request $request)
 	{
+		//filesize()
+		//echo $_FILES['logo_image']['size']."P";
+		//echo $_FILES['logo_image']['type'];
+		//exit;
 		if($_FILES['logo_image']['name']!="")
 		{
-			$destinationPath ='../uploads/original/'; // upload path			
-			$extension = Input::file('logo_image')->getClientOriginalExtension(); // getting image extension
-			$fileName = time()."_".rand(111111111,999999999).'.'.$extension;
-			Input::file('logo_image')->move($destinationPath, $fileName); // uploading file to given path
+			if($_FILES['logo_image']['type']=="image/jpeg" || $_FILES['logo_image']['type']=="image/jpg")
+			{
+				if((($_FILES['logo_image']['size']/1024)/1024) <=2)
+				{
+					$destinationPath ='../uploads/original/'; // upload path			
+					$extension = Input::file('logo_image')->getClientOriginalExtension(); // getting image extension
+					$fileName = time()."_".rand(111111111,999999999).'.'.$extension;
+					Input::file('logo_image')->move($destinationPath, $fileName); // uploading file to given path
+				}
+				else
+				{
+					return redirect()->back()	
+					->withInput()								
+					->withErrors([
+						'message' => 'Unable to upload your logo. Please try again',
+					]);
+				}
+			}
+			else
+			{
+					return redirect()->back()	
+					->withInput()								
+					->withErrors([
+						'message' => 'Upload only jpg file within 2MB size',
+					]);
+			}
+		}
+		else
+		{
+
+			//dd("a");
+					return redirect()->back()	
+					->withInput()								
+					->withErrors([
+						'message' => 'Upload only jpg file within 2MB size',
+					]);
 		}
 
 

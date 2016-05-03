@@ -21,7 +21,7 @@
 				</div>
 			@endif
 
-			<form name="add_user" id="add_user" action="{{url()}}/partner/addlogo" method="post" enctype="multipart/form-data">
+			<form name="add_user" id="add_user" action="{{url()}}/partner/addlogo" method="post" enctype="multipart/form-data" onsubmit="Upload();">
 				<input type="hidden" name="reedemer_id" value="{{$reedemer_id}}">
 				<input type="hidden" name="logo_text" value="{{$logo_text}}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -34,7 +34,7 @@
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">
-								<input type="file" name="logo_image" value="" />
+								<input accept="image/jpeg" type="file" name="logo_image" value="" />
 							</div>
 						</div>	
 					</div>
@@ -84,5 +84,15 @@
         
 
    // });
+
+	function Upload() {
+		var fileUpload = document.getElementById("fileUpload");
+		if (typeof (fileUpload.files) != "undefined") {
+			var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+			alert(size + " KB.");
+		} else {
+			alert("This browser does not support HTML5.");
+		}
+	}
 </script>
 @endsection
