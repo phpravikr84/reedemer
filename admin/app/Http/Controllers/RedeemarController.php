@@ -144,6 +144,12 @@ class RedeemarController extends Controller {
 			$response['message']='Web address is missing';
 			$error=1;
 		}
+		if (filter_var($web_address, FILTER_VALIDATE_URL) === false)
+		{
+			$response['success']='false';
+			$response['message']='Enter valid url';
+			$error=1;
+		}
 		if(strlen($password) <6)
 		{
 			$response['success']='false';
@@ -199,7 +205,7 @@ class RedeemarController extends Controller {
 				else
 				{
 					$response['success']='false';
-					$response['message']='User added successfully';
+					$response['message']='Unable to add user';
 				}
 			}
 		}

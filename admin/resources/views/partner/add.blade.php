@@ -43,7 +43,7 @@
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">
-								<input type="text" placeholder="Company Name" value="@if(old('company_name')) {{ old('company_name') }} @else {{$logo_details['logo_text']}} @endif" id="" name="company_name" class="um-form-field valid ">
+								<input type="text" placeholder="Company Name" value="@if(old('company_name')){{old('company_name')}}@else {{$logo_details['logo_text']}}@endif" id="" name="company_name" class="um-form-field valid ">
 							</div>
 						</div>
 						<div data-key="address" placeholder="Address" class="um-field um-field-last_name um-field-text">
@@ -66,7 +66,7 @@
 						</div>
 						<div data-key="address" class="um-field um-field-last_name um-field-text">
 							<div class="um-field-label">
-								<label for="web-address">Web Address</label>
+								<label for="web-address">Web Address(i.e. http://www.yourdomain.com)</label>
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">
@@ -75,7 +75,7 @@
 						</div>
 						<div data-key="address" class="um-field um-field-last_name um-field-text">
 							<div class="um-field-label">
-								<label for="password">Password</label>
+								<label for="password">Password(At least 6 charcter long)</label>
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">

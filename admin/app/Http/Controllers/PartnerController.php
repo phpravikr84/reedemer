@@ -90,6 +90,7 @@ class PartnerController extends Controller {
 	public function postStore(Request $request)
 	{		
 		$wptoken=$this->getWptoken();
+		//dd($wptoken->toArray());
 		$logo_id=$request->get('logo_id');
 		
 		// Data Array
