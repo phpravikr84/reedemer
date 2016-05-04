@@ -836,9 +836,9 @@ function() {
              {   
                 var main_site_url=$('#main_site_url').val();
 
-                $(".delete_row").hide();
+                $(".delete_row").hide();              
                 $("td#row_"+itemId).parent()
-                .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
+                .replaceWith('<tr><td colspan="5" class="center"><img src="'+site_path+'/images/loader.gif" /></td></tr>');               
                
                x.get("../admin/dashboard/deletereedemer/"+itemId).success(function(response){
                   window.location.reload();             
