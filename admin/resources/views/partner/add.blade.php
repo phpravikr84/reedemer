@@ -75,7 +75,7 @@
 						</div>
 						<div data-key="address" class="um-field um-field-last_name um-field-text">
 							<div class="um-field-label">
-								<label for="password">Password(At least 6 charcter long)</label>
+								<label for="password">Password(At least 6 character long)</label>
 								<div class="um-clear"></div>
 							</div>
 							<div class="um-field-area">

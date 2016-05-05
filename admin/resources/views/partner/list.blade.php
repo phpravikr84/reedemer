@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container"> 
+	 @if($logo_details->count() >0)
 	<div class="well well-sm">
 		<div class="col-md-4 col-xs-4">
         	<strong>Search for my logo</strong>
@@ -12,7 +13,7 @@
 			</div>	    	
 	    </div>	    
     </div>
-
+   
     <div class="demo-grid-2 mdl-grid">              
 	  <div class="mdl-cell border-box mdl-cell--12-col friends" >                
 	    <div id="myWorkContent"   >
@@ -34,13 +35,15 @@
 	       </ul>                   
 	   </div>
 	  </div>
-	</div>  
+	</div> 
+	@endif 
 	<div class="demo-grid-2 mdl-grid"> 
+		@if($logo_details->count() >0)
 		<input type="button" name="save_logo_old" id="save_logo_old" value="Save as my logo" />
-
+		@endif
 		<input type="button" name="save_logo" id="save_logo" value="Register and upload logo" />
 	</div>
-
+	@if($logo_details->count() >0)
 	<div class="demo-grid-2 mdl-grid margin-top-10 details_div"> 
 		<div id="logo_details_div" class="logo_div col-md-6 col-xs-6" >		
 		<div id="logo_section">
@@ -59,6 +62,7 @@
 		</div> 		
 		</div>
 	</div>
+	@endif
 	<div style="clear:both;"></div>
 	<div class="demo-grid-2 mdl-grid margin-top-10"> 
 		<div id="products" class="row list-group">
