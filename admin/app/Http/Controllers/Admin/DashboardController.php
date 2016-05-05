@@ -579,12 +579,37 @@ class DashboardController extends Controller {
 
 	public function postCategory(Request $request)
 	{
-		//dd($request[0]);
-		$id=null;
-		if($request[0])
+		//dd($request->all());
+		if($request[0]['sub_cat'])
 		{
-			$id=$request[0];
-			$category = Category::where('id',$id)->get();
+			$category = Category::where('parent_id',$request[0]['parent_id'])->orderBy('id','DESC')->get();
+		}
+		else
+		{
+			$id=null;
+			if($request[0])
+			{
+				$id=$request[0];
+				$category = Category::where('id',$id)->orderBy('id','DESC')->get();
+			}
+			else
+			{
+				$category = Category::where('parent_id',0)->orderBy('id','DESC')->get();
+			}
+		}
+		//dd($category->toArray());
+		return $category;
+	}
+
+	//Listing to show only 
+	public function getCategory($parent_id='')
+	{
+		//dd($parent_id);
+		//$id=null;
+		if($parent_id)
+		{
+			//$id=$request[0];
+			$category = Category::where('parent_id',$parent_id)->get();
 		}
 		else
 		{
@@ -613,11 +638,20 @@ class DashboardController extends Controller {
 
 	public function postStorecategory(Request $request)
 	{	
+		//dd($request->all());
 		$cat_name=$request->get('cat_name');
+		if($request->get('parent_id'))
+		{
+			$parent_id=$request->get('parent_id');
+		}
+		else
+		{
+			$parent_id=0;
+		}
 
 		$category = new Category();
 		$category->cat_name 		= $cat_name;	
-		$category->parent_id 		= 0;
+		$category->parent_id 		= $parent_id;
 		$category->status 		= 1;		
 		if($category->save())
 		{

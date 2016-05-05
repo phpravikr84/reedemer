@@ -536,17 +536,20 @@ function() {
     function() {
         "use strict";
 
-        function a(a, b, c, d, x, fu) {
+        function a(a, b, c, d, x, fu,hb) {
             a.dataLength={filtered:[]};
             a.cnames = [];
             a.logo_details = [];
             a.currentPage = 0;
             a.pageSize = 5;
+            var cat_id = $("#cat_id").val();
 
             var site_path=$("#site_path").val();
             var update_id =$("#update_id").val();
 
             a.img_file_path =site_path;
+
+           
            
             // show all uploaded logo in admin panel           
             x.post("../admin/dashboard/logo").success(function(data_response){              
@@ -567,14 +570,27 @@ function() {
                     }, 10000);
                 }
             });
+            // show all uploaded logo in admin panel 
 
-            //alert(update_id);
-            // show all uploaded logo in admin panel           
+            if($("#cat_id").val())
+            {
+                var new_cat_id = $("#cat_id").val();
+            }
+           
+            a.new_cat_id=new_cat_id;
+            a.category_details = {};
             x.post("../admin/dashboard/category",update_id).success(function(category_data_response){              
                 a.category_details = category_data_response;                
                 a.file_path=site_path; 
+                a.cat_id=cat_id;                
             });
 
+            x.get("../admin/dashboard/category").success(function(category_data_drop){              
+                a.category_drop = category_data_drop;                
+               // a.file_path=site_path; 
+                //a.cat_id=cat_id;                
+            });
+          
             a.update_category=function(itemId,itemStatus){
                x.get("../admin/dashboard/categoryupdate/"+itemId+"/"+itemStatus).success(function(response){
                   a.status=response;                 
@@ -586,10 +602,25 @@ function() {
             a.add_category=function(){                
                a.show_success_msg=false; 
                a.show_error_msg=false; 
-
+//parent_id
+               var new_cat_id_u=$("#cat_id").val();
+               var parent_id=$("#parent_id").val();
+               //var parent_id=$("#parent_id").val();
+               
+            //   alert(new_cat_id+'g');
+               // a.category= push[{   'parent_id':parent_id
+               //             }]; 
+                // a.category.push({
+                //     parent_id: parent_id
+                // });
+               a.category.parent_id = parent_id;
+               //a.category.demo = 'demo';
+              // alert(JSON.stringify(a.category, null, 4));
+              // alert(parent_id);
+             //  return false;
                $('#add_category').prop('disabled', true);
                $("#add_category").text('Saving..'); 
-             ///  alert(JSON.stringify(a.category, null, 4));
+              // alert(JSON.stringify(a.category, null, 4));
               // return false;
                x.post("../admin/dashboard/storecategory", a.category).success(function(response){
                 
@@ -703,7 +734,44 @@ function() {
              }
             }
 
+            a.set_cat_id = function(cat_id){
+               // alert(cat_id);
+               // return false;
+              //a.dir_id=dir_id;
+              $("#cat_id").val(cat_id);
+               // x.get("../directory/category/"+dir_id).success(function(response){
+                 // alert(JSON.stringify(response, null, 4)); 
+               //   a.repo_details=response
+                  //a.file_path=site_path
+               // });
+                // alert(cat_id);
+                 a.cat_details= [{                               
+                                'parent_id':cat_id,
+                                'sub_cat':1
+                              }]; 
 
+                             // alert(JSON.stringify(a.cat_details, null, 4)); 
+                              //return false;
+                 x.post("../admin/dashboard/category",a.cat_details).success(function(category_data_response){              
+                    // alert(JSON.stringify(category_data_response, null, 4)); 
+                //     return false;
+                     a.category_details = category_data_response;                
+                     a.file_path=site_path; 
+                     a.cat_id=cat_id;
+                 });
+            }; 
+
+            a.back_cat=function(){   
+
+               // var main_site_url=$('#main_site_url').val();       
+               // var redirect_url=main_site_url+'/admin/dashboard#/tables/category_list';
+               // alert(redirect_url)         ;
+               // $("#cat_id").val('');
+               // window.location.href=redirect_url;   
+              // history.back();
+              // window.location.reload();   
+             //hb.history.back();
+            }
                   
             // Upload logo by admin
             a.uploadFile = function(){
@@ -955,7 +1023,7 @@ function() {
             }) 
         }
 
-        angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload", a])
+        angular.module("redeemar-app").controller("ReedemerController", ["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileUpload","$window", a])
     }(),    
     function() {
         "use strict";
