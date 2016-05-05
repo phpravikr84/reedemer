@@ -570,8 +570,8 @@ function() {
                     }, 10000);
                 }
             });
-            // show all uploaded logo in admin panel 
 
+            // show all uploaded logo in admin panel 
             if($("#cat_id").val())
             {
                 var new_cat_id = $("#cat_id").val();
@@ -586,10 +586,10 @@ function() {
             });
 
             x.get("../admin/dashboard/category").success(function(category_data_drop){              
-                a.category_drop = category_data_drop;                
-               // a.file_path=site_path; 
-                //a.cat_id=cat_id;                
+                a.category_drop = category_data_drop;   
             });
+
+
           
             a.update_category=function(itemId,itemStatus){
                x.get("../admin/dashboard/categoryupdate/"+itemId+"/"+itemStatus).success(function(response){
@@ -602,26 +602,14 @@ function() {
             a.add_category=function(){                
                a.show_success_msg=false; 
                a.show_error_msg=false; 
-//parent_id
+
                var new_cat_id_u=$("#cat_id").val();
                var parent_id=$("#parent_id").val();
-               //var parent_id=$("#parent_id").val();
                
-            //   alert(new_cat_id+'g');
-               // a.category= push[{   'parent_id':parent_id
-               //             }]; 
-                // a.category.push({
-                //     parent_id: parent_id
-                // });
                a.category.parent_id = parent_id;
-               //a.category.demo = 'demo';
-              // alert(JSON.stringify(a.category, null, 4));
-              // alert(parent_id);
-             //  return false;
+              
                $('#add_category').prop('disabled', true);
-               $("#add_category").text('Saving..'); 
-              // alert(JSON.stringify(a.category, null, 4));
-              // return false;
+               $("#add_category").text('Saving..');              
                x.post("../admin/dashboard/storecategory", a.category).success(function(response){
                 
                   if(response=="success")
@@ -652,9 +640,7 @@ function() {
                })
             }
 
-            a.category_edit=function(itemId){            
-              //  alert(itemId)
-              //  return false;
+            a.category_edit=function(itemId){
               $("#update_id").val(itemId);              
               var main_site_url=$("#main_site_url").val(); 
               var edit_url=main_site_url+'/admin/dashboard#/tables/category_edit/';    
@@ -669,25 +655,21 @@ function() {
               a.cat_details= [{
                                 'cat_name':cat_name,
                                 'id':update_id
-                              }]; 
-            // alert(JSON.stringify(a.inventory_details,null,4));
-            // return false;
+                              }];             
               x.post(main_site_url+"/admin/dashboard/editcategory",a.cat_details).success(function(response){
                 var main_site_url=$("#main_site_url").val();                              
                 var redirect_url=main_site_url+'/admin/dashboard#/tables/category_list';
                 
                 if(response=='success')
                 {
-                  $("#update_id").val('');
-                  //return false;
+                  $("#update_id").val('');                  
                   $("#error_div").hide();
                   $("#show_message").slideDown();
                   $("#success_div").html("Data updated successfully. <br />Please wait,we will reload this page.");
                   $("#success_div").show(); 
 
 
-                  setTimeout(function() { 
-                   // window.location.reload();
+                  setTimeout(function() {
                     window.location.href = redirect_url; 
                   }, 5000);
                 }
@@ -717,19 +699,47 @@ function() {
 
             a.delete_category=function(itemId){ 
              if(confirm("Are you sure?"))
-             {   
-                //alert(itemId);
-                //return false;edit_category
+             {
                 var main_site_url=$('#main_site_url').val();
 
                 $(".delete_row").hide();
                 $("td#row_"+itemId).parent()
                 .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
-               //var site_path=$("#site_path").val();   
-              // alert(site_path);
-               //return false;
-               x.get(site_path+"admin/dashboard/deletecategory/"+itemId).success(function(response){
-                  window.location.reload();             
+                x.get(site_path+"admin/dashboard/deletecategory/"+itemId).success(function(response){
+                 alert(response);
+                  if(response=='success')
+                  {                   
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#success_div").html("Data deleted successfully. <br />Please wait,we will reload this page.");
+                    $("#success_div").show();              
+
+                    setTimeout(function() { 
+                      window.location.reload(); 
+                    }, 5000);                                 
+                  }
+                  if(response=='subcat_exists')
+                  { 
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please remove all sub category under this category before delete this.");
+                    $("#error_div").show();
+                    $("#success_div").hide(); 
+                    setTimeout(function() { 
+                     // window.location.reload(); 
+                    }, 5000); 
+                  }
+                  if(response=='error')
+                  { 
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Upable to delete category now. <br/> Please try after some time.");
+                    $("#error_div").show();
+                    $("#success_div").hide(); 
+                    setTimeout(function() { 
+                     // window.location.reload(); 
+                    }, 5000); 
+                  }
                })
              }
             }

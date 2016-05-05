@@ -582,7 +582,10 @@ class DashboardController extends Controller {
 		//dd($request->all());
 		if($request[0]['sub_cat'])
 		{
-			$category = Category::where('parent_id',$request[0]['parent_id'])->orderBy('id','DESC')->get();
+			$category = Category::where('parent_id',$request[0]['parent_id'])
+						->where('visibility',1)
+						->orderBy('id','DESC')
+						->get();
 		}
 		else
 		{
@@ -590,11 +593,17 @@ class DashboardController extends Controller {
 			if($request[0])
 			{
 				$id=$request[0];
-				$category = Category::where('id',$id)->orderBy('id','DESC')->get();
+				$category = Category::where('id',$id)
+							->where('visibility',1)
+							->orderBy('id','DESC')
+							->get();
 			}
 			else
 			{
-				$category = Category::where('parent_id',0)->orderBy('id','DESC')->get();
+				$category = Category::where('parent_id',0)
+							->where('visibility',1)
+							->orderBy('id','DESC')
+							->get();
 			}
 		}
 		//dd($category->toArray());
@@ -609,11 +618,15 @@ class DashboardController extends Controller {
 		if($parent_id)
 		{
 			//$id=$request[0];
-			$category = Category::where('parent_id',$parent_id)->get();
+			$category = Category::where('parent_id',$parent_id)
+						->where('visibility',1)
+						->get();
 		}
 		else
 		{
-			$category = Category::orderBy('id','DESC')->get();
+			$category = Category::where('visibility',1)
+						->orderBy('id','DESC')
+						->get();
 		}
 		//dd($category->toArray());
 		return $category;
@@ -700,11 +713,32 @@ class DashboardController extends Controller {
 
 	public function getDeletecategory($id)
 	{
-		$category = Category::find($id); 		
-		if($category->delete())
+		$category = Category::find($id); 
+		
+		$chk_subcat=Category::where('parent_id',$category->id)
+					->where('visibility','1')
+					->count();
+		//dd($chk_subcat);
+		if($chk_subcat >0)
 		{
-			return 'success';
+			return 'subcat_exists';
 		}
+		else
+		{
+			$category->visibility = 0;
+			if($category->save())
+			{
+				return 'success';
+			}
+			else
+			{
+				return 'error';
+			}
+		}
+		//if($category->delete())
+		//{
+		//	return 'success';
+		//}
 	}
 
 	
