@@ -789,6 +789,12 @@ function() {
 
                 $('#upload_file').prop('disabled', false);
                 $("#upload_file").text('Saving..');
+               // alert(JSON.stringify(a.Redeemer,null,4));
+               // return false;
+
+               
+
+
 
                 if($("#logo_text").val()=='')
                 {
@@ -804,9 +810,22 @@ function() {
                 }
 
                 var ext = $('#logo_name').val().split('.').pop().toLowerCase();
+                var file_size = $('#logo_name')[0].files[0].size;
+                //alert(file_size);
+               // return false;
                 if($.inArray(ext, ['jpg','jpeg']) == -1) {
                     $("#show_message").slideDown();
                     $("#error_div").html("Please upload only .jpg /.jpeg image.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#upload_file').prop('disabled', false);
+                    $("#upload_file").text('Save');
+                    return false;
+                }
+                if(file_size>2097152) { 
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please upload only .jpg /.jpeg image within 2MB s.ize");
                     $("#error_div").show();
                     $("#success_div").hide();
 
