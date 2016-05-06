@@ -66,6 +66,7 @@
   <script src="{{ asset('/user/js/repo.js') }}"></script>
   <script src="{{ asset('/user/js/logo.js') }}"></script>
   <script src="{{ asset('/user/js/promotion.js') }}"></script>
+  <script src="{{ asset('/user/js/partnersetting.js') }}"></script>
   <script src="{{ asset('/js/jquery-1.12.0.min.js') }}"></script>
   <script src="{{ asset('/js/jquery.rateyo.min.js') }}"></script>
   <script src="{{ asset('/js/jquery-1.10.2.js') }}"></script>

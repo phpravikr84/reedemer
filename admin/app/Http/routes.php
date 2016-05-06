@@ -35,6 +35,7 @@ Route::controller('/inventory', 'InventoryController');
 Route::controller('/directory', 'DirectoryController');
 Route::controller('/cron', 'CronController');
 Route::controller('/redeemar', 'RedeemarController');
+Route::controller('/partnersetting', 'PartnersettingController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 
