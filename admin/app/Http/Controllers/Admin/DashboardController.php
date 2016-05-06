@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Model\Logo;
+use App\Model\Price;
+use App\Model\Partnersetting;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -172,17 +174,8 @@ class DashboardController extends Controller {
 
 	
 	public function postStorereedemer(Request $request)
-	{
-		/*$user = new User();
-		$user->company_name 		= $request->input('company_name');			
-		$user->type 		= 2;			
-		$user->approve 		= 1;	
-		$user->email 		= $request->input('email');
-		$user->password = bcrypt($request->input('password'));
-		if($user->save())
-		{
-			return 'success';
-		}*/
+	{		
+		//dd($request->input('address').'--'.$request->input('web_address').'--'.$request->input('company_name').'--'.$request->input('email').'--'.$request->input('password'));
 		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
 		{
 			return 'error';
@@ -201,7 +194,7 @@ class DashboardController extends Controller {
 			return redirect()->back()
 							 ->withInput($request->only('company_name'))
 							 ->withErrors('Please insert all field');
-			//return $messages;		
+			
 			exit;	
 		} else {
 			// create the data for our user
@@ -214,6 +207,16 @@ class DashboardController extends Controller {
 			$user->web_address 		= $request->input('web_address');
 			$user->password = bcrypt($request->input('password'));
 			$user->save();
+			$user_id = $user->id;
+			
+			// Insert dummy data into Table: reedemer_partner_settings
+			// $price = new Partnersetting();
+			// $price->setting_val 	= env('DEFAULT_PRICE_SETTING_VAL');			
+			// $price->price_range_id 	= env('DEFAULT_PRICE_RANGE');		
+			// $price->status 			= 1;			
+			// $price->created_by 		= $user_id;
+			
+			// $price->save();
 				
 			
 			return 'success';		
@@ -516,12 +519,28 @@ class DashboardController extends Controller {
 	public function postUserdetails()
 	{		
 		$user_id=Auth::user()->id;
+		$type=Auth::user()->type;
 		$user_details=User::findOrFail($user_id);
-		
+		if($type==2)
+		{
+			if(Logo::where('reedemer_id',$user_details->id)->count() >0)
+			{
+				$logo_details=Logo::where('reedemer_id',$user_details->id)->first()->logo_name;
+			}
+			else
+			{
+				$logo_details="no_logo.gif";
+			}
+		}
+		//dd($logo_details);
 		$user_arr=array();
 		$user_arr['company_name']=$user_details->company_name;
 		$user_arr['email']=$user_details->email;
 		$user_arr['type']=$user_details->type;
+		if($type==2)
+		{
+			$user_arr['logo_image']=$logo_details;
+		}
 		
 		return $user_arr;
 	}

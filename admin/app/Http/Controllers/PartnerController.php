@@ -56,9 +56,15 @@ class PartnerController extends Controller {
 					  ->orderBy('id','DESC')
 					  ->get();					 
 		$url=url();
+
+		$logo_details_unused=Logo::where('status',1)
+					  ->whereNull('reedemer_id')
+					  ->orderBy('id','DESC')
+					  ->get();
 		
 		return view('partner.list',[
 						'logo_details' =>$logo_details,
+						'logo_details_unused' =>$logo_details_unused,
 						'url' =>$url
 				   ]);
 	}
@@ -92,7 +98,7 @@ class PartnerController extends Controller {
 		$wptoken=$this->getWptoken();
 		//dd($wptoken->toArray());
 		$logo_id=$request->get('logo_id');
-		
+		//dd($logo_id);
 		// Data Array
 		$data = array(
 			//'logo_id' => urlencode($request->get('logo_id')),

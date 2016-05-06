@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container"> 
-	 @if($logo_details->count() >0)
+	 @if($logo_details_unused->count() >0)
 	<div class="well well-sm">
 		<div class="col-md-4 col-xs-4">
         	<strong>Search for my logo</strong>
@@ -18,16 +18,12 @@
 	  <div class="mdl-cell border-box mdl-cell--12-col friends" >                
 	    <div id="myWorkContent"   >
 	       <ul style="margin:0; padding:0">
-	       	  @foreach($logo_details as $logo)
-		          <li style="cursor:pointer" class="image_container friend_holder fl" id="{{$logo->logo_text}}" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');">
-		            <!-- <div class="text_div">
-		              <input type="radio" onclick="show_big_image('{{$logo->id}}','{{$logo->logo_name}}','{{$logo->tracking_rating}}');" value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">
-		            </div> -->
-
-		            <div class="image_div" id="image_div_{{$logo->id}}" onclick="get_select({{$logo->id}})">	
+	       	  @foreach($logo_details_unused as $logo_unused)
+		          <li style="cursor:pointer" class="image_container friend_holder fl" id="{{$logo_unused->logo_text}}" onclick="show_big_image('{{$logo_unused->id}}','{{$logo_unused->logo_name}}','{{$logo_unused->tracking_rating}}');">
+		            <div class="image_div" id="image_div_{{$logo_unused->id}}" onclick="get_select({{$logo_unused->id}})">	
 		            <label>    
-		              <input type="radio"  value="{{$logo->id}}" name="company_logo_id" class="image_click checkboxs">        	
-		              <img  width="120" src="{{env('SITE_PATH')}}uploads/original/{{$logo->logo_name}}">
+		              <input type="radio"  value="{{$logo_unused->id}}" name="company_logo_id" class="image_click checkboxs">        	
+		              <img  width="120" src="{{env('SITE_PATH')}}uploads/original/{{$logo_unused->logo_name}}">
 		            </label>
 		            </div> 
 		          </li>
@@ -38,12 +34,12 @@
 	</div> 
 	@endif 
 	<div class="demo-grid-2 mdl-grid"> 
-		@if($logo_details->count() >0)
+		@if($logo_details_unused->count() >0)
 		<input type="button" name="save_logo_old" id="save_logo_old" value="Save as my logo" />
 		@endif
 		<input type="button" name="save_logo" id="save_logo" value="Register and upload logo" />
 	</div>
-	@if($logo_details->count() >0)
+	@if($logo_details_unused->count() >0)
 	<div class="demo-grid-2 mdl-grid margin-top-10 details_div"> 
 		<div id="logo_details_div" class="logo_div col-md-6 col-xs-6" >		
 		<div id="logo_section">

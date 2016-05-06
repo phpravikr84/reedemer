@@ -69,10 +69,11 @@ function() {
             //a.d_path=site_path;      
 
            
-
+            var site_path=$("#site_path").val();
             h.post("../admin/dashboard/userdetails")
             .success(function (data) {                
                 a.ReedemerDetails=data;
+                a.site_path=site_path;
             });    
         } 
 
