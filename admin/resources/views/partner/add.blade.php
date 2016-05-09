@@ -75,6 +75,32 @@
 						</div>
 						<div data-key="address" class="um-field um-field-last_name um-field-text">
 							<div class="um-field-label">
+								<label for="web-address">Category</label>
+								<div class="um-clear"></div>
+							</div>
+							<div class="um-field-area">
+								<select name="category_id" id="category_id">
+									<option  value="">---</option>
+									@foreach($category_details as $category)
+									<option  value="{{$category->id}}">{{$category->cat_name}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						
+						<div data-key="address" class="um-field um-field-last_name um-field-text">
+							<div class="um-field-label">
+								<label for="web-address">Sub Category</label>
+								<div class="um-clear"></div>
+							</div>
+							<div class="um-field-area">
+								<select name="subcat_id" id="subcat_id">
+								    <option value="">Select category first</option>
+								</select>
+							</div>
+						</div>
+						<div data-key="address" class="um-field um-field-last_name um-field-text">
+							<div class="um-field-label">
 								<label for="password">Password(At least 6 character long)</label>
 								<div class="um-clear"></div>
 							</div>
@@ -138,10 +164,35 @@
 @endsection
 @section('scripts')
 <script>
-    // $(document).ready(function(){
-    //     $("#register").click(function(){
-    //         alert("a");
-    //     });
+     $(document).ready(function(){
+     	   
+	    $('#category_id').on('change',function(){
+	        var category_id = $(this).val();
+	       // var site_path=$("#site_path").val();           
+	       // alert(category_id);
+	        //return false;
+	        if(category_id){
+	            $.ajax({
+	                type:'GET',
+	                url:'../../partner/subcategory/'+category_id,
+	                //data:'parent_id='+category_id,
+	                success:function(html){
+	                	//alert(site_path);
+	                	 var new_html="<option value=''>----</option>";
+	                	  for(var i=0; i<html.length; i++)
+	                	  {
+	                	  	new_html+="<option value='"+html[i].id+"'>"+html[i].cat_name+"</option>";
+	                	  }
+	                	//alert(JSON.stringify(new_html,null,4));
+	                    $('#subcat_id').html(new_html);
+	                }
+
+	            }); 
+	        }else{
+	            $('#subcat_id').html('<option value="">Select state first</option>'); 
+	        }
+	    });
+     });
 
         
 

@@ -154,8 +154,7 @@ label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
     	$("#msg_section").show();
         $("input[name='save_logo_old']").click(function(){
         //	$("#logo_section").show(500);
-            var logo_id = $("input[name='company_logo_id']:checked").val();
-           
+            var logo_id = $("input[name='company_logo_id']:checked").val();         
             if(!logo_id)
             {
             	alert("Please select a logo.");
@@ -191,7 +190,7 @@ function show_big_image(image_id,image_name,rating_val)
 }
 
 function get_select(select_id)
-{
+{	
 	$(".image_div").css({		
 		'border':'',
 		'box-shadow':'',

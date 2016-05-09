@@ -120,6 +120,8 @@ class RedeemarController extends Controller {
 		$web_address  = $request->input('web_address');
 		$password     = $request->input('password');
 		$confirm_user_password     = $request->input('confirm_user_password');
+		$cat_id     = $request->input('category_id');
+		$subcat_id     = $request->input('subcat_id');
 		$owner 		  = $request->input('owner');
 		$create_offer_permission 		  = $request->input('create_offer_permission');
 		$type         = 2;
@@ -191,6 +193,8 @@ class RedeemarController extends Controller {
 				$user->address 		= $address;	
 				$user->email 		= $email;	
 				$user->web_address 	= $web_address;	
+				$user->cat_id 		= $cat_id;	
+				$user->subcat_id 	= $subcat_id;	
 				$user->owner 		= $owner;	
 				$user->create_offer_permission 		= $create_offer_permission;
 				$user->type 		= $type;			

@@ -12,6 +12,7 @@ use Session;
 use App\Helper\vuforiaclient;
 use App\Model\User;
 use App\Model\Logo;
+use App\Model\Category;
 
 class PartnerController extends Controller {
 
@@ -86,15 +87,39 @@ class PartnerController extends Controller {
 
 	public function getAdd($logo_id)
 	{	
-		$logo_details=Logo::where('id',$logo_id)->first();			
+		$logo_details=Logo::where('id',$logo_id)->first();		
+		$category_details=$this->getCategory('0');
+		//dd($category_details->toArray());
 		return view('partner.add',[
 						'logo_id' =>$logo_id,
-						'logo_details' =>$logo_details
+						'logo_details' =>$logo_details,
+						'category_details' =>$category_details
 				   ]);
 	}
 
-	public function postStore(Request $request)
+	//Listing to show only 
+	public function getCategory($parent_id='')
 	{		
+		if($parent_id!='')
+		{
+			//$id=$request[0];
+			$category = Category::where('parent_id',$parent_id)
+						->where('visibility',1)
+						->get();
+		}
+		else
+		{
+			$category = Category::where('visibility',1)
+						->orderBy('id','DESC')
+						->get();
+		}
+		//dd($category->toArray());
+		return $category;
+	}
+
+	public function postStore(Request $request)
+	{	
+	//dd($request->all())	;
 		$wptoken=$this->getWptoken();
 		//dd($wptoken->toArray());
 		$logo_id=$request->get('logo_id');
@@ -108,6 +133,8 @@ class PartnerController extends Controller {
 			'web_address' => urlencode($request->get('web_address')),
 			'password' => urlencode($request->get('user_password')),
 			'confirm_user_password' => urlencode($request->get('confirm_user_password')),
+			'category_id' => urlencode($request->get('category_id')),
+			'subcat_id' => urlencode($request->get('subcat_id')),
 			'owner' => urlencode($request->get('owner')),
 			'create_offer_permission' => urlencode($request->get('create_offer_permission')),
 			'token_value' => $wptoken->token_value
@@ -311,6 +338,27 @@ class PartnerController extends Controller {
 	{
 		//$this->getVuforiarate();
 		return view('partner.msg');
+	}
+
+	//Listing to show only 
+	public function getSubcategory($parent_id='')
+	{	
+		//dd($parent_id)	;
+		if($parent_id!='')
+		{
+			//$id=$request[0];
+			$category = Category::where('parent_id',$parent_id)
+						->where('visibility',1)
+						->get();
+		}
+		else
+		{
+			$category = Category::where('visibility',1)
+						->orderBy('id','DESC')
+						->get();
+		}
+		//dd($category->toArray());
+		return $category;
 	}
 	
 
