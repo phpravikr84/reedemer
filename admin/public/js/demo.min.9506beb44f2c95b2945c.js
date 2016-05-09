@@ -550,6 +550,34 @@ function() {
             a.img_file_path =site_path;
 
            
+            // Category, sub-cat listing
+            $('#category_id').on('change',function(){
+                var category_id = $(this).val();
+                // var site_path=$("#site_path").val();           
+                // alert(category_id);
+                //return false;
+                if(category_id){
+                    $.ajax({
+                        type:'GET',
+                        url:'../admin/dashboard/subcategory/'+category_id,
+                        //data:'parent_id='+category_id,
+                        success:function(html){
+                            //alert(site_path);
+                             var new_html="<option value=''>----</option>";
+                              for(var i=0; i<html.length; i++)
+                              {
+                                new_html+="<option value='"+html[i].id+"'>"+html[i].cat_name+"</option>";
+                              }
+                            //alert(JSON.stringify(new_html,null,4));
+                            $('#subcat_id').html(new_html);
+                        }
+
+                    }); 
+                }else{
+                    $('#subcat_id').html('<option value="">Select state first</option>'); 
+                }
+            });
+
            
             // show all uploaded logo in admin panel           
             x.post("../admin/dashboard/logo").success(function(data_response){              
@@ -842,11 +870,70 @@ function() {
 
             a.add_reedemer=function(){                
            //     alert(JSON.stringify(a.Redeemer, null, 4));
+               if($("#company_name").val()=='')
+               {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please insert company name.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save user');  
+
+                    return false;
+               }
+               else if($("#company_name").val()=='')
+               {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please insert address.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save user');  
+
+                    return false;
+               }
                a.show_success_msg=false; 
                a.show_error_msg=false; 
+               var category_id = $("#category_id").val();
+               if($("#subcat_id").val()!='')
+               {
+                    var subcat_id = $("#subcat_id").val();
+               }
+               else
+               {
+                    var subcat_id = null;
+               }              
+              
+               
 
-               $('#add_reedemer').prop('disabled', true);
-               $("#add_reedemer").text('Saving..'); 
+               a.Redeemer.category_id = category_id;
+               a.Redeemer.subcat_id = subcat_id;
+               var url=$("#web_address").val();              
+
+               var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+                if (!re.test(url)) { 
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Invalid web address.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save user');   
+                    return false;
+                }
+
+
+              
+               //return false;
+              // $('#add_reedemer').prop('disabled', true);
+               //$("#add_reedemer").text('Saving..'); 
+              // alert(JSON.stringify(a.Redeemer,null,4));
+              // return false;
 
                x.post("../admin/dashboard/storereedemer", a.Redeemer).success(function(response){
                  // $('#add_reedemer').prop('disabled', false);
@@ -872,6 +959,17 @@ function() {
                     $("#error_div").hide();
                     $("#show_message").slideDown();
                     $("#error_div").html("Email already exists.Please try with diffrent email.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#add_reedemer').prop('disabled', false);
+                    $("#add_reedemer").text('Save user');     
+                  }
+                  else if(response=="already_company_exists")
+                  {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Company already exists.");
                     $("#error_div").show();
                     $("#success_div").hide();
 

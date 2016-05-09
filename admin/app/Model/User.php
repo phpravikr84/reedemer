@@ -14,11 +14,16 @@ class User extends Model  {
 	 */
 	protected $table = 'users';
 
- 	//public function profile()
-	//{
-	//	return $this->hasOne('App\Profile');
-	//}
+ 	public function profile()
+	{
+		return $this->hasOne('App\Model\Logo');
+	}
 
-	
+  
+	 //self::deleting(function($user) { // before delete() method call this
+        //     $user->photos()->delete();
+             // do the rest of the cleanup...
+      //  });
+	//
 
 }

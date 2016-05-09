@@ -50,8 +50,24 @@
                 <span class="mdl-textfield__error">Please supply a valid email address.</span>
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-                <input ng-model="Redeemer.web_address" class="mdl-textfield__input" type="text" id="address" />
+                <input ng-model="Redeemer.web_address" class="mdl-textfield__input" type="text" id="web_address" />
                 <label class="mdl-textfield__label" for="web_address">Web Address</label>
+              </div>
+              <div data-key="address" class="um-field um-field-last_name um-field-text">
+                <div class="um-field-area">
+                  <select name="category_id" id="category_id">
+                    <option value="">-- Select category --</option>                    
+                    <option ng-repeat="cat in category_details"  value="{{cat.id}}">{{cat.cat_name}}</option>                    
+                  </select>
+                </div>
+              </div>
+              <div style="height:10px;"></div>
+              <div data-key="address" class="um-field um-field-last_name um-field-text">
+                <div class="um-field-area">
+                  <select name="subcat_id" id="subcat_id">
+                      <option value="">Select category first</option>
+                  </select>
+                </div>
               </div>
               <div class="mdl-textfield mdl-js-textfield">
                 <input ng-model="Redeemer.password" class="mdl-textfield__input" type="password" id="password" name="password" />

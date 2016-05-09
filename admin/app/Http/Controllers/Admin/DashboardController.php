@@ -174,13 +174,28 @@ class DashboardController extends Controller {
 
 	
 	public function postStorereedemer(Request $request)
-	{		
-		//dd($request->input('address').'--'.$request->input('web_address').'--'.$request->input('company_name').'--'.$request->input('email').'--'.$request->input('password'));
-		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
+	{	
+		//dd($request->all())	;
+		//dd($request->input('address').'--'.$request->input('web_address').'--'.$request->input('company_name').'--'.$request->input('email').'--'.$request->input('password').'--'.$request->input('category_id'));
+		// if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='' ||  $request->input('category_id')=='')
+		// {
+		// 	return 'error';
+		// 	exit;
+		// }
+		$c_c=strtolower($request->input('company_name'));
+		$user_check = User::where('company_name',$c_c)->count();
+		//dd($user_check);
+		if($user_check >0)
 		{
-			return 'error';
+			return 'already_company_exists';
 			exit;
 		}
+		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='' ||  $request->input('category_id')=='')
+		{
+		 	return 'error';
+		 	exit;
+		}
+
 		$rules = array(
 				'company_name'     => 'required',  
 				'email'            => 'required|email|unique:users',   
@@ -199,14 +214,17 @@ class DashboardController extends Controller {
 		} else {
 			// create the data for our user
 			$user = new User();
-			$user->company_name 		= $request->input('company_name');			
+			$user->company_name = $request->input('company_name');			
 			$user->address 		= $request->input('address');
-			$user->type 		= 2;			
-			$user->approve 		= 1;
+			$user->type 		= 2; // Type 2 for redeemar partner		
+			$user->approve 		= 1; // Autometically approve redeemar
 			$user->email 		= $request->input('email');
-			$user->web_address 		= $request->input('web_address');
-			$user->password = bcrypt($request->input('password'));
+			$user->web_address 	= $request->input('web_address');
+			$user->password 	= bcrypt($request->input('password'));
+			$user->cat_id 		= $request->input('category_id');
+			$user->subcat_id 	= $request->input('subcat_id');
 			$user->save();
+			//Get latest redeemar ID
 			$user_id = $user->id;
 			
 			// Insert dummy data into Table: reedemer_partner_settings
@@ -761,6 +779,25 @@ class DashboardController extends Controller {
 	}
 
 	
-
+	//Listing to show only 
+	public function getSubcategory($parent_id='')
+	{	
+		//dd($parent_id)	;
+		if($parent_id!='')
+		{
+			//$id=$request[0];
+			$category = Category::where('parent_id',$parent_id)
+						->where('visibility',1)
+						->get();
+		}
+		else
+		{
+			$category = Category::where('visibility',1)
+						->orderBy('id','DESC')
+						->get();
+		}
+		//dd($category->toArray());
+		return $category;
+	}
 	
 }
