@@ -43,7 +43,7 @@
             </tr>
             </thead>
             <tbody>
-              <tr id="val_{{category.id}}" ng-if="cnames.length > 0"  dir-paginate="category in category_details|itemsPerPage:10">               
+              <tr id="val_{{category.id}}" ng-if="category_details.length > 0"  dir-paginate="category in category_details|itemsPerPage:10">               
                 <td>                  
                     <a href="javascript:void(0);" data-ng-click="set_cat_id(category.id)">{{category.cat_name}}
                     </a>
@@ -70,7 +70,7 @@
                   </dir-pagination-controls>
                 </td>
               </tr>
-              <tr ng-if="cnames.length == 0">
+              <tr ng-if="category_details.length == 0">
                 <td class="center" colspan="5">No data present</td>                
               </tr> 
             </tbody>
