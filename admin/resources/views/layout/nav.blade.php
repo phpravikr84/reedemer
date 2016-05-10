@@ -15,7 +15,7 @@
 </ul>
 </li>
 <li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650"><a href="http://159.203.91.38/index.php/deals/">Deals</a></li>
-<li id="menu-item-1348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1348"><a href="http://159.203.91.38/index.php/deals/">Partners</a></li>
+<li id="menu-item-1348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1348"><a href="http://159.203.91.38/index.php/partner/">Partners</a></li>
 <li id="menu-item-619" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-619"><a href="http://159.203.91.38/index.php/shops/">Shops</a></li>
 <li id="menu-item-620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620"><a href="http://159.203.91.38/index.php/categories/">Categories</a></li>
 <li id="menu-item-704" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-409 current_page_item menu-item-704"><a href="http://159.203.91.38/index.php/contact/">Contact</a></li>
