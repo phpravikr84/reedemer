@@ -290,7 +290,7 @@ h6,
 <body class="page page-id-409 page-template page-template-template-contact page-template-template-contact-php">
 
 
-<div class="navigation-wrapper" style="background:#000000">
+<div class="navigation-wrapper">
 	@include('layout.nav')
 </div><!-- end navigation-wrapper -->
 <div class="nav-offset"></div>
