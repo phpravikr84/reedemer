@@ -3,6 +3,7 @@ use Auth;
 //use App\Model\Logo;
 use App\Model\Wptoken;
 use App\Model\Demotest;
+use App\Model\Pp;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 //use Request; 
@@ -130,7 +131,7 @@ class BridgeController extends Controller {
 		$pp=new Pp();
 		$pp->val=$response;
 		$pp->save();
-		
+
 		return $response;
 
 		//$result['message']=htmlspecialchars(ltrim($response['message'],' & '));	
