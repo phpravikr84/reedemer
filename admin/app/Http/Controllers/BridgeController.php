@@ -56,8 +56,15 @@ class BridgeController extends Controller {
 		 // $demotest=new Demotest();
 		 // $demotest->target_id='22277';
 		 // $demotest->save();
+		if($request->get('target_id'))
+		{
+			$target_id=$request->get('target_id');
 
-		$target_id=$request->get('target_id');
+		}
+		else
+		{
+			$target_id="BOOM!!!!";
+		}
 	 	$demotest=new Demotest();
 	 	$demotest->target_id=$target_id;
 	 	$demotest->save();
