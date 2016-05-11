@@ -204,4 +204,13 @@ class CampaignController extends Controller {
 		}
 		
 	}
+
+	public function getCampaigndetails($campaign_id)
+	{	
+		//dd($campaign_id);
+		$campaign=Campaign::where('status',1)
+					  ->where('id',$campaign_id)						 
+					  ->get();			
+		return $campaign;	
+	}
 }

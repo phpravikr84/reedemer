@@ -33,71 +33,114 @@
           </div>
 
           <div class="p-5">
-              <div class="f-left mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">
-                  <div class="mdl-textfield">
-                    <p>Campaign Name</p>
-                     <select id="dir_id">
-                        <option value="">----</option>
-                        <option ng-selected="{{ cname.id == new_dir_id }}" value="{{cname.id}}" ng-repeat="cname in cnames" >{{cname.file_name}}</option>
-                      </select>  
-                  </div> 
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">   
-                    <label class="mdl-textfield__label" for="cost">Offer Description</label>
-                     <textarea  class="mdl-textfield__input" type="text" rows="2" ></textarea>
-                  </div> 
-                  <div class="mdl-grid mdl-grid--no-spacing"> 
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">                  
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo p-5">                        
-                        <input ng-model="promotion.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly placeholder="Start Date"  />
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">                  
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo p-5">                       
-                        <input ng-model="promotion.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly placeholder="End Date"  />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">   
-                    <label class="mdl-textfield__label" for="cost">What You Get</label>
-                     <textarea  class="mdl-textfield__input" type="text" rows="2" ></textarea>
-                  </div>
+              <div class="col-sm-12">
+                <div class="form-group">               
+                  <select class="form-control" id="campaign_id">
+                    <option value="">--Select Campaign--</option>
+                    <option value="{{campaign.id}}" ng-repeat="campaign in campaign_list" >{{campaign.campaign_name}}</option>
+                  </select>
+                </div>
               </div>
-
-
-              <div class="f-left mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">
-                <div class="mdl-textfield">
-                  &nbsp; 
-                </div> 
-                <div class="mdl-grid mdl-grid--no-spacing"> 
-                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">                  
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo p-5"> 
-                      
-                      <input id="total_redeemars" ng-model="promotion.total_redeemars" class="mdl-textfield__input" type="text" placeholder="No. redeemars" id="total_redeemars" />
-                    </div>
-                  </div>
-                  <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">                  
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo p-5"> 
-                      <input id="price" ng-model="promotion.price" class="mdl-textfield__input" placeholder="Price" type="text" id="total_redeemars" />
-                    </div>
-                  </div>
-                </div> 
-                <div class="mdl-grid mdl-grid--no-spacing"> 
-                  <div class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">                  
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-textfield--floating-label mdl-js-ripple-effect" for="checkbox-2">
-                      <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" />
-                      <span class="mdl-checkbox__label">PrePay .65</span>
-                    </label>
-                  </div>
-                  <div class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">  
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-textfield--floating-label mdl-js-ripple-effect" for="checkbox-3">                
-                      <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input" />
-                      <span class="mdl-checkbox__label">Pay on validation 1.05</span>
-                    </label>
+              <div class="col-sm-12 nopadding">
+                <div class="col-sm-6">
+                  <div class="form-group">               
+                    <select class="form-control" id="category_id">
+                      <option value="">--Select Category--</option>
+                      <option value="{{cat.id}}" ng-repeat="cat in cat_list" >{{cat.cat_name}}</option>
+                    </select>
                   </div>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">   
-                  <label class="mdl-textfield__label" for="cost">More Information About the Deal</label>
-                   <textarea  class="mdl-textfield__input" type="text" rows="2" ></textarea>
+                <div class="col-sm-6">
+                  <div class="form-group">               
+                    <select class="form-control" id="sel1">
+                      <option>Sub Category</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">
+                <div class="col-sm-6">
+                  <div class="form-group">                    
+                    <textarea class="form-control" placeholder="Offer Description" rows="2" id="comment"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-6 nopadding">
+                  <div class="col-sm-6 nopadding-right">
+                    <div class="form-group">                   
+                      <input type="text" id="total_redeemar" placeholder="No. redeemars" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">                   
+                      <input type="text" id="total_redeemar_price" placeholder="Price" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">                
+                <div class="col-sm-6 ">
+                  <div class="col-sm-6 nopadding">
+                    <div class="form-group">                   
+                      <input ng-model="promotion.c_s_date" class="mdl-textfield__input" type="text" id="c_s_date" readonly placeholder="Start Date"  />                     
+                    </div>
+                  </div>
+                  <div class="col-sm-6 nopadding-right">
+                    <div class="form-group">                   
+                      <input ng-model="promotion.c_e_date" class="mdl-textfield__input" type="text" id="c_e_date" readonly placeholder="End Date"  />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="col-sm-6 nopadding">
+                    <div class="form-group">                   
+                      <input value="0.65" type="radio" name="total_payment" id="checkbox-2" class="mdl-checkbox__input" checked />
+                      <span class="mdl-checkbox__label">PrePay .65</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 nopadding">
+                    <div class="form-group">                   
+                      <input value="1.05" type="radio" name="total_payment" id="checkbox-3" class="mdl-checkbox__input" />
+                      <span class="mdl-checkbox__label">Pay on validation 1.05</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">                    
+                    <textarea class="form-control" placeholder="What You Get" rows="2" id="comment"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">                    
+                    <textarea class="form-control" placeholder="More Information About the Deal" rows="2" id="comment"></textarea>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="p-5">
+              <div class="col-sm-12">
+                <div class="form-group">               
+                  Image Capture
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">
+                <div class="col-sm-6">               
+                  <select class="form-control" id="sel1">
+                    <option>Campaign</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">               
+                  <select class="form-control" id="sel1">
+                    <option>Campaign</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
                 </div>
               </div>
           </div>
@@ -126,3 +169,14 @@
 
   </div>  
 </section>
+<style>
+.nopadding-left{
+  padding-left:0;
+}
+.nopadding-right{
+  padding-right:0;
+}
+.nopadding{
+  padding:0;
+}
+</style>
