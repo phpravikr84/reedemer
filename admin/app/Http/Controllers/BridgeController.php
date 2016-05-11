@@ -5,7 +5,7 @@ use App\Model\Wptoken;
 use App\Model\Demotest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request; 
+//use Request; 
 use Illuminate\Http\Response; 
 use Redirect;
 use Input;
@@ -14,6 +14,7 @@ use App\Helper\vuforiaclient;
 use App\Model\User;
 use App\Model\Logo;
 use App\Model\Category;
+use Illuminate\Http\Request;
 
 class BridgeController extends Controller {
 
@@ -53,9 +54,6 @@ class BridgeController extends Controller {
 	 */
 	public function postIndex(Request $request)
 	{
-		 // $demotest=new Demotest();
-		 // $demotest->target_id='22277';
-		 // $demotest->save();
 		if($request->get('target_id'))
 		{
 			$target_id=$request->get('target_id');
