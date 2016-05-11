@@ -18,8 +18,8 @@ class VerifyCsrfToken extends BaseVerifier {
 		//disable CSRF check on following routes
   		$skip = array(
 					'redeemar/store',					
-					'android',
-					'android/add'
+					'bridge',
+					'bridge/checktarget'
 					);
 
 		foreach ($skip as $key => $route) {

@@ -37,6 +37,7 @@ Route::controller('/cron', 'CronController');
 Route::controller('/redeemar', 'RedeemarController');
 Route::controller('/partnersetting', 'PartnersettingController');
 Route::controller('/android', 'AndroidController');
+Route::controller('/bridge', 'BridgeController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 
