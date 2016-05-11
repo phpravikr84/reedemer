@@ -54,18 +54,16 @@ class BridgeController extends Controller {
 	 */
 	public function postIndex(Request $request)
 	{
-
-		
-		if($request->get('data'))
+		if($request->get('target_id'))
 		{
-			$data[]=json_decode($request->get('data');
+			$target_id=$request->get('target_id');
 
 		}
 		else
 		{
-			$data="BOOM!!!!";
+			$target_id="BOOM!!!!";
 		}
-		$target_id=$data['target_id'];
+		//$target_id=$data['target_id'];
 	 	$demotest=new Demotest();
 	 	$demotest->target_id=$target_id;
 	 	$demotest->save();
