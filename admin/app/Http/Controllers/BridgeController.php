@@ -157,19 +157,19 @@ class BridgeController extends Controller {
 	public function postChecktarget(Request $request)
 	{
 		$target_id=$request->get('target_id');
-		 // $logo=Logo::where('target_id',$target_id)->get()->first();		
+		 $logo=Logo::where('target_id',$target_id)->get()->first();		
 		
-		 // if($logo->reedemer_id)
-		 // {
-		 // 	$return['status']="partner_found";
-		 // 	$return['message']="There are already a partner associates with this logo.";
-		 // }
-		 // else
-		 // {
-		 // 	$return['status']="partner_not_found";
-		 // 	$return['message']="No partner associates with this logo.";
-		 // }
-		return $target_id;
+		 if($logo->reedemer_id)
+		 {
+		 	$return['status']="partner_found";
+		 	$return['message']="There are already a partner associates with this logo.";
+		 }
+		 else
+		 {
+		 	$return['status']="partner_not_found";
+		 	$return['message']="No partner associates with this logo.";
+		 }
+		return $return;
 	}
 	
 
