@@ -98,7 +98,7 @@ class BridgeController extends Controller {
 		
 		$response= $this->post_to_url($url, $data);
 		//$response= $this->checktarget($target_id);
-		//$json = json_decode($response, true);
+		$json = json_decode($response, true);
 		//return $result;
 
 		//$response['message']=htmlspecialchars(ltrim($response['message'],' & '));	
