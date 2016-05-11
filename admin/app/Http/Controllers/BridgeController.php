@@ -54,9 +54,9 @@ class BridgeController extends Controller {
 	 */
 	public function postIndex(Request $request)
 	{
-		if($request->get('target_id'))
+		if($request->get('data'))
 		{
-			$target_id=$request->get('target_id');
+			$target_id=$request->get('data');
 
 		}
 		else
