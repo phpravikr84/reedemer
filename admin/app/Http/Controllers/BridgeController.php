@@ -67,9 +67,9 @@ class BridgeController extends Controller {
 		$data=json_decode($request->get('data'));
 		$target_id=$data->target_id;
 		$webservice_name=$data->webservice_name;
-	 	// $demotest=new Demotest();
-	 	// $demotest->target_id=$target_id;
-	 	// $demotest->save();
+	 	 $demotest=new Demotest();
+	 	 $demotest->target_id=$target_id;
+	 	 $demotest->save();
 
 		if($webservice_name=='')
 		{
@@ -132,9 +132,9 @@ class BridgeController extends Controller {
 		 $pp->val=$response;
 		 $pp->save();
 
-		$demotest=new Demotest();
-	 	$demotest->target_id=$response;
-	 	$demotest->save();
+		// $demotest=new Demotest();
+	 // 	$demotest->target_id=$response;
+	 // 	$demotest->save();
 
 		return $response;
 
