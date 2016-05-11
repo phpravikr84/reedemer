@@ -51,39 +51,43 @@ class AndroidController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getIndex(Request $request)
+	public function postIndex(Request $request)
 	{
-		 // $data = array(
-		 // 	'target_id' => urlencode($request->get('target_id')),
-		 // 	'webservice_name' => 'demo_add'
-		 // );
-		dd($request->all());
+		
+		$base_path=getenv('WEBSERVICE');
+		$webservice_name=$request->get('webservice_name');
+		$target_id=$request->get('target_id');
+
+		$data = array(
+		  	'target_id' => urlencode($target_id),		  
+		  	'webservice_name' => $webservice_name
+		);
+		//dd($request->all());
 		
 		//$url = getenv('WEBSERVICE');
 		//echo $url;
 		//$result= $this->post_to_url($url, $data);
 		//$result_arr=json_decode($result);
-		$webservice_name="demo_add";
-		$base_path=getenv('WEBSERVICE');
+		
 		//$favcolor = "red";
 
 		switch ($webservice_name) {
-		case "demo_name":
-			$url=$base_path."demo_add";
+		case "demo_add":
+			$url=$base_path."add";
 		break;		
 		default:
 			$url=$base_path."not_found";
 		}
+
+		$result= $this->post_to_url($url, $data);
 	}
 
-	public function getAdd()
+	public function postAdd(Request $request)
 	{
-		
-
-
+		$target_id=$request->get('target_id');
 
 		$demotest=new Demotest();
-		$demotest->target_id='4444';
+		$demotest->target_id=$target_id;
 		$demotest->save();
 	}
 
