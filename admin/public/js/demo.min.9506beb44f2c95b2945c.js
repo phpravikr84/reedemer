@@ -1193,14 +1193,17 @@ function() {
                   //     company_id=0;
                   // }
                   // var company_id=0;
+
                    var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+logo_text+"/"+response).success(function(response_back){
+                       // alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
                            // alert(target_id);
                             h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                               // alert("a");
                                 if(target.response=="success")
                                 {
                                     var main_site_url=$("#main_site_url").val();
@@ -1220,11 +1223,24 @@ function() {
                         }
                         if(response_back.response=="image_problem")
                         {
-                            $("#show_success_msg").hide();
-                            $("#image_error").show('500');
-                            $("#logo_text").val("");
-                            $("#company_id").val("");
-                            $("#logo_name").val("");                                          
+                            //alert("a")
+                            // $("#show_success_msg").hide();
+                            // $("#image_error").show('500');
+                            // $("#logo_text").val("");
+                            // $("#company_id").val("");
+                            // $("#logo_name").val("");    
+
+
+                            $("#error_div").hide();
+                            $("#show_message").slideDown();
+                            $("#error_div").html("Unable to upload your image. Please try with a diffrent image.<br> We will reload this page shortly.");
+                            $("#error_div").show();
+                            $("#success_div").hide();
+
+                            setTimeout(function() { 
+                            //window.location.href = redirect_url; 
+                                window.location.reload();
+                            }, 5000);                                      
 
                         }
 
