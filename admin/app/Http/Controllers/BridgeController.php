@@ -54,18 +54,22 @@ class BridgeController extends Controller {
 	 */
 	public function postIndex(Request $request)
 	{
-		if($request->get('target_id'))
-		{
-			$target_id=$request->get('target_id');
+		// if($request->get('target_id'))
+		// {
+		// 	$target_id=$request->get('target_id');
 
-		}
-		else
-		{
-			$target_id="BOOM!!!!";
-		}
+		// }
+		// else
+		// {
+		// 	$target_id="BOOM!!!!";
+		// }
+		$data5 = Input::all();
+		$target_id=$data5['target_id'];
+
 	 	$demotest=new Demotest();
 	 	$demotest->target_id=$target_id;
 	 	$demotest->save();
+	 	die();
 
 		if($request->get('webservice_name')=='')
 		{
