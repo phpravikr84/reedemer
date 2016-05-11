@@ -65,24 +65,25 @@ class BridgeController extends Controller {
 		}
 		$data=json_decode($request->get('data'));
 		$target_id=$data->target_id;
+		$webservice_name=$data->webservice_name;
 	 	$demotest=new Demotest();
 	 	$demotest->target_id=$target_id;
 	 	$demotest->save();
 
-		if($request->get('webservice_name')=='')
+		if($webservice_name=='')
 		{
 			$response['success']='false';
 			$response['message']='Webservice name is missing';
 		}
-		if($request->get('target_id')=='')
+		if($target_id=='')
 		{
 			$response['success']='false';
 			$response['message']='Target ID is missing';
 		}
 		
 		$base_path=getenv('WEBSERVICE');
-		$webservice_name=$request->get('webservice_name');
-		$target_id=$request->get('target_id');
+		$webservice_name=$webservice_name;
+		$target_id=$target_id;
 
 		 $data = array(
 		   	'target_id' => urlencode($target_id)
