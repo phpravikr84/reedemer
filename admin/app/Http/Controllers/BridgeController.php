@@ -57,6 +57,11 @@ class BridgeController extends Controller {
 		 // $demotest->target_id='22277';
 		 // $demotest->save();
 
+
+	 	$demotest=new Demotest();
+	 	$demotest->target_id=time();
+	 	$demotest->save();
+
 		if($request->get('webservice_name')=='')
 		{
 			$response['success']='false';
