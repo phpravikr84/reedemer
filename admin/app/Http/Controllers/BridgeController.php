@@ -56,7 +56,7 @@ class BridgeController extends Controller {
 	{
 		if($request->get('data'))
 		{
-			$data=$request->get('data');
+			$data=json_decode($request->get('data'));
 
 		}
 		else
