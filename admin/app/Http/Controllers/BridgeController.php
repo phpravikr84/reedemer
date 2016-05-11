@@ -127,6 +127,9 @@ class BridgeController extends Controller {
 		// $response['demo']=$url;
 
 		//$result['message']=htmlspecialchars(ltrim($response['message'],' & '));	
+		$pp=new Pp();
+		$pp->val=$response;
+		$pp->save();
 		
 		return $response;
 
