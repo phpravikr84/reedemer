@@ -172,16 +172,16 @@ class BridgeController extends Controller {
 		$target_id=$request->get('target_id');
 		$logo=Logo::where('target_id',$target_id)->get()->first();
 
-		$pp=new Pp();
-	 	 $pp->val=$logo;
-	 	 $pp->save();
-
+		
 		$dataArr=array(
 	 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
 	 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
 	 			 );
 
-		
+		$pp=new Pp();
+	 	 $pp->val=$dataArr;
+	 	 $pp->save();
+
 		if($logo->reedemer_id)
 		{
 		 	$return['status']="R1001";
