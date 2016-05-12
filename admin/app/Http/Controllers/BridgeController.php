@@ -119,9 +119,9 @@ class BridgeController extends Controller {
 		// $response['demo']=$url;
 
 		//$result['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		 $pp=new Pp();
-		 $pp->val=$response;
-		 $pp->save();
+		 // $pp=new Pp();
+		 // $pp->val=$response;
+		 // $pp->save();
 
 		// $demotest=new Demotest();
 	 // 	$demotest->target_id=$response;
@@ -166,47 +166,61 @@ class BridgeController extends Controller {
 	// 	$demotest->save();
 	// }
 
-	// public function postChecktarget(Request $request)
-	// {
-	// 	$target_id=$request->get('target_id');
-	// 	$logo=Logo::where('target_id',$target_id)->get()->first();		
-		
-	// 	if($logo->reedemer_id)
-	// 	{
-	// 	 	$return['status']="R1001";
-	// 	 	$return['message']="There are already a partner associates with this logo.";
-	// 	}
-	// 	else
-	// 	{
-	// 	 	$return['status']="R1002";
-	// 	 	$return['message']="No partner associates with this logo.";
-	// 	}
-	// 	return $return;
-	// }
-
-	public function getChecktarget($target_id='9e121bd3c9ac4b9a89b9f8b631283d29')
+	public function postChecktarget(Request $request)
 	{
-		//dd("getChecktarget");
-		//$target_id=$request->get('target_id');
-		$logo=Logo::where('target_id',$target_id)->get()->first();	
+		$target_id=$request->get('target_id');
+		$logo=Logo::where('target_id',$target_id)->get()->first();
+
 		$dataArr=array(
-					'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
-					'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
-				 );
+	 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
+	 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
+	 			 );
+
 		
 		if($logo->reedemer_id)
 		{
 		 	$return['status']="R1001";
-		 	$return['details']=$dataArr;
+		 	$return['message']=$dataArr;
 		}
 		else
 		{
 		 	$return['status']="R1002";
-		 	$return['details']="No partner associates with this logo.";
+		 	$return['message']="No partner associates with this logo.";
 		}
-		//dd($return);
+
+	 	 $pp=new Pp();
+	 	 $pp->val=$return;
+	 	 $pp->save();
+
 		return $return;
 	}
+
+	// public function getChecktarget($target_id='9e121bd3c9ac4b9a89b9f8b631283d29')
+	// {
+		
+	// 	$logo=Logo::where('target_id',$target_id)->get()->first();	
+	// 	$dataArr=array(
+	// 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
+	// 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
+	// 			 );
+		
+	// 	if($logo->reedemer_id)
+	// 	{
+	// 	 	$return['status']="R1001";
+	// 	 	$return['details']=$dataArr;
+	// 	}
+	// 	else
+	// 	{
+	// 	 	$return['status']="R1002";
+	// 	 	$return['details']="No partner associates with this logo.";
+	// 	}
+	// 	//dd($return);
+	// 	 $pp=new Pp();
+	// 	 $pp->val=$return;
+	// 	 $pp->save();
+
+	// 	return $return;
+	// }
 
 	public function getSendmail()
 	{
