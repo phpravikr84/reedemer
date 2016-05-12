@@ -185,7 +185,7 @@ class BridgeController extends Controller {
 
 
 		 	$return['status']="R1001";
-		 	$return['message']=$dataStr;
+		 	$return['details']=$dataStr;
 
 
 		 	$pp=new Pp();
@@ -195,7 +195,7 @@ class BridgeController extends Controller {
 		else
 		{
 		 	$return['status']="R1002";
-		 	$return['message']="No partner associates with this logo.";
+		 	$return['details']="No partner associates with this logo.";
 		}
 		
 	 	// dd($return);
