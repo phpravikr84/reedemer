@@ -179,7 +179,7 @@ class BridgeController extends Controller {
 	 			 );
 
 		$pp=new Pp();
-	 	$pp->val='m';
+	 	$pp->val=$dataArr;
 	 	$pp->save();
 
 		if($logo->reedemer_id)
