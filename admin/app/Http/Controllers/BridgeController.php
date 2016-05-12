@@ -184,7 +184,7 @@ class BridgeController extends Controller {
 		$logo_url= getenv("SITE_URL")."admin/uploads/original/".$logo->logo_name;
 		//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
 
-		$dataArr=array('company_name' => '$company_name','logo_url' => '$logo_url');
+		$dataArr=array('company_name' => $company_name,'logo_url' => $logo_url);
 		$dataStr=json_encode($dataArr);
 
 
