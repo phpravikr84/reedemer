@@ -178,10 +178,7 @@ class BridgeController extends Controller {
 	 // 				'logo_url' => 'bbb'
 	 // 			 );
 
-		$dataArr=array(
-				'company_name' => ,
-				'logo_url' =>,
-			 );
+		
 
 		$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
 		$logo_url= getenv("SITE_URL")."admin/uploads/original/".$logo->logo_name;
