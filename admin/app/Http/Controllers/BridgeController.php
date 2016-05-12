@@ -167,13 +167,14 @@ class BridgeController extends Controller {
 	// }
 
 	public function postChecktarget(Request $request)
-	{
-		$pp=new Pp();
-	 	 $pp->val='vvv';
-	 	 $pp->save();
+	{		
 
 		$target_id=$request->get('target_id');
 		$logo=Logo::where('target_id',$target_id)->get()->first();
+
+		$pp=new Pp();
+	 	 $pp->val=$logo;
+	 	 $pp->save();
 
 		$dataArr=array(
 	 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
