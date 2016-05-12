@@ -177,9 +177,10 @@ class BridgeController extends Controller {
 	 				'company_name' => "bb",
 	 				'logo_url' => 'bbb'
 	 			 );
+		$dataStr='{"company_name":"bbb","logo_url":"66"}';
 
 		$pp=new Pp();
-	 	$pp->val=$logo;
+	 	$pp->val=$dataStr;
 	 	$pp->save();
 
 		if($logo->reedemer_id)
