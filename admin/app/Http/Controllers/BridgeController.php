@@ -168,6 +168,10 @@ class BridgeController extends Controller {
 
 	public function postChecktarget(Request $request)
 	{
+		$pp=new Pp();
+	 	 $pp->val='vvv';
+	 	 $pp->save();
+
 		$target_id=$request->get('target_id');
 		$logo=Logo::where('target_id',$target_id)->get()->first();
 
@@ -188,10 +192,7 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		}
 
-	 	 $pp=new Pp();
-	 	 $pp->val=$dataArr;
-	 	 $pp->save();
-
+	 	 
 		return $return;
 	}
 
