@@ -188,12 +188,13 @@ class BridgeController extends Controller {
 	 				'company_name' => $company_name,
 	  				'logo_url' => $logo_url
 	  			 );
+		$dataStr=base64_encode($dataArr);
 
 
 		if($logo->reedemer_id)
 		{
 		 	$return['status']="R1001";
-		 	$return['message']=$dataArr;
+		 	$return['message']=$dataStr;
 		}
 		else
 		{
@@ -201,7 +202,7 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		}
 		$pp=new Pp();
-	 	$pp->val=$dataArr;
+	 	$pp->val=$dataStr;
 	 	$pp->save();
 	 	// dd($return);
 		return $return;
