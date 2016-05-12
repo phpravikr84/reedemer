@@ -200,7 +200,7 @@ class BridgeController extends Controller {
 		
 		$user_name="vvv";
 		$data = array('user_name' => 'rr', 'login_id' => 'rr', 'password' => 'rrr', 'user_email' => $user_email);
-		\Mail::send('emails.activate', $data, function($message) use ($admin_email,$user_email,$user_name){ 
+		\Mail::send('emails.nopartner', $data, function($message) use ($admin_email,$user_email,$user_name){ 
 			$subject="Active your account in Redeemar";
 			$message->from($user_email, $user_name);
 			$message->to($admin_email)->subject($subject);
