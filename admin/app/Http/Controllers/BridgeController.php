@@ -1,12 +1,10 @@
 <?php namespace App\Http\Controllers;
 use Auth;
-//use App\Model\Logo;
 use App\Model\Wptoken;
 use App\Model\Demotest;
 use App\Model\Pp;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//use Request; 
 use Illuminate\Http\Response; 
 use Redirect;
 use Input;
@@ -35,11 +33,7 @@ class BridgeController extends Controller {
 	 *
 	 * @return void
 	 */
-	// public function __construct()
-	// {
-	// 	$this->middleware('guest');
-	// }
-
+	
 	public function __construct()
 	{
 		//$this->middleware('auth');
@@ -58,19 +52,23 @@ class BridgeController extends Controller {
 		$data=json_decode($request->get('data'));
 		$target_id=$data->target_id;
 		$webservice_name=$data->webservice_name;
+
+		// Put all response to database for testing purpose
+		// Will have to remove this later
+		
 	 	$demotest=new Demotest();
 	 	$demotest->target_id=$target_id;
 	 	$demotest->save();
 
 		if($webservice_name=='')
 		{
-			$response['success']='false';
-			$response['details']='R0001'; //Webservice name is missing
+			$response['status']='failure';
+			$response['messageCode']='R0001'; //Webservice name is missing
 		}
 		if($target_id=='')
 		{
-			$response['success']='false';
-			$response['details']='R0002'; //Target ID is missing
+			$response['status']='failure';
+			$response['messageCode']='R0002'; //Target ID is missing
 		}
 		
 		$base_path=getenv('WEBSERVICE');
@@ -89,49 +87,10 @@ class BridgeController extends Controller {
 			$url=$base_path."not_found";
 		}
 
-		// $response['success']='false';
-		// $response['message']='Token is missing';
-
-		// $response['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		
-		// //return $response;
-
-		// $response['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		
-		// return $response;
-
-		
 		$response= $this->post_to_url($url, $data);
-		//$response= $this->checktarget($target_id);
-		$json = json_decode($response, true);
-		//return $result;
+		$json = json_decode($response, true);		
 
-		//$response['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		
-		// //return $response;
-
-		//$response['message']=htmlspecialchars(ltrim($response['message'],' & '));
-
-		//return $response;
-
-		// $response['success']='false';
-		// $response['message']='Token is missing';
-		// $response['demo']=$url;
-
-		//$result['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		 // $pp=new Pp();
-		 // $pp->val=$response;
-		 // $pp->save();
-
-		// $demotest=new Demotest();
-	 // 	$demotest->target_id=$response;
-	 // 	$demotest->save();
-
-		return $response;
-
-		//$result['message']=htmlspecialchars(ltrim($response['message'],' & '));	
-		
-		
+		return $response;		
 	}
 
 	
@@ -157,36 +116,27 @@ class BridgeController extends Controller {
 	}
 
 
-	// public function postChecktarget(Request $request)
-	// {
-	// 	$target_id=$request->get('target_id');
-
-	// 	$demotest=new Demotest();
-	// 	$demotest->target_id=$target_id;
-	// 	$demotest->save();
-	// }
-
 	public function postChecktarget(Request $request)
 	{		
 
 		$target_id=$request->get('target_id');
-		$logo=Logo::where('target_id',$target_id)->get()->first();
-
-		
+		$logo=Logo::where('target_id',$target_id)->get()->first();		
 
 		if($logo->reedemer_id)
 		{
 			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
 			$logo_name= $logo->logo_name;
-			//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
-
+			
 			$dataArr=array('company_name' => $company_name,'logo_name' => $logo_name);
 			$dataStr=json_encode($dataArr);
 
 
-		 	$return['status']="R1001";
-		 	$return['details']=$dataStr;
+			$response['status']='success';
+		 	$return['messageCode']="R1001";
+		 	$return['data']=$dataStr;
 
+		 	// Put all response to database for testing purpose
+		 	// Will have to remove this later
 
 		 	$pp=new Pp();
 	 		$pp->val=$dataStr;
@@ -194,40 +144,12 @@ class BridgeController extends Controller {
 		}
 		else
 		{
-		 	$return['status']="R1002";
-		 	$return['details']="No partner associates with this logo.";
-		}
-		
-	 	// dd($return);
+			$response['status']='success';
+		 	$return['messageCode']="R1002";
+		}		
+	 	
 		return $return;
 	}
-
-	// public function getChecktarget($target_id='9e121bd3c9ac4b9a89b9f8b631283d29')
-	// {
-		
-	// 	$logo=Logo::where('target_id',$target_id)->get()->first();	
-	// 	$dataArr=array(
-	// 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
-	// 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
-	// 			 );
-		
-	// 	if($logo->reedemer_id)
-	// 	{
-	// 	 	$return['status']="R1001";
-	// 	 	$return['details']=$dataArr;
-	// 	}
-	// 	else
-	// 	{
-	// 	 	$return['status']="R1002";
-	// 	 	$return['details']="No partner associates with this logo.";
-	// 	}
-	// 	//dd($return);
-	// 	 $pp=new Pp();
-	// 	 $pp->val=$return;
-	// 	 $pp->save();
-
-	// 	return $return;
-	// }
 
 	public function getSendmail()
 	{
