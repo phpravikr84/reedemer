@@ -199,7 +199,7 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		}
 		$pp=new Pp();
-	 	$pp->val=$dataArr;
+	 	$pp->val=$dataStr;
 	 	$pp->save();
 	 	// dd($return);
 		return $return;
