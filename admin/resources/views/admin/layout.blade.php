@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('/css/demo.min.a2f360834fafcc0ef2d1.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">  
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.css') }}"> 
 
   <!-- IE Compatibility shims -->
   <!--[if lt IE 9]>
@@ -48,6 +49,8 @@
   <script src="{{ asset('/js/demo.min.9506beb44f2c95b2945c.js') }}"></script>
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script> 
   <script src="{{ asset('/js/dirPagination.js') }}"></script>
+
+  <script src="{{ asset('/js/lightbox-plus-jquery.js') }}"></script>
   @yield('scripts')
 </body>
 </html>
