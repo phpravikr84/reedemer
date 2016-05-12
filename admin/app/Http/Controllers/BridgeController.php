@@ -189,7 +189,7 @@ class BridgeController extends Controller {
 		}
 
 	 	 $pp=new Pp();
-	 	 $pp->val=$return;
+	 	 $pp->val=$dataArr;
 	 	 $pp->save();
 
 		return $return;
