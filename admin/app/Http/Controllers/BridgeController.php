@@ -184,21 +184,21 @@ class BridgeController extends Controller {
 		$logo_url= getenv("SITE_URL")."admin/uploads/original/".$logo->logo_name;
 		$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
 
-		$pp=new Pp();
-	 	$pp->val=$dataStr;
-	 	$pp->save();
+		
 
 		if($logo->reedemer_id)
 		{
 		 	$return['status']="R1001";
-		 	$return['message']=$dataArr;
+		 	$return['message']=$dataStr;
 		}
 		else
 		{
 		 	$return['status']="R1002";
 		 	$return['message']="No partner associates with this logo.";
 		}
-
+		$pp=new Pp();
+	 	$pp->val=$dataStr;
+	 	$pp->save();
 	 	// dd($return);
 		return $return;
 	}
