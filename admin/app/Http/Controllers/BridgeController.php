@@ -188,7 +188,7 @@ class BridgeController extends Controller {
 	 				'company_name' => $company_name,
 	  				'logo_url' => $logo_url
 	  			 );
-		$dataStr=serialize($dataArr);
+		$dataStr=json_encode($dataArr,128);
 
 
 		if($logo->reedemer_id)
