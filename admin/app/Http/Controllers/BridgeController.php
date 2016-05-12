@@ -173,34 +173,31 @@ class BridgeController extends Controller {
 		$logo=Logo::where('target_id',$target_id)->get()->first();
 
 		
-		 // $dataArr=array(
-	 	// 			'company_name' => "bb",
-	  // 				'logo_url' => 'bbb'
-	  // 			 );
-
-		
-
-		$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
-		$logo_name= $logo->logo_name;
-		//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
-
-		$dataArr=array('company_name' => $company_name,'logo_name' => $logo_name);
-		$dataStr=json_encode($dataArr);
-
 
 		if($logo->reedemer_id)
 		{
+			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
+			$logo_name= $logo->logo_name;
+			//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
+
+			$dataArr=array('company_name' => $company_name,'logo_name' => $logo_name);
+			$dataStr=json_encode($dataArr);
+
+
 		 	$return['status']="R1001";
 		 	$return['message']=$dataStr;
+
+
+		 	$pp=new Pp();
+	 		$pp->val=$dataStr;
+	 		$pp->save();
 		}
 		else
 		{
 		 	$return['status']="R1002";
 		 	$return['message']="No partner associates with this logo.";
 		}
-		$pp=new Pp();
-	 	$pp->val=$dataStr;
-	 	$pp->save();
+		
 	 	// dd($return);
 		return $return;
 	}
