@@ -55,21 +55,21 @@ class BridgeController extends Controller {
 	 */
 	public function postIndex(Request $request)
 	{
-		if($request->get('target_id'))
-		{
-			$target_id=$request->get('target_id');
+		// if($request->get('target_id'))
+		// {
+		// 	$target_id=$request->get('target_id');
 
-		}
-		else
-		{
-			$target_id="BOOM!!!!";
-		}
+		// }
+		// else
+		// {
+		// 	$target_id="BOOM!!!!";
+		// }
 		$data=json_decode($request->get('data'));
 		$target_id=$data->target_id;
 		$webservice_name=$data->webservice_name;
-	 	 $demotest=new Demotest();
-	 	 $demotest->target_id=$target_id;
-	 	 $demotest->save();
+	 	$demotest=new Demotest();
+	 	$demotest->target_id=$target_id;
+	 	$demotest->save();
 
 		if($webservice_name=='')
 		{
@@ -191,6 +191,20 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		 }
 		return $return;
+	}
+
+	public function getSendmail()
+	{
+		$user_email="duser2@mailinator.com";
+		$admin_email="dadmin2@mailinator.com";
+		
+		$user_name="vvv";
+		$data = array('user_name' => 'rr', 'login_id' => 'rr', 'password' => 'rrr', 'user_email' => $user_email);
+		\Mail::send('emails.activate', $data, function($message) use ($admin_email,$user_email,$user_name){ 
+			$subject="Active your account in Redeemar";
+			$message->from($user_email, $user_name);
+			$message->to($admin_email)->subject($subject);
+		}); 
 	}
 	
 
