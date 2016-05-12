@@ -174,7 +174,7 @@ class BridgeController extends Controller {
 
 		
 		$dataArr=array(
-	 				'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
+	 				'company_name' => "bb",
 	 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
 	 			 );
 
