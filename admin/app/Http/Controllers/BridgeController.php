@@ -175,12 +175,12 @@ class BridgeController extends Controller {
 		
 		$dataArr=array(
 	 				'company_name' => "bb",
-	 				'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
+	 				'logo_url' => 'bbb'
 	 			 );
 
 		$pp=new Pp();
-	 	 $pp->val=$dataArr;
-	 	 $pp->save();
+	 	$pp->val=$dataArr;
+	 	$pp->save();
 
 		if($logo->reedemer_id)
 		{
@@ -193,7 +193,7 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		}
 
-	 	 
+	 	// dd($return);
 		return $return;
 	}
 
