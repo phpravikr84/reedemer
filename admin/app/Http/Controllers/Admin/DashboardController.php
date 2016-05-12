@@ -286,7 +286,7 @@ class DashboardController extends Controller {
 
 	}
 
-	public function getVuforiarate($target_id,$logo_id)
+	public function getVuforiarate($target_id,$logo_id,$contact_email)
 	{
 		//dd($logo_id);
 		$client = new vuforiaclient();
@@ -300,6 +300,7 @@ class DashboardController extends Controller {
 		$logo = Logo::find($logo_id);
 
 		$logo->tracking_rating = $tracking_rating;
+		$logo->contact_email = $contact_email;
 
 		if($logo->save())
 		{

@@ -828,7 +828,19 @@ function() {
                 {
                     $("#error_div").hide();
                     $("#show_message").slideDown();
-                    $("#error_div").html("Please insert all fields.");
+                    $("#error_div").html("Please insert company name.");
+                    $("#error_div").show();
+                    $("#success_div").hide();
+
+                    $('#upload_file').prop('disabled', false);
+                    $("#upload_file").text('Save');
+                    return false;
+                }
+                if($("#contact_email").val()=='')
+                {
+                    $("#error_div").hide();
+                    $("#show_message").slideDown();
+                    $("#error_div").html("Please insert contact email.");
                     $("#error_div").show();
                     $("#success_div").hide();
 
@@ -853,7 +865,7 @@ function() {
                 }
                 if(file_size>2097152) { 
                     $("#show_message").slideDown();
-                    $("#error_div").html("Please upload only .jpg /.jpeg image within 2MB s.ize");
+                    $("#error_div").html("Please upload only .jpg /.jpeg image within 2MB size");
                     $("#error_div").show();
                     $("#success_div").hide();
 
@@ -1201,8 +1213,9 @@ function() {
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
+                            var contact_email=$("#contact_email").val();
                            // alert(target_id);
-                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id).success(function(target){
+                            h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id+"/"+contact_email).success(function(target){
                                // alert("a");
                                 if(target.response=="success")
                                 {
