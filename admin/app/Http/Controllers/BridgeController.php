@@ -185,8 +185,8 @@ class BridgeController extends Controller {
 		//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
 
 		$dataArr=array(
-	 				company_name => $company_name,
-	  				logo_url => $logo_url
+	 				'company_name' => $company_name,
+	  				'logo_url' => $logo_url
 	  			 );
 
 
