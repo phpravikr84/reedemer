@@ -54,16 +54,7 @@ class BridgeController extends Controller {
 	 * @return Response
 	 */
 	public function postIndex(Request $request)
-	{
-		// if($request->get('target_id'))
-		// {
-		// 	$target_id=$request->get('target_id');
-
-		// }
-		// else
-		// {
-		// 	$target_id="BOOM!!!!";
-		// }
+	{		
 		$data=json_decode($request->get('data'));
 		$target_id=$data->target_id;
 		$webservice_name=$data->webservice_name;
@@ -74,12 +65,12 @@ class BridgeController extends Controller {
 		if($webservice_name=='')
 		{
 			$response['success']='false';
-			$response['message']='Webservice name is missing';
+			$response['details']='R0001'; //Webservice name is missing
 		}
 		if($target_id=='')
 		{
 			$response['success']='false';
-			$response['message']='Target ID is missing';
+			$response['details']='R0002'; //Target ID is missing
 		}
 		
 		$base_path=getenv('WEBSERVICE');
@@ -175,21 +166,45 @@ class BridgeController extends Controller {
 	// 	$demotest->save();
 	// }
 
-	public function postChecktarget(Request $request)
-	{
-		$target_id=$request->get('target_id');
-		 $logo=Logo::where('target_id',$target_id)->get()->first();		
+	// public function postChecktarget(Request $request)
+	// {
+	// 	$target_id=$request->get('target_id');
+	// 	$logo=Logo::where('target_id',$target_id)->get()->first();		
 		
-		 if($logo->reedemer_id)
-		 {
-		 	$return['status']="partner_found";
-		 	$return['message']="There are already a partner associates with this logo.";
-		 }
-		 else
-		 {
-		 	$return['status']="partner_not_found";
-		 	$return['message']="No partner associates with this logo.";
-		 }
+	// 	if($logo->reedemer_id)
+	// 	{
+	// 	 	$return['status']="R1001";
+	// 	 	$return['message']="There are already a partner associates with this logo.";
+	// 	}
+	// 	else
+	// 	{
+	// 	 	$return['status']="R1002";
+	// 	 	$return['message']="No partner associates with this logo.";
+	// 	}
+	// 	return $return;
+	// }
+
+	public function getChecktarget($target_id='9e121bd3c9ac4b9a89b9f8b631283d29')
+	{
+		//dd("getChecktarget");
+		//$target_id=$request->get('target_id');
+		$logo=Logo::where('target_id',$target_id)->get()->first();	
+		$dataArr=array(
+					'company_name' => \App\Model\User::where('id',$logo->reedemer_id)->first()->company_name,
+					'logo_url' => getenv('SITE_URL').'admin/uploads/original/'.$logo->logo_name,
+				 );
+		
+		if($logo->reedemer_id)
+		{
+		 	$return['status']="R1001";
+		 	$return['details']=$dataArr;
+		}
+		else
+		{
+		 	$return['status']="R1002";
+		 	$return['details']="No partner associates with this logo.";
+		}
+		//dd($return);
 		return $return;
 	}
 

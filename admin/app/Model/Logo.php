@@ -21,7 +21,7 @@ class Logo extends Model  {
 
 	public function reedemer()
 	{
-		return $this->hasMany('App\User');
+		return $this->hasOne('App\User');
 	}
 
 }
