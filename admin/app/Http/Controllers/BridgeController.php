@@ -193,7 +193,7 @@ class BridgeController extends Controller {
 		if($logo->reedemer_id)
 		{
 		 	$return['status']="R1001";
-		 	$return['message']=$dataStr;
+		 	$return['message']=$dataArr;
 		}
 		else
 		{
