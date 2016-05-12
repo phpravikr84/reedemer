@@ -181,10 +181,10 @@ class BridgeController extends Controller {
 		
 
 		$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
-		$logo_url= getenv("SITE_URL")."admin/uploads/original/".$logo->logo_name;
+		$logo_name= $logo->logo_name;
 		//$dataStr='{"company_name":'.$company_name.',"logo_url":'.$logo_url.'}';
 
-		$dataArr=array('company_name' => $company_name,'logo_url' => $logo_url);
+		$dataArr=array('company_name' => $company_name,'logo_name' => $logo_name);
 		$dataStr=json_encode($dataArr);
 
 
@@ -199,7 +199,7 @@ class BridgeController extends Controller {
 		 	$return['message']="No partner associates with this logo.";
 		}
 		$pp=new Pp();
-	 	$pp->val=$dataStr;
+	 	$pp->val=$dataArr;
 	 	$pp->save();
 	 	// dd($return);
 		return $return;
