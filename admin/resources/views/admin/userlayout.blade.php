@@ -19,6 +19,12 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="{{ asset('/css/thumbelina.css') }}"> 
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}"> 
+
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/fancybox/jquery.fancybox.css') }}">
+
+
+
   <!-- IE Compatibility shims -->
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js""></script>
@@ -65,6 +71,7 @@
   <script src="{{ asset('/user/js/inventory.js') }}"></script>
   <script src="{{ asset('/user/js/repo.js') }}"></script>
   <script src="{{ asset('/user/js/logo.js') }}"></script>
+  <script src="{{ asset('/user/js/video.js') }}"></script>
   <script src="{{ asset('/user/js/promotion.js') }}"></script>
   <script src="{{ asset('/user/js/partnersetting.js') }}"></script>
   <script src="{{ asset('/js/jquery-1.12.0.min.js') }}"></script>
@@ -73,6 +80,27 @@
   <script src="{{ asset('/js/jquery-ui.js') }}"></script>
   <script src="{{ asset('/user/js/rating.js') }}"></script>  
   <script src="{{ asset('/js/dirPagination.js') }}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+  <script src="{{ asset('/js/fancybox/jquery.fancybox.js') }}"></script>
+      
+<script type="text/javascript">
+          $(document).ready(function() {
+        $(".various").fancybox({
+          maxWidth  : 800,
+          maxHeight : 600,
+          fitToView : false,
+          width   : '70%',
+          height    : '70%',
+          autoSize  : false,
+          closeClick  : false,
+          openEffect  : 'elastic',
+          closeEffect : 'none'
+        });
+      });
+    </script>
+
+
+  
   @yield('scripts')
 </body>
 </html>
