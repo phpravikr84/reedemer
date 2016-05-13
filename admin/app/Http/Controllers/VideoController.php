@@ -98,7 +98,7 @@ class VideoController extends Controller {
 		 $video->video_thumb		= $video_thumb;	
 		 $video->uploaded_by 	= $uploaded_by;	
 		 $video->default_video 	= $default_video;	
-		 $video->status 	= $status;	
+		 $video->status 	= 1;	
 		
 		 if($video->save())
 		 {
