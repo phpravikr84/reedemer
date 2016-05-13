@@ -1,7 +1,7 @@
 
 "use strict";
 
-var MyApp = angular.module("video-app", ["ngFileUpload","angularUtils.directives.dirPagination"]);
+var MyApp = angular.module("video-app", ["ngFileUpload"]);
 
 
 
@@ -34,32 +34,14 @@ MyApp.factory("fileToUpload", ["$http", function(h){
 }]);
 
 
-MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileToUpload",function (a, b, c, d, x, fu) {          
-   // a.dataLength={filtered:[]};
-    //a.cnames = [];
-    //a.inventory_details = [];
-    //$("#option-1").prop("checked", true);
-    //$("#option-3").prop("checked", true);
-   // alert("a");
-   // $('#play_arrow').prop('disabled', true);
+MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileToUpload",function (a, b, c, d, x, fu) {            
    
     var site_path=$("#site_path").val();
-   // var update_id =$("#update_id").val();
-
-   
     
    x.post("../video/list").success(function(data_response){              
         a.video_details = data_response; 
-        a.file_path=site_path;  
-        //alert(JSON.stringify(a.video_details,null,4));
-    });       
-
-    // $('.put_href').click(function() {
-    //    var newurl = $('#video_url').val();
-    //    alert(newurl);
-    //    $('.put_href').attr('href', newurl);lgZBsWGaQY0?autoplay=1
-    // });
-
+        a.file_path=site_path;         
+    });  
 
     $(".put_href").click(function() {
 
@@ -75,18 +57,6 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
 
           return false;
         }
-
-        // if(newurl.indexOf('youtube') != -1){
-        //     alert("youtube");
-        // }
-        // else if(newurl.indexOf('vimeo') != -1){
-        //     alert("vimeo");
-        // }
-        // else
-        // {
-        //   alert("none");
-        // }
-
         
         if(provider==1)
         {  
@@ -103,15 +73,10 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
           var videoid = newurl.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
           var video_id=videoid[1];
 
-          //alert(provider+'----'+video_id); 
-
           $(".put_href").attr("href","https://www.youtube.com/embed/"+video_id+"?autoplay=1");
         }
         if(provider==2)
         {
-          //alert("B")       ;
-          //var regExp = /https:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/;
-
           if(newurl.indexOf('vimeo') == -1){
               $("#error_div").hide();
               $("#show_message").slideDown();
@@ -122,34 +87,13 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
               return false;
           }
 
-          var regExp = /(?:https?:\/{2})?(www\.)?vimeo.com\/(\d+)($|\/)/;
-        //  var videoid = newurl.match(regExp);
+          var regExp = /(?:https?:\/{2})?(www\.)?vimeo.com\/(\d+)($|\/)/;        
           var match = newurl.match(regExp);
-          var video_id=match[2];     
+          var video_id=match[2];    
 
-          //alert(provider+'----'+video_id); 
-          //return false;
           $(".put_href").attr("href","https://player.vimeo.com/video/"+video_id+"?autoplay=1");    
         }
-
-        // if(videoid != null) {
-        // console.log("video id = ",videoid[1]);
-        // } else { 
-        // console.log("The youtube url is not valid.");
-        // }
-      //alert(video_id);
-     // return false;
-      // $(".put_href").attr("href","https://www.youtube.com/watch?v=rBUjxW0AHxs");
-      
-       
-       //
-       //alert("a");
     });
-   
-    // $('#video_url').change(function() {
-    //   var newurl = $('#video_url').val();
-    //   $('a.put_href').attr('href', newurl);
-    // });
 
     a.addVideo = function(){      
       $('#add_video').prop('disabled', true);
@@ -188,8 +132,7 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
               $("#success_div").html("Data inserted successfully. <br />Please wait,we will reload this page.");
               $("#success_div").show();              
 
-              setTimeout(function() { 
-               // window.location.reload();
+              setTimeout(function() {                
                 window.location.href = redirect_url; 
               }, 5000); 
             }     
@@ -222,17 +165,13 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
               $("#error_div").html("Please insert all field.");
               $("#error_div").show();
               $("#success_div").hide();              
-            }
-           // $('#add_inventory').prop('disabled', false);
-           // $("#add_inventory").text('Save');
+            }           
           })
       
     };
 
 
-    a.make_default=function(itemId){ 
-     // alert(itemId+'----');
-      //return false;
+    a.make_default=function(itemId){      
        x.get("../video/mainvideo/"+itemId).success(function(response){
           a.status=response;                 
            if(response=='success')
@@ -243,8 +182,7 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
               $("#success_div").show();              
 
               setTimeout(function() { 
-                window.location.reload();
-               // window.location.href = redirect_url; 
+                window.location.reload();               
               }, 5000); 
             } 
             else
@@ -256,8 +194,7 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
               $("#success_div").hide();     
 
               setTimeout(function() { 
-                window.location.reload();
-               // window.location.href = redirect_url; 
+                window.location.reload();                
               }, 5000);          
             }                
        })
