@@ -543,6 +543,7 @@ function() {
             a.currentPage = 0;
             a.pageSize = 5;
             var cat_id = $("#cat_id").val();
+            a.all_logo_details=[];
 
             var site_path=$("#site_path").val();
             var update_id =$("#update_id").val();
@@ -734,7 +735,7 @@ function() {
                 $("td#row_"+itemId).parent()
                 .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/images/loader.gif" /></td></tr>');               
                 x.get(site_path+"admin/dashboard/deletecategory/"+itemId).success(function(response){
-                 alert(response);
+               //  alert(response);
                   if(response=='success')
                   {                   
                     $("#error_div").hide();
@@ -754,7 +755,7 @@ function() {
                     $("#error_div").show();
                     $("#success_div").hide(); 
                     setTimeout(function() { 
-                     // window.location.reload(); 
+                      window.location.reload(); 
                     }, 5000); 
                   }
                   if(response=='error')
@@ -765,7 +766,7 @@ function() {
                     $("#error_div").show();
                     $("#success_div").hide(); 
                     setTimeout(function() { 
-                     // window.location.reload(); 
+                      window.location.reload(); 
                     }, 5000); 
                   }
                })
@@ -1140,6 +1141,7 @@ function() {
             //     'campaign_name':c_name,
             //     'id':update_id
             // }];
+
             // alert(JSON.stringify(a.redeemar_details,null,4));
             // return false;
             var site_path=$("#site_path").val();               
@@ -1207,19 +1209,37 @@ function() {
                   // var company_id=0;
                   //alert(response);
                   //return false;
+                  var contact_email=$("#contact_email").val();
                   var category_id=$("#category_id").val();
                   var subcat_id=$("#subcat_id").val();
+                  var logo_text =$("#logo_text").val();   
+                  var contact_email=$("#contact_email").val();
+                  var main_site_url=$("#main_site_url").val(); 
 
-                  alert(category_id+"---"+subcat_id);
 
-                   var logo_text =$("#logo_text").val();                   
-                   h.get("../admin/dashboard/addlogo/"+logo_text+"/"+response).success(function(response_back){
-                      // alert(response_back.response);
+                    a.all_logo_details= [{
+                        'logo_text':logo_text,
+                        'image_name':response,
+                        'category_id':category_id,
+                        'subcat_id':subcat_id,                    
+                        'contact_email':contact_email
+                    }];
+
+                 // a.all_logo_details.category_id=category_id;
+                 // a.all_logo_details.subcat_id=subcat_id;
+
+                //  alert(category_id+"---"+subcat_id);
+                // alert(JSON.stringify(a.all_logo_details,null,4));
+                //  return false;
+
+                                 
+                   h.post("../admin/dashboard/addlogo",a.all_logo_details).success(function(response_back){
+                       alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
                             var logo_id=response_back.logo_id;
-                            var contact_email=$("#contact_email").val();
+                            
                            // alert(target_id);
                             h.get("../admin/dashboard/vuforiarate/"+target_id+"/"+logo_id+"/"+contact_email).success(function(target){
                                // alert("a");
