@@ -39,18 +39,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     //a.inventory_details = [];   
     var site_path=$("#site_path").val();
 
-    $( '#campaign_id' ).change(function() {       
-        var campaign_id=$("#campaign_id").val();
-        //alert(campaign_id);
-        x.get("../campaign/campaigndetails/"+campaign_id).success(function(response_details){              
-          //alert(JSON.stringify(response_details[0].start_date,null,4));
-          //a.campaign_list = response; 
-          //a.file_path=site_path;  
-          //a.campaign_list = response_details; 
-          //a.campaign_list.c_s_date="05/05/2016"
-          //http://localhost/reedemer/admin/public/admin/dashboard/category
-
-          $( "#c_s_date" ).datepicker({         
+     $( "#c_s_date" ).datepicker({         
             dateFormat:"mm/dd/yy",
            // minDate:response_details[0].start_date,
             onSelect: function (selected) {
@@ -69,16 +58,13 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
               $("#c_s_date").datepicker("option", "maxDate", dt);
             }
           });
-        }); 
-
-    });  
-
     
    
     x.post("../campaign/list").success(function(response){              
       //alert(JSON.stringify(response,null,4));
       a.campaign_list = response; 
       a.file_path=site_path;  
+      //a.PromotionDetails.desC = "Winter vegetable pasta with white wine and";
     }); 
 
     x.get("../admin/dashboard/category").success(function(response_cat){              
@@ -87,6 +73,46 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
      // a.file_path=site_path;  
     }); 
 
+    x.post("../inventory/list").success(function(data_response){        
+      //alert(JSON.stringify(data_response,null,4));
+      a.inventory_details = data_response;   
+    });  
+   // x.post("../inventory/list").success(function(data_response){              
+     // a.inventory_details = data_response;   
+
+    //  a.ProductList = data_response;
+
+      // a.ProductList = null;
+      // //Declaring the function to load data from database
+      // a.fillProductList = function () {
+      //     x({
+      //         method: 'POST',
+      //         url: '../inventory/list',
+      //         data: {}
+      //     }).success(function (result) {
+      //         a.ProductList = result.d;
+      //         alert(JSON.stringify(a.ProductList,null,4));
+      //     });
+      // };
+      // //Calling the function to load the data on pageload
+      // a.fillProductList();
+
+
+   // }); 
+
+
+   
+
+    a.get_inventory = function(){     
+      var inventory_id=a.inventory_id.id;
+      alert(JSON.stringify(inventory_id,null,4));
+    } 
+
+    //a.result = a.someVal;
+    a.offer_description = "";
+   // a.desC = 'bob';
+    //a.PromotionDetails="bbbbbb";
+    
 
     // $("input[type='button']").click(function(){
     // var radioValue = $("input[name='gender']:checked").val();
@@ -112,31 +138,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
        $("#total_redeemar_price").val(total_price);
     });       
   
-    $( '#category_id' ).change(function() {  
-        var category_id=$( '#category_id' ).val();
-        //alert(category_id);
-        if(category_id){
-          $.ajax({
-          type:'GET',
-          url:'../../partner/subcategory/'+category_id,
-          //data:'parent_id='+category_id,
-          success:function(html){
-          //alert(site_path);
-          var new_html="<option value=''>----</option>";
-          for(var i=0; i<html.length; i++)
-          {
-          new_html+="<option value='"+html[i].id+"'>"+html[i].cat_name+"</option>";
-          }
-          //alert(JSON.stringify(new_html,null,4));
-          $('#subcat_id').html(new_html);
-          }
-
-          }); 
-        }else{
-        $('#subcat_id').html('<option value="">Select state first</option>'); 
-        }
-
-
-    });
+    a.add_offer=function(){  
+      alert(JSON.stringify(a.promotion, null, 4));
+    }
 
 }]);

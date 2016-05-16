@@ -125,4 +125,15 @@ white-space:wrap;
      height: 220px;
      min-height:220px;
 }
+.small-text{
+  font-size:14px;  
+}
 
+.break_work{
+    word-wrap: break-word; 
+    width: 50%
+}
+
+.top-buffer{
+    margin-top:20px; 
+}

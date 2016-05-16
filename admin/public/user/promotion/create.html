@@ -31,13 +31,13 @@
                 
             </div>
           </div>
-
+          <form name="promotionForm"  novalidate>
           <div class="p-5">
               <div class="col-sm-12">
                 <div class="form-group">               
-                  <select class="form-control" id="campaign_id">
+                  <select ng-model="promotion.campaign_id" class="form-control" id="campaign_id">
                     <option value="">--Select Campaign--</option>
-                    <option value="{{campaign.id}}" ng-repeat="campaign in campaign_list" >{{campaign.campaign_name}}</option>
+                    <option  value="{{campaign.id}}" ng-repeat="campaign in campaign_list" >{{campaign.campaign_name}}</option>
                   </select>
                 </div>
               </div>
@@ -64,18 +64,18 @@
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-6">
                   <div class="form-group">                    
-                    <textarea class="form-control" placeholder="Offer Description" rows="2" id="comment"></textarea>
+                    <textarea class="form-control"  ng-model="offer_description" placeholder="Offer Description" rows="2" id="offer_description"  ng-Trim="false"  ></textarea>
                   </div>
                 </div>
                 <div class="col-sm-6 nopadding">
                   <div class="col-sm-6 nopadding-right">
                     <div class="form-group">                   
-                      <input type="text" id="total_redeemar" placeholder="No. redeemars" class="form-control">
+                      <input type="text" ng-model="promotion.total_redeemar" id="total_redeemar" placeholder="No. redeemars" class="form-control"  >
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">                   
-                      <input type="text" id="total_redeemar_price" placeholder="Price" class="form-control">
+                      <input type="text" ng-model="promotion.total_redeemar_price" id="total_redeemar_price" placeholder="Price" class="form-control"  >
                     </div>
                   </div>
                 </div>
@@ -109,12 +109,12 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">                    
-                    <textarea class="form-control" placeholder="What You Get" rows="2" id="comment"></textarea>
+                    <textarea class="form-control" ng-model="promotion.what_you_get" placeholder="What You Get" rows="2" id="what_you_get"></textarea>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">                    
-                    <textarea class="form-control" placeholder="More Information About the Deal" rows="2" id="comment"></textarea>
+                    <textarea class="form-control" ng-model="promotion.more_information" placeholder="More Information About the Deal" rows="2" id="more_information"></textarea>
                   </div>
                 </div>
               </div>
@@ -123,27 +123,79 @@
               <div class="col-sm-12">
                 <div class="form-group">               
                   Image Capture
+                  <hr />
                 </div>
               </div>
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-6">               
-                  <select class="form-control" id="sel1">
-                    <option>Campaign</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                  <button type="button" class="btn btn-primary">Primary</button>
                 </div>
                 <div class="col-sm-6">               
-                  <select class="form-control" id="sel1">
-                    <option>Campaign</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
+                  <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" />
                 </div>
               </div>
           </div>
+
+          <div class="p-5">
+              <div class="col-sm-12">
+                <div class="form-group">               
+                  Product Discount
+                  <hr />
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">
+                <div  class="col-sm-6 ">
+                  <div  class="col-sm-12">
+                   <select ng-options="inventory.inventory_name for inventory in inventory_details" ng-model="inventory_id" ng-change="get_inventory()">
+                      <option value="{{inventory.id}}" >{{inventory.inventory_name}}</option>
+                  </select>
+                  </div>
+                  <div  class="col-sm-12 top-buffer nopadding">
+                    <div  class="col-sm-6">
+                      <input type="text" id="total_redeemar_price" placeholder="Cost" class="form-control">
+                    </div>
+                    <div  class="col-sm-6">
+                      <input type="text" id="total_redeemar_price" placeholder="Selling Price" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div  class="col-sm-6 nopadding">
+                   <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" />
+                </div>
+              </div>
+          </div>
+
+          <div class="p-5">
+              <div class="col-sm-12">
+                <div class="form-group">               
+                  Offer Value
+                  <hr />
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">
+                <div class="col-sm-3">               
+                   <input type="text" id="total_redeemar_price" placeholder="$ Pay" class="form-control">
+                </div>
+                <div class="col-sm-3">               
+                   <input type="text" id="total_redeemar_price" placeholder="$ Retail Value" class="form-control">
+                </div>
+                <div class="col-sm-6">               
+                   <input value="0.65" type="radio" name="include_product_value" id="checkbox-5" class="mdl-checkbox__input" />
+                      <span class="mdl-checkbox__label">Include Product Value</span>
+                </div>
+              </div>
+          </div>
+
+          <div class="p-5">
+              <div class="col-sm-12">
+                <div class="form-group">               
+                  <button ng-disabled="promotionForm.$invalid" ng-click="add_offer()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                  Add Directory
+                  </button>  
+                </div>
+              </div>              
+          </div>
+        </form>
         </div>
       </div>
       <div class="p-40 p-r-20 p-20--small">
@@ -160,6 +212,22 @@
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Preview</h2>
+          </div>
+          <div class="col-sm-12 ">
+              <img ng-src="{{file_path}}../uploads/dummy.jpg" width="265" />
+          </div>
+          <div class="col-sm-12 small-text">
+              <div class="col-sm-6 break_work" ng-bind="offer_description"   >
+                 
+              </div>
+              <div class="col-sm-6">
+                <div class="col-sm-6">
+                  Pay
+                </div>
+                <div class="col-sm-6">
+                  Save
+                </div>
+              </div>
           </div>
         </div>
       </div>

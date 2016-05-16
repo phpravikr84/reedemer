@@ -80,27 +80,28 @@
   <script src="{{ asset('/js/jquery-ui.js') }}"></script>
   <script src="{{ asset('/user/js/rating.js') }}"></script>  
   <script src="{{ asset('/js/dirPagination.js') }}"></script>
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  -->
-  <script src="{{ asset('/js/fancybox/jquery.fancybox.js') }}"></script>
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+  <script src="{{ asset('/js/fancybox/jquery.fancybox.js') }}"></script> -->
       
 <script type="text/javascript">
-          $(document).ready(function() {
-        $(".various").fancybox({
-          maxWidth  : 800,
-          maxHeight : 600,
-          fitToView : false,
-          width   : '70%',
-          height    : '70%',
-          autoSize  : false,
-          closeClick  : false,
-          openEffect  : 'elastic',
-          closeEffect : 'none'
-        });
-      });
+          // $(document).ready(function() {
+          //   $(".various").fancybox({
+          //     maxWidth  : 800,
+          //     maxHeight : 600,
+          //     fitToView : false,
+          //     width   : '70%',
+          //     height    : '70%',
+          //     autoSize  : false,
+          //     closeClick  : false,
+          //     openEffect  : 'elastic',
+          //     closeEffect : 'none'
+          //   });
+          // });
     </script>
 
 
   
   @yield('scripts')
+
 </body>
 </html>

@@ -720,12 +720,15 @@ class DashboardController extends Controller {
 	{
 		//dd($parent_id);
 		//$id=null;
-		if($parent_id)
+		if($parent_id<=0)
 		{
+			
 			//$id=$request[0];
 			$category = Category::where('parent_id',$parent_id)
 						->where('visibility',1)
 						->get();
+
+			//dd($parent_id);
 		}
 		else
 		{
