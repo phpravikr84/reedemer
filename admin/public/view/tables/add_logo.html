@@ -43,6 +43,22 @@
                 <input ng-model="Redeemer.contact_email" class="mdl-textfield__input" type="text" id="contact_email" />
                 <label class="mdl-textfield__label" for="logo_text">Contact Email</label>
               </div>
+              <div data-key="address" class="um-field um-field-last_name um-field-text">
+                <div class="um-field-area">
+                  <select name="category_id" id="category_id">
+                    <option value="">-- Select category --</option>                    
+                    <option ng-repeat="cat in category_details"  value="{{cat.id}}">{{cat.cat_name}}</option>                    
+                  </select>
+                </div>
+              </div>
+              <div style="height:10px;"></div>
+              <div data-key="address" class="um-field um-field-last_name um-field-text">
+                <div class="um-field-area">
+                  <select name="subcat_id" id="subcat_id">
+                      <option value="">Select category first</option>
+                  </select>
+                </div>
+              </div>
               <div class="mdl-textfield">
                 <p>Upload Logo</p>
                   <input type = "file" ng-model="Redeemer.logo_name" file-model = "myFile" id="logo_name" />

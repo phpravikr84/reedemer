@@ -1205,10 +1205,16 @@ function() {
                   //     company_id=0;
                   // }
                   // var company_id=0;
+                  //alert(response);
+                  //return false;
+                  var category_id=$("#category_id").val();
+                  var subcat_id=$("#subcat_id").val();
+
+                  alert(category_id+"---"+subcat_id);
 
                    var logo_text =$("#logo_text").val();                   
                    h.get("../admin/dashboard/addlogo/"+logo_text+"/"+response).success(function(response_back){
-                       // alert(response_back.response);
+                      // alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
