@@ -911,20 +911,20 @@ function() {
                }
                a.show_success_msg=false; 
                a.show_error_msg=false; 
-               var category_id = $("#category_id").val();
-               if($("#subcat_id").val()!='')
-               {
-                    var subcat_id = $("#subcat_id").val();
-               }
-               else
-               {
-                    var subcat_id = null;
-               }              
+               // var category_id = $("#category_id").val();
+               // if($("#subcat_id").val()!='')
+               // {
+               //      var subcat_id = $("#subcat_id").val();
+               // }
+               // else
+               // {
+               //      var subcat_id = null;
+               // }              
               
                
 
-               a.Redeemer.category_id = category_id;
-               a.Redeemer.subcat_id = subcat_id;
+               // a.Redeemer.category_id = category_id;
+               // a.Redeemer.subcat_id = subcat_id;
                var url=$("#web_address").val();              
 
                var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
