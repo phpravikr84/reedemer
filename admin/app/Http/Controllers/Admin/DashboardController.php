@@ -413,6 +413,73 @@ class DashboardController extends Controller {
 		}
 	}
 
+
+	public function postAddlogo(Request $request)
+	{	
+		//dd($request[0]['logo_text']);
+		$logo_text=$request[0]['logo_text'];
+		$enhance_logo=0;
+		$image_name=$request[0]['image_name'];
+		$cat_id=$request[0]['category_id'];
+		$subcat_id=$request[0]['subcat_id'];
+		$contact_email=$request[0]['contact_email'];
+		
+		$id=Auth::user()->id;
+		$type=Auth::user()->type;		
+		if($type==2)
+		{
+			$user_details=User::find($id);
+			//dd($user_details->company_name);
+			$reedemer_id=null;
+			//dd()
+			$status=0;
+			$logo_text=$user_details->company_name;
+		}
+		else
+		{
+			$reedemer_id=null;
+			$status=1;
+			//$logo_text="";
+				
+		}
+
+		$client = new vuforiaclient();
+		$rand=rand(111111,999999);
+		$send[0] = "Logo_".time()."_".$rand;
+		$send[1] = '../uploads/original/'.$image_name;
+		$send[2] = '../uploads/original/'.$image_name;
+		$send[3] = 'Redeemar';
+		$send[4] = 'Redeemar';		
+		$response=$client->addTarget($send);
+		$response_arr=json_decode($response);		
+
+		if($response_arr->result_code=="TargetCreated")
+		{
+			//dd("A");
+			$target_id=$response_arr->target_id;					
+			$logo = new Logo();
+			$logo->reedemer_id 		= $reedemer_id;	
+			$logo->target_id 		= $target_id;
+			$logo->logo_name 		= $image_name;	
+			$logo->logo_text 		= $logo_text;
+			$logo->contact_email	= $contact_email;
+			$logo->cat_id 			= $cat_id;
+			$logo->subcat_id 		= $subcat_id;
+			$logo->status 			= $status;			
+			$logo->enhance_logo 	= $enhance_logo;
+			$logo->uploaded_by 		= $id;
+			if($logo->save())
+			{
+				$logo_id = $logo->id;
+				return array('response'=>'success','target_id'=>$target_id,'logo_id'=>$logo_id);
+			}			
+		}
+		else
+		{
+			return array('response'=>'image_problem','target_id'=>'');			
+		}
+	}
+
 	public function getAlllogo()
 	{
 		$id=Auth::user()->id;
