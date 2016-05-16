@@ -190,7 +190,7 @@ class DashboardController extends Controller {
 			return 'already_company_exists';
 			exit;
 		}
-		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='' ||  $request->input('category_id')=='')
+		if($request->input('address')=='' || $request->input('web_address')=='' || $request->input('company_name')=='' || $request->input('email')=='' ||  $request->input('password')=='')
 		{
 		 	return 'error';
 		 	exit;
@@ -221,8 +221,8 @@ class DashboardController extends Controller {
 			$user->email 		= $request->input('email');
 			$user->web_address 	= $request->input('web_address');
 			$user->password 	= bcrypt($request->input('password'));
-			$user->cat_id 		= $request->input('category_id');
-			$user->subcat_id 	= $request->input('subcat_id');
+			$user->cat_id 		= '';
+			$user->subcat_id 	= '';
 			$user->save();
 			//Get latest redeemar ID
 			$user_id = $user->id;
