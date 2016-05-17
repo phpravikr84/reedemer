@@ -146,7 +146,7 @@ class BridgeController extends Controller {
 			
 			// get video links 
             
-            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->get();
+            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->orderBy('default_video','desc')->get();
 
 			$dataArr=array('companyName' => $company_name,'logoImage' => $logo_name, 'videoList' => $video_list);
 			$dataStr=json_encode($dataArr);

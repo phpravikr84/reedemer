@@ -19,7 +19,8 @@ class VerifyCsrfToken extends BaseVerifier {
   		$skip = array(
 					'redeemar/store',					
 					'bridge',
-					'bridge/checktarget'
+					'bridge/checktarget',
+					'bridge/offerlist'
 					);
 
 		foreach ($skip as $key => $route) {
