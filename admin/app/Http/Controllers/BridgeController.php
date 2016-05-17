@@ -83,7 +83,12 @@ class BridgeController extends Controller {
 		switch ($webservice_name) {
 		case "check_target":
 			$url=$base_path."checktarget";
-		break;		
+		break;
+
+		case "showoffers":
+			$url=$base_path."offerlist";
+		break;	
+
 		default:
 			$url=$base_path."not_found";
 		}
@@ -114,6 +119,15 @@ class BridgeController extends Controller {
 
 	    curl_close($post);
 	    return $result;
+	}
+
+	// Show Offer List
+
+	public function getOfferlist()
+	{
+
+		echo "Hello";
+
 	}
 
 
