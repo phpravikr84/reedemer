@@ -130,7 +130,7 @@ class BridgeController extends Controller {
 			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
 			$logo_name= $logo->logo_name;
 			
-			// get video links
+			// get video links for reedemer
             
             $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->get();
 
@@ -139,7 +139,7 @@ class BridgeController extends Controller {
 
 
 			$response['status']='success';
-		 	$return['messageCode']="R1001";
+		 	$return['messageCode']="R01001";
 		 	$return['data']=$dataStr;
 
 		 	// Put all response to database for testing purpose
@@ -152,7 +152,7 @@ class BridgeController extends Controller {
 		else
 		{
 			$response['status']='success';
-		 	$return['messageCode']="R1002";
+		 	$return['messageCode']="R01002";
 		}		
 	 	
 		return $return;
