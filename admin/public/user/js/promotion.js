@@ -73,10 +73,25 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
      // a.file_path=site_path;  
     }); 
 
-    x.post("../inventory/list").success(function(data_response){        
-      //alert(JSON.stringify(data_response,null,4));
-      a.inventory_details = data_response;   
-    });  
+    x.post("../inventory/list").success(function(inventory_list){        
+     // alert(JSON.stringify(inventory_list[0].id,null,4));
+      a.inventory_list = inventory_list;   
+      //$("#inventory_list").val($("#inventory_list option:first").val());
+
+      //$('#inventory_list option:first-child').attr("selected", "selected");
+      //a.inventory_id = a.inventory_list[0];
+      
+ 
+    }); 
+   // $("#inventory_list option:last").attr("selected", true);
+
+   
+    
+    //$("select#inventory_list").val('3')
+   // alert("a");
+    //alert($("#inventory_list").val());
+
+
    // x.post("../inventory/list").success(function(data_response){              
      // a.inventory_details = data_response;   
 
@@ -103,14 +118,33 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
    
 
-    a.get_inventory = function(){     
-      var inventory_id=a.inventory_id.id;
-      alert(JSON.stringify(inventory_id,null,4));
+    a.get_inventory = function(){  
+      //inventory_id={}   ;
+      if (!angular.isUndefined(a.inventory_id)) {
+        var inventory_id=a.inventory_id.id;
+
+        x.post("../inventory/inventorydetails",inventory_id).success(function(data_item){ 
+          //alert(JSON.stringify(data_response,null,4));
+          a.inventory_item=data_item;
+          a.file_path=site_path;
+         // a.inventory_item.inventory_cost=data_response.cost;
+         // a.inventory_item.inventory_sell_price=data_response.sell_price;
+
+        }); 
+
+      }
+      //else
+      //{
+       // alert("a");
+     // }
+      //alert(JSON.stringify(angular.isDefined(a.inventory_id),null,4));
+      
     } 
 
     //a.result = a.someVal;
     a.offer_description = "";
     a.what_you_get = "";
+    a.cost = "";
    
    // a.desC = 'bob';
     //a.PromotionDetails="bbbbbb";

@@ -208,8 +208,8 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
      {    
         $(".delete_row").hide();
         $("td#row_"+itemId).parent()
-    .replaceWith('<tr><td colspan="5" class="center"><img src="'+main_site_url+'/../images/loader.gif" /></td></tr>');   
-       
+    .replaceWith('<tr><td colspan="5" class="center"><img src="'+site_path+'/../images/loader.gif" /></td></tr>');   
+       // return false;   
        x.get("../video/delete/"+itemId).success(function(response){
           window.location.reload();             
        })
