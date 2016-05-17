@@ -53,6 +53,7 @@
 </head>
 
 <body ng-controller="MainController" > 
+
   <!-- <div id="app" class="app" ng-include="'{{ asset('/tpl/demo/app.html') }}'"></div> -->
   <div class="demo-layout mdl-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
     <ml-header></ml-header><!-- This directive uses the partial: src/tpl/demo/partials/header.html -->
@@ -74,30 +75,37 @@
   <script src="{{ asset('/user/js/video.js') }}"></script>
   <script src="{{ asset('/user/js/promotion.js') }}"></script>
   <script src="{{ asset('/user/js/partnersetting.js') }}"></script>
-  <script src="{{ asset('/js/jquery-1.12.0.min.js') }}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <!-- <script src="{{ asset('/js/jquery-1.12.0.min.js') }}"></script> -->
   <script src="{{ asset('/js/jquery.rateyo.min.js') }}"></script>
-  <script src="{{ asset('/js/jquery-1.10.2.js') }}"></script>
+  <!-- <script src="{{ asset('/js/jquery-1.10.2.js') }}"></script>-->
   <script src="{{ asset('/js/jquery-ui.js') }}"></script>
   <script src="{{ asset('/user/js/rating.js') }}"></script>  
   <script src="{{ asset('/js/dirPagination.js') }}"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+ <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  -->
   <script src="{{ asset('/js/fancybox/jquery.fancybox.js') }}"></script>
       
 <script type="text/javascript">
-          $(document).ready(function() {
-            $(".various").fancybox({
-              maxWidth  : 800,
-              maxHeight : 600,
-              fitToView : false,
-              width   : '70%',
-              height    : '70%',
-              autoSize  : false,
-              closeClick  : false,
-              openEffect  : 'elastic',
-              closeEffect : 'none'
-            });
-          });
-    </script>
+          // $(document).ready(function() {
+          //   $(".various").fancybox({
+          //     maxWidth  : 800,
+          //     maxHeight : 600,
+          //     fitToView : false,
+          //     width   : '70%',
+          //     height    : '70%',
+          //     autoSize  : false,
+          //     closeClick  : false,
+          //     openEffect  : 'elastic',
+          //     closeEffect : 'none'
+          //   });
+          // });
+    </script> 
+
+
+
+
+
+
 
 
   

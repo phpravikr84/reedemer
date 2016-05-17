@@ -36,6 +36,20 @@ MyApp.factory("fileToUpload", ["$http", function(h){
 
 MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTableParams", "$filter", "$http", "fileToUpload",function (a, b, c, d, x, fu) {            
    
+    $(document).ready(function() {
+            $(".various").fancybox({
+              maxWidth  : 800,
+              maxHeight : 600,
+              fitToView : false,
+              width   : '70%',
+              height    : '70%',
+              autoSize  : false,
+              closeClick  : false,
+              openEffect  : 'elastic',
+              closeEffect : 'none'
+            });
+          });
+    
     var site_path=$("#site_path").val();
     
    x.post("../video/list").success(function(data_response){              
