@@ -240,4 +240,14 @@ class InventoryController extends Controller {
 		}
 		
 	}
+
+	public function postInventorydetails(Request $request)
+	{		
+		//dd($request[0]);
+		
+		$id=$request[0];
+		$inventory=Inventory::find($id);
+		
+		return $inventory;	
+	}
 }

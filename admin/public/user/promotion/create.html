@@ -146,21 +146,22 @@
               <div class="col-sm-12 nopadding">
                 <div  class="col-sm-6 ">
                   <div  class="col-sm-12">
-                   <select ng-options="inventory in inventory_details" ng-model="inventory_id" ng-change="get_inventory()">
-                      <option value="{{inventory.id}}" >{{inventory.inventory_name}}</option>
+                   <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >                      
+                      <option value="">-- choose an option --</option>
                   </select>
                   </div>
                   <div  class="col-sm-12 top-buffer nopadding">
                     <div  class="col-sm-6">
-                      <input type="text" id="total_redeemar_price" placeholder="Cost" class="form-control">
+                      <input type="text" ng-model="inventory_item.cost" id="inventory_cost" placeholder="Cost" class="form-control" ng-Trim="false">
                     </div>
                     <div  class="col-sm-6">
-                      <input type="text" id="total_redeemar_price" placeholder="Selling Price" class="form-control">
+                      <input type="text" ng-model="inventory_item.sell_price" id="selling_price" placeholder="Selling Price" class="form-control">
                     </div>
                   </div>
                 </div>
                 <div  class="col-sm-6 nopadding">
-                   <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" />
+                   <!-- <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" /> -->
+                   <img ng-src="{{file_path}}../uploads/inventory/original/{{inventory_item.inventory_image}}" width="150" />
                 </div>
               </div>
           </div>
@@ -230,11 +231,13 @@
 
                       </div>
                       <div class="col-sm-6">
-                        <div class="col-sm-6">
-                          Pay
+                        <div class="col-sm-6 green_text">
+                          <span>Pay</span>
+                          $<span ng-bind="inventory_item.cost"></span>
                         </div>
-                        <div class="col-sm-6">
-                          Save
+                        <div class="col-sm-6 green_text">
+                          <span>Save</span>
+                          $<span></span>
                         </div>
                       </div>
                     </div>
