@@ -83,7 +83,12 @@ class BridgeController extends Controller {
 		switch ($webservice_name) {
 		case "check_target":
 			$url=$base_path."checktarget";
-		break;		
+		break;
+
+		case "showoffers":
+			$url=$base_path."offerlist";
+		break;	
+
 		default:
 			$url=$base_path."not_found";
 		}
@@ -116,6 +121,15 @@ class BridgeController extends Controller {
 	    return $result;
 	}
 
+	// Show Offer List
+
+	public function getOfferlist()
+	{
+
+		echo "Hello";
+
+	}
+
 
 	public function postChecktarget(Request $request)
 	{	
@@ -132,9 +146,9 @@ class BridgeController extends Controller {
 			
 			// get video links 
             
-            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->get();
+            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->orderBy('default_video','desc')->get();
 
-			$dataArr=array('company_name' => $company_name,'logo_image' => $logo_name, 'videos' => $video_list);
+			$dataArr=array('companyName' => $company_name,'logoImage' => $logo_name, 'videoList' => $video_list);
 			$dataStr=json_encode($dataArr);
 
 
