@@ -110,6 +110,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
     //a.result = a.someVal;
     a.offer_description = "";
+    a.what_you_get = "";
+   
    // a.desC = 'bob';
     //a.PromotionDetails="bbbbbb";
     
