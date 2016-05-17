@@ -11,6 +11,7 @@ use Input;
 use Session;
 use App\Helper\vuforiaclient;
 use App\Model\User;
+use App\Model\Video;
 use App\Model\Logo;
 use App\Model\Category;
 use Illuminate\Http\Request;
@@ -117,9 +118,11 @@ class BridgeController extends Controller {
 
 
 	public function postChecktarget(Request $request)
-	{		
+	{	
 
 		$target_id=$request->get('target_id');
+
+
 		$logo=Logo::where('target_id',$target_id)->get()->first();		
 
 		if($logo->reedemer_id)
@@ -127,7 +130,11 @@ class BridgeController extends Controller {
 			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
 			$logo_name= $logo->logo_name;
 			
-			$dataArr=array('company_name' => $company_name,'logo_name' => $logo_name);
+			// get video links
+            
+            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->get();
+
+			$dataArr=array('company_name' => $company_name,'logo_image' => $logo_name, 'videos' => $video_list);
 			$dataStr=json_encode($dataArr);
 
 
