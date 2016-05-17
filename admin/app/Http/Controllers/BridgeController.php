@@ -130,7 +130,7 @@ class BridgeController extends Controller {
 			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
 			$logo_name= $logo->logo_name;
 			
-			// get video links for reedemer
+			// get video links 
             
             $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->get();
 
