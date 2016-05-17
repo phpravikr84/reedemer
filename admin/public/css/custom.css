@@ -134,6 +134,16 @@ white-space:wrap;
     width: 50%
 }
 
+.break_work_80{
+    word-wrap: break-word; 
+    width: 80%
+}
+
+.green_text{
+    color:#64B526 !important;
+    font-weight:700;
+}
+
 .top-buffer{
     margin-top:20px; 
 }

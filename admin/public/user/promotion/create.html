@@ -17,7 +17,7 @@
       </div>
     </div> -->
 
-    <div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">
+    <div class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-col-phone no-p-l">
       <div class="p-5 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
           <div class="mdl-card__title">
@@ -109,7 +109,7 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">                    
-                    <textarea class="form-control" ng-model="promotion.what_you_get" placeholder="What You Get" rows="2" id="what_you_get"></textarea>
+                    <textarea class="form-control" ng-model="what_you_get" placeholder="What You Get" rows="2" id="what_you_get" ng-Trim="false"></textarea>
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -146,7 +146,7 @@
               <div class="col-sm-12 nopadding">
                 <div  class="col-sm-6 ">
                   <div  class="col-sm-12">
-                   <select ng-options="inventory.inventory_name for inventory in inventory_details" ng-model="inventory_id" ng-change="get_inventory()">
+                   <select ng-options="inventory in inventory_details" ng-model="inventory_id" ng-change="get_inventory()">
                       <option value="{{inventory.id}}" >{{inventory.inventory_name}}</option>
                   </select>
                   </div>
@@ -207,28 +207,68 @@
     </div>
 
     <!-- Preview Section -->
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-color--grey-100">
+    <div class="mdl-cell mdl-cell--5-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-color--grey-100">
       <div class="p-5 ml-card-holder ml-card-holder-first">
         <div class="mdl-card mdl-shadow--1dp">
-          <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Preview</h2>
-          </div>
-          <div class="col-sm-12 ">
-              <img ng-src="{{file_path}}../uploads/dummy.jpg" width="265" />
-          </div>
-          <div class="col-sm-12 small-text">
-              <div class="col-sm-6 break_work" ng-bind="offer_description"   >
-                 
-              </div>
-              <div class="col-sm-6">
-                <div class="col-sm-6">
-                  Pay
+            <div class="mdl-card__title">
+              <h2 class="mdl-card__title-text">Preview</h2>
+            </div>
+            <div class="mdl-tabs mdl-js-tabs">
+                <div class="mdl-tabs__tab-bar">
+                  <a href="#starks-panel" class="mdl-tabs__tab is-active">Mode 1</a>
+                  <a href="#lannisters-panel" class="mdl-tabs__tab">Mode 2</a>
+                  <a href="#targaryens-panel" class="mdl-tabs__tab">Details</a>
                 </div>
-                <div class="col-sm-6">
-                  Save
+
+                <div class="mdl-tabs__panel is-active" id="starks-panel">
+                  <div class="p-20">
+                    <div class="col-sm-12 ">
+                      <img ng-src="{{file_path}}../uploads/dummy.jpg" width="265" />
+                    </div>
+                    <div class="col-sm-12 small-text">
+                      <div class="col-sm-6 break_work green_text" ng-bind="offer_description"   >
+
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="col-sm-6">
+                          Pay
+                        </div>
+                        <div class="col-sm-6">
+                          Save
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdl-tabs__panel" id="lannisters-panel">
+                  <div class="p-20">
+                    <div class="col-sm-12 ">
+                      <div class="col-sm-6 ">
+                      <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" />
+                      </div>
+                      <div class="col-sm-6 green_text break_work"  ng-bind="offer_description" >
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdl-tabs__panel" id="targaryens-panel">
+                  <div class="p-20">
+                    <div class="col-sm-12 ">
+                      <img ng-src="{{file_path}}../uploads/dummy.jpg" width="265" />
+                    </div>
+                    <div class="col-sm-12 green_text break_work_80" ng-bind="offer_description"   >
+
+                    </div>
+                    <div class="col-sm-12 " ng-bind="what_you_get"   >
+
+                    </div>
+                  </div>
                 </div>
               </div>
-          </div>
+
+
+            </div>
         </div>
       </div>
     </div>
