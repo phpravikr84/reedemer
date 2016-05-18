@@ -130,7 +130,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
          // alert("B");
          $("#cost").val(data_item.cost);
          $("#selling_price").val(data_item.sell_price);
-         var src="../../uploads/inventory/original/"+data_item.inventory_image;
+         var src=site_path+"../uploads/inventory/original/"+data_item.inventory_image;
          $(("#inventory_image")).attr("src", src);
          // a.inventory_item.inventory_cost=data_response.cost;
          // a.inventory_item.inventory_sell_price=data_response.sell_price;
