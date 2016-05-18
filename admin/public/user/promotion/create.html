@@ -119,6 +119,7 @@
                 </div>
               </div>
           </div>
+
           <div class="p-5">
               <div class="col-sm-12">
                 <div class="form-group">               
@@ -128,7 +129,8 @@
               </div>
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-6">               
-                  <button type="button" class="btn btn-primary">Primary</button>
+                  <button ng-click="open_pop()"  type="button" class="btn btn-primary">Primary</button>
+
                 </div>
                 <div class="col-sm-6">               
                   <img ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
@@ -143,24 +145,130 @@
                   <hr />
                 </div>
               </div>
-              <div class="col-sm-12 ">                                                 
-                    <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" name="inventory_list[]" ng-change="get_inventory()" id="inventory_list" >                      
-                      <option value="">-- choose an option --</option>
-                  </select>                              
-              </div>
-              <div class="col-sm-12 ">   
-                <div class="col-sm-6 ">
+              <!-- <div class="col-sm-12"> -->
+                <!-- <button class="addfields" ng-click="addNewChoice()">Add fields</button>-->
+                <!-- <div class="col-sm-12 ">                                                 
+                      <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" name="inventory_list[]" ng-change="get_inventory()" id="inventory_list" >                      
+                        <option value="">-- choose an option --</option>
+                    </select>                              
+                </div>
+                <div class="col-sm-12 ">   
                   <div class="col-sm-6 ">
+                    <div class="col-sm-6 ">
+                      <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
+                    </div>
+                    <div class="col-sm-6 ">
+                      <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
+                      <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+                    </div>
+                  </div> 
+                  <div class="col-sm-6 ">
+                    <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />
+                  </div> 
+                </div> 
+                <div id="choicesDisplay">
+                  {{ choices }}
+               </div> -->
+
+
+
+                <!-- <fieldset  data-ng-repeat="choice in choices">
+                  <select>
+                     <option>Mobile</option>
+                     <option>Office</option>
+                     <option>Home</option>
+                  </select>
+                  <input type="text" ng-model="choice.name" name="" placeholder="Enter mobile number">
+                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+               </fieldset>
+               <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+                   
+               <div id="choicesDisplay">
+                  {{ choices }}
+               </div>  -->
+                
+            <!-- </div> -->
+            <!-- <div class="col-sm-12"  >
+                <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+            </div> -->
+            <!-- <div class="col-sm-12 nopadding"  data-ng-repeat="choice in choices"> -->
+              <!-- <div class="col-sm-12 nopadding">   
+                <div class="col-sm-6 ">    -->
+                  <!-- <select ng-options="inventory.id as inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
+                      <option value="">-- choose an option --</option>
+                  </select>  -->
+
+                  <!-- <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
+                      <option value="">-- choose an option --</option>
+                      <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
+                  </select> 
+                </div>
+              </div> -->
+              <!-- <div class="col-sm-12 nopadding">   
+                <div class="col-sm-3 ">   
+                  <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
+                </div>
+                <div class="col-sm-3 ">   
+                  <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
+                </div>
+                <div class="col-sm-3 ">   
+                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />
+                   
+                </div>
+                <div class="col-sm-3 ">  
+                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+                </div>
+
+              </div> -->
+            <!-- </div> -->
+            <!-- <div class="col-sm-12 ">   
+              <div class="col-sm-12 nopadding">   
+                <div class="col-sm-6 ">  
+                   <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
+                      <option value="">-- choose an option --</option>
+                      <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
+                  </select> 
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding">   
+                <div class="col-sm-3 ">   
+                  <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
+                </div>
+                <div class="col-sm-3 ">   
+                  <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
+                </div>
+                <div class="col-sm-3 ">   
+                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />                   
+                </div>
+                <div class="col-sm-3 ">  
+                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-sm-12 nopadding">
+              <div class="col-sm-7 nopadding">
+                <div class="col-sm-12 ">
+                  <div class="col-sm-12 nopadding">  
+                     <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
+                        <option value="">-- choose an option --</option>
+                        <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
+                    </select> 
+                  </div>
+                </div>
+                <div class="col-sm-12 ">
+                  <div class="col-sm-5 nopadding margin-right-5">
                     <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
                   </div>
-                  <div class="col-sm-6 ">
+                  <div class="col-sm-6 nopadding">
                     <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
                   </div>
-                </div> 
-                <div class="col-sm-6 ">
-                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />
-                </div> 
+                </div>
               </div>
+              <div class="col-sm-5 ">
+                 <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />   
+              </div>
+            </div>
           </div>
 
           <div class="p-5">
@@ -172,13 +280,13 @@
               </div>
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-3">               
-                   <input type="text" id="total_redeemar_price" placeholder="$ Pay" class="form-control">
+                   <input type="text" id="pay_value" placeholder="$ Pay" class="form-control">
                 </div>
                 <div class="col-sm-3">               
-                   <input type="text" id="total_redeemar_price" placeholder="$ Retail Value" class="form-control">
+                   <input type="text" id="retails_value" placeholder="$ Retail Value" class="form-control">
                 </div>
                 <div class="col-sm-6">               
-                   <input value="0.65" type="radio" name="include_product_value" id="checkbox-5" class="mdl-checkbox__input" />
+                   <input value="1" type="checkbox" name="include_product_value" id="include_product_value" class="mdl-checkbox__input" />
                       <span class="mdl-checkbox__label">Include Product Value</span>
                 </div>
               </div>
@@ -275,8 +383,11 @@
     <!-- //Preview Section -->
 
 
-  </div>  
+  </div> 
+
 </section>
+
+
 <style>
 .nopadding-left{
   padding-left:0;

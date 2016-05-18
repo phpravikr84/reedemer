@@ -84,7 +84,12 @@
   <script src="{{ asset('/js/dirPagination.js') }}"></script>
  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  -->
   <script src="{{ asset('/js/fancybox/jquery.fancybox.js') }}"></script>
-      
+  <link rel="Stylesheet" type="text/css" href="
+http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css
+" />
+  <script type="text/javascript" src="
+http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js">
+</script>
 <script type="text/javascript">
           // $(document).ready(function() {
           //   $(".various").fancybox({
@@ -103,6 +108,34 @@
 
 
     </script> 
+
+    <script type="text/javascript">
+   //$(function ()    {
+    
+        // $('<div>').dialog({
+        //     modal: true,
+        //     open: function ()
+        //     {
+        //         $(this).load('http://www.google.com');
+        //     },         
+        //     height: 400,
+        //     width: 400,
+        //     title: 'Dynamically Loaded Page'
+        // });
+    
+     // });
+
+
+// $(document).ready(function () {
+//     //$('#dialog').dialog(); 
+//     $('#opener').click(function () {
+//         $('#dialog').dialog('open');
+//         return false;
+//     });
+// });
+</script>
+
+
 
 
 

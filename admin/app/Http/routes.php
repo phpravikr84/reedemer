@@ -39,6 +39,7 @@ Route::controller('/partnersetting', 'PartnersettingController');
 Route::controller('/android', 'AndroidController');
 Route::controller('/bridge', 'BridgeController');
 Route::controller('/video', 'VideoController');
+Route::controller('/promotion', 'PromotionController');
 
 Route::group(['namespace'=> 'Admin' , 'middleware' => 'auth'] , function(){
 

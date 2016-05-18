@@ -83,6 +83,28 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       
  
     }); 
+
+    a.open_pop = function(item){  
+    $('<div>').dialog({
+            modal: true,
+            open: function ()
+            {
+                //$(this).load('http://www.google.com');
+
+                $.ajax({ url: 'http://localhost/reedemer/admin/public/promotion',
+                         data: {action: 'test'},
+                         type: 'get',
+                         success: function(output) {
+                                      alert(output);
+                                  }
+                });
+
+            },         
+            height: 400,
+            width: 400,
+            title: 'Dynamically Loaded Page'
+        });
+  }
    // $("#inventory_list option:last").attr("selected", true);
 
    
@@ -114,20 +136,51 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
 
    // }); 
+ // alert(JSON.stringify(inventory_list,null,4));
+  // a.choices = [{id: 'choice1'}];
+  // a.addNewChoice = function() {
+  //   var newItemNo = a.choices.length+1;
+  //   a.data_length=newItemNo;
+  //   a.choices.push({'id':'choice'+newItemNo});
+  // };
+    
+  // a.removeChoice = function() {
+  //   var lastItem = a.choices.length-1;
+  //   a.choices.splice(lastItem);
+  // };
+
+    
+        
+   // a.pup = function()
+   //      {
+   //        alert("N");
+   //      }
+
+ 
 
 
-   
 
-    a.get_inventory = function(){  
+  
+    a.get_inventory = function(item){  
+     
       //inventory_id={}   ;
-      if (!angular.isUndefined(a.inventory_id)) {
-        var inventory_id=a.inventory_id.id;
+
+      //alert(a.inventory_id);
+      //alert(item);
+      var inventory_id=$("#inventory_list").val();
+     // if (!angular.isUndefined(a.inventory_id)) {
+       // alert(newItemNo);
+       // var inventory_id=a.inventory_id.id;
+       // var inventory_id=$("#inventory_list").val();
+
+       // alert(inventory_id);
 
         x.post("../inventory/inventorydetails",inventory_id).success(function(data_item){ 
-         // alert(JSON.stringify(data_item,null,4));
+          //alert(JSON.stringify(data_item,null,4));
           a.inventory_item=data_item;
           a.file_path=site_path;
          // alert("B");
+         //alert(JSON.stringify(data_item,null,4));
          $("#cost").val(data_item.cost);
          $("#selling_price").val(data_item.sell_price);
          var src=site_path+"../uploads/inventory/original/"+data_item.inventory_image;
@@ -137,7 +190,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
         }); 
 
-      }
+     // }
       //else
       //{
        // alert("a");
@@ -150,6 +203,18 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.offer_description = "";
     a.what_you_get = "";
     a.cost = "";
+
+    $("#include_product_value").click(function() {
+        // this function will get executed every time the #home element is clicked (or tab-spacebar changed)
+        if($(this).is(":checked")) // "this" refers to the element that fired the event
+        {
+            var total_cost=$("#cost").val();
+            var selling_price=$("#selling_price").val();
+            //alert('home is checked');
+            $("#pay_value").val(total_cost);
+            $("#retails_value").val(selling_price);
+        }
+    });
    
    // a.desC = 'bob';
     //a.PromotionDetails="bbbbbb";
@@ -183,4 +248,11 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       alert(JSON.stringify(a.promotion, null, 4));
     }
 
+
+
 }]);
+ // function localFuncHoisted(valu) {
+ //        // Internal function, doesn't matter where it is declared
+ //        // will be visible to all internal methods
+ //        alert(valu);
+ //    };
