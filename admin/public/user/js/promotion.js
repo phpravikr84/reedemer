@@ -124,9 +124,14 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
         var inventory_id=a.inventory_id.id;
 
         x.post("../inventory/inventorydetails",inventory_id).success(function(data_item){ 
-          //alert(JSON.stringify(data_response,null,4));
+         // alert(JSON.stringify(data_item,null,4));
           a.inventory_item=data_item;
           a.file_path=site_path;
+         // alert("B");
+         $("#cost").val(data_item.cost);
+         $("#selling_price").val(data_item.sell_price);
+         var src="../../uploads/inventory/original/"+data_item.inventory_image;
+         $(("#inventory_image")).attr("src", src);
          // a.inventory_item.inventory_cost=data_response.cost;
          // a.inventory_item.inventory_sell_price=data_response.sell_price;
 

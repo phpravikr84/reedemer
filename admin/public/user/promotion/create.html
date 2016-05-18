@@ -143,26 +143,23 @@
                   <hr />
                 </div>
               </div>
-              <div class="col-sm-12 nopadding">
-                <div  class="col-sm-6 ">
-                  <div  class="col-sm-12">
-                   <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >                      
+              <div class="col-sm-12 ">                                                 
+                    <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" name="inventory_list[]" ng-change="get_inventory()" id="inventory_list" >                      
                       <option value="">-- choose an option --</option>
-                  </select>
+                  </select>                              
+              </div>
+              <div class="col-sm-12 ">   
+                <div class="col-sm-6 ">
+                  <div class="col-sm-6 ">
+                    <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
                   </div>
-                  <div  class="col-sm-12 top-buffer nopadding">
-                    <div  class="col-sm-6">
-                      <input type="text" ng-model="inventory_item.cost" id="inventory_cost" placeholder="Cost" class="form-control" ng-Trim="false">
-                    </div>
-                    <div  class="col-sm-6">
-                      <input type="text" ng-model="inventory_item.sell_price" id="selling_price" placeholder="Selling Price" class="form-control">
-                    </div>
+                  <div class="col-sm-6 ">
+                    <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
                   </div>
-                </div>
-                <div  class="col-sm-6 nopadding">
-                   <!-- <img ng-src="{{file_path}}../uploads/dummy.jpg" width="150" /> -->
-                   <img ng-src="{{file_path}}../uploads/inventory/original/{{inventory_item.inventory_image}}" width="150" />
-                </div>
+                </div> 
+                <div class="col-sm-6 ">
+                  <img ng-src="{{file_path}}../uploads/dummy.jpg" id="inventory_image" width="150" />
+                </div> 
               </div>
           </div>
 
