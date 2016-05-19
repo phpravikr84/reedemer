@@ -71,6 +71,7 @@ class PromotionController extends Controller {
 		$include_product_value=$request->get('include_product_value');
 		$discount=$request->get('discount');
 		$value_calculate=$request->get('value_calculate');
+		$product_id_str=$request->get('product_id_str');
 
 		$offer = new Offer();
 		$offer->campaign_id				= $campaign_id;			

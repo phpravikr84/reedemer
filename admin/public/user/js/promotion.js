@@ -79,7 +79,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
                          data: {action: 'test'},
                          type: 'get',
                          success: function(output) {
-                                      alert(output);
+                                      //alert(output);
                                   }
                 });
 
@@ -188,7 +188,23 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
   a.add_offer=function()
   {
-    //alert("a");
+   // alert(a.inventory_id);
+     var inventoryId=null;
+   //  var product_id=null;
+     var product_id_str='';
+     $(".inventory_class").each(function(){
+        inventoryId = $(this).attr('id');
+        //alert(inventoryId);
+        var product_id=$("#"+inventoryId).val();
+        //if(product_id_str)
+        //{
+        product_id_str+=product_id+',';
+        //}
+
+        // alert(product_id);
+     });
+    //$("")
+    
     a.promotion_arr={};
     var campaign_id=$("#campaign_id").val();
     var category_id=$("#category_id").val();
@@ -208,6 +224,10 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     var include_product_value=$("#include_product_value").val();    
     var value_calculate=$("input[type='radio'][name='value_calculate']:checked").val();
     var discount='';
+
+    var product_id_str=product_id_str.replace(/^,|,$/g,'');
+
+    //alert(product_id_str);
 
     //var inventory_id=$("#inventory_id").val();  
     // var selectArray = $('[id^=inventory_id]');
@@ -255,6 +275,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.promotion_arr.retails_value=retails_value;
     a.promotion_arr.include_product_value=include_product_value;
     a.promotion_arr.discount=discount;
+    a.promotion_arr.product_id_str=product_id_str;
 
    // alert(JSON.stringify(a.promotion_arr, null, 4));
 

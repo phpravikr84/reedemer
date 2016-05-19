@@ -152,7 +152,7 @@
               <div class="col-sm-7 nopadding">
                 <div class="col-sm-12 ">
                   <div class="col-sm-12 nopadding">  
-                     <select name="inventory_id[inventory_id]"  ng-model="inventory_id" ng-change="get_inventory(inventory_id, choice.id)" id="inventory_list" >
+                     <select  ng-model="inventory_id" ng-change="get_inventory(inventory_id, choice.id)" id="inventory_list{{choice.id}}" class="inventory_class" >
                         <option value="">-- choose an option --</option>
                         <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
                     </select> 
@@ -331,8 +331,7 @@
         </div>
       </div>
     </div>
-    <!-- //Preview Section -->
-
+    <!-- //Preview Section --> 
 
   </div> 
 
