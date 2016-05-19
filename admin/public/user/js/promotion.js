@@ -79,7 +79,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
                          data: {action: 'test'},
                          type: 'get',
                          success: function(output) {
-                                      alert(output);
+                                      //alert(output);
                                   }
                 });
 
@@ -186,6 +186,72 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
      $("#total_redeemar_price").val(total_price);
   });       
 
-  
+  a.add_offer=function()
+  {
+    //alert("a");
+    a.promotion_arr={};
+    var campaign_id=$("#campaign_id").val();
+    var category_id=$("#category_id").val();
+    var subcat_id=$("#subcat_id").val();
+    var offer_description=$("#offer_description").val();
+    var total_redeemar=$("#total_redeemar").val();
+    var total_redeemar_price=$("#total_redeemar_price").val();
+    var c_s_date=$("#c_s_date").val();
+    var c_e_date=$("#c_e_date").val();
+    var total_payment=$("input[type='radio'][name='total_payment']:checked").val();
+    var what_you_get=$("#what_you_get").val();
+    var more_information=$("#more_information").val();
+
+
+    var pay_value=$("#pay_value").val();
+    var retails_value=$("#retails_value").val();
+    var include_product_value=$("#include_product_value").val();    
+    var value_calculate=$("input[type='radio'][name='value_calculate']:checked").val();
+    var discount='';
+   // alert(value_calculate);
+    if(value_calculate==1 || value_calculate==2)
+    {
+      var value_calculate=1;
+      var off_value=$("#off_value").val();
+      discount=off_value;
+    }
+    if(value_calculate==3 || value_calculate==4)
+    {
+      var value_calculate=2;
+      var discount_value=$("#discount_value").val();
+      discount=discount_value;
+    }
+    if(value_calculate==5 || value_calculate==6)
+    {
+      var value_calculate=3;
+      var saving_value=$("#saving_value").val();
+      discount=saving_value;
+    }
+
+    
+    a.promotion_arr.campaign_id=campaign_id;
+    a.promotion_arr.category_id=category_id;
+    a.promotion_arr.subcat_id=subcat_id;
+    a.promotion_arr.offer_description=offer_description;
+    a.promotion_arr.total_redeemar=total_redeemar;
+    a.promotion_arr.total_redeemar_price=total_redeemar_price;
+    a.promotion_arr.c_s_date=c_s_date;
+    a.promotion_arr.c_e_date=c_e_date;
+    a.promotion_arr.total_payment=total_payment;
+    a.promotion_arr.what_you_get=what_you_get;
+    a.promotion_arr.more_information=more_information;
+
+    a.promotion_arr.value_calculate=value_calculate;
+    a.promotion_arr.pay_value=pay_value;
+    a.promotion_arr.retails_value=retails_value;
+    a.promotion_arr.include_product_value=include_product_value;
+    a.promotion_arr.discount=discount;
+
+   // alert(JSON.stringify(a.promotion_arr, null, 4));
+
+    // x.post("../promotion/storeoffer",a.promotion_arr).success(function(response){
+    //   alert(response);
+    // });
+  }
 
 }]);
