@@ -139,112 +139,12 @@
           </div>
 
           <div class="p-5">
-              <div class="col-sm-12">
-                <div class="form-group">               
-                  Product Discount
-                  <hr />
-                </div>
+            <div class="col-sm-12">
+              <div class="form-group">               
+                Product Discount
+                <hr />
               </div>
-              <!-- <div class="col-sm-12"> -->
-                <!-- <button class="addfields" ng-click="addNewChoice()">Add fields</button>-->
-                <!-- <div class="col-sm-12 ">                                                 
-                      <select ng-options="inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" name="inventory_list[]" ng-change="get_inventory()" id="inventory_list" >                      
-                        <option value="">-- choose an option --</option>
-                    </select>                              
-                </div>
-                <div class="col-sm-12 ">   
-                  <div class="col-sm-6 ">
-                    <div class="col-sm-6 ">
-                      <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
-                    </div>
-                    <div class="col-sm-6 ">
-                      <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
-                      <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-                    </div>
-                  </div> 
-                  <div class="col-sm-6 ">
-                    <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />
-                  </div> 
-                </div> 
-                <div id="choicesDisplay">
-                  {{ choices }}
-               </div> -->
-
-
-
-                <!-- <fieldset  data-ng-repeat="choice in choices">
-                  <select>
-                     <option>Mobile</option>
-                     <option>Office</option>
-                     <option>Home</option>
-                  </select>
-                  <input type="text" ng-model="choice.name" name="" placeholder="Enter mobile number">
-                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-               </fieldset>
-               <button class="addfields" ng-click="addNewChoice()">Add fields</button>
-                   
-               <div id="choicesDisplay">
-                  {{ choices }}
-               </div>  -->
-                
-            <!-- </div> -->
-            <!-- <div class="col-sm-12"  >
-                <button class="addfields" ng-click="addNewChoice()">Add fields</button>
-            </div> -->
-            <!-- <div class="col-sm-12 nopadding"  data-ng-repeat="choice in choices"> -->
-              <!-- <div class="col-sm-12 nopadding">   
-                <div class="col-sm-6 ">    -->
-                  <!-- <select ng-options="inventory.id as inventory.inventory_name for inventory in inventory_list" ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
-                      <option value="">-- choose an option --</option>
-                  </select>  -->
-
-                  <!-- <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
-                      <option value="">-- choose an option --</option>
-                      <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
-                  </select> 
-                </div>
-              </div> -->
-              <!-- <div class="col-sm-12 nopadding">   
-                <div class="col-sm-3 ">   
-                  <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
-                </div>
-                <div class="col-sm-3 ">   
-                  <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
-                </div>
-                <div class="col-sm-3 ">   
-                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />
-                   
-                </div>
-                <div class="col-sm-3 ">  
-                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-                </div>
-
-              </div> -->
-            <!-- </div> -->
-            <!-- <div class="col-sm-12 ">   
-              <div class="col-sm-12 nopadding">   
-                <div class="col-sm-6 ">  
-                   <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
-                      <option value="">-- choose an option --</option>
-                      <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
-                  </select> 
-                </div>
-              </div>
-              <div class="col-sm-12 nopadding">   
-                <div class="col-sm-3 ">   
-                  <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
-                </div>
-                <div class="col-sm-3 ">   
-                  <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
-                </div>
-                <div class="col-sm-3 ">   
-                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />                   
-                </div>
-                <div class="col-sm-3 ">  
-                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-                </div>
-              </div>
-            </div> -->
+            </div>              
             <div class="col-sm-12">
               <input type='button' ng-click="addNewChoice()" value='Add Button{{choices.id}}' id='saddButton'>
             </div>
@@ -263,7 +163,7 @@
                     <input type="text" ng-model="promotion.cost" id="cost{{choice.id}}" placeholder="Cost" class="form-control"  >
                   </div>
                   <div class="col-sm-6 nopadding">
-                    <input type="text" ng-model="promotion.selling_price" id="selling_price{{choice.id}}" placeholder="Selling Price" class="form-control"  >
+                    <input type="text" name="selling_price" ng-model="promotion.selling_price" id="selling_price{{choice.id}}" placeholder="Selling Price" class="form-control selling_price_class"  >
                   </div>
                 </div>
                 <div class="col-sm-12 ">
@@ -284,15 +184,61 @@
                 </div>
               </div>
               <div class="col-sm-12 nopadding">
-                <div class="col-sm-3">               
-                   <input type="text" id="pay_value" placeholder="$ Pay" class="form-control">
+                <div class="col-sm-4">               
+                   <input type="text" ng-model="pay_value" ng-change="set_discount()" id="pay_value" placeholder="$ Pay" class="form-control">
                 </div>
-                <div class="col-sm-3">               
-                   <input type="text" id="retails_value" placeholder="$ Retail Value" class="form-control">
+                <div class="col-sm-4">               
+                   <input type="text" id="retails_value" placeholder="$ Retail Value" class="form-control retail_value_class">
                 </div>
-                <div class="col-sm-6">               
-                   <input value="1" type="checkbox" name="include_product_value" id="include_product_value" class="mdl-checkbox__input" />
+                <div class="col-sm-4">               
+                   <input ng-click="include_price(choice.id)" value="1" type="checkbox" name="include_product_value" id="include_product_value" class="mdl-checkbox__input" />
                       <span class="mdl-checkbox__label">Include Product Value</span>
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding margin-top-10">
+                <div class="col-sm-4">               
+                   OFF
+                </div>
+                <div class="col-sm-4">               
+                   DISCOUNT
+                </div>
+                <div class="col-sm-4">               
+                   SAVING
+                </div>
+              </div>
+              <div class="col-sm-12 nopadding margin-top-10">
+                <div class="col-sm-4">
+                   <div class="col-sm-12" style="mardin:0; padding:0">    
+                    <input type="text" ng-model="off_value" id="off_value" placeholder="" class="form-control">
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0">    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="1" checked /> %
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0" >    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="2" /> $
+                  </div>
+                </div>
+                <div class="col-sm-4">  
+                   <div class="col-sm-12" style="mardin:0; padding:0">    
+                   <input type="text" ng-model="discount_value" id="discount_value" placeholder="" class="form-control">
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0">    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="3" /> %
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0" >    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="4" /> $
+                  </div>
+                </div>
+                <div class="col-sm-4 nopadding">               
+                  <div class="col-sm-12" style="mardin:0; padding:0">    
+                    <input type="text" ng-model="saving_value" id="saving_value" placeholder="" class="form-control">
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0">    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="5" /> %
+                  </div>
+                  <div class="col-sm-6" style="mardin:0; padding:0" >    
+                    <input type="radio" ng-click="set_discount()" name="value_calculate" value="6" /> $
+                  </div>
                 </div>
               </div>
           </div>
@@ -301,7 +247,7 @@
               <div class="col-sm-12">
                 <div class="form-group">               
                   <button ng-disabled="promotionForm.$invalid" ng-click="add_offer()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-                  Add Directory
+                  Create Offer
                   </button>  
                 </div>
               </div>              
@@ -343,11 +289,11 @@
                       <div class="col-sm-6">
                         <div class="col-sm-6 green_text">
                           <span>Pay</span>
-                          $<span ng-bind="inventory_item.cost"></span>
+                          $<span id="pay_value_show">{{pay_value}}</span>
                         </div>
                         <div class="col-sm-6 green_text">
                           <span>Save</span>
-                          $<span></span>
+                          <span id="save_value_show"></span>
                         </div>
                       </div>
                     </div>
@@ -391,16 +337,3 @@
   </div> 
 
 </section>
-
-
-<style>
-.nopadding-left{
-  padding-left:0;
-}
-.nopadding-right{
-  padding-right:0;
-}
-.nopadding{
-  padding:0;
-}
-</style>
