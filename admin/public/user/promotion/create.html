@@ -245,12 +245,14 @@
                 </div>
               </div>
             </div> -->
-
-            <div class="col-sm-12 nopadding">
+            <div class="col-sm-12">
+              <input type='button' ng-click="addNewChoice()" value='Add Button{{choices.id}}' id='saddButton'>
+            </div>
+            <div class="col-sm-12 nopadding" data-ng-repeat="choice in choices">
               <div class="col-sm-7 nopadding">
                 <div class="col-sm-12 ">
                   <div class="col-sm-12 nopadding">  
-                     <select  ng-model="inventory_id" ng-change="get_inventory()" id="inventory_list" >
+                     <select  ng-model="inventory_id" ng-change="get_inventory(inventory_id, choice.id)" id="inventory_list" >
                         <option value="">-- choose an option --</option>
                         <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
                     </select> 
@@ -258,15 +260,18 @@
                 </div>
                 <div class="col-sm-12 ">
                   <div class="col-sm-5 nopadding margin-right-5">
-                    <input type="text" ng-model="promotion.cost" id="cost" placeholder="Cost" class="form-control"  >
+                    <input type="text" ng-model="promotion.cost" id="cost{{choice.id}}" placeholder="Cost" class="form-control"  >
                   </div>
                   <div class="col-sm-6 nopadding">
-                    <input type="text" ng-model="promotion.selling_price" id="selling_price" placeholder="Selling Price" class="form-control"  >
+                    <input type="text" ng-model="promotion.selling_price" id="selling_price{{choice.id}}" placeholder="Selling Price" class="form-control"  >
                   </div>
+                </div>
+                <div class="col-sm-12 ">
+                  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
                 </div>
               </div>
               <div class="col-sm-5 ">
-                 <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image" width="150" />   
+                 <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image{{choice.id}}" width="150" />   
               </div>
             </div>
           </div>

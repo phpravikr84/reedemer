@@ -114,6 +114,7 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
       $("#add_video").text('Saving..');       
       var provider=$("input[name='provider']:checked").val();
       var status=$("input[name='status']:checked").val();
+      var video_name=$("#video_name").val();
      
           if($("#video_url").val()=='')
           {
@@ -130,6 +131,7 @@ MyApp.controller('VideoController',["$scope", "PlaceholderTextService", "ngTable
          
           a.video.provider = provider; 
           a.video.status = status; 
+          a.video.video_name = video_name; 
           
           var main_site_url=$('#main_site_url').val();
        

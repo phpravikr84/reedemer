@@ -105,6 +105,17 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
             title: 'Dynamically Loaded Page'
         });
   }
+
+  a.choices = [{id: '1'}];
+  a.addNewChoice = function() {
+    var newItemNo = a.choices.length+1;
+    a.choices.push({'id':newItemNo});
+  };
+    
+  a.removeChoice = function() {
+    var lastItem = a.choices.length-1;
+    a.choices.splice(lastItem);
+  };
    // $("#inventory_list option:last").attr("selected", true);
 
    
@@ -161,13 +172,14 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
 
   
-    a.get_inventory = function(item){  
+    a.get_inventory = function(item, choices){  
      
       //inventory_id={}   ;
 
       //alert(a.inventory_id);
-      //alert(item);
-      var inventory_id=$("#inventory_list").val();
+      console.log("item :: "+item+" choice :: "+JSON.stringify(choices, null, 4));
+      // var inventory_id=$("#inventory_list").val();
+      var inventory_id=item;
      // if (!angular.isUndefined(a.inventory_id)) {
        // alert(newItemNo);
        // var inventory_id=a.inventory_id.id;
@@ -181,10 +193,13 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
           a.file_path=site_path;
          // alert("B");
          //alert(JSON.stringify(data_item,null,4));
-         $("#cost").val(data_item.cost);
-         $("#selling_price").val(data_item.sell_price);
+         var costId = "#cost"+choices;
+         $(costId).val(data_item.cost);
+         var imageDivId = "#selling_price"+choices;
+         $(imageDivId).val(data_item.sell_price);
          var src=site_path+"../uploads/inventory/original/"+data_item.inventory_image;
-         $(("#inventory_image")).attr("src", src);
+         var inventoryImageId = "#inventory_image"+choices;
+         $((inventoryImageId)).attr("src", src);
          // a.inventory_item.inventory_cost=data_response.cost;
          // a.inventory_item.inventory_sell_price=data_response.sell_price;
 
@@ -251,8 +266,3 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
 
 }]);
- // function localFuncHoisted(valu) {
- //        // Internal function, doesn't matter where it is declared
- //        // will be visible to all internal methods
- //        alert(valu);
- //    };

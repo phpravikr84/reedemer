@@ -52,6 +52,7 @@ class VideoController extends Controller {
 		$uploaded_by=Auth::user()->id;
 		$status=$request->get('status');
 		$provider=$request->get('provider');
+		$video_name=$request->get('video_name');
 
 		$videoType=$this->videoType($video_url);
 		if($videoType=="unknown")
@@ -95,6 +96,7 @@ class VideoController extends Controller {
 		 $video->video_url	= $video_url;			
 		 $video->provider	= $provider;	
 		 $video->video_id 	= $video_id;	
+		 $video->video_name 	= $video_name;
 		 $video->video_thumb		= $video_thumb;	
 		 $video->uploaded_by 	= $uploaded_by;	
 		 $video->default_video 	= $default_video;	
