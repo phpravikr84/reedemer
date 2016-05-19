@@ -152,7 +152,7 @@
               <div class="col-sm-7 nopadding">
                 <div class="col-sm-12 ">
                   <div class="col-sm-12 nopadding">  
-                     <select  ng-model="inventory_id" ng-change="get_inventory(inventory_id, choice.id)" id="inventory_list" >
+                     <select name="inventory_id[inventory_id]"  ng-model="inventory_id" ng-change="get_inventory(inventory_id, choice.id)" id="inventory_list" >
                         <option value="">-- choose an option --</option>
                         <option value="{{inventory.id}}" ng-repeat="inventory in inventory_list" >{{inventory.inventory_name}}</option>
                     </select> 

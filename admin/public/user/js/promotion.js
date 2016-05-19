@@ -79,7 +79,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
                          data: {action: 'test'},
                          type: 'get',
                          success: function(output) {
-                                      //alert(output);
+                                      alert(output);
                                   }
                 });
 
@@ -208,6 +208,15 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     var include_product_value=$("#include_product_value").val();    
     var value_calculate=$("input[type='radio'][name='value_calculate']:checked").val();
     var discount='';
+
+    //var inventory_id=$("#inventory_id").val();  
+    // var selectArray = $('[id^=inventory_id]');
+    // var ids = selectArray.map(function() {
+    //     return this.id.replace("inventory_id['", "").replace("']", "");
+    // }).get().join();
+    // alert(ids); 
+    //alert(JSON.stringify($('select[name=inventory_id]').val(), null, 4));
+
    // alert(value_calculate);
     if(value_calculate==1 || value_calculate==2)
     {

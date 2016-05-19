@@ -35,7 +35,11 @@ class PromotionController extends Controller {
 	public function getIndex()
 	{	
 		//return view('welcome');
-		dd("a");
+		//dd("a");
+		$html='<div>AAAA</div>';
+
+		return $html;
+
 	}
 
 	public function postStoreoffer(Request $request)
