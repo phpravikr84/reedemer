@@ -14,6 +14,7 @@ use App\Model\User;
 use App\Model\Video;
 use App\Model\Logo;
 use App\Model\Category;
+use App\Model\Offer;
 use Illuminate\Http\Request;
 
 class BridgeController extends Controller {
@@ -123,10 +124,16 @@ class BridgeController extends Controller {
 
 	// Show Offer List
 
-	public function getOfferlist()
+	public function getOfferlist(Request $request)
 	{
 
-		echo "Hello";
+		$reedemer_id=$request->get('reedemer_id');
+
+		$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
+
+		$datalist['data']=$offer_list;
+
+		return $datalist;
 
 	}
 
@@ -137,18 +144,20 @@ class BridgeController extends Controller {
 		$target_id=$request->get('target_id');
 
 
-		$logo=Logo::where('target_id',$target_id)->get()->first();		
+		$logo=Logo::where('target_id',$target_id)->get()->first();	
 
+		//dd(count($logo));	
+        
 		if($logo->reedemer_id)
 		{
-			$company_name=\App\Model\User::where('id',$logo->reedemer_id)->first()->company_name;
+			$company_name=User::where('id',$logo->reedemer_id)->first()->company_name;
 			$logo_name= $logo->logo_name;
 			
 			// get video links 
             
-            $video_list=\App\Model\Video::where('uploaded_by',$logo->reedemer_id)->orderBy('default_video','desc')->get();
+            $video_list=Video::where('uploaded_by',$logo->reedemer_id)->orderBy('default_video','desc')->get();
 
-			$dataArr=array('companyName' => $company_name,'logoImage' => $logo_name, 'videoList' => $video_list);
+			$dataArr=array('reedemer_id'=>$logo->reedemer_id,'companyName' => $company_name,'logoImage' => $logo_name, 'videoList' => $video_list);
 			$dataStr=json_encode($dataArr);
 
 
