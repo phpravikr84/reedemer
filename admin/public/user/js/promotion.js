@@ -68,27 +68,21 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       a.inventory_list = inventory_list;  
     }); 
 
-    a.open_pop = function(item){  
-    $('<div>').dialog({
-            modal: true,
-            open: function ()
-            {
-                //$(this).load('http://www.google.com');
-
-                $.ajax({ url: 'http://localhost/reedemer/admin/public/promotion',
-                         data: {action: 'test'},
-                         type: 'get',
-                         success: function(output) {
-                                      //alert(output);
-                                  }
-                });
-
-            },         
-            height: 400,
-            width: 400,
-            title: 'Dynamically Loaded Page'
+   // a.open_pop = function(item){  
+      $(document).ready(function() {
+        $(".various").fancybox({
+          maxWidth  : 800,
+          maxHeight : 600,
+          fitToView : false,
+          width   : '70%',
+          height    : '70%',
+          autoSize  : false,
+          closeClick  : false,
+          openEffect  : 'elastic',
+          closeEffect : 'none'
         });
-    }
+      });
+   // }
 
     a.choices = [{id: '1'}];
     a.addNewChoice = function() {
