@@ -129,11 +129,13 @@
               </div>
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-6">               
-                  <button ng-click="open_pop()"  type="button" class="btn btn-primary">Import Image</button>
-
+                   
+                  <a class="various fancybox.iframe put_href" href="../reedemer/file/"> 
+                      <button  type="button" class="btn btn-primary">Import Image</button>
+                  </a>
                 </div>
                 <div class="col-sm-6">               
-                  <img ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
+                  <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
                 </div>
               </div>
           </div>
@@ -280,7 +282,7 @@
                 <div class="mdl-tabs__panel is-active" id="starks-panel">
                   <div class="p-20">
                     <div class="col-sm-12 ">
-                      <img ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
+                      <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
                     </div>
                     <div class="col-sm-12 small-text">
                       <div class="col-sm-6 break_work green_text" ng-bind="offer_description"   >
@@ -303,7 +305,7 @@
                   <div class="p-20">
                     <div class="col-sm-12 ">
                       <div class="col-sm-6 ">
-                      <img ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
+                      <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
                       </div>
                       <div class="col-sm-6 green_text break_work"  ng-bind="offer_description" >
                         
@@ -314,7 +316,7 @@
                 <div class="mdl-tabs__panel" id="targaryens-panel">
                   <div class="p-20">
                     <div class="col-sm-12 ">
-                      <img ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
+                      <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
                     </div>
                     <div class="col-sm-12 green_text break_work_80" ng-bind="offer_description"   >
 
