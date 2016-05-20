@@ -129,7 +129,9 @@ class BridgeController extends Controller {
 
 		$reedemer_id=$request->get('reedemer_id');
 
-		$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
+		//$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
+
+		$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
 
 		$datalist['data']=$offer_list;
 

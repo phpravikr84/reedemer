@@ -24,4 +24,17 @@ class Inventory extends Model  {
 	//	return $this->hasMany('App\User');
 	//}
 
+	// public function offers()
+ //    {
+ //        return $this->belongsToMany('App\Model\Offer');
+ //    }
+    // public function offers()
+    // {
+    //     return $this->morphedByMany('App\Model\Offer', 'reedemer_offer_details')->withPivot('offer_id'
+
+    //     	);
+    // }
+    public function offers() {
+        return $this->belongsToMany('App\Model\Offer','reedemer_offer_details', 'offer_id', 'inventory_id');
+    }
 }

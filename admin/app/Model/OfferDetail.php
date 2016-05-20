@@ -15,6 +15,14 @@ class OfferDetail extends Model  {
 	protected $table = 'reedemer_offer_details';
 
 	
-   
+   public function inventoryDetails()
+    {
+        return $this->hasOne('App\Model\Inventory','id','inventory_id');
+    }
+
+     public function offerDetail()
+    {
+        return $this->hasOne('App\Model\Offer','id','offer_id');
+    }
  	
 }
