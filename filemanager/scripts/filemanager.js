@@ -1659,7 +1659,7 @@ $(function(){
 		$.ajax({
 		    'async': false,
 		    type: 'GET',
-		     url: "../admin/public/promotion/folderid",
+		     url: "../admin/public/index.php/promotion/folderid",
 		    // url: "/admin/public/promotion/folderid",
 		   // 'url': "http://localhost/reedemer/admin/public/promotion/folderid",    
 		    cache: false, 
