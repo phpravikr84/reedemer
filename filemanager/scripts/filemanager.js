@@ -20,6 +20,9 @@ $.urlParam = function(name){
 		return 0;
 };
 
+
+//var testResult = document.getElementById("user_folder_id_first").value;
+//alert(testResult);
 /*-----------------------------------------------------$('#level-up').click----
   Setup, Layout, and Status Functions
 ---------------------------------------------------------*/
@@ -1651,11 +1654,20 @@ $(function(){
 	if(!config.options.fileRoot) {
 		//alert("A");
 		//var folder_id=$("#folder_id").val();
-		var href = $("#amit").val();
-		alert(href);
-
+		//var href = $("#amit").val();
+		//alert(href);
+		$.ajax({
+		    'async': false,
+		     url: "../admin/public/promotion/folderid",
+		   // 'url': "http://localhost/reedemer/admin/public/promotion/folderid",    
+		    cache: false, 
+		    'success': function (data) {
+		    //	alert(data);
+		       fileRoot = "/reedemer/filemanager/userfiles/"+data+"/";
+		    }
+		});
 		//fileRoot = '/' + document.location.pathname.substring(1, document.location.pathname.lastIndexOf('/') + 1) + 'userfiles/';
-		fileRoot = "/reedemer/filemanager/userfiles/";
+		
 		//fileRoot = '../admin/uploads/';
 	} else {
 		if(!config.options.serverRoot) {

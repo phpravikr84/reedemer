@@ -59,7 +59,7 @@ class PromotionController extends Controller {
 		//dd($str[1]);
 		$str_wot_name=rtrim(str_replace($image_name, '', $str[1]),"/");
 		$base=env('UPLOADS')."/".$str_wot_name;
-		//dd($image_name);
+		//dd($base);
 		$directory=Directory::where('created_by',$user_id)
 		   		   ->where('file_name',$image_name)
 		 		   ->where('directory_base_path',$base)
@@ -102,18 +102,12 @@ class PromotionController extends Controller {
 
 		$camp_img_id=$request->get('camp_img_id');
 
-		$directory=Directory::find($camp_img_id);
+		$stamp="/var/www/html/reedemer/admin/uploads/original/1462188492_947739140.jpg"; // Logo
+		$image="/var/www/html/reedemer/admin/uploads/original/1462173863_896650352.jpg"; //Image
+		$newcopy='/var/www/html/reedemer/filemanager/userfiles/aa.jpg';
 
-
-		$offer_image=$directory->file_name;
-		$offer_image_path=$directory->directory_url;
-		//dd($offer_image);
-		//$stamp="/var/www/html/reedemer/admin/uploads/original/1462188492_947739140.jpg"; // Logo
-		//$image="/var/www/html/reedemer/admin/uploads/original/1462173863_896650352.jpg"; //Image
-		//$newcopy='/var/www/html/reedemer/filemanager/userfiles/aa.jpg';
-
-		//$watermark=$this->watermark($image, $stamp, $newcopy);
-		//dd($watermark);
+		$watermark=$this->watermark($image, $stamp, $newcopy);
+		dd($watermark);
 
 		$offer = new Offer();
 		$offer->campaign_id				= $campaign_id;			
@@ -133,8 +127,6 @@ class PromotionController extends Controller {
 		$offer->discount 				= $discount;
 		$offer->value_calculate 		= $value_calculate;
 		$offer->created_by 				= $created_by;	
-		$offer->offer_image 			= $offer_image;	
-		$offer->offer_image_path 		= $offer_image_path;	
 		if($offer->save())
 		{
 			return 'success';
@@ -162,10 +154,19 @@ class PromotionController extends Controller {
 		imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
 		// Output and free memory
-		header('Content-type: image/png');
+		header('Content-type: image/jpeg');
 		imagejpeg($im);
 		imagedestroy($im);
 	}
+
+	public function getFolderid()
+	{
+		
+		$id=Auth::User()->id;
+//dd($id);
+		return $id;
+	}
+	
 
 	
 }
