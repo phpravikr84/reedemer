@@ -1655,7 +1655,7 @@ $(function(){
 		alert(href);
 
 		//fileRoot = '/' + document.location.pathname.substring(1, document.location.pathname.lastIndexOf('/') + 1) + 'userfiles/';
-		fileRoot = "/reedemer/filemanager/userfiles/68/";
+		fileRoot = "/reedemer/filemanager/userfiles/";
 		//fileRoot = '../admin/uploads/';
 	} else {
 		if(!config.options.serverRoot) {
