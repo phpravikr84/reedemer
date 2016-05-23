@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Auth;
+use DB;
 use App\Model\Wptoken;
 use App\Model\Demotest;
 use App\Model\Pp;
@@ -151,7 +152,7 @@ class BridgeController extends Controller {
 
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
-			$offer_list=Offer::where('created_by',$reedemer_id)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
          $datalist['messageCode']="R01001";
 		
@@ -159,7 +160,7 @@ class BridgeController extends Controller {
 	else
 	{
 
-		$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+		$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 		 $datalist['messageCode']="R01002";
 
@@ -185,7 +186,7 @@ class BridgeController extends Controller {
 			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
 
-			$offer_list=Offer::where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['messageCode']="R01001";
 
@@ -209,7 +210,7 @@ class BridgeController extends Controller {
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
 
-			$offer_list=Offer::where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['messageCode']="R01001";
 
@@ -226,7 +227,7 @@ class BridgeController extends Controller {
 
 		$offer_id=$request->get('offer_id');
 
-		$offer_list=Offer::where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+		$offer_list=Offer:: select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 		$datalist['data']=$offer_list;
 
