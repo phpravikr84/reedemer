@@ -1658,7 +1658,7 @@ $(function(){
 		//alert(href);
 		$.ajax({
 		    'async': false,
-		     url: "../admin/public/promotion/folderid",
+		     url: "/admin/public/promotion/folderid",
 		   // 'url': "http://localhost/reedemer/admin/public/promotion/folderid",    
 		    cache: false, 
 		    'success': function (data) {
