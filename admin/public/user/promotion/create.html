@@ -128,13 +128,15 @@
                 </div>
               </div>
               <div class="col-sm-12 nopadding">
-                <div class="col-sm-6">  
-                  <a class="various fancybox.iframe put_href" href="/filemanager/index.html"> 
+                <div class="col-sm-6">               
+                   <div class="get_val_rel"></div>
+                  <a id="amit" value="1" class=" various fancybox.iframe put_href" href="../reedemer/filemanager/?slug=300" rel="300"> 
                       <button  type="button" class="btn btn-primary">Import Image</button>
                   </a>
                 </div>
                 <div class="col-sm-6">               
                   <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="150" />
+                  <input type="text" name="camp_img_id" id="camp_img_id" value="" />
                 </div>
               </div>
           </div>
@@ -280,8 +282,11 @@
 
                 <div class="mdl-tabs__panel is-active" id="starks-panel">
                   <div class="p-20">
-                    <div class="col-sm-12 ">
+                    <div class="col-sm-12 image_box">
                       <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
+                      <div class="logo_img_box">
+                        <img ng-src="../../uploads/original/1462869038_308423044.jpg" width="80" />
+                      </div>
                     </div>
                     <div class="col-sm-12 small-text">
                       <div class="col-sm-6 break_work green_text" ng-bind="offer_description"   >

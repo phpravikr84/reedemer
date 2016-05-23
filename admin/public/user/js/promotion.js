@@ -60,7 +60,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       a.file_path=site_path;       
     }); 
 
-    x.get("../admin/dashboard/category").success(function(response_cat){ 
+    x.get("../admin/dashboard/owncategory").success(function(response_cat){ 
       a.cat_list = response_cat;        
     }); 
 
@@ -221,6 +221,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
 
     var product_id_str=product_id_str.replace(/^,|,$/g,'');
 
+    var camp_img_id=$("#camp_img_id").val();
+
     //alert(product_id_str);
 
     //var inventory_id=$("#inventory_id").val();  
@@ -270,12 +272,13 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.promotion_arr.include_product_value=include_product_value;
     a.promotion_arr.discount=discount;
     a.promotion_arr.product_id_str=product_id_str;
+    a.promotion_arr.camp_img_id=camp_img_id;
 
-   // alert(JSON.stringify(a.promotion_arr, null, 4));
+    //alert(JSON.stringify(a.promotion_arr, null, 4));
 
-    // x.post("../promotion/storeoffer",a.promotion_arr).success(function(response){
-    //   alert(response);
-    // });
+     x.post("../promotion/storeoffer",a.promotion_arr).success(function(response){
+       alert(response);
+     });
   }
 
 }]);

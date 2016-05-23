@@ -75,11 +75,13 @@ class DirectoryController extends Controller {
 
 	public function postStore(Request $request)
 	{
+		//dd("a");
 		$created_by=Auth::user()->id;
 		$upload_dir = env('UPLOADS');
 
 		$base_dir=$upload_dir."/".$created_by;
 		$directory_name=$request->get('dir_name');
+		$dest_dir="../../filemanager/userfiles/".$created_by;
 		if($request->get('new_dir_id'))
 		{
 			$directory_id=$request->get('new_dir_id');
@@ -94,6 +96,11 @@ class DirectoryController extends Controller {
 			//create base folder
 			mkdir($base_dir, 0777);
 		}
+		if(!file_exists($dest_dir))
+		{
+			//create base folder
+			mkdir($dest_dir, 0777);
+		}
 
 		// check if folder exists
 		if(!file_exists($base_dir."/".$directory_name))
@@ -104,6 +111,12 @@ class DirectoryController extends Controller {
 		else
 		{
 			return 'folder_exists';
+		}
+
+		if(!file_exists($dest_dir."/".$directory_name))
+		{	
+			//create folder		
+			mkdir($dest_dir."/".$directory_name, 0777);
 		}
 
 		$status=1;	
@@ -194,6 +207,7 @@ class DirectoryController extends Controller {
 
 	public function postUpload(Request $request)
 	{
+		//dd("a");
 		$created_by=Auth::user()->id;
 		$upload_dir = env('UPLOADS');
 
@@ -207,12 +221,23 @@ class DirectoryController extends Controller {
 		// {
 		// 	$directory_id=0;
 		// }
+		
+		$dest_dir="../../filemanager/userfiles/".$created_by;
 		//check if base folder exists
 		if(!file_exists($base_dir))
 		{
 			//create base folder
 			mkdir($base_dir, 0777);
 		}
+		if(!file_exists($dest_dir))
+		{
+			//create base folder
+			mkdir($dest_dir, 0777);
+		}
+		//copy($base_dir, $destination.'/'.$file);
+		//mkdir($dest_dir, 0777);
+		//dd($base_dir);
+
 
 		// // check if folder exists
 		// if(!file_exists($base_dir."/".$directory_name))
@@ -231,10 +256,13 @@ class DirectoryController extends Controller {
 		$dir_id=$request->input('dir_id');
 		$created_by=Auth::user()->id;
 		//dd($image_name);
+		$dir_name_c="";
 		if($dir_id)
 		{
 			$directory=Directory::find($dir_id);
+			//dd($directory);
 			$dir_path=$directory->directory_base_path;
+			$dir_name_c=$directory->original_name;
 		}
 		else
 		{
@@ -275,8 +303,11 @@ class DirectoryController extends Controller {
 		
 		//dd($directory_url);
 		$file_ori = $_FILES[ 'image_file' ][ 'tmp_name' ];
+		$copy_file_url=$dest_dir."/".$dir_name_c."/".$new_file_name;
+		//dd($copy_file_url);
+		copy($file_ori, $copy_file_url);	
 		
-		move_uploaded_file($file_ori, "$original_path$new_file_name");		
+		move_uploaded_file($file_ori, "$original_path.$new_file_name");		
 			
 		
 		

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response; 
 use App\Model\User;
 use App\Model\Video;
+use App\Model\Directory;
 use App\Model\Offer;
 use Hash;
 use Validator;
@@ -42,6 +43,32 @@ class PromotionController extends Controller {
 
 	}
 
+	public function postImageid(Request $request)
+	{
+		$user_id=Auth::User()->id;
+		//dd($user_id);
+		//dd($request->get('file_name'));
+		$str=explode("filemanager/userfiles/",$request->get('file_name'));
+		$str_value=explode("/",$str[1]);		
+		// Get name of image
+		$image_name=array_pop($str_value);
+
+		//$last_ele_len=strlen($image_name);
+		//$base_dir=substr($str[1], 0, $last_ele_len-4);
+		//$base=env('UPLOADS')."/".$base_dir;
+		//dd($str[1]);
+		$str_wot_name=rtrim(str_replace($image_name, '', $str[1]),"/");
+		$base=env('UPLOADS')."/".$str_wot_name;
+		//dd($image_name);
+		$directory=Directory::where('created_by',$user_id)
+		   		   ->where('file_name',$image_name)
+		 		   ->where('directory_base_path',$base)
+		 		   ->first();
+		$id=$directory->id;
+		//dd($id);
+		return $id;
+	}
+
 	public function postStoreoffer(Request $request)
 	{	
 		//return view('welcome');
@@ -73,6 +100,21 @@ class PromotionController extends Controller {
 		$value_calculate=$request->get('value_calculate');
 		$product_id_str=$request->get('product_id_str');
 
+		$camp_img_id=$request->get('camp_img_id');
+
+		$directory=Directory::find($camp_img_id);
+
+
+		$offer_image=$directory->file_name;
+		$offer_image_path=$directory->directory_url;
+		//dd($offer_image);
+		//$stamp="/var/www/html/reedemer/admin/uploads/original/1462188492_947739140.jpg"; // Logo
+		//$image="/var/www/html/reedemer/admin/uploads/original/1462173863_896650352.jpg"; //Image
+		//$newcopy='/var/www/html/reedemer/filemanager/userfiles/aa.jpg';
+
+		//$watermark=$this->watermark($image, $stamp, $newcopy);
+		//dd($watermark);
+
 		$offer = new Offer();
 		$offer->campaign_id				= $campaign_id;			
 		$offer->cat_id 					= $category_id;	
@@ -91,6 +133,8 @@ class PromotionController extends Controller {
 		$offer->discount 				= $discount;
 		$offer->value_calculate 		= $value_calculate;
 		$offer->created_by 				= $created_by;	
+		$offer->offer_image 			= $offer_image;	
+		$offer->offer_image_path 		= $offer_image_path;	
 		if($offer->save())
 		{
 			return 'success';
@@ -101,7 +145,27 @@ class PromotionController extends Controller {
 		}
 	}
 
-	
+	function watermark($target, $wtrmrk_file, $newcopy)
+	{
+		// Load the stamp and the photo to apply the watermark to
+		$stamp = imagecreatefromjpeg($wtrmrk_file);
+		$im = imagecreatefromjpeg($target);
+
+		// Set the margins for the stamp and get the height/width of the stamp image
+		$marge_right = 10;
+		$marge_bottom = 10;
+		$sx = imagesx($stamp);
+		$sy = imagesy($stamp);
+
+		// Copy the stamp image onto our photo using the margin offsets and the photo 
+		// width to calculate positioning of the stamp. 
+		imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+
+		// Output and free memory
+		header('Content-type: image/png');
+		imagejpeg($im);
+		imagedestroy($im);
+	}
 
 	
 }

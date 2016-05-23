@@ -1276,19 +1276,19 @@ var getFileInfo = function(file) {
 	// Include the template.
 	var template = '<div id="preview" class="dd"><img /><div id="main-title"><h1></h1><div id="tools"></div></div><dl></dl></div>';
 	template += '<form id="toolbar">';
-	template += '<button id="use_this" name="use_this" type="button" value="Use This"></button>';
-	// template += '<button id="parentfolder">' + lg.parentfolder + '</button>';
-	// if($.inArray('select', capabilities)  != -1 && ($.urlParam('CKEditor') || window.opener || window.tinyMCEPopup || $.urlParam('field_name'))) template += '<button id="select" name="select" type="button" value="Select">' + lg.select + '</button>';
-	// if($.inArray('download', capabilities)  != -1) template += '<button id="download" name="download" type="button" value="Download">' + lg.download + '</button>';
-	// if($.inArray('rename', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="rename" name="rename" type="button" value="Rename">' + lg.rename + '</button>';
-	// if($.inArray('move', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="move" name="move" type="button" value="Move">' + lg.move + '</button>';
-	// if($.inArray('delete', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="delete" name="delete" type="button" value="Delete">' + lg.del + '</button>';
-	// if($.inArray('replace', capabilities)  != -1 && config.options.browseOnly != true)  {
-	// 	template += '<button id="replace" name="replace" type="button" value="Replace">' + lg.replace + '</button>';
-	// 	template += '<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';
-	// 	template += '<input id="mode" name="mode" type="hidden" value="replace" /> ';
-	// 	template += '<input id="newfilepath" name="newfilepath" type="hidden" />';
-	// }
+	template += '<button id="use_this" >Use This Image</button>';
+	template += '<button id="parentfolder">' + lg.parentfolder + '</button>';
+	if($.inArray('select', capabilities)  != -1 && ($.urlParam('CKEditor') || window.opener || window.tinyMCEPopup || $.urlParam('field_name'))) template += '<button id="select" name="select" type="button" value="Select">' + lg.select + '</button>';
+	if($.inArray('download', capabilities)  != -1) template += '<button id="download" name="download" type="button" value="Download">' + lg.download + '</button>';
+	if($.inArray('rename', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="rename" name="rename" type="button" value="Rename">' + lg.rename + '</button>';
+	if($.inArray('move', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="move" name="move" type="button" value="Move">' + lg.move + '</button>';
+	if($.inArray('delete', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="delete" name="delete" type="button" value="Delete">' + lg.del + '</button>';
+	if($.inArray('replace', capabilities)  != -1 && config.options.browseOnly != true)  {
+		template += '<button id="replace" name="replace" type="button" value="Replace">' + lg.replace + '</button>';
+		template += '<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';
+		template += '<input id="mode" name="mode" type="hidden" value="replace" /> ';
+		template += '<input id="newfilepath" name="newfilepath" type="hidden" />';
+	}
 	template += '</form>';
 
 	// test if scrollbar plugin is enabled
@@ -1299,9 +1299,21 @@ var getFileInfo = function(file) {
 	}
 	$('#use_this').click(function() {
 		//alert(text(data['Filename']));
-		//alert(file);		
-		parent.$(".campaign_image_show").attr("src",file);
-		parent.$.fancybox.close();
+		//var file_name = file.substring(file.lastIndexOf("/") + 1, file.length);		
+		$.ajax({
+            type: 'POST',
+            url: "../admin/public/promotion/imageid",
+            data: {'file_name':file},
+            dataType: 'json',
+            success: function (data) {	
+           // alert(data);
+            	parent.$("#camp_img_id").val(data);
+				parent.$(".campaign_image_show").attr("src",file);
+				parent.$.fancybox.close();
+            }
+
+        });		
+        return false;
 		
 	});
 	$('#parentfolder').click(function() {getFolderInfo(currentpath);});
@@ -1637,11 +1649,20 @@ $(function(){
 	}
 
 	if(!config.options.fileRoot) {
-		fileRoot = '/' + document.location.pathname.substring(1, document.location.pathname.lastIndexOf('/') + 1) + 'userfiles/';
+		//alert("A");
+		//var folder_id=$("#folder_id").val();
+		var href = $("#amit").val();
+		alert(href);
+
+		//fileRoot = '/' + document.location.pathname.substring(1, document.location.pathname.lastIndexOf('/') + 1) + 'userfiles/';
+		fileRoot = "/reedemer/filemanager/userfiles/134/";
+		//fileRoot = '../admin/uploads/';
 	} else {
 		if(!config.options.serverRoot) {
+			//alert("B");
 			fileRoot = config.options.fileRoot;
 		} else {
+			//alert("C");
 			fileRoot = '/' + config.options.fileRoot;
 		}
 		// we remove double slashes - can happen when using PHP SetFileRoot() function with fileRoot = '/' value

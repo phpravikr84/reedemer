@@ -740,6 +740,15 @@ class DashboardController extends Controller {
 		return $category;
 	}
 
+	public function getOwncategory($parent_id='')
+	{
+		$category = Category::where('parent_id',$parent_id)
+					->where('visibility',1)
+					->get();
+
+		return $category;
+	}
+
 	public function getCategoryupdate($id,$approve)
 	{	
 	

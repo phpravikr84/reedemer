@@ -147,7 +147,16 @@ white-space:wrap;
 .top-buffer{
     margin-top:20px; 
 }
-
+.image_box{
+    border:1px solid #CCCCCC;
+    position: relative;
+}
+.logo_img_box{
+    border:1px solid #CCCCCC;
+    position: absolute;
+    top:5px;
+    left:5px;
+}
 /*=============================*/
 
 

@@ -64,6 +64,7 @@
   <input type="hidden" name="site_path" id="site_path" value="{{getenv('SITE_PATH')}}"  />
   <input type="hidden" name="site_image_path" id="site_image_path" value="{{ asset('/images') }}"  />
   <input type="hidden" name="update_id" id="update_id" value="" />
+  
   @yield('content')
  
   <script src="{{ asset('/user/js/vendors.min.c95e87841078c8095acf.js') }}"></script>
