@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Auth;
+use DB;
 use App\Model\Wptoken;
 use App\Model\Demotest;
 use App\Model\Pp;
@@ -14,6 +15,8 @@ use App\Model\User;
 use App\Model\Video;
 use App\Model\Logo;
 use App\Model\Category;
+use App\Model\UserPassedOffer;
+use App\Model\UserBankOffer;
 use App\Model\Offer;
 use Illuminate\Http\Request;
 
@@ -89,6 +92,16 @@ class BridgeController extends Controller {
 		case "showoffers":
 			$url=$base_path."offerlist";
 		break;	
+		case "offerdetail":
+			$url=$base_path."offerdetail";
+		break;
+		case "myoffer":
+			$url=$base_path."myoffer";
+		break;	
+
+		case "mypassedoffer":
+			$url=$base_path."mypassedoffer";
+		break;		
 
 		default:
 			$url=$base_path."not_found";
@@ -129,9 +142,92 @@ class BridgeController extends Controller {
 
 		$reedemer_id=$request->get('reedemer_id');
 
-		//$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
+		if($request->get('user_id'))
+		{
+			// Get passed users list offer
 
-		$offer_list=Offer::where('created_by',$reedemer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings')->orderBy('created_at','desc')->get();
+			$user_id=$request->get('user_id');
+
+			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
+
+			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
+
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+
+         $datalist['messageCode']="R01001";
+		
+	}
+	else
+	{
+
+		$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+
+		 $datalist['messageCode']="R01002";
+
+	}
+
+	     $datalist['data']=$offer_list;
+
+		return $datalist;
+
+	}
+
+    // Show User Bank Offer
+
+	public function getMyoffer(Request $request)
+	{
+
+			// Get passed users list offer
+
+		    $reedemer_id=$request->get('reedemer_id');
+
+			$user_id=$request->get('user_id');
+
+			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
+
+
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+
+			$datalist['messageCode']="R01001";
+
+			$datalist['data']=$offer_list;
+
+			return $datalist;
+
+	}
+
+	// Show User Passed Offer
+
+	public function getMypassedoffer(Request $request)
+	{
+
+			// Get passed users list offer
+
+		    $reedemer_id=$request->get('reedemer_id');
+
+			$user_id=$request->get('user_id');
+
+			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
+
+
+			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+
+			$datalist['messageCode']="R01001";
+
+			$datalist['data']=$offer_list;
+
+			return $datalist;
+
+	}
+
+   // Show Offer Details
+
+	public function getOfferdetail(Request $request)
+	{
+
+		$offer_id=$request->get('offer_id');
+
+		$offer_list=Offer:: select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 		$datalist['data']=$offer_list;
 

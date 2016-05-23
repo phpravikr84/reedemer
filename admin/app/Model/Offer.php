@@ -27,20 +27,14 @@ class Offer extends Model  {
 
     public function categoryDetails()
     {
-        return $this->hasOne('App\Model\Category','id','cat_id');
+        return $this->hasOne('App\Model\Category','id','cat_id')->select(array('id', 'cat_name'));
     }
 
      public function subCategoryDetails()
     {
-        return $this->hasOne('App\Model\Category','id','subcat_id');
+        return $this->hasOne('App\Model\Category','id','subcat_id')->select(array('id', 'cat_name'));
     }
-
-    // public function offerDetails()
-    // {
-    //     //return $this->hasMany('App\Model\cccc','offer_id','id');
-
-    //      return $this->hasMany('App\Model\OfferDetail','offer_id','id');
-    // }
+ 
 
      public function partnerSettings()
     {
@@ -49,14 +43,13 @@ class Offer extends Model  {
        
     }
     
-    // public function offerDetail()
-    // {
-    //     return $this->morphToMany('App\Model\Inventory', 'App\Model\OfferDetail')->withPivot('inventory_id'
-
-    //     	);
-    // }
+    
     public function offerDetail() {
         return $this->hasMany('App\Model\OfferDetail','offer_id','id');
+    }
+
+     public function companyDetail() {
+        return $this->hasMany('App\Model\User','id','created_by')->select(array('id', 'company_name','email','web_address'));
     }
    
  	
