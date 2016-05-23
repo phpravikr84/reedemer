@@ -149,8 +149,9 @@ class BridgeController extends Controller {
 
 			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
+			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
-			$offer_list=Offer::where('created_by',$reedemer_id)->whereNotIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::where('created_by',$reedemer_id)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
          $datalist['messageCode']="R01001";
 		
@@ -205,10 +206,10 @@ class BridgeController extends Controller {
 
 			$user_id=$request->get('user_id');
 
-			$userbankoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
+			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
 
-			$offer_list=Offer::where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['messageCode']="R01001";
 
