@@ -165,7 +165,7 @@ class BridgeController extends Controller {
 
 	}
 
-	$datalist['data']=$offer_list;
+	     $datalist['data']=$offer_list;
 
 		return $datalist;
 

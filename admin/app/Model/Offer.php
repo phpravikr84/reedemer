@@ -39,7 +39,7 @@ class Offer extends Model  {
      public function partnerSettings()
     {
 
-    	 return $this->hasOne('App\Model\Partnersetting','created_by','created_by')->select(array('id', 'setting_val','price_range_id'));
+    	 return $this->hasOne('App\Model\Partnersetting','created_by','created_by');
        
     }
     
