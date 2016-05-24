@@ -140,13 +140,14 @@ class BridgeController extends Controller {
 	public function postOfferlist(Request $request)
 	{
 
-		$reedemer_id=$request->get('reedemer_id');
+		$data=json_decode($request->get('data'));
+		$reedemer_id=$data->reedemer_id;
 
-		if($request->get('user_id'))
+		$user_id=$data->user_id;
+
+		if($user_id>0)
 		{
 			// Get passed users list offer
-
-			$user_id=$request->get('user_id');
 
 			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
@@ -179,11 +180,11 @@ class BridgeController extends Controller {
 
 			// Get passed users list offer
 
-		   $reedemer_id=$request->get('reedemer_id');
+		   $data=json_decode($request->get('data'));
 
+		   $reedemer_id=$data->reedemer_id;
 
-
-			$user_id=$request->get('user_id');
+		    $user_id=$data->user_id;
 
 			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
@@ -205,9 +206,11 @@ class BridgeController extends Controller {
 
 			// Get passed users list offer
 
-		    $reedemer_id=$request->get('reedemer_id');
+		  $data=json_decode($request->get('data'));
 
-			$user_id=$request->get('user_id');
+		   $reedemer_id=$data->reedemer_id;
+
+		    $user_id=$data->user_id;
 
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
@@ -226,7 +229,9 @@ class BridgeController extends Controller {
 	public function postOfferdetail(Request $request)
 	{
 
-			$offer_id=$request->get('offer_id');
+			$data=json_decode($request->get('data'));
+		    $offer_id=$data->offer_id;
+		    $user_id=$data->user_id;
 
 			$offer_list=Offer:: select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
