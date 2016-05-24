@@ -1351,7 +1351,7 @@ var getFileInfo = function(file) {
 				var url = data['Path'];
 			}
 			if(data['Protected']==0) {
-				$('#fileinfo').find('div#tools').append(' <a id="copy-button" data-clipboard-text="'+ url + '" title="' + lg.copy_to_clipboard + '" href="#"><span>' + lg.copy_to_clipboard + '</span></a>');
+				//$('#fileinfo').find('div#tools').append(' <a id="copy-button" data-clipboard-text="'+ url + '" title="' + lg.copy_to_clipboard + '" href="#"><span>' + lg.copy_to_clipboard + '</span></a>');
 				// loading zeroClipboard code
 				
 				loadJS('./scripts/zeroclipboard/copy.js?d' + d.getMilliseconds());
