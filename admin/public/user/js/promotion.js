@@ -68,6 +68,35 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       a.inventory_list = inventory_list;  
     }); 
 
+    $('input[name="choose_image"]').on('change', function() {
+       var selectd_val=$('input[name="choose_image"]:checked').val();      
+      // / alert(selectd_val)  ;
+       //var total_price=selectd_val*$("#choose_image").val();      
+       
+      //$("#total_redeemar_price").val(total_price);
+      if(selectd_val==2)
+      {
+        $(".image_chooser").hide();
+        x.post("../promotion/logolist").success(function(response){ 
+          //a.campaign_list = response; 
+          //a.file_path=site_path;    
+         // alert(response);   
+          var img_pathShow='../../uploads/original/'+response;       
+          $(".logo_img_box").hide();
+          $(".campaign_image_show").attr("src", img_pathShow);
+        }); 
+      }
+      else
+      {
+          $(".image_chooser").show();
+          $(".logo_img_box").show();
+          var img_pathShow='../../uploads/no-image-found.gif';    
+          $(".campaign_image_show").attr("src", img_pathShow);   
+          //http://localhost/reedemer/admin/uploads/
+      }
+       
+       
+    });
    // a.open_pop = function(item){  
       $(document).ready(function() {
         $(".various").fancybox({
@@ -222,6 +251,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     var product_id_str=product_id_str.replace(/^,|,$/g,'');
 
     var camp_img_id=$("#camp_img_id").val();
+    var choose_image=$("input[type='radio'][name='choose_image']:checked").val();
 
     //alert(product_id_str);
 
@@ -273,11 +303,30 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.promotion_arr.discount=discount;
     a.promotion_arr.product_id_str=product_id_str;
     a.promotion_arr.camp_img_id=camp_img_id;
+    a.promotion_arr.choose_image=choose_image;
 
     //alert(JSON.stringify(a.promotion_arr, null, 4));
 
      x.post("../promotion/storeoffer",a.promotion_arr).success(function(response){
-       alert(response);
+      // alert(response);
+
+      if(response=='success')
+      {
+        var main_site_url=$("#main_site_url").val();
+                              
+        var redirect_url=main_site_url+'/user/dashboard#/promotion/create';  
+
+        $("#error_div").hide();
+        $("#show_message").slideDown();
+        $("#success_div").html("Data inserted successfully. <br />Please wait,we will reload this page.");
+        $("#success_div").show();              
+
+        setTimeout(function() { 
+          window.location.reload();
+          //window.location.href = redirect_url; 
+        }, 5000); 
+      }
+
      });
   }
 
