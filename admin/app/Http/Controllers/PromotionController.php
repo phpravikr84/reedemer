@@ -8,6 +8,7 @@ use App\Model\User;
 use App\Model\Video;
 use App\Model\Directory;
 use App\Model\Offer;
+use App\Model\OfferDetail;
 use Hash;
 use Validator;
 use App\Model\Logo;
@@ -81,8 +82,12 @@ class PromotionController extends Controller {
 		$offer_description=$request->get('offer_description');
 		$total_redeemar=$request->get('total_redeemar');
 		$total_redeemar_price=$request->get('total_redeemar_price');
-		$c_s_date=$request->get('c_s_date');
-		$c_e_date=$request->get('c_e_date');
+		$c_s_date_user=explode("/",$request->get('c_s_date'));
+		$c_s_date=$c_s_date_user[2]."-".$c_s_date_user[0]."-".$c_s_date_user[1];
+		$c_e_date_user=explode("/",$request->get('c_e_date'));
+		$c_e_date=$c_e_date_user[2]."-".$c_e_date_user[0]."-".$c_e_date_user[1];
+		//dd($c_e_date);
+		//die();
 		$total_payment=$request->get('total_payment');
 		if($total_payment==0.65)
 		{
@@ -100,7 +105,10 @@ class PromotionController extends Controller {
 		$include_product_value=$request->get('include_product_value');
 		$discount=$request->get('discount');
 		$value_calculate=$request->get('value_calculate');
-		$product_id_str=$request->get('product_id_str');
+		$product_id_arr=explode(",",$request->get('product_id_str'));
+
+		
+		
 
 		$camp_img_id=$request->get('camp_img_id');
 
@@ -179,6 +187,16 @@ class PromotionController extends Controller {
 		$offer->created_by 				= $created_by;	
 		if($offer->save())
 		{
+			$offer_id = $offer->id;
+			//dd($offer_id);
+			foreach($product_id_arr as $product_id)
+			{
+				//dd($product_id);
+				$data[] = array('offer_id'=>$offer_id, 'inventory_id'=>$product_id, 'created_at'=>date("Y-m-d H:i:s"), 'updated_at'=>date("Y-m-d H:i:s"));
+			}
+
+			OfferDetail::insert($data); // Eloquent
+
 			return 'success';
 		}
 		else
