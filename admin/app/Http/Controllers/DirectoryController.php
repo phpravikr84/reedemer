@@ -277,7 +277,7 @@ class DirectoryController extends Controller {
 		$request->input('dir_id');
 
 		//$original_path= env('UPLOADS')."/42/Demo_1"."/";
-		//dd($original_path);
+		
 		$original_path= $dir_path."/";
 		//dd($original_path);
 
@@ -292,6 +292,7 @@ class DirectoryController extends Controller {
 		{
 			$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
 		}
+
 		$directory_url=url()."/".$original_path.$new_file_name;
 		$check_url=$original_path.$new_file_name;
 		//$directory_url="../../".$original_path.$new_file_name;
@@ -306,8 +307,8 @@ class DirectoryController extends Controller {
 		$copy_file_url=$dest_dir."/".$dir_name_c."/".$new_file_name;
 		//dd($copy_file_url);
 		copy($file_ori, $copy_file_url);	
-		
-		move_uploaded_file($file_ori, "$original_path.$new_file_name");		
+		//dd($original_path.$new_file_name);
+		move_uploaded_file($file_ori, $original_path.$new_file_name);		
 			
 		
 		
