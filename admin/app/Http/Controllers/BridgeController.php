@@ -137,7 +137,7 @@ class BridgeController extends Controller {
 
 	// Show Offer List
 
-	public function getOfferlist(Request $request)
+	public function postOfferlist(Request $request)
 	{
 
 		$reedemer_id=$request->get('reedemer_id');
@@ -174,12 +174,14 @@ class BridgeController extends Controller {
 
     // Show User Bank Offer
 
-	public function getMyoffer(Request $request)
+	public function postMyoffer(Request $request)
 	{
 
 			// Get passed users list offer
 
-		    $reedemer_id=$request->get('reedemer_id');
+		   $reedemer_id=$request->get('reedemer_id');
+
+
 
 			$user_id=$request->get('user_id');
 
@@ -198,7 +200,7 @@ class BridgeController extends Controller {
 
 	// Show User Passed Offer
 
-	public function getMypassedoffer(Request $request)
+	public function postMypassedoffer(Request $request)
 	{
 
 			// Get passed users list offer
@@ -208,7 +210,6 @@ class BridgeController extends Controller {
 			$user_id=$request->get('user_id');
 
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
-
 
 			$offer_list=Offer::select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
@@ -222,14 +223,14 @@ class BridgeController extends Controller {
 
    // Show Offer Details
 
-	public function getOfferdetail(Request $request)
+	public function postOfferdetail(Request $request)
 	{
 
-		$offer_id=$request->get('offer_id');
+			$offer_id=$request->get('offer_id');
 
-		$offer_list=Offer:: select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer:: select(array('*',DB::raw("DATEDIFF(end_date,start_date) AS expires")))->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
-		$datalist['data']=$offer_list;
+			$datalist['data']=$offer_list;
 
 		return $datalist;
 
