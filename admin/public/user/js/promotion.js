@@ -81,7 +81,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
           //a.campaign_list = response; 
           //a.file_path=site_path;    
          // alert(response);   
-          var img_pathShow='../../uploads/original/'+response;       
+          var img_pathShow=site_path+'../uploads/original/'+response;     
+         // alert(img_pathShow+"A")  ;
           $(".logo_img_box").hide();
           $(".campaign_image_show").attr("src", img_pathShow);
         }); 
@@ -90,7 +91,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       {
           $(".image_chooser").show();
           $(".logo_img_box").show();
-          var img_pathShow='../../uploads/no-image-found.gif';    
+          var img_pathShow=site_path+'../uploads/no-image-found.gif';    
+          //alert(img_pathShow+"B")  ;
           $(".campaign_image_show").attr("src", img_pathShow);   
           //http://localhost/reedemer/admin/uploads/
       }
