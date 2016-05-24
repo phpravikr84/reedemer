@@ -1305,7 +1305,7 @@ var getFileInfo = function(file) {
 		//var file_name = file.substring(file.lastIndexOf("/") + 1, file.length);		
 		$.ajax({
             type: 'POST',
-            url: "../admin/public/promotion/imageid",
+            url: "../admin/public/index.php/promotion/imageid",
             data: {'file_name':file},
             dataType: 'json',
             success: function (data) {	
