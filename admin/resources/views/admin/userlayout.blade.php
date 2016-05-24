@@ -88,9 +88,9 @@
   <link rel="Stylesheet" type="text/css" href="
 http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css
 " />
-  <script type="text/javascript" src="
+  <!-- <script type="text/javascript" src="
 http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js">
-</script>
+</script> -->
 <script type="text/javascript">
           // $(document).ready(function() {
           //   $(".various").fancybox({

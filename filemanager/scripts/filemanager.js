@@ -1280,18 +1280,18 @@ var getFileInfo = function(file) {
 	var template = '<div id="preview" class="dd"><img /><div id="main-title"><h1></h1><div id="tools"></div></div><dl></dl></div>';
 	template += '<form id="toolbar">';
 	template += '<button id="use_this" >Use This Image</button>';
-	template += '<button id="parentfolder">' + lg.parentfolder + '</button>';
-	if($.inArray('select', capabilities)  != -1 && ($.urlParam('CKEditor') || window.opener || window.tinyMCEPopup || $.urlParam('field_name'))) template += '<button id="select" name="select" type="button" value="Select">' + lg.select + '</button>';
-	if($.inArray('download', capabilities)  != -1) template += '<button id="download" name="download" type="button" value="Download">' + lg.download + '</button>';
-	if($.inArray('rename', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="rename" name="rename" type="button" value="Rename">' + lg.rename + '</button>';
-	if($.inArray('move', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="move" name="move" type="button" value="Move">' + lg.move + '</button>';
-	if($.inArray('delete', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="delete" name="delete" type="button" value="Delete">' + lg.del + '</button>';
-	if($.inArray('replace', capabilities)  != -1 && config.options.browseOnly != true)  {
-		template += '<button id="replace" name="replace" type="button" value="Replace">' + lg.replace + '</button>';
-		template += '<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';
-		template += '<input id="mode" name="mode" type="hidden" value="replace" /> ';
-		template += '<input id="newfilepath" name="newfilepath" type="hidden" />';
-	}
+	// template += '<button id="parentfolder">' + lg.parentfolder + '</button>';
+	// if($.inArray('select', capabilities)  != -1 && ($.urlParam('CKEditor') || window.opener || window.tinyMCEPopup || $.urlParam('field_name'))) template += '<button id="select" name="select" type="button" value="Select">' + lg.select + '</button>';
+	// if($.inArray('download', capabilities)  != -1) template += '<button id="download" name="download" type="button" value="Download">' + lg.download + '</button>';
+	// if($.inArray('rename', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="rename" name="rename" type="button" value="Rename">' + lg.rename + '</button>';
+	// if($.inArray('move', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="move" name="move" type="button" value="Move">' + lg.move + '</button>';
+	// if($.inArray('delete', capabilities)  != -1 && config.options.browseOnly != true) template += '<button id="delete" name="delete" type="button" value="Delete">' + lg.del + '</button>';
+	// if($.inArray('replace', capabilities)  != -1 && config.options.browseOnly != true)  {
+	// 	template += '<button id="replace" name="replace" type="button" value="Replace">' + lg.replace + '</button>';
+	// 	template += '<div class="hidden-file-input"><input id="fileR" name="fileR" type="file" /></div>';
+	// 	template += '<input id="mode" name="mode" type="hidden" value="replace" /> ';
+	// 	template += '<input id="newfilepath" name="newfilepath" type="hidden" />';
+	// }
 	template += '</form>';
 
 	// test if scrollbar plugin is enabled
