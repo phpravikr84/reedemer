@@ -192,7 +192,7 @@ class PromotionController extends Controller {
 			foreach($product_id_arr as $product_id)
 			{
 				//dd($product_id);
-				$data[] = array('offer_id'=>$offer_id, 'product_id'=>$product_id, 'created_at'=>date("Y-m-d H:i:s"), 'updated_at'=>date("Y-m-d H:i:s"));
+				$data[] = array('offer_id'=>$offer_id, 'inventory_id'=>$product_id, 'created_at'=>date("Y-m-d H:i:s"), 'updated_at'=>date("Y-m-d H:i:s"));
 			}
 
 			OfferDetail::insert($data); // Eloquent
