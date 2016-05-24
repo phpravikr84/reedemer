@@ -1663,7 +1663,7 @@ $(function(){
 		    cache: false, 
 		    'success': function (data) {
 		    //	alert(data);
-		       fileRoot = "/filemanager/userfiles/"+data+"/";
+		       fileRoot = "filemanager/userfiles/"+data+"/";
 		      
 		    }
 		});

@@ -306,6 +306,7 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.promotion_arr.choose_image=choose_image;
 
     //alert(JSON.stringify(a.promotion_arr, null, 4));
+    //return false;
 
      x.post("../promotion/storeoffer",a.promotion_arr).success(function(response){
       // alert(response);
