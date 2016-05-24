@@ -154,7 +154,7 @@ class BridgeController extends Controller {
 
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
-			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->where('end_date','>=',$now)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->where('end_date','>=',$now)->whereNotIn('id',$userbankoffer)->whereNotIn('id',$userpassedoffer)->with('categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
                 $datalist['messageCode']="R01001";
 		
@@ -162,7 +162,7 @@ class BridgeController extends Controller {
 	else
 	{
 
-		$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->where('end_date','>=',$now)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+		$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->where('end_date','>=',$now)->with('categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 		 $datalist['messageCode']="R01002";
 
@@ -190,7 +190,7 @@ class BridgeController extends Controller {
 			$userbankoffer=UserBankOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
 
-			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->whereIn('id',$userbankoffer)->with('categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['messageCode']="R01001";
 
@@ -215,7 +215,7 @@ class BridgeController extends Controller {
 
 			$userpassedoffer=UserPassedOffer::where('user_id',$user_id)->with('userDetail')->lists('offer_id');
 
-			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer::select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('created_by',$reedemer_id)->whereIn('id',$userpassedoffer)->with('categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['messageCode']="R01001";
 
@@ -235,7 +235,7 @@ class BridgeController extends Controller {
 		    $user_id=$data->user_id;
 		    $now=date('Y-m-d h:i:s');
 
-			$offer_list=Offer:: select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('end_date','>=',$now)->where('id',$offer_id)->with('offerDetail.inventoryDetails','campaignDetails','categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
+			$offer_list=Offer:: select(array('*',DB::raw('DATEDIFF(CAST(end_date as char), NOW()) AS expires')))->where('end_date','>=',$now)->where('id',$offer_id)->with('categoryDetails','subCategoryDetails','partnerSettings','companyDetail')->orderBy('created_at','desc')->get();
 
 			$datalist['data']=$offer_list;
 
