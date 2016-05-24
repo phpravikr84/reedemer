@@ -883,7 +883,7 @@ var replaceItem = function(data) {
     $('#newfilepath').val(data["Path"]);
 
     // we open the input file dialog window
-    $('#fileR').click();
+    //$('#fileR').click();
 };
 
 // Move the current item to specified dir and returns the new name.
@@ -1659,13 +1659,12 @@ $(function(){
 		$.ajax({
 		    'async': false,
 		    type: 'GET',
-		     url: "../admin/public/index.php/promotion/folderid",
-		    // url: "/admin/public/promotion/folderid",
-		   // 'url': "http://localhost/reedemer/admin/public/promotion/folderid",    
+		     url: "../admin/public/index.php/promotion/folderid",		    
 		    cache: false, 
 		    'success': function (data) {
 		    //	alert(data);
 		       fileRoot = "/reedemer/filemanager/userfiles/"+data+"/";
+		      
 		    }
 		});
 		//fileRoot = '/' + document.location.pathname.substring(1, document.location.pathname.lastIndexOf('/') + 1) + 'userfiles/';

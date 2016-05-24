@@ -455,7 +455,13 @@ class DashboardController extends Controller {
 
 		if($response_arr->result_code=="TargetCreated")
 		{
-			//dd("A");
+			$src='../uploads/original/'.$image_name;
+			$dest='../uploads/thumb/'.$image_name;
+			$desired_width=env("THUMB_SIZE");
+
+			//Create Thumb
+			$thumb_name=$this->create_thumb($src,$dest,$desired_width);
+			
 			$target_id=$response_arr->target_id;					
 			$logo = new Logo();
 			$logo->reedemer_id 		= $reedemer_id;	
@@ -878,6 +884,27 @@ class DashboardController extends Controller {
 		}
 		//dd($category->toArray());
 		return $category;
+	}
+
+
+	function create_thumb($src, $dest, $desired_width)
+	{
+		/* read the source image */
+		$source_image = imagecreatefromjpeg($src);
+		$width = imagesx($source_image);
+		$height = imagesy($source_image);
+		
+		/* find the "desired height" of this thumbnail, relative to the desired width  */
+		$desired_height = floor($height * ($desired_width / $width));
+		
+		/* create a new, "virtual" image */
+		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		
+		/* copy source image at a resized size */
+		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+		
+		/* create the physical thumbnail image to its destination */
+		imagejpeg($virtual_image, $dest);
 	}
 	
 }

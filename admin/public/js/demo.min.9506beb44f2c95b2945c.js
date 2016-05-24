@@ -1234,7 +1234,7 @@ function() {
 
                                  
                    h.post("../admin/dashboard/addlogo",a.all_logo_details).success(function(response_back){
-                       alert(response_back.response);
+                       //alert(response_back.response);
                         if(response_back.response=="success")
                         {
                             var target_id=response_back.target_id;
