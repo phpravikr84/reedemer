@@ -73,6 +73,8 @@ class PromotionController extends Controller {
 	{	
 		//return view('welcome');
 		//dd($request->get('campaign_id'));
+		$user_id=Auth::User()->id;
+
 		$campaign_id=$request->get('campaign_id');
 		$category_id=$request->get('category_id');
 		$subcat_id=$request->get('subcat_id');
@@ -102,12 +104,58 @@ class PromotionController extends Controller {
 
 		$camp_img_id=$request->get('camp_img_id');
 
-		$stamp="/var/www/html/reedemer/admin/uploads/original/1462188492_947739140.jpg"; // Logo
-		$image="/var/www/html/reedemer/admin/uploads/original/1462173863_896650352.jpg"; //Image
-		$newcopy='/var/www/html/reedemer/filemanager/userfiles/aa.jpg';
+		
+		$choose_image=$request->get('choose_image');
 
-		$watermark=$this->watermark($image, $stamp, $newcopy);
-		dd($watermark);
+		$logo=Logo::where('reedemer_id',$user_id)->first();
+		if($choose_image==1)
+		{
+			$directory=Directory::find($camp_img_id);
+
+			
+			$directory_base_path=$directory->directory_base_path;
+
+			$logo_image_path=env("UPLOADS")."/thumb/".$logo->logo_name;
+			$offer_image_old=$directory->file_name;
+			$offer_image_path_old=$directory_base_path."/".$offer_image_old;
+
+			$ext = pathinfo($offer_image_path_old, PATHINFO_EXTENSION);
+
+			$source_file=$offer_image_path_old;
+			$offer_image_name="offer_".time().rand(99,99999).$user_id.".".$ext;
+
+			$output_file_path="../uploads/offer/".$offer_image_name;
+
+			// dd($offer_image_old);
+			$this->watermark($source_file, $output_file_path, $logo_image_path);
+
+			$offer_image=$offer_image_name;
+			$offer_image_path=env("IMAGE_URL")."uploads/offer/".$offer_image;
+			// $output_file_path=$directory->directory_url;
+		}
+		else
+		{
+			
+		
+			
+			//dd($logo->logo_name);
+			//return $logo->logo_name;
+
+			$offer_image=$logo->logo_name;
+			$offer_image_path=env("IMAGE_URL")."uploads/original/".$offer_image;
+
+			//$thumb=$this->create_thumb($src, $dest, $desired_width);
+			
+		}
+		//dd($offer_image);
+		//die();
+		//dd($directory->toArray());
+		// $stamp="/var/www/html/reedemer/admin/uploads/original/1462173863_896650352.jpg"; // Logo
+		// $image="/var/www/html/reedemer/admin/uploads/original/1462188492_947739140.jpg"; //Image
+		// $newcopy='/var/www/html/reedemer/filemanager/userfiles/aa.jpg';
+
+		// $watermark=$this->watermark($image, $stamp, $newcopy);
+		//dd($watermark);
 
 		$offer = new Offer();
 		$offer->campaign_id				= $campaign_id;			
@@ -126,6 +174,8 @@ class PromotionController extends Controller {
 		$offer->include_product_value 	= $include_product_value;
 		$offer->discount 				= $discount;
 		$offer->value_calculate 		= $value_calculate;
+		$offer->offer_image 			= $offer_image;	
+		$offer->offer_image_path 		= $offer_image_path;	
 		$offer->created_by 				= $created_by;	
 		if($offer->save())
 		{
@@ -137,34 +187,67 @@ class PromotionController extends Controller {
 		}
 	}
 
-	function watermark($target, $wtrmrk_file, $newcopy)
+	function watermark($source_file_path, $output_file_path, $stamp)
 	{
-		// Load the stamp and the photo to apply the watermark to
-		$stamp = imagecreatefromjpeg($wtrmrk_file);
-		$im = imagecreatefromjpeg($target);
+		define('WATERMARK_OVERLAY_IMAGE', $stamp);
+		define('WATERMARK_OVERLAY_OPACITY', 80);
+		define('WATERMARK_OUTPUT_QUALITY', 90);
 
-		// Set the margins for the stamp and get the height/width of the stamp image
-		$marge_right = 10;
-		$marge_bottom = 10;
-		$sx = imagesx($stamp);
-		$sy = imagesy($stamp);
-
-		// Copy the stamp image onto our photo using the margin offsets and the photo 
-		// width to calculate positioning of the stamp. 
-		imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
-
-		// Output and free memory
-		header('Content-type: image/jpeg');
-		imagejpeg($im);
-		imagedestroy($im);
+		list($source_width, $source_height, $source_type) = getimagesize($source_file_path);
+	    if ($source_type === NULL) {
+	        return false;
+	    }
+	    switch ($source_type) {
+	        case IMAGETYPE_GIF:
+	            $source_gd_image = imagecreatefromgif($source_file_path);
+	            break;
+	        case IMAGETYPE_JPEG:
+	            $source_gd_image = imagecreatefromjpeg($source_file_path);
+	            break;
+	        case IMAGETYPE_PNG:
+	            $source_gd_image = imagecreatefrompng($source_file_path);
+	            break;
+	        default:
+	            return false;
+	    }
+	    $overlay_gd_image = imagecreatefromjpeg(WATERMARK_OVERLAY_IMAGE);
+	     $overlay_width = imagesx($overlay_gd_image);
+	     $overlay_height = imagesy($overlay_gd_image);
+	    //$overlay_width = 100;
+	    //$overlay_height = 100;
+	    imagecopymerge(
+	        $source_gd_image,
+	        $overlay_gd_image,
+	        10,  //x position
+	        10,  //y position
+	        0,
+	        0,
+	        $overlay_width,
+	        $overlay_height,
+	        WATERMARK_OVERLAY_OPACITY
+	    );
+	    imagejpeg($source_gd_image, $output_file_path, WATERMARK_OUTPUT_QUALITY);
+	    imagedestroy($source_gd_image);
+	    imagedestroy($overlay_gd_image);
 	}
+
+	
 
 	public function getFolderid()
 	{
 		
 		$id=Auth::User()->id;
-//dd($id);
+
 		return $id;
+	}
+
+	public function postLogolist()
+	{
+		$user_id=Auth::User()->id;
+		
+		$logo=Logo::where('reedemer_id',$user_id)->first();
+		//dd($logo->logo_name);
+		return $logo->logo_name;
 	}
 	
 
