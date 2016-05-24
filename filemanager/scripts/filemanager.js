@@ -520,6 +520,7 @@ var bindToolbar = function(data) {
 	
 	// this little bit is purely cosmetic
 	$( "#fileinfo button" ).each(function( index ) {
+		alert
 		// check if span doesn't exist yet, when bindToolbar called from renameItem for example
 		if($(this).find('span').length == 0)
 			$(this).wrapInner('<span></span>');
@@ -1208,20 +1209,20 @@ var getDetailView = function(path) {
 };
 
 function getContextMenuOptions(elem) {
-	var optionsID = elem.attr('class').replace(/ /g, '_');
-	if (optionsID == "") return 'itemOptions';
-	if (!($('#' + optionsID).length)) {
-		// Create a clone to itemOptions with menus specific to this element
-		var newOptions = $('#itemOptions').clone().attr('id', optionsID);
-		if (!elem.hasClass('cap_select')) $('.select', newOptions).remove();
-		if (!elem.hasClass('cap_download')) $('.download', newOptions).remove();
-		if (!elem.hasClass('cap_rename')) $('.rename', newOptions).remove();
-		if (!elem.hasClass('cap_move')) $('.move', newOptions).remove();
-		$('.replace', newOptions).remove(); // we remove replace since it is not implemented on Opera + Chrome and works only if #preview panel is on on FF
-		if (!elem.hasClass('cap_delete')) $('.delete', newOptions).remove();
-		$('#itemOptions').after(newOptions);
-	}
-	return optionsID;
+	// var optionsID = elem.attr('class').replace(/ /g, '_');
+	// if (optionsID == "") return 'itemOptions';
+	// if (!($('#' + optionsID).length)) {
+	// 	// Create a clone to itemOptions with menus specific to this element
+	// 	var newOptions = $('#itemOptions').clone().attr('id', optionsID);
+	// 	if (!elem.hasClass('cap_select')) $('.select', newOptions).remove();
+	// 	if (!elem.hasClass('cap_download')) $('.download', newOptions).remove();
+	// 	if (!elem.hasClass('cap_rename')) $('.rename', newOptions).remove();
+	// 	if (!elem.hasClass('cap_move')) $('.move', newOptions).remove();
+	// 	$('.replace', newOptions).remove(); // we remove replace since it is not implemented on Opera + Chrome and works only if #preview panel is on on FF
+	// 	if (!elem.hasClass('cap_delete')) $('.delete', newOptions).remove();
+	// 	$('#itemOptions').after(newOptions);
+	// }
+	// return optionsID;
 }
 
 // Binds contextual menus to items in list and grid views.
@@ -1245,6 +1246,7 @@ var setMenus = function(action, path) {
 				
 			case 'rename':
 				var newName = renameItem(data);
+				
 				break;
 				
 			case 'replace':
@@ -1663,7 +1665,7 @@ $(function(){
 		    cache: false, 
 		    'success': function (data) {
 		    //	alert(data);
-		       fileRoot = "/filemanager/userfiles/"+data+"/";
+		       fileRoot = "/reedemer/filemanager/userfiles/"+data+"/";
 		      
 		    }
 		});

@@ -138,7 +138,7 @@
               <div class="col-sm-12 nopadding ">
                 <div class="col-sm-6 image_chooser">               
                    <div class="get_val_rel"></div>
-                  <a value="1" class=" various fancybox.iframe put_href" href="/filemanager/index.html" rel="300"> 
+                  <a value="1" class=" various fancybox.iframe put_href" href="/reedemer/filemanager/index.html" rel="300"> 
                       <button  type="button" class="btn btn-primary">Import Image</button>
                   </a>
                 </div>
@@ -258,8 +258,8 @@
           <div class="p-5">
               <div class="col-sm-12">
                 <div class="form-group">               
-                  <button ng-disabled="promotionForm.$invalid" ng-click="add_offer()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-                  Create Offer
+                  <button id="add_offer" ng-disabled="promotionForm.$invalid" ng-click="add_offer()"   class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                  Save
                   </button>  
                 </div>
               </div>              
@@ -293,12 +293,12 @@
                   <div class="p-20">
                     <div class="col-sm-12 image_box" style="padding-left:0;padding-right:0; width:95%">
                       <img class="campaign_image_show" ng-src="{{file_path}}../uploads/no-image-found.gif" width="265" />
-                      <div class="logo_img_box">                       
+                      <div class="logo_img_box" style="opacity:0.8">                       
                         <img ng-src="{{site_path}}../uploads/original/{{ReedemerDetails.logo_image}}" class="demo-avatar img-responsive" width="100"  />
                       </div>
                     </div>
-                    <div class="col-sm-12 small-text">
-                      <div class="col-sm-6 break_work green_text" ng-bind="offer_description"   >
+                    <div class="col-sm-12 small-text" style="margin:0; padding:0">
+                      <div class="col-sm-6 break_work green_text" ng-bind="offer_description" style="margin:0; padding:0"  >
 
                       </div>
                       <div class="col-sm-6">
@@ -312,6 +312,25 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-sm-12 small-text">
+                      <div class="col-sm-6"   >
+                        &nbsp;
+                      </div>
+                      <div class="col-sm-6" style="margin:0; padding:0">
+                        <div class="col-sm-6" style="margin:0; padding:0">
+                          <span class="small_text">
+                            $50 value
+                          </span> 
+                        </div>
+                        <div class="col-sm-6" style="margin:0; padding:0">
+                          <span class="small_text ">
+                            Expires in <span class="expires_in">0</span> Days
+                          </span>                          
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="mdl-tabs__panel" id="lannisters-panel">

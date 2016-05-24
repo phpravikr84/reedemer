@@ -157,6 +157,13 @@ white-space:wrap;
     top:5px;
     left:5px;
 }
+.small_text{
+    font-size: 10px;
+    font-weight: normal;
+}
+.contextMenu{
+    display:none;
+}
 /*=============================*/
 
 
