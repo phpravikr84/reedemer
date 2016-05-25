@@ -24,6 +24,7 @@ class VerifyCsrfToken extends BaseVerifier {
 					'promotion/imageid',
 					'bridge/offerdetail',
 					'bridge/myoffer',
+					'bridge/bankoffer',
 					'bridge/mypassedoffer'
 					);
 
