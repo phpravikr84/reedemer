@@ -24,4 +24,9 @@ class Logo extends Model  {
 		return $this->hasOne('App\User');
 	}
 
+	public function categoryDetails()
+    {
+        return $this->hasOne('App\Model\Category');
+    }
+
 }

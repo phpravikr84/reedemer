@@ -73,7 +73,7 @@ class UserController extends Controller {
 				'email'            => 'required|email|unique:users',   
 				'password'         => 'required|min:6'
 
-			);	
+		);	
 		$validator = Validator::make($request->all(), $rules);
 		if ($validator->fails()) {				
 			$messages = $validator->messages();

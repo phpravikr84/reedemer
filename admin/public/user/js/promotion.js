@@ -68,6 +68,14 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
       a.inventory_list = inventory_list;  
     }); 
 
+    x.post("../promotion/logodetails").success(function(response_details){ 
+      //alert(JSON.stringify(response_details, null, 4));
+        a.category_show=response_details.cat_id;
+        a.category_id=response_details.original_cat_id;
+        a.sub_category_show=response_details.subcat_id;
+        a.subcat_id=response_details.original_subcat_id;
+    });
+
     $('input[name="choose_image"]').on('change', function() {
        var selectd_val=$('input[name="choose_image"]:checked').val();      
       // / alert(selectd_val)  ;
@@ -255,6 +263,9 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     var camp_img_id=$("#camp_img_id").val();
     var choose_image=$("input[type='radio'][name='choose_image']:checked").val();
 
+    var validate_after=$("#validate_after").val();
+    var validate_within=$("#validate_within").val();
+
     //alert(product_id_str);
 
     //var inventory_id=$("#inventory_id").val();  
@@ -306,6 +317,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
     a.promotion_arr.product_id_str=product_id_str;
     a.promotion_arr.camp_img_id=camp_img_id;
     a.promotion_arr.choose_image=choose_image;
+    a.promotion_arr.validate_after=validate_after;
+    a.promotion_arr.validate_within=validate_within;
 
     //alert(JSON.stringify(a.promotion_arr, null, 4));
     //return false;

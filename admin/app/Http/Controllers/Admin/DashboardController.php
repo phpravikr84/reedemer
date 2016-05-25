@@ -457,7 +457,7 @@ class DashboardController extends Controller {
 		{
 			$src='../uploads/original/'.$image_name;
 			$dest='../uploads/thumb/'.$image_name;
-			$desired_width=env("THUMB_SIZE");
+			$desired_width=200;
 
 			//Create Thumb
 			$thumb_name=$this->create_thumb($src,$dest,$desired_width);

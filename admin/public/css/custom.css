@@ -164,6 +164,12 @@ white-space:wrap;
 .contextMenu{
     display:none;
 }
+.input-100{
+    width: 100px !important;
+}
+.input-80{
+    width: 80px !important;
+}
 /*=============================*/
 
 

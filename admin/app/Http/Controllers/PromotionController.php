@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Model\User;
 use App\Model\Video;
 use App\Model\Directory;
+use App\Model\Category;
 use App\Model\Offer;
 use App\Model\OfferDetail;
 use Hash;
@@ -111,6 +112,8 @@ class PromotionController extends Controller {
 		
 
 		$camp_img_id=$request->get('camp_img_id');
+		$validate_after=$request->get('validate_after');
+		$validate_within=$request->get('validate_within');
 
 		
 		$choose_image=$request->get('choose_image');
@@ -129,7 +132,22 @@ class PromotionController extends Controller {
 
 			$ext = pathinfo($offer_image_path_old, PATHINFO_EXTENSION);
 
-			$source_file=$offer_image_path_old;
+
+
+			$desired_width=env("OFFER_IMAGE_SIZE");
+			$dest_dir=$directory_base_path."/thumb/";
+
+			if(!file_exists($dest_dir))
+			{
+				//create base folder
+				mkdir($dest_dir, 0777);
+			}
+			$dest=$dest_dir.$offer_image_old;
+			//dd($directory_base_path);
+			$thumb_name=$this->create_thumb($offer_image_path_old, $dest, $desired_width);
+			//dd($thumb_name);
+			$source_file=$dest;
+			//dd($source_file);
 			$offer_image_name="offer_".time().rand(99,99999).$user_id.".".$ext;
 
 			$output_file_path="../uploads/offer/".$offer_image_name;
@@ -181,6 +199,8 @@ class PromotionController extends Controller {
 		$offer->retails_value 			= $retails_value;
 		$offer->include_product_value 	= $include_product_value;
 		$offer->discount 				= $discount;
+		$offer->validate_after 			= $validate_after;
+		$offer->validate_within 		= $validate_within;
 		$offer->value_calculate 		= $value_calculate;
 		$offer->offer_image 			= $offer_image;	
 		$offer->offer_image_path 		= $offer_image_path;	
@@ -266,6 +286,44 @@ class PromotionController extends Controller {
 		$logo=Logo::where('reedemer_id',$user_id)->first();
 		//dd($logo->logo_name);
 		return $logo->logo_name;
+	}
+
+	public function postLogodetails()
+	{
+		$user_id=Auth::User()->id;
+		
+		$logo=Logo::where('reedemer_id',$user_id)->first();
+		//dd($logo->toArray());
+		$logo_arr=array(
+			'target_id'=>$logo->target_id,
+			'original_cat_id'=>$logo->cat_id,
+			'cat_id'=>Category::where('id',$logo->cat_id)->first()->cat_name,
+			'original_subcat_id'=>$logo->subcat_id,
+			'subcat_id'=>$logo->subcat_id >0 ? Category::where('id',$logo->subcat_id)->first()->cat_name:'Not Applicable'
+		);
+		return $logo_arr;
+	}
+
+	function create_thumb($src, $dest, $desired_width)
+	{
+		/* read the source image */
+		$source_image = imagecreatefromjpeg($src);
+		$width = imagesx($source_image);
+		$height = imagesy($source_image);
+		
+		/* find the "desired height" of this thumbnail, relative to the desired width  */
+		$desired_height = floor($height * ($desired_width / $width));
+		
+		/* create a new, "virtual" image */
+		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		
+		/* copy source image at a resized size */
+		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+		
+		/* create the physical thumbnail image to its destination */
+		imagejpeg($virtual_image, $dest);
+
+		//return $dest;
 	}
 	
 
