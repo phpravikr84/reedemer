@@ -42,6 +42,14 @@ class Offer extends Model  {
     	 return $this->hasOne('App\Model\Partnersetting','created_by','created_by');
        
     }
+
+
+      public function myofferDetails()
+    {
+
+         return $this->hasMany('App\Model\UserBankOffer','offer_id','id')->select(array('offer_id', 'user_id','validate_within','validate_after'));
+       
+    }
     
     
     public function offerDetail() {
