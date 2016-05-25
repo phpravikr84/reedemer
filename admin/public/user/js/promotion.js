@@ -118,7 +118,8 @@ MyApp.controller('PromotionController',["$scope", "PlaceholderTextService", "ngT
           autoSize  : false,
           closeClick  : false,
           openEffect  : 'elastic',
-          closeEffect : 'none'
+          closeEffect : 'none',
+          loop  : false,
         });
       });
    // }

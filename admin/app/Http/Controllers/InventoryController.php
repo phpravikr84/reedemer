@@ -14,6 +14,9 @@ use Auth;
 use Session ;
 use App\Model\Campaign;
 use App\Model\Inventory;
+use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
+use File;
 
 
 class InventoryController extends Controller {
@@ -50,7 +53,8 @@ class InventoryController extends Controller {
 		{
 			$id=$request[0];
 			$inventory=Inventory::where('status',1)
-						  ->where('id',$id)						 
+						  ->where('id',$id)	
+						  ->orderBy('id','DESC')					 
 						  ->get();	
 		}
 		else
@@ -58,6 +62,7 @@ class InventoryController extends Controller {
 			if($type==1)
 			{	
 				$inventory=Inventory::where('status',1)
+						   ->orderBy('id','DESC')
 						   ->orderBy('id','DESC')
 						   ->get();		
 			}
@@ -249,5 +254,99 @@ class InventoryController extends Controller {
 		$inventory=Inventory::find($id);
 		
 		return $inventory;	
+	}
+
+	public function getShowaddform()
+	{
+		return view('admin.reedemer.add_inventory');
+	}
+
+	public function postStoreaddform(Request $request)
+	{
+		$obj = new helpers();
+
+		$file = Input::file('inventory_image');
+
+		$extension = $file->getClientOriginalExtension();
+
+		$folder_name=env('UPLOADS');			
+		$original_path= $folder_name."/inventory/original/";
+		$thumb_path= $folder_name."/inventory/thumb/";
+		$medium_path= $folder_name."/inventory/medium/";
+
+		//$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+		$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
+
+
+		//$file = Input::file('image');
+        //getting timestamp
+        //$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        
+       // $name = $timestamp. '-' .$file->getClientOriginalName();
+        
+       // $image->filePath = $name;
+
+        $file->move($original_path, $new_file_name);
+
+
+
+		//move_uploaded_file($file_ori, "$original_path$new_file_name");
+
+		//$obj->createThumbnail($original_path."1464183777_250771893.jpg",$thumb_path,env('THUMB_SIZE'));
+		//$obj->createThumbnail($original_path.$new_file_name,$medium_path,env('MEDIUM_SIZE'));		
+
+
+		//$destinationPathThumb=$thumb_path;
+		//$destinationPathMedium=$medium_path;
+		//$destinationPathOriginal=$original_path;
+
+		//File::copy($original_path."1464183777_250771893.jpg" , $thumb_path);
+
+		//$file->copy($original_path."1464183777_250771893.jpg", $thumb_path);
+		//$file->move($medium_path, $new_file_name);
+		//$file->move($original_path);
+		//Storage::move('old/file1.jpg', 'new/file1.jpg');
+
+        //getting timestamp
+        //$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        
+        //$name = $timestamp. '-' .$file->getClientOriginalName();
+        
+       // $image->filePath = $name;
+
+      //  $file->move(public_path().'/images/', $name);
+
+
+		//dd($file);
+		//dd($_FILES[ 'file' ][ 'inventory_image' ]);
+		$created_by=Auth::user()->id;
+		// Get current logged in user TYPE
+		$type=Auth::user()->type;	
+
+
+		$inventory_name=$request->get('inventory_name');
+		$sell_price=$request->get('sell_price');
+		$cost=$request->get('cost');
+
+		$inven = new Inventory();
+		$inven->inventory_name 		= $inventory_name;	
+		$inven->sell_price 		= $sell_price;
+		$inven->cost 		= $cost;	
+		$inven->inventory_image 		= 'vvv';		
+		$inven->status 			= 1;			
+		$inven->created_by 		= $created_by;
+		$inven->save();
+			
+			
+		$inventory=Inventory::where('status',1)
+				  ->where('created_by',$created_by)	
+				  ->orderBy('id','DESC')					 
+				  ->get();
+		$select='<option value="">-- choose an option --</option>';
+		foreach($inventory as $inv)
+		{			
+			$select.='<option value="'.$inv['id'].'" ng-repeat="inventory in inventory_list" >'.$inv['inventory_name'].'</option>';
+		}        
+		return $select;
 	}
 }
