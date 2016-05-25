@@ -14,6 +14,9 @@ class UserBankOffer extends Model  {
 	 */
 	protected $table = 'reedemer_user_bank_offer';
 
+
+	protected $fillable = array('user_id', 'offer_id', 'validate_within', 'validate_after','status');
+
  	
  	 public function userDetail() {
         return $this->hasMany('App\Model\UserBankOffer','offer_id','id')->select('id');

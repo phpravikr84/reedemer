@@ -25,7 +25,9 @@ class VerifyCsrfToken extends BaseVerifier {
 					'bridge/offerdetail',
 					'bridge/myoffer',
 					'bridge/mypassedoffer',
-					'inventory/storeaddform'
+					'inventory/storeaddform',
+					'bridge/bankoffer',
+					'bridge/mypassedoffer'
 					);
 
 		foreach ($skip as $key => $route) {
