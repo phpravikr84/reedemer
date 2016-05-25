@@ -63,7 +63,7 @@
                     <a href="javascript:void(0);" data-ng-click="set_dir_id(repo.id)">{{repo.file_name}}</a>                 
                   </span>
                   <span ng-if="repo.directory == 0">
-                    {{repo.file_name}}                
+                    <img ng-src="{{repo.directory_url}}" width="80" />
                   </span>
                 </td>                
                                
