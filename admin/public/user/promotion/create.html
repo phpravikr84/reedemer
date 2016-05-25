@@ -44,20 +44,26 @@
               <div class="col-sm-12 nopadding">
                 <div class="col-sm-6">
                   <div class="form-group">               
-                    <select class="form-control" id="category_id">
+                    <!-- <select class="form-control" id="">
                       <option value="">--Select Category--</option>
                       <option value="{{cat.id}}" ng-repeat="cat in cat_list" >{{cat.cat_name}}</option>
-                    </select>
+                    </select> -->
+                     Category: 
+                     <span ng-bind="category_show"></span>
+                     <input type="hidden" ng-model="category_id" id="category_id"  class="form-control"  >
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">               
-                    <select class="form-control" id="subcat_id">
+                    <!-- <select class="form-control" id="subcat_id">
                       <option>Sub Category</option>
                       <option>2</option>
                       <option>3</option>
                       <option>4</option>
-                    </select>
+                    </select> -->     
+                    Sub-Category:        
+                    <span ng-bind="sub_category_show"></span>
+                    <input type="hidden" ng-model="subcat_id" id="subcat_id"  class="form-control"  >
                   </div>
                 </div>
               </div>
@@ -68,9 +74,9 @@
                   </div>
                 </div>
                 <div class="col-sm-6 nopadding">
-                  <div class="col-sm-6 nopadding-right">
+                  <div class="col-sm-6 nopadding-right" style="padding-left:0; padding:0">
                     <div class="form-group">                   
-                      <input type="text" ng-model="promotion.total_redeemar" id="total_redeemar" placeholder="No. redeemars" class="form-control"  >
+                      <input type="text" ng-model="promotion.total_redeemar" id="total_redeemar" placeholder="No. redeemars" class="form-control" style="padding:0; margin:0" >
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -121,6 +127,29 @@
           </div>
 
           <div class="p-5">
+            <div class="col-sm-12">
+              <div class="form-group">               
+                Validation
+                <hr />
+              </div>
+            </div> 
+            <div class="col-sm-12">
+              <div class="col-sm-6">
+                Validate After
+              </div>
+              <div class="col-sm-6">
+                 Validate within                
+              </div>
+              <div class="col-sm-6">
+                <input type="text" ng-model="promotion.validate_after" id="validate_after" placeholder="Hour" class="form-control input-80"  >               
+              </div>
+              <div class="col-sm-6">
+                <input type="text" ng-model="promotion.validate_within" id="validate_within" placeholder="Hour" class="form-control input-80"  >               
+              </div>             
+            </div>
+          </div>
+
+          <div class="p-5">
               <div class="col-sm-12">
                 <div class="form-group">               
                   Image Capture
@@ -158,7 +187,14 @@
               </div>
             </div>              
             <div class="col-sm-12">
-              <input type='button' ng-click="addNewChoice()" value='Add Button{{choices.id}}' id='saddButton'>
+              <div class="col-sm-6">
+                 <input type='button' ng-click="addNewChoice()" value='Add More Inventory{{choices.id}}' id='saddButton'>
+              </div>
+              <div class="col-sm-6">
+                <a value="1" class=" various fancybox.iframe put_href" href="http://localhost/reedemer/admin/public/user/dashboard#/inventory/add" rel="300"> 
+                 Add Inventory Item
+               </a>
+              </div>
             </div>
             <div class="col-sm-12 nopadding" data-ng-repeat="choice in choices">
               <div class="col-sm-7 nopadding">

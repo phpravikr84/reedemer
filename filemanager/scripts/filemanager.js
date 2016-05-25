@@ -1812,28 +1812,30 @@ $(function(){
 		$( "#newfolder" ).before( '<button value="Upload" type="button" name="upload" id="upload" class="em"><span>' + lg.upload + '</span></button> ' );
 		
 		$('#upload').unbind().click(function() {
-			// we create prompt
-			var msg  = '<div id="dropzone-container"><h2>' + lg.current_folder + $('#uploader h1').attr('title')  + '</h2><div id="multiple-uploads" class="dropzone"></div>';
-				msg += '<div id="total-progress"><div data-dz-uploadprogress="" style="width:0%;" class="progress-bar"></div></div>';
-				msg += '<div class="prompt-info">' + lg.dz_dictMaxFilesExceeded.replace('%s', config.upload.number) + lg.file_size_limit + config.upload.fileSizeLimit + ' ' + lg.mb + '.</div>';
-				msg += '<button id="process-upload">' + lg.upload + '</button></div>';
+			alert("Not Done");			// we create prompt
+			// var msg  = '<div id="dropzone-container"><h2>' + lg.current_folder + $('#uploader h1').attr('title')  + '</h2><div id="multiple-uploads" class="dropzone"></div>';
+			// 	msg += '<div id="total-progress"><div data-dz-uploadprogress="" style="width:0%;" class="progress-bar"></div></div>';
+			// 	msg += '<div class="prompt-info">' + lg.dz_dictMaxFilesExceeded.replace('%s', config.upload.number) + lg.file_size_limit + config.upload.fileSizeLimit + ' ' + lg.mb + '.</div>';
+			// 	msg += '<button id="process-upload">' + lg.upload + '</button></div>';
+
+			// var msg ="";
 			
-			error_flag = false;
-			var path = $('#currentpath').val();
+			// error_flag = false;
+			// var path = $('#currentpath').val();
 			
-			var fileSize = (config.upload.fileSizeLimit != 'auto') ? config.upload.fileSizeLimit : 256; // default dropzone value 
+			// var fileSize = (config.upload.fileSizeLimit != 'auto') ? config.upload.fileSizeLimit : 256; // default dropzone value 
 			
-			if(config.security.uploadPolicy == 'DISALLOW_ALL') {
-				var allowedFiles = '.' + config.security.uploadRestrictions.join(',.');
-			} else {
-				// we allow any extension since we have no easy way to handle the the built-in `acceptedFiles` params
-				// Would be handled later by the connector
-				var allowedFiles = null; 
-			}
+			// if(config.security.uploadPolicy == 'DISALLOW_ALL') {
+			// 	var allowedFiles = '.' + config.security.uploadRestrictions.join(',.');
+			// } else {
+			// 	// we allow any extension since we have no easy way to handle the the built-in `acceptedFiles` params
+			// 	// Would be handled later by the connector
+			// 	var allowedFiles = null; 
+			// }
 			
-			if ($.urlParam('type').toString().toLowerCase() == 'images' || config.upload.imagesOnly) {
-				var allowedFiles = '.' + config.images.imagesExt.join(',.');
-			}
+			// if ($.urlParam('type').toString().toLowerCase() == 'images' || config.upload.imagesOnly) {
+			// 	var allowedFiles = '.' + config.images.imagesExt.join(',.');
+			// }
 			
 			var btns = {}; 
 			btns[lg.close] = false; 
