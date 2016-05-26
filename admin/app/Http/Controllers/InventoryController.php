@@ -262,77 +262,63 @@ class InventoryController extends Controller {
 	}
 
 	public function postStoreaddform(Request $request)
-	{
+	{		
 		$obj = new helpers();
+		$folder_name=env('UPLOADS');
+		if($_FILES[ 'file' ][ 'name' ]=="")
+		{
+			return 'error';
+		}
+		$file_name=$_FILES[ 'file' ][ 'name' ];
+		$temp_path = $_FILES[ 'file' ][ 'tmp_name' ];
 
-		$file = Input::file('inventory_image');
+		
 
-		$extension = $file->getClientOriginalExtension();
+		if (!file_exists($folder_name)) {			
+			$create_folder= mkdir($folder_name, 0777);
+			$thumb_path= mkdir($folder_name."/inventory/thumb", 0777);
+			$medium_path= mkdir($folder_name."/inventory/medium", 0777);
+			$original_path= mkdir($folder_name."/inventory/original", 0777);
+		}
+		else
+		{			
+			$thumb_path= env('UPLOADS')."/inventory/thumb"."/";
+			$medium_path= env('UPLOADS')."/inventory/medium"."/";
+			$original_path= env('UPLOADS')."/inventory/original"."/";
+		}
 
-		$folder_name=env('UPLOADS');			
-		$original_path= $folder_name."/inventory/original/";
-		$thumb_path= $folder_name."/inventory/thumb/";
-		$medium_path= $folder_name."/inventory/medium/";
 
-		//$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+		$extension = pathinfo($file_name, PATHINFO_EXTENSION);
 		$new_file_name = time()."_".rand(111111111,999999999).'.'.$extension; // renameing image
 
-
-		//$file = Input::file('image');
-        //getting timestamp
-        //$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-        
-       // $name = $timestamp. '-' .$file->getClientOriginalName();
-        
-       // $image->filePath = $name;
-
-        $file->move($original_path, $new_file_name);
-
-
-
-		//move_uploaded_file($file_ori, "$original_path$new_file_name");
-
-		//$obj->createThumbnail($original_path."1464183777_250771893.jpg",$thumb_path,env('THUMB_SIZE'));
-		//$obj->createThumbnail($original_path.$new_file_name,$medium_path,env('MEDIUM_SIZE'));		
-
-
-		//$destinationPathThumb=$thumb_path;
-		//$destinationPathMedium=$medium_path;
-		//$destinationPathOriginal=$original_path;
-
-		//File::copy($original_path."1464183777_250771893.jpg" , $thumb_path);
-
-		//$file->copy($original_path."1464183777_250771893.jpg", $thumb_path);
-		//$file->move($medium_path, $new_file_name);
-		//$file->move($original_path);
-		//Storage::move('old/file1.jpg', 'new/file1.jpg');
-
-        //getting timestamp
-        //$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-        
-        //$name = $timestamp. '-' .$file->getClientOriginalName();
-        
-       // $image->filePath = $name;
-
-      //  $file->move(public_path().'/images/', $name);
-
-
-		//dd($file);
-		//dd($_FILES[ 'file' ][ 'inventory_image' ]);
+		$file_ori = $_FILES[ 'file' ][ 'tmp_name' ];
+		
+		move_uploaded_file($file_ori, "$original_path$new_file_name");
+		
+		$obj->createThumbnail($original_path,$thumb_path,env('THUMB_SIZE'));
+		$obj->createThumbnail($original_path,$medium_path,env('MEDIUM_SIZE'));
+		
 		$created_by=Auth::user()->id;
 		// Get current logged in user TYPE
-		$type=Auth::user()->type;	
-
+		$type=Auth::user()->type;
 
 		$inventory_name=$request->get('inventory_name');
 		$sell_price=$request->get('sell_price');
 		$cost=$request->get('cost');
+		$inventory_image=$new_file_name;	
+
+		if($inventory_name=="" || $sell_price=="" || $cost=="" || $inventory_image=="")
+		{
+			return 'error';
+		}
+		
+		//dd($inventory_name);
 
 		$inven = new Inventory();
 		$inven->inventory_name 		= $inventory_name;	
 		$inven->sell_price 		= $sell_price;
 		$inven->cost 		= $cost;	
-		$inven->inventory_image 		= 'vvv';		
+		$inven->inventory_image 		= $inventory_image;		
 		$inven->status 			= 1;			
 		$inven->created_by 		= $created_by;
 		$inven->save();

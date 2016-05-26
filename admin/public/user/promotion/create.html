@@ -208,7 +208,7 @@
                 </div>
                 <div class="col-sm-12 ">
                   <div class="col-sm-5 nopadding margin-right-5">
-                    <input type="text" ng-model="promotion.cost" id="cost{{choice.id}}" placeholder="Cost" class="form-control"  >
+                    <input type="text" ng-model="promotion.cost" id="cost{{choice.id}}" placeholder="Cost" class="form-control inventory_cost"  >
                   </div>
                   <div class="col-sm-6 nopadding">
                     <input type="text" name="selling_price" ng-model="promotion.selling_price" id="selling_price{{choice.id}}" placeholder="Selling Price" class="form-control selling_price_class"  >
@@ -219,7 +219,7 @@
                 </div>
               </div>
               <div class="col-sm-5 ">
-                 <img ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image{{choice.id}}" width="150" />   
+                 <img class="inventory_image_class" ng-src="{{file_path}}../uploads/no-image-found.gif" id="inventory_image{{choice.id}}" width="150" />   
               </div>
             </div>
           </div>
