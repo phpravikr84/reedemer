@@ -99,6 +99,10 @@ class BridgeController extends Controller {
 			$url=$base_path."myoffer";
 		break;	
 
+		case "bankoffer":
+			$url=$base_path."bankoffer";
+		break;	
+
 		case "mypassedoffer":
 			$url=$base_path."mypassedoffer";
 		break;		
@@ -139,8 +143,10 @@ class BridgeController extends Controller {
 
 	public function postOfferlist(Request $request)
 	{
+      
 
 		$data=json_decode($request->get('data'));
+
 		$reedemer_id=$data->reedemer_id;
         
 		$user_id=$data->user_id;
@@ -195,6 +201,33 @@ class BridgeController extends Controller {
 			$datalist['messageCode']="R01001";
 
 			$datalist['data']=$offer_list;
+
+			return $datalist;
+
+	}
+
+
+	public function postBankoffer(Request $request)
+	{
+
+			// Get passed users list offer
+
+		   $data=json_decode($request->get('data'));
+
+		    $user_id=$data->user_id;
+
+		    $offer_id=$data->offer_id;
+
+			$offer_detail=Offer::where('id',$offer_id)->first();
+
+			$validate_after=$offer_detail['validate_after'];
+
+			$validate_within=$offer_detail['validate_within'];
+
+		     $datalist = UserBankOffer::create(['user_id' => $user_id, 'offer_id' => $offer_id , 'validate_within' => $validate_within, 'validate_after' => $validate_after]);
+
+			$datalist['messageCode']="R01001";
+
 
 			return $datalist;
 
